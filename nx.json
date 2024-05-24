@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "outputs": ["{projectRoot}/dist"],
+      "cache": true
+    },
+    "format": {
+      "cache": true
+    },
+    "lint:eslint": {
+      "cache": true
+    }
+  },
+  "defaultBase": "main",
+  "nxCloudAccessToken": "ZDg5MzU3NDctNWVhNi00NjUwLTlkZjgtZTYxZjA5MjU4N2QyfHJlYWQtd3JpdGU="
+}
