@@ -1,7 +1,7 @@
 {
-  "name": "@onwidget/astrowind",
+  "name": "@gc-telemed/fastro",
   "version": "1.0.0-beta.34",
-  "description": "AstroWind: A free template using Astro 4.0 and Tailwind CSS. Astro starter theme.",
+  "description": "FastRow: A free template generator using Astro 4.0 and Tailwind CSS. Astro starter theme.",
   "type": "module",
   "private": true,
   "engines": {
