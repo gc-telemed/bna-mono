@@ -1,4 +1,8 @@
-# 🚀 AstroWind
+# 🚀 AstroWind + FastRow
+
+FastRow is a set of row-based record management software generator. Rownomic is a library that provides FastRow generators to your existing code-stack via a simple UI.
+
+This public repo currently just has some AstroWind based demos.
 
 <img src="https://raw.githubusercontent.com/onwidget/.github/main/resources/astrowind/lighthouse-score.png" align="right"
      alt="AstroWind Lighthouse Score" width="100" height="358">
