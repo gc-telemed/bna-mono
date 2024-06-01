@@ -1,21 +1,23 @@
+import svelte, { vitePreprocess } from '@astrojs/svelte';
 import path from 'path';
+import css from 'rollup-plugin-css-only';
 import { fileURLToPath } from 'url';
+
 
 import { defineConfig, squooshImageService } from 'astro/config';
 
-import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
-import icon from 'astro-icon';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
 import compress from '@playform/compress';
-import svelte from '@astrojs/svelte';
+import icon from 'astro-icon';
 import astrowind from './vendor/integration';
 
 import {
+  lazyImagesRehypePlugin,
   readingTimeRemarkPlugin,
   responsiveTablesRehypePlugin,
-  lazyImagesRehypePlugin,
 } from './src/utils/frontmatter.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,7 +34,27 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     svelte({
-      configFile: './svelte.config.js',
+      preprocess: vitePreprocess({
+        compilerOptions: {
+          onwarn: (warning, handler) => {
+            if (warning?.code === 'css-unused-selector') return;
+            handler(warning);
+          },
+        },
+        plugins: [
+          css({ output: 'bundle.css' }),
+        ],
+        typescript: true,
+        exclude: [
+          "./node_modules/**",
+          "./.svelte-kit/**",
+          "./dist/**",
+          "./build/**",
+          "./.svelte/**",
+          "./coverage/**",
+          "**/_/**"
+        ]
+      }),
     }),
     sitemap(),
     mdx(),

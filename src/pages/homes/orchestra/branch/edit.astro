@@ -1,0 +1,13 @@
+---
+import DataTable from "~/components/common/DataTable.svelte";
+import DataPageLayout from "~/layouts/DataPageLayout.astro";
+
+const metadata = {
+  title: 'BrEdit',
+};
+---
+
+<DataPageLayout metadata={metadata}>
+  <DataTable client:load />
+</DataPageLayout>
+

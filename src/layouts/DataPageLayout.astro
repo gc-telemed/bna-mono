@@ -1,0 +1,32 @@
+---
+import Footer from '~/components/widgets/Footer.astro';
+import Header from '~/components/widgets/Header.astro';
+import Layout from '~/layouts/Layout.astro';
+
+import { footerData, headerData } from '~/navigation.mjs';
+
+const dataTableHeaderData = {
+  ...headerData,
+  actions: [{ text: 'Upload', href: 'https://github.com/gc-telemed/bna-mono', target: '_blank' }],
+}
+
+import type { MetaData } from '~/types';
+
+export interface Props {
+  metadata?: MetaData;
+}
+
+const { metadata } = Astro.props;
+---
+
+<Layout metadata={metadata}>
+  <slot name="header">
+    <Header {...dataTableHeaderData } isSticky showRssFeed showToggleTheme />
+  </slot>
+  <main class="mx-12 pl-24">
+    <slot />
+  </main>
+  <slot name="footer">
+    <Footer {...footerData} />
+  </slot>
+</Layout>

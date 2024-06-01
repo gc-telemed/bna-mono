@@ -6,6 +6,17 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
-    }
-  }
+    },
+  },
+  "exclude": [
+    "./node_modules/**",
+    "./.astro/**",
+    "./.nx/**",
+    "./.vscode/**",
+    "./dist/**",
+    "./build/**",
+    "./.svelte/**",
+    "./coverage/**",
+    "**/_/**"
+  ]
 }

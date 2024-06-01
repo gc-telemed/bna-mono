@@ -1,5 +1,5 @@
 site:
-  name: FastRow-v1 (Rownomic)
+  name: FR-v1 (Rownomic)
   site: 'https://fastrow.nep.work'
   base: '/'
   trailingSlash: false
