@@ -2,92 +2,18 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 import Content from '~/components/widgets/Content.astro';
-import Features from '~/components/widgets/Features.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
+import TwoCols from '~/components/widgets/TwoCols.astro';
 
 const metadata = {
-  title: 'BPM Orchestrator',
+  title: 'BPM Orchestrator (Branch + Nodes)',
 };
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- Hero2 Widget ******************* -->
-
-  <Hero2
-    tagline="Orchestra Demo"
-    actions={[
-      { variant: 'primary', text: 'Records', href: '/homes/orchestra/branch' },
-      { variant: 'primary', target: '_blank', text: 'Processes', href: 'https://github.com/gc-telemed/bna-mono' },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1580481072645-022f9a6dbf27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'AstroWind Hero Image',
-    }}
-  >
-    <Fragment slot="title">
-      Rownomics:<br /> <span class="text-accent dark:text-white highlight"> org mode</span
-      > for your org<br />
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        Elevate your business processes with our latest orchestrator release named <span class="font-semibold">Rownomic.</span></span
-      >
-      Seamlessly blend the power of our latest version, Rownomics (with Astro 4.0 + AstroWind) 
-      to declaratively and deterministically generate websites and apps 
-      that resonate with your brand and audience.
-    </Fragment>
-  </Hero2>
-
-  <!-- Features Widget *************** -->
-
-  <Features
-    id="features"
-    title="What is BOSS?"
-    subtitle="The BOSS Suite contains Rownomic's special edition geared for enterprise use. Enterprise edition of Rownomic contains further customizations and scaling options beyond that provided in the free tier."
-    columns={2}
-    items={[
-      {
-        title: 'Integration of Astro 4.0 and Tailwind CSS',
-        description:
-          'Offers a powerful combination that enhances both the development process and the end-user experience. Also, allows to build dynamic and visually stunning websites with optimized performance.',
-        icon: 'tabler:layers-union',
-      },
-      {
-        title: 'Versatile design for startups, small businesses, and more',
-        description: `Easily customize AstroWind to harmonize with the unique branding and identity of your venture. AstroWind's versatile design adapts to suit your needs.`,
-        icon: 'tabler:artboard',
-      },
-      {
-        title: 'Effortless customization for portfolios and marketing sites',
-        description:
-          'With intuitive customization, easily showcase portfolio pieces, case studies, project highlights, and relevant content. Ideal for creative professionals and businesses looking to highlight their expertise.',
-        icon: 'tabler:writing',
-      },
-      {
-        title: 'Optimized landing pages and engaging blogs',
-        description: `Landing pages are strategically designed to captivate visitors and prompt specific actions. Additionally, the blog creation feature empowers sharing insights, engaging the audience.`,
-        icon: 'tabler:podium',
-      },
-      {
-        title: 'Fast loading times and production-ready code',
-        description: `Using Astro 4.0 ensures fast loading and seamless rendering, enhancing browsing. The code follows best practices, improving user experience, SEO, and reducing bounce rates.`,
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'SEO-optimized structure for enhanced visibility',
-        description: `Follows SEO best practices with clean code, semantic HTML markup, and fast loading, enhancing search engine rankings. AstroWind's SEO structure ensures visibility to potential customers and clients.`,
-        icon: 'tabler:eyeglass',
-      },
-    ]}
-  />
 
   <!-- Content Widget **************** -->
 
@@ -257,7 +183,7 @@ const metadata = {
 
   <!-- FAQs Widget ******************* -->
 
-  <FAQs
+  <TwoCols
     title="Frequently Asked Questions"
     items={[
       {
@@ -287,7 +213,7 @@ const metadata = {
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
-  </FAQs>
+  </TwoCols>
 
   <!-- Steps2 Widget ****************** -->
 

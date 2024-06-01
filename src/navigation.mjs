@@ -6,23 +6,19 @@ export const headerData = {
       text: 'Homes',
       links: [
         {
-          text: 'Orchestrators',
-          href: getPermalink('/homes/saas'),
-        },
-        {
-          text: 'Orchestra',
-          href: getPermalink('/homes/orchestra'),
-        },
-        {
-          text: 'Incubators',
+          text: 'Incubate',
           href: getPermalink('/homes/startup'),
         },
         {
-          text: 'Generators',
+          text: 'Automate',
           href: getPermalink('/homes/mobile-app'),
         },
         {
-          text: 'Personal',
+          text: 'Orchestrate',
+          href: getPermalink('/homes/orchestra'),
+        },
+        {
+          text: 'Zen',
           href: getPermalink('/homes/personal'),
         },
       ],

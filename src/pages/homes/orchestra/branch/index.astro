@@ -11,7 +11,7 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 
 const metadata = {
-  title: 'BPM Orchestrator',
+  title: 'BPM Orchestrator (Branch + Nodes)',
 };
 ---
 
@@ -20,10 +20,10 @@ const metadata = {
   <!-- Hero2 Widget ******************* -->
 
   <Hero2
-    tagline="Orchestra Demo"
+    tagline="Branch Editor Demo"
     actions={[
-      { variant: 'primary', text: 'Records', href: '/homes/orchestra/branch' },
-      { variant: 'primary', target: '_blank', text: 'Processes', href: 'https://github.com/gc-telemed/bna-mono' },
+      { variant: 'primary', text: 'Create', href: '/homes/orchestra/branch/new' },
+      { variant: 'primary', text: 'Update', href: '/homes/orchestra/branch/edit' },
       { text: 'Learn more', href: '#features' },
     ]}
     image={{
@@ -32,17 +32,14 @@ const metadata = {
     }}
   >
     <Fragment slot="title">
-      Rownomics:<br /> <span class="text-accent dark:text-white highlight"> org mode</span
-      > for your org<br />
+      BranchEditor:<br />your <span class="text-accent dark:text-white highlight"> row data</span> companion. <br />
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        Elevate your business processes with our latest orchestrator release named <span class="font-semibold">Rownomic.</span></span
-      >
-      Seamlessly blend the power of our latest version, Rownomics (with Astro 4.0 + AstroWind) 
-      to declaratively and deterministically generate websites and apps 
-      that resonate with your brand and audience.
+        Elevate your business records with our latest row manager release named <span class="font-semibold">BranchEditor.</span>
+      </span>
+      Create a knowledge inventory management system with events and triggers on the fly for any business domain and architect your data, relations, and interactions your own way.
     </Fragment>
   </Hero2>
 
