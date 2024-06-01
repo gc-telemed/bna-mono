@@ -9,7 +9,7 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from '@playform/compress';
-
+import svelte from '@astrojs/svelte';
 import astrowind from './vendor/integration';
 
 import {
@@ -30,6 +30,9 @@ export default defineConfig({
   integrations: [
     tailwind({
       applyBaseStyles: false,
+    }),
+    svelte({
+      configFile: './svelte.config.js',
     }),
     sitemap(),
     mdx(),

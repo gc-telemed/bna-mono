@@ -13,6 +13,7 @@
   },
   "eslint.experimental.useFlatConfig": true,
   "cSpell.words": [
+    "astrojs",
     "nanostores",
     "Rownomic"
   ]
