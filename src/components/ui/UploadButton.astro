@@ -1,0 +1,36 @@
+---
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
+import type { CallToAction as Props } from '~/types';
+
+const { variant = 'secondary', class: className = '', type, ...rest } = Astro.props;
+
+const variants = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  tertiary: 'btn btn-tertiary',
+  link: 'cursor-pointer hover:text-primary',
+};
+---
+
+<script>
+  import { handleFileChange } from '../common/data/store';
+import { exportXlsx } from '../common/data/xspreadshi';
+
+  const actionButton = document.querySelector('.action-button');
+  actionButton?.addEventListener('change', handleFileChange);
+
+  const saveButton = document.querySelector('.save-button');
+  saveButton?.addEventListener('click', exportXlsx);
+</script>
+
+<div class="flex">
+  <button type={type} class={twMerge(variants[variant] || '', className)} {...rest}>
+    <input class="action-button" type="file" name="xlfile" id="xlf" />
+  </button>
+  <button class="save-button" type="button" class={twMerge(variants[variant] || '', className)} {...rest}>
+    <span class="border-slate-300">
+      <Icon name="tabler:download" class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />
+    </span>
+  </button>
+</div>

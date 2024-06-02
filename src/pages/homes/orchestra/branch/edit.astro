@@ -1,4 +1,5 @@
 ---
+import DataSheet from "~/components/common/DataSheet.svelte";
 import DataTable from "~/components/common/DataTable.svelte";
 import DataPageLayout from "~/layouts/DataPageLayout.astro";
 
@@ -8,6 +9,7 @@ const metadata = {
 ---
 
 <DataPageLayout metadata={metadata}>
-  <DataTable client:load />
+  <DataTable client:only="svelte" />
+  <DataSheet client:only="svelte"/>
 </DataPageLayout>
 

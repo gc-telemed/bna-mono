@@ -60,7 +60,7 @@
   });
 </script>
 
-<div id="datagrid" class="ag-theme-quartz" style="height: 80vh; width: 80vw;" bind:this={gridContainer}></div>
+<div id="datagrid" class="ag-theme-quartz pl-16" style="height: 75vh; width: 96vw;" bind:this={gridContainer}></div>
 
 <style global>
   @import 'ag-grid-community/styles/ag-grid.css';

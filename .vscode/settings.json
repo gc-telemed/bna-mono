@@ -16,6 +16,8 @@
     "astrojs",
     "nanostores",
     "onwarn",
-    "Rownomic"
+    "Rownomic",
+    "stox",
+    "xtos"
   ]
 }
