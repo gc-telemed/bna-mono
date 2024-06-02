@@ -18,13 +18,12 @@
   let rbTrue: HTMLInputElement;
   let boolFilter: BoolFilterSlot;
 
-
   const gridOptions: agGrid.GridOptions<IRow> = {
     columnDefs: [
-      { field: 'make', filter: 'agTextColumnFilter' }, 
-      { field: 'model', filter: 'agTextColumnFilter' }, 
-      { field: 'price', filter: "agNumberColumnFilter"}, 
-      { field: 'electric', filter: BoolFilterSlot }
+      { field: 'make', filter: 'agTextColumnFilter' },
+      { field: 'model', filter: 'agTextColumnFilter' },
+      { field: 'price', filter: 'agNumberColumnFilter' },
+      { field: 'electric', filter: BoolFilterSlot },
     ],
     rowData: [
       { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
@@ -39,7 +38,20 @@
       minWidth: 50,
       sortable: true,
       resizable: true,
-      floatingFilter: true
+      floatingFilter: true,
+      editable: true,
+    },
+    onRowEditingStarted: (event: agGrid.RowEditingStartedEvent) => {
+      console.log('now doing row editing');
+    },
+    onRowEditingStopped: (event: agGrid.RowEditingStoppedEvent) => {
+      console.log('stopped doing row editing');
+    },
+    onCellEditingStarted: (event: agGrid.CellEditingStartedEvent) => {
+      console.log('cellEditingStarted');
+    },
+    onCellEditingStopped: (event: agGrid.CellEditingStoppedEvent) => {
+      console.log('cellEditingStopped');
     },
   };
 
