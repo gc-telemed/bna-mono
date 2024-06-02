@@ -34,17 +34,14 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     svelte({
+      onwarn: (warning, handler) => {
+        if (warning?.code === 'css-unused-selector') return;
+        handler(warning);
+      },
       preprocess: vitePreprocess({
-        compilerOptions: {
-          onwarn: (warning, handler) => {
-            if (warning?.code === 'css-unused-selector') return;
-            handler(warning);
-          },
-        },
         plugins: [
           css({ output: 'bundle.css' }),
         ],
-        typescript: true,
         exclude: [
           "./node_modules/**",
           "./.svelte-kit/**",
@@ -53,8 +50,10 @@ export default defineConfig({
           "./.svelte/**",
           "./coverage/**",
           "**/_/**"
-        ]
+        ],
+        typescript: true,
       }),
+      
     }),
     sitemap(),
     mdx(),
