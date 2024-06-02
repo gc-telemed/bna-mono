@@ -1,9 +1,8 @@
 ---
-import Footer from '~/components/widgets/Footer.astro';
 import Header from '~/components/widgets/Header.astro';
 import Layout from '~/layouts/Layout.astro';
 
-import { footerData, headerData } from '~/navigation.mjs';
+import { headerData } from '~/navigation.mjs';
 
 const dataTableHeaderData = {
   ...headerData,
@@ -23,10 +22,7 @@ const { metadata } = Astro.props;
   <slot name="header">
     <Header {...dataTableHeaderData } isSticky showRssFeed showToggleTheme />
   </slot>
-  <main class="mx-12 pl-24">
+  <main>
     <slot />
   </main>
-  <slot name="footer">
-    <Footer {...footerData} />
-  </slot>
 </Layout>

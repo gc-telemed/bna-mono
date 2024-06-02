@@ -11,7 +11,7 @@
   ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
   let gridContainer;
-  let gridApi: GridApi<IRow>;
+  let gridApi;
 
   let eGui: HTMLDivElement;
   let rbAll: HTMLInputElement;
