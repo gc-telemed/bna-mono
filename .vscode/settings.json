@@ -13,7 +13,10 @@
   },
   "eslint.experimental.useFlatConfig": true,
   "cSpell.words": [
+    "arity",
     "astrojs",
+    "kleisli",
+    "nanostore",
     "nanostores",
     "onwarn",
     "Rownomic",

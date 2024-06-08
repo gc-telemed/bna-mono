@@ -7,32 +7,24 @@
   import { onMount } from 'svelte';
   import { BoolFilterSlot } from './data/bool-filter';
   import type { IRow } from './data/row-item';
+  import { workBook } from './data/store';
+  import Sidebar from '../ui/Sidebar.svelte';
+  import Navbar from '../ui/Navbar.svelte';
+
+  export let columnDefs: agGrid.ColDef<IRow>[];
+  export let rowData: IRow[];
 
   ModuleRegistry.registerModules([ClientSideRowModelModule]);
+
+  console.log("columnDefs in grid", columnDefs)
+  console.log("rowData in grid", rowData)
 
   let gridContainer;
   let gridApi;
 
-  let eGui: HTMLDivElement;
-  let rbAll: HTMLInputElement;
-  let rbTrue: HTMLInputElement;
-  let boolFilter: BoolFilterSlot;
-
   const gridOptions: agGrid.GridOptions<IRow> = {
-    columnDefs: [
-      { field: 'make', filter: 'agTextColumnFilter' },
-      { field: 'model', filter: 'agTextColumnFilter' },
-      { field: 'price', filter: 'agNumberColumnFilter' },
-      { field: 'electric', filter: BoolFilterSlot },
-    ],
-    rowData: [
-      { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },
-      { make: 'Ford', model: 'F-Series', price: 33850, electric: false },
-      { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
-      { make: 'Mercedes', model: 'EQA', price: 48890, electric: true },
-      { make: 'Fiat', model: '500', price: 15774, electric: false },
-      { make: 'Nissan', model: 'Juke', price: 20675, electric: false },
-    ],
+    columnDefs,
+    rowData,
     defaultColDef: {
       flex: 1,
       minWidth: 50,
@@ -60,13 +52,13 @@
   });
 </script>
 
-<div id="datagrid" class="ag-theme-quartz pl-16" style="height: 75vh; width: 96vw;" bind:this={gridContainer}></div>
+<div class="data-grid ag-theme-quartz pl-16" bind:this={gridContainer}></div>
 
 <style global>
   @import 'ag-grid-community/styles/ag-grid.css';
   @import 'ag-grid-community/styles/ag-theme-quartz.css';
 
-  #datagrid {
+  .data-grid {
     --ag-header-foreground-color: blue;
   }
 
