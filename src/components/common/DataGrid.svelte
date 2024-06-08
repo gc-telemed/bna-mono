@@ -2,16 +2,18 @@
   import 'ag-grid-community/styles/ag-grid.css';
   import 'ag-grid-community/styles/ag-theme-quartz.css';
   import * as XLSX from 'xlsx';
-  import { sheetMapper, workBook } from './data/store';
+  import { sheetMapper, workBook, currentSheetName } from './data/store';
   import DataTable from './DataTable.svelte';
-
+  import Sidebar from '../ui/Sidebar.svelte';
+  import Navbar from '../ui/Navbar.svelte';
+	let open = false;  
 </script>
-<div class="data-grid px-12 mx-auto flex flex-col" >
+<Sidebar bind:open/>
+<Navbar bind:sidebar={open}/>
+<div class="data-grid flex flex-col" >
 {#each $sheetMapper.keys() as sheetName}
-  {#if $sheetMapper.get(sheetName)?.colDefs && $sheetMapper.get(sheetName)?.rowData}
-    <h1 class="px-12 mx-auto">{sheetName}</h1>
-    <pre>{JSON.stringify($sheetMapper.get(sheetName).colDefs)}</pre>
-    <pre>{JSON.stringify($sheetMapper.get(sheetName).rowData)}</pre>
+  {#if sheetName.startsWith($currentSheetName) && $sheetMapper.get(sheetName)?.colDefs && $sheetMapper.get(sheetName)?.rowData}
+    <h1 class="mx-auto">{sheetName}</h1>
     <DataTable columnDefs={$sheetMapper.get(sheetName).colDefs} rowData={$sheetMapper.get(sheetName).rowData} />
   {/if}
 {/each}

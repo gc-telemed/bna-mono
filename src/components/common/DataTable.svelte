@@ -1,18 +1,13 @@
 <script lang="ts">
   import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
-  import { GridApi, ModuleRegistry } from '@ag-grid-community/core';
+  import { ModuleRegistry } from '@ag-grid-community/core';
   import * as agGrid from 'ag-grid-community';
   import 'ag-grid-community/styles/ag-grid.css';
   import 'ag-grid-community/styles/ag-theme-quartz.css';
   import { onMount } from 'svelte';
-  import { BoolFilterSlot } from './data/bool-filter';
-  import type { IRow } from './data/row-item';
-  import { workBook } from './data/store';
-  import Sidebar from '../ui/Sidebar.svelte';
-  import Navbar from '../ui/Navbar.svelte';
-
-  export let columnDefs: agGrid.ColDef<IRow>[];
-  export let rowData: IRow[];
+  
+  export let columnDefs: agGrid.ColDef[];
+  export let rowData: [];
 
   ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
@@ -22,7 +17,7 @@
   let gridContainer;
   let gridApi;
 
-  const gridOptions: agGrid.GridOptions<IRow> = {
+  const gridOptions: agGrid.GridOptions<any> = {
     columnDefs,
     rowData,
     defaultColDef: {
@@ -48,12 +43,12 @@
   };
 
   onMount(() => {
-    gridApi = agGrid.createGrid<IRow>(gridContainer, gridOptions);
+    gridApi = agGrid.createGrid(gridContainer, gridOptions);
   });
 </script>
-
-<div class="data-grid ag-theme-quartz pl-16" bind:this={gridContainer}></div>
-
+<div class="mx-auto flex flex-col">
+<div class="data-grid ag-theme-quartz pl-16" style="height: 66vw; width: 96vw;" bind:this={gridContainer}></div>
+</div>
 <style global>
   @import 'ag-grid-community/styles/ag-grid.css';
   @import 'ag-grid-community/styles/ag-theme-quartz.css';
