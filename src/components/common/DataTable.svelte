@@ -22,7 +22,7 @@
     rowData,
     defaultColDef: {
       flex: 1,
-      minWidth: 50,
+      minWidth: 200,
       sortable: true,
       resizable: true,
       floatingFilter: true,
@@ -46,8 +46,8 @@
     gridApi = agGrid.createGrid(gridContainer, gridOptions);
   });
 </script>
-<div class="mx-auto flex flex-col">
-<div class="data-grid ag-theme-quartz pl-16" style="height: 66vw; width: 96vw;" bind:this={gridContainer}></div>
+<div class="griddy-wrapper">
+<div class="data-grid ag-theme-quartz" style="height: 85vw; width: 96vw;" bind:this={gridContainer}></div>
 </div>
 <style global>
   @import 'ag-grid-community/styles/ag-grid.css';

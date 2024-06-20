@@ -22,5 +22,6 @@
     "Rownomic",
     "stox",
     "xtos"
-  ]
+  ],
+  "codeQL.githubDatabase.download": "never"
 }
