@@ -1,6 +1,6 @@
 # cosys.work
 
-Marketing site for **CoSys** — offline-first, peer-to-peer health software.
+Marketing site for **cosys.work** — offline-first, peer-to-peer health software.
 
 Three flagship products are presented here:
 

@@ -4,12 +4,12 @@
  */
 
 export const SITE = {
-  name: 'CoSys',
+  name: 'cosys.work',
   legalName: 'CoSys Work Pvt. Ltd.',
   url: 'https://cosys.work',
   tagline: 'Health software that leaves your data where it belongs.',
   description:
-    'CoSys builds offline-first, peer-to-peer health software. The Diabetes App for patients, the Clinic App for care teams, and the P2P platform that connects them — with medical records that never touch a corporate server.',
+    'cosys.work builds offline-first, peer-to-peer health software. The Diabetes App for patients, the Clinic App for care teams, and the P2P platform that connects them — with medical records that never touch a corporate server.',
 } as const;
 
 export const CONTACT = {
@@ -65,7 +65,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'A peer-to-peer trust network that moves medical records directly between the devices that need them — and nowhere else.',
     summary:
-      'The peer-to-peer trust network underneath CoSys apps: device-to-device sync, verified institutional nodes, and a plugin marketplace with no central gatekeeper.',
+      'The peer-to-peer trust network underneath cosys.work apps: device-to-device sync, verified institutional nodes, and a plugin marketplace with no central gatekeeper.',
     accent: 'violet',
     emoji: '🕸️',
   },

@@ -19,7 +19,8 @@ const { class: className } = Astro.props;
     <circle cx="7" cy="24.5" r="3.6" class="fill-brand-600 stroke-none"></circle>
     <circle cx="25" cy="24.5" r="3.6" class="fill-brand-400 stroke-none"></circle>
   </svg>
-  <span class="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
-    Co<span class="text-brand-600 dark:text-brand-400">Sys</span>
+  {/* The domain is the brand, so the wordmark is always lowercase. */}
+  <span class="text-xl font-bold tracking-tight text-neutral-900 lowercase dark:text-white">
+    cosys<span class="text-brand-600 dark:text-brand-400">.work</span>
   </span>
 </span>
