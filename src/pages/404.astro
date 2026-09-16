@@ -1,24 +1,39 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import { getHomePermalink } from '~/utils/permalinks';
-
-const title = `Error 404`;
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import { NAV } from '@/data/site';
 ---
 
-<Layout metadata={{ title }}>
-  <section class="flex items-center h-full p-16">
-    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 font-bold text-9xl">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
-        <p class="mt-4 mb-8 text-lg text-muted dark:text-slate-400">
-          But dont worry, you can find plenty of other things on our homepage.
-        </p>
-        <a rel="noopener noreferrer" href={getHomePermalink()} class="btn ml-4">Back to homepage</a>
-      </div>
+<Base title="Page not found" description="That page does not exist." path="/404">
+  <Section class="!py-24 lg:!py-32">
+    <div class="mx-auto max-w-lg text-center">
+      <p class="text-brand-500 dark:text-brand-400 text-6xl font-bold tabular-nums">404</p>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">
+        That page does not exist
+      </h1>
+      <p class="mt-3 text-pretty text-neutral-600 dark:text-neutral-400">
+        The link may be out of date, or we may have moved something. Here is everything else.
+      </p>
+      <ul class="mt-8 flex flex-wrap items-center justify-center gap-2.5">
+        {
+          NAV.map(({ label, href }) => (
+            <li>
+              <a
+                href={href}
+                class="hover:border-brand-300 hover:text-brand-700 dark:hover:border-brand-400/40 dark:hover:text-brand-300 inline-flex rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="/"
+        class="bg-brand-600 hover:bg-brand-700 mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-sm transition"
+      >
+        Back to the homepage
+      </a>
     </div>
-  </section>
-</Layout>
+  </Section>
+</Base>

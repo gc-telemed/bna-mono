@@ -1,0 +1,63 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  /** Rendered in the accent colour on its own line, after the title. */
+  accentTitle?: string;
+  lede?: string;
+  accentClass?: string;
+  chipClass?: string;
+  align?: 'center' | 'left';
+}
+
+const {
+  eyebrow,
+  title,
+  accentTitle,
+  lede,
+  accentClass = 'text-brand-600 dark:text-brand-400',
+  chipClass = 'border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300',
+  align = 'center',
+} = Astro.props;
+---
+
+<div class:list={[align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-2xl']}>
+  {
+    eyebrow && (
+      <span
+        class:list={['inline-block rounded-full border px-4 py-1 text-sm font-medium', chipClass]}
+      >
+        {eyebrow}
+      </span>
+    )
+  }
+  <h2
+    class:list={[
+      'text-3xl font-bold tracking-tight text-balance text-neutral-900 md:text-4xl md:leading-tight dark:text-neutral-100',
+      eyebrow && 'mt-4',
+    ]}
+  >
+    {title}
+    {
+      accentTitle && (
+        <>
+          {' '}
+          <br class="hidden md:block" />
+          <span class={accentClass}>{accentTitle}</span>
+        </>
+      )
+    }
+  </h2>
+  {
+    lede && (
+      <p
+        class:list={[
+          'mt-4 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400',
+          align === 'center' && 'mx-auto max-w-2xl',
+        ]}
+      >
+        {lede}
+      </p>
+    )
+  }
+</div>

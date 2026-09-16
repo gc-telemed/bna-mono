@@ -1,397 +1,382 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Card from '@/components/Card.astro';
+import CTA from '@/components/CTA.astro';
+import { SITE, CONTACT, PRODUCTS, ACCENT } from '@/data/site';
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+const badges = [
+  { icon: '📡', label: 'Offline-first' },
+  { icon: '🔒', label: 'On-device AI' },
+  { icon: '🤝', label: 'Peer-to-peer' },
+  { icon: '🩺', label: 'Clinician-led' },
+  { icon: '🧩', label: 'Open to plugins' },
+];
 
-const metadata = {
-  title: 'FastRow + Rownomic app/pwa + backend generators for creating apps & websites with PrismQL + Astro',
-  ignoreTitleTemplate: true,
+const principles = [
+  {
+    emoji: '📡',
+    title: 'Works with no signal',
+    body: 'Logging, reminders, trends and the assistant all run on the device. Connectivity is something the apps use when it is there, never something they wait for.',
+  },
+  {
+    emoji: '🔒',
+    title: 'The AI stays on the phone',
+    body: 'Lightweight models run locally, so health questions and personal readings are never shipped to an API. The assistant drafts and summarises; it never decides.',
+  },
+  {
+    emoji: '🗄️',
+    title: 'No corporate custody',
+    body: 'We do not operate a data lake of patient records, because there is nothing to operate. Records live on patient devices and on the clinic systems that already hold them.',
+  },
+  {
+    emoji: '🩺',
+    title: 'Doctor-led by design',
+    body: 'Our apps keep an honest record and make a clinician’s guidance easy to follow. They do not calculate doses and they do not offer a diagnosis.',
+  },
+  {
+    emoji: '🗳️',
+    title: 'Governed by the people using it',
+    body: 'The patient-facing app is shaped by the community that lives with the condition, and any group is free to fork it and build the variant they need.',
+  },
+  {
+    emoji: '🧩',
+    title: 'Extensible by outsiders',
+    body: 'Coaches, dietitians, clinics and independent developers publish plugins straight to the people who want them, over the same peer-to-peer fabric.',
+  },
+];
+
+const flow = [
+  {
+    step: '01',
+    title: 'The patient logs by photographing',
+    body: 'A glucometer display, a lab report, a plate of food, a medication pack. The on-device AI drafts a structured entry and the patient confirms it. Seconds, not minutes.',
+  },
+  {
+    step: '02',
+    title: 'The record syncs to the clinic',
+    body: 'On arrival — or ahead of a remote consultation — the patient approves a direct, encrypted connection to the clinic. Months of structured history land on the clinician’s screen before the conversation starts.',
+  },
+  {
+    step: '03',
+    title: 'The clinician annotates and plans',
+    body: 'Notes attach to the exact readings that prompted them. The visit summary and updated plan are pushed back to the patient’s phone over the same connection — no email attachments, no lost printouts.',
+  },
+  {
+    step: '04',
+    title: 'The plan turns into care at home',
+    body: 'A requested lab, a due refill or a dietary goal becomes a one-tap action routed to licensed local services. The patient approves every one. Nothing is ordered automatically.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  description: SITE.description,
+  email: CONTACT.email,
+  makesOffer: PRODUCTS.map(({ name, summary }) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'SoftwareApplication', name, description: summary },
+  })),
 };
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/gc-telemed/bna-mono',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'FastRow KnowMe Hero Image' }}
-  >
-    <Fragment slot="title">
-      Free CodeGen for <span class="hidden xl:inline">creating Apps & WebShops with</span>
-      <span class="text-accent dark:text-white highlight"> PrismQL </span> + Astro 4.0
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">FastRow</span> is a free, customizable and production-ready template generator for Astro 4.0. 
-        It is distributed as a set of row-based record management software generators. 
-        Rownomic is a library that provides FastRow generators to your existing code-stack via a simple UI. 
+<Base title={SITE.name} description={SITE.description} path="/" structuredData={structuredData}>
+  <!-- Hero -->
+  <Section class="!pt-16 !pb-8 lg:!pt-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <span
+        class="border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300 inline-block rounded-full border px-4 py-1 text-sm font-medium"
+      >
+        Decentralised chronic care
       </span>
-    </Fragment>
-  </Hero>
+      <h1
+        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:text-6xl lg:leading-tight dark:text-white"
+      >
+        Health software that leaves{' '}<br class="hidden sm:block" />
+        <span class="text-brand-600 dark:text-brand-400">your data where it belongs</span>
+      </h1>
+      <p
+        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
+      >
+        CoSys builds offline-first tools for long-term conditions: an app for the person living with
+        one, an app for the clinic treating it, and a peer-to-peer network that moves records
+        directly between them. There is no server in the middle holding anyone&rsquo;s medical
+        history.
+      </p>
 
-  <!-- Note Widget ******************* -->
+      <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/diabetes-app"
+          class="bg-brand-600 hover:bg-brand-700 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-sm transition"
+        >
+          See the Diabetes App
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+        <a
+          href="/platform"
+          class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
+        >
+          How the platform works
+        </a>
+      </div>
 
-  <Note />
+      <ul
+        class="mt-10 flex flex-wrap items-center justify-center gap-2.5 text-sm text-neutral-600 dark:text-neutral-400"
+      >
+        {
+          badges.map(({ icon, label }) => (
+            <li class="flex items-center gap-1.5 rounded-full bg-neutral-100 px-3 py-1 dark:bg-neutral-800">
+              <span aria-hidden="true">{icon}</span>
+              <span>{label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
 
-  <!-- Features Widget *************** -->
+  <!-- Flagship products -->
+  <Section id="products">
+    <SectionHeading
+      eyebrow="Three products, one fabric"
+      title="Built for both sides of the"
+      accentTitle="consulting room door"
+      lede="Each product is useful on its own. Together they close the loop between what happens in a patient's day and what a clinician can actually see."
+    />
 
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with Rownomics (v1)"
-    subtitle="This public repo currently just has some AstroWind based demos and a placeholder for some upcoming updates. Suitable for Startups, Small Businesses, SaaS apps+websites, Professional Portfolios, Marketing websites, Community Pages & Blogs. Current enterprise is available upon request and a subset will be community licensed and open-sourced soon."
-    items={[
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
       {
-        title: 'PrismQL + Astro Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
+        PRODUCTS.map(({ slug, name, audience, blurb, accent, emoji }) => (
+          <a
+            href={slug}
+            class:list={[
+              'group flex flex-col rounded-2xl border border-neutral-200 bg-white p-8 transition hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900',
+              ACCENT[accent].ring,
+            ]}
+          >
+            <span class="text-4xl" aria-hidden="true">
+              {emoji}
+            </span>
+            <span
+              class:list={[
+                'mt-5 inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium',
+                ACCENT[accent].chip,
+              ]}
+            >
+              {audience}
+            </span>
+            <h3 class="mt-3 text-xl font-bold text-neutral-900 dark:text-neutral-100">{name}</h3>
+            <p class="mt-2.5 flex-1 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+              {blurb}
+            </p>
+            <span
+              class:list={[
+                'mt-6 inline-flex items-center gap-1.5 text-sm font-semibold',
+                ACCENT[accent].text,
+              ]}
+            >
+              Learn more
+              <svg
+                class="h-4 w-4 transition group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </Section>
 
-  <!-- Content Widget **************** -->
+  <!-- The problem -->
+  <Section>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
+      <div>
+        <SectionHeading
+          eyebrow="Why we build this way"
+          title="A health record on someone else’s server"
+          accentTitle="is a liability for everyone"
+          align="left"
+        />
+        <div
+          class="mt-5 space-y-4 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
+        >
+          <p>
+            The standard architecture for digital health pools everybody&rsquo;s readings into one
+            place. That makes the pool valuable to the company holding it — and valuable to whoever
+            breaches it. A single failure exposes millions of people at once, and the recovery is
+            measured in months of disrupted care.
+          </p>
+          <p>
+            It also fails quietly, every day, in a more ordinary way: the moment the connection
+            drops, a cloud-dependent app stops being a medical tool. For anyone outside a city with
+            reliable bandwidth, that is most of the time.
+          </p>
+          <p class="font-medium text-neutral-800 dark:text-neutral-200">
+            We took the pool away. Records stay on the patient&rsquo;s device and on the systems of
+            the clinics they explicitly trust. There is no third copy for us to lose.
+          </p>
+        </div>
+      </div>
 
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 4.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
+      <div class="grid gap-4">
+        <div
+          class="rounded-2xl border border-neutral-200 bg-neutral-50 p-7 dark:border-neutral-800 dark:bg-neutral-900"
+        >
+          <p
+            class="mb-4 text-xs font-semibold tracking-wider text-neutral-400 uppercase dark:text-neutral-500"
+          >
+            Centralised health platforms
+          </p>
+          <ul class="space-y-3">
+            {
+              [
+                'One breach exposes every patient at once',
+                'Care stops working where the bandwidth stops',
+                'The operator holds raw records, and the liability that comes with them',
+                'Terms and ownership can change without the patient',
+              ].map((item) => (
+                <li class="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400">
+                  <svg
+                    class="mt-0.5 h-4.5 w-4.5 flex-shrink-0 text-red-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <>
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="m15 9-6 6M9 9l6 6" />
+                    </>
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+        <div
+          class="border-brand-200 bg-brand-50 dark:border-brand-400/20 dark:bg-brand-400/5 rounded-2xl border p-7"
+        >
+          <p
+            class="text-brand-700 dark:text-brand-400 mb-4 text-xs font-semibold tracking-wider uppercase"
+          >
+            The CoSys approach
+          </p>
+          <ul class="space-y-3">
+            {
+              [
+                'Breaking one device gets you one device',
+                'The full experience runs offline, by default',
+                'Clinics keep records where they already keep them, under their own control',
+                'The patient grants and revokes every connection',
+              ].map((item) => (
+                <li class="flex items-start gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+                  <svg
+                    class="text-brand-500 mt-0.5 h-4.5 w-4.5 flex-shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </Section>
 
-  <!-- Content Widget **************** -->
+  <!-- How it fits together -->
+  <Section class="!py-0">
+    <div
+      class="rounded-3xl bg-neutral-100 px-6 py-14 sm:px-10 lg:px-16 lg:py-20 dark:bg-neutral-900/60"
+    >
+      <SectionHeading
+        eyebrow="The loop"
+        title="From a photo on a phone"
+        accentTitle="to care at the front door"
+        lede="Routine chronic care asks the patient to travel: to the clinic, to the lab, to the pharmacy. We run that in the other direction."
+      />
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+      <ol class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          flow.map(({ step, title, body }) => (
+            <li class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
+              <span class="text-brand-500 dark:text-brand-400 text-sm font-bold tabular-nums">
+                {step}
+              </span>
+              <h3 class="mt-2 font-semibold text-pretty text-neutral-900 dark:text-neutral-100">
+                {title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+                {body}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+      <p class="mt-8 text-center text-sm text-neutral-500 dark:text-neutral-500">
+        Physical visits are reserved for the part that genuinely needs a clinician in the room.
+      </p>
+    </div>
+  </Section>
 
-  <!-- Content Widget **************** -->
+  <!-- Principles -->
+  <Section>
+    <SectionHeading
+      eyebrow="What we hold to"
+      title="Commitments we designed around,"
+      accentTitle="not features we added later"
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {principles.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Steps Widget ****************** -->
-
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</em>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/gc-telemed/bna-mono',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
-  </CallToAction>
-</Layout>
+  <!-- CTA -->
+  <Section>
+    <CTA
+      title="Building this with clinics, coaches and patients"
+      body="If you run a clinic that is tired of transcribing paperwork, live with a condition and have opinions about the tools, or write software and want to work on this — we want to hear from you."
+      ctaLabel="Start a conversation"
+      secondaryLabel="Read about CoSys"
+      secondaryHref="/company"
+    />
+  </Section>
+</Base>

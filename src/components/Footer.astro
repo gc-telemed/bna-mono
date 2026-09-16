@@ -1,0 +1,81 @@
+---
+import Logo from '@/components/Logo.astro';
+import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40"
+>
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 md:grid-cols-4">
+      <div class="md:col-span-2">
+        <Logo />
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+          {SITE.tagline} Offline-first health software built on a peer-to-peer trust network, so medical
+          records stay with the people they belong to.
+        </p>
+        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{CONTACT.locations}</p>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Products</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {
+            PRODUCTS.map(({ slug, name }) => (
+              <li>
+                <a
+                  href={slug}
+                  class="hover:text-brand-600 dark:hover:text-brand-400 text-neutral-500 transition dark:text-neutral-400"
+                >
+                  {name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Company</h2>
+        <ul class="mt-4 space-y-2.5 text-sm">
+          {
+            [
+              { label: 'About CoSys', href: '/company' },
+              { label: 'Contact', href: '/contact' },
+              { label: 'Privacy', href: '/privacy' },
+            ].map(({ label, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="hover:text-brand-600 dark:hover:text-brand-400 text-neutral-500 transition dark:text-neutral-400"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              href={`mailto:${CONTACT.email}`}
+              class="hover:text-brand-600 dark:hover:text-brand-400 text-neutral-500 transition dark:text-neutral-400"
+            >
+              {CONTACT.email}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col gap-3 border-t border-neutral-200 pt-6 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800 dark:text-neutral-500"
+    >
+      <p>&copy; {year} {SITE.legalName}. All rights reserved.</p>
+      <p>
+        CoSys products keep records, they do not practise medicine. Treatment decisions stay with
+        your licensed clinician.
+      </p>
+    </div>
+  </div>
+</footer>

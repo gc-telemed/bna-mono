@@ -1,0 +1,193 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Card from '@/components/Card.astro';
+import CTA from '@/components/CTA.astro';
+import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+
+const beliefs = [
+  {
+    emoji: '🧭',
+    title: 'The record belongs to the patient',
+    body: 'Not to us, and not to whoever acquires us later. If a company can monetise a health history, sooner or later it is asked to. We removed the option by removing the copy.',
+  },
+  {
+    emoji: '📡',
+    title: 'Connectivity is a luxury, not a premise',
+    body: 'Software that stops working when the signal drops is not a medical tool, it is a website. Everything essential runs on the device, and the network is a bonus.',
+  },
+  {
+    emoji: '🩺',
+    title: 'Clinicians decide, software remembers',
+    body: 'We build record-keeping and communication. We do not calculate doses or suggest diagnoses. The moment software starts making the call, the accountability gets blurry.',
+  },
+  {
+    emoji: '🫱',
+    title: 'The people who live with it should steer it',
+    body: 'Chronic conditions are managed by patients, daily, for decades. The product direction belongs to them, and to the clinicians treating them, rather than to a roadmap.',
+  },
+];
+
+const approach = [
+  {
+    emoji: '🏔️',
+    title: 'Start where the constraints are real',
+    body: 'We build first for places with patchy bandwidth, expensive hardware and long journeys to clinics. Software that holds up there works comfortably everywhere else — the reverse is almost never true.',
+  },
+  {
+    emoji: '📷',
+    title: 'Meet people at the hardware they own',
+    body: 'Continuous monitors and connected devices are out of reach for most people with diabetes. So the camera is the sensor: photograph the meter you already have, and let the phone do the reading.',
+  },
+  {
+    emoji: '🚪',
+    title: 'Turn the journey around',
+    body: 'Routine chronic care sends the patient to the clinic, the lab and the pharmacy. Where licensed local services can do it, we route the visit in the other direction instead.',
+  },
+  {
+    emoji: '🔁',
+    title: 'Generalise from one condition, carefully',
+    body: 'Diabetes is where we start because the daily logging burden is severe and the clinical loop is tight. The same fabric extends to other long-term conditions once it is genuinely proven on one.',
+  },
+];
+---
+
+<Base
+  title="Company"
+  description={`About ${SITE.name} — why we build offline-first, peer-to-peer health software, and what we hold to.`}
+  path="/company"
+>
+  <!-- Hero -->
+  <Section class="!pt-16 !pb-8 lg:!pt-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <span
+        class="border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300 inline-block rounded-full border px-4 py-1 text-sm font-medium"
+      >
+        About CoSys
+      </span>
+      <h1
+        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:leading-tight dark:text-white"
+      >
+        We build the tools we{' '}<br class="hidden sm:block" />
+        <span class="text-brand-600 dark:text-brand-400">wanted to exist</span>
+      </h1>
+      <p
+        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
+      >
+        CoSys makes software for people managing long-term conditions and the clinicians who treat
+        them. We started because the available tools asked for a permanent internet connection, a
+        monthly fee, and an unconditional copy of the most private thing a person has.
+      </p>
+    </div>
+  </Section>
+
+  <!-- Story -->
+  <Section>
+    <div
+      class="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
+    >
+      <p>
+        Diabetes care is mostly logging. Readings, meals, doses, symptoms — recorded by hand,
+        several times a day, for the rest of someone&rsquo;s life. It is tedious enough that most
+        people stop, and when the logging stops the clinician loses the only honest view of what is
+        actually happening between appointments.
+      </p>
+      <p>
+        The usual answer is more hardware and more cloud: a continuous monitor, a subscription, a
+        dashboard hosted somewhere far away. That answer excludes most of the people who need it
+        most, and it quietly assumes that a company should hold everybody&rsquo;s medical history in
+        one place.
+      </p>
+      <p class="font-medium text-neutral-800 dark:text-neutral-200">
+        We took a different route. Use the camera people already own. Run the intelligence on the
+        phone. Move records directly between the patient and the clinician who needs them, and store
+        nothing in the middle.
+      </p>
+      <p>
+        That turned out to require three things rather than one: an app for the patient, an app for
+        the clinic, and a peer-to-peer network connecting them without a server. All three are what
+        we work on.
+      </p>
+    </div>
+  </Section>
+
+  <!-- What we believe -->
+  <Section class="!py-0">
+    <div
+      class="rounded-3xl bg-neutral-100 px-6 py-14 sm:px-10 lg:px-16 lg:py-20 dark:bg-neutral-900/60"
+    >
+      <SectionHeading
+        eyebrow="What we hold to"
+        title="Four commitments that make"
+        accentTitle="the rest of it harder"
+      />
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {beliefs.map((item) => <Card {...item} />)}
+      </div>
+    </div>
+  </Section>
+
+  <!-- How we work -->
+  <Section>
+    <SectionHeading
+      eyebrow="How we work"
+      title="Built for the hard case first,"
+      accentTitle="not retrofitted to it"
+      lede="We work out of Nepal, and we build for it before we build for anywhere else. That is a design constraint as much as a market."
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {approach.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- Products recap -->
+  <Section>
+    <SectionHeading title="What we make" lede="Three products, one peer-to-peer fabric." />
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {
+        PRODUCTS.map(({ slug, name, summary, emoji }) => (
+          <a
+            href={slug}
+            class="hover:border-brand-300 dark:hover:border-brand-400/40 group rounded-2xl border border-neutral-200 bg-white p-7 transition hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+          >
+            <span class="text-3xl" aria-hidden="true">
+              {emoji}
+            </span>
+            <h3 class="mt-3 font-bold text-neutral-900 dark:text-neutral-100">{name}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+              {summary}
+            </p>
+            <span class="text-brand-600 dark:text-brand-400 mt-4 inline-flex items-center gap-1.5 text-sm font-semibold">
+              Learn more
+              <svg
+                class="h-4 w-4 transition group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- CTA -->
+  <Section>
+    <CTA
+      title="Work with us"
+      body="Clinics willing to shape the workflow, people living with diabetes who have strong opinions, and developers who want to build on a peer-to-peer fabric — all welcome."
+      ctaLabel="Say hello"
+      email={CONTACT.email}
+      secondaryLabel="Contact details"
+      secondaryHref="/contact"
+    />
+  </Section>
+</Base>

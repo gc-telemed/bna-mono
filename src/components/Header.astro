@@ -1,0 +1,106 @@
+---
+import Logo from '@/components/Logo.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { NAV, CONTACT } from '@/data/site';
+
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => here === href;
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-neutral-200/80 bg-white/85 backdrop-blur-md dark:border-neutral-800 dark:bg-neutral-950/85"
+>
+  <nav
+    class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8"
+    aria-label="Main"
+  >
+    <a href="/" class="rounded-lg" aria-label="CoSys — home">
+      <Logo />
+    </a>
+
+    <ul class="ml-auto hidden items-center gap-1 lg:flex">
+      {
+        NAV.map(({ label, href }) => (
+          <li>
+            <a
+              href={href}
+              aria-current={isCurrent(href) ? 'page' : undefined}
+              class:list={[
+                'rounded-lg px-3 py-2 text-sm font-medium transition',
+                isCurrent(href)
+                  ? 'text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-400/10'
+                  : 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="ml-auto flex items-center gap-2 lg:ml-0">
+      <ThemeToggle />
+      <a
+        href={`mailto:${CONTACT.email}`}
+        class="bg-brand-600 hover:bg-brand-700 hidden rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm transition sm:inline-flex"
+      >
+        Get in touch
+      </a>
+      <button
+        type="button"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 transition hover:bg-neutral-100 lg:hidden dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800"
+      >
+        <span class="sr-only">Toggle navigation</span>
+        <svg
+          class="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-nav" hidden class="border-t border-neutral-200 lg:hidden dark:border-neutral-800">
+    <ul class="mx-auto max-w-7xl space-y-1 px-4 py-3 sm:px-6">
+      {
+        NAV.map(({ label, href }) => (
+          <li>
+            <a
+              href={href}
+              aria-current={isCurrent(href) ? 'page' : undefined}
+              class:list={[
+                'block rounded-lg px-3 py-2.5 text-sm font-medium',
+                isCurrent(href)
+                  ? 'text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-400/10'
+                  : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const panel = document.getElementById('mobile-nav');
+
+  button?.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!open));
+    if (panel) panel.hidden = open;
+  });
+</script>

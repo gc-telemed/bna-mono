@@ -1,0 +1,56 @@
+---
+import { CONTACT } from '@/data/site';
+
+interface Props {
+  title: string;
+  body: string;
+  ctaLabel?: string;
+  email?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  title,
+  body,
+  ctaLabel = 'Email us',
+  email = CONTACT.email,
+  secondaryLabel,
+  secondaryHref,
+} = Astro.props;
+---
+
+<div class="bg-brand-700 dark:bg-brand-800 rounded-3xl px-8 py-14 text-center md:px-16">
+  <h2 class="text-3xl font-bold tracking-tight text-balance text-white md:text-4xl">{title}</h2>
+  <p class="text-brand-50/90 mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">{body}</p>
+  <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+    <a
+      href={`mailto:${email}`}
+      class="text-brand-800 hover:bg-brand-50 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold shadow-sm transition"
+    >
+      {ctaLabel}
+      <svg
+        class="h-4 w-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </a>
+    {
+      secondaryLabel && secondaryHref && (
+        <a
+          href={secondaryHref}
+          class="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+        >
+          {secondaryLabel}
+        </a>
+      )
+    }
+  </div>
+</div>

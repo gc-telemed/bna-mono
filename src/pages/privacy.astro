@@ -1,0 +1,142 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import { SITE, CONTACT } from '@/data/site';
+
+const siteFacts = [
+  'No analytics, tracking pixels or advertising scripts.',
+  'No cookies are set by this site. Your theme preference is kept in your own browser’s local storage and is never sent anywhere.',
+  'No contact forms — the links here open your own email client, so you decide what to send and when.',
+  'Our hosting provider records standard web server logs, as every host does.',
+];
+
+const productFacts = [
+  {
+    title: 'Records stay on your device',
+    body: 'Readings, photos, notes and trends live in the app on your phone. They are not uploaded to us, because we do not operate a store for them.',
+  },
+  {
+    title: 'The AI runs locally',
+    body: 'The on-device assistant processes your photos and data on the phone itself. Your questions and readings are not sent to an external service for inference.',
+  },
+  {
+    title: 'You grant every connection',
+    body: 'Sharing with a family member, a carer or a clinic means opening a direct, encrypted connection to a peer you have verified. You can revoke it, and no connection is opened without you.',
+  },
+  {
+    title: 'Clinics hold what you shared with them',
+    body: 'Once you share records with a clinic, that clinic keeps them on its own systems under its own obligations — the same as any other record it holds about you. We are not a party to that copy.',
+  },
+  {
+    title: 'Backups go where you put them',
+    body: 'If you choose to back up source images or documents, they go to a node you nominate — a family device or your clinic — encrypted. There is no default destination belonging to us.',
+  },
+  {
+    title: 'Research participation is opt-in',
+    body: 'Contributing stripped, anonymised data to research is off unless you turn it on, category by category, and you can turn it off again.',
+  },
+];
+---
+
+<Base
+  title="Privacy"
+  description={`How ${SITE.name} handles data — on this website, and in the apps.`}
+  path="/privacy"
+>
+  <Section class="!pt-16 !pb-8 lg:!pt-20">
+    <div class="mx-auto max-w-3xl">
+      <span
+        class="border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300 inline-block rounded-full border px-4 py-1 text-sm font-medium"
+      >
+        Privacy
+      </span>
+      <h1
+        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl dark:text-white"
+      >
+        What we hold about you
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400">
+        The short version: as little as we can arrange, and none of your medical records. That is
+        not a policy we wrote afterwards — it is the reason the software is built the way it is.
+      </p>
+    </div>
+  </Section>
+
+  <Section class="!pt-6">
+    <div class="mx-auto max-w-3xl space-y-12">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          This website
+        </h2>
+        <ul class="mt-5 space-y-3">
+          {
+            siteFacts.map((fact) => (
+              <li class="flex items-start gap-3 text-neutral-600 dark:text-neutral-400">
+                <svg
+                  class="text-brand-500 mt-1 h-4.5 w-4.5 flex-shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span class="leading-relaxed text-pretty">{fact}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          The apps
+        </h2>
+        <p class="mt-3 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400">
+          The Diabetes App and the Clinic App run on a peer-to-peer network. There is no CoSys
+          server holding patient records in the middle of it.
+        </p>
+        <dl class="mt-6 space-y-5">
+          {
+            productFacts.map(({ title, body }) => (
+              <div class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
+                <dt class="font-semibold text-neutral-900 dark:text-neutral-100">{title}</dt>
+                <dd class="mt-1.5 text-sm leading-relaxed text-pretty text-neutral-500 dark:text-neutral-400">
+                  {body}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          If you email us
+        </h2>
+        <p class="mt-3 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400">
+          We keep the message so we can reply and follow up. Please do not send medical records or
+          test results by email — it is not a secure channel, and we do not want a copy. If you want
+          something deleted from our inbox, ask at <a
+            href={`mailto:${CONTACT.email}`}
+            class="text-brand-600 dark:text-brand-400 font-medium underline-offset-2 hover:underline"
+            >{CONTACT.email}</a
+          > and we will.
+        </p>
+      </div>
+
+      <div
+        class="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <p class="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+          This page describes how our software is designed and how we work today, in plain language.
+          It is not a contract, and it does not replace the terms that will ship with the apps
+          themselves. If anything here is unclear or you think it is wrong, write to us.
+        </p>
+      </div>
+    </div>
+  </Section>
+</Base>

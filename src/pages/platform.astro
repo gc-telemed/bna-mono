@@ -1,0 +1,331 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Card from '@/components/Card.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+
+const product = PRODUCTS[2]!;
+const accent = 'text-violet-600 dark:text-violet-300';
+const chip =
+  'border-violet-300 bg-violet-100 text-violet-700 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-300';
+
+const comparison = [
+  {
+    dimension: 'Where records live',
+    cloud: 'Centralised corporate servers and data lakes',
+    cosys: 'On the patient’s device, and on the institutional nodes they explicitly trust',
+  },
+  {
+    dimension: 'Dependency',
+    cloud: 'Continuous bandwidth; degrades or fails in dead zones',
+    cosys: 'Offline-first throughout, syncing asynchronously when a connection appears',
+  },
+  {
+    dimension: 'Risk profile',
+    cloud: 'Systemic — one breach exposes an entire population',
+    cosys: 'Fragmented — compromising the network means compromising devices one at a time',
+  },
+  {
+    dimension: 'Custody',
+    cloud: 'The operator holds raw records, and answers for them',
+    cosys: 'No operator copy exists; custody sits with the patient and their clinic',
+  },
+  {
+    dimension: 'Extension',
+    cloud: 'A single vendor roadmap and an approval queue',
+    cosys: 'Anyone can publish a plugin directly to the people who want it',
+  },
+];
+
+const layers = [
+  {
+    emoji: '📱',
+    title: 'The device layer',
+    body: 'Every participant holds their own records locally. Applications are fully functional on the device alone; the network is an addition to that, never a prerequisite for it.',
+  },
+  {
+    emoji: '🔗',
+    title: 'The trust fabric',
+    body: 'Devices connect directly and only to peers the owner has verified — a family member, a carer, a clinician. Each link is granted deliberately and can be severed the same way.',
+  },
+  {
+    emoji: '🏛️',
+    title: 'Institutional nodes',
+    body: 'Clinics and laboratories join as isolated, containerised organisations, each running its own certificate authority so exchanges are signed, verifiable and confined to their participants.',
+  },
+  {
+    emoji: '🧩',
+    title: 'The plugin fabric',
+    body: 'The same network distributes extensions. Developers, dietitians, coaches and clinics publish directly, and users install only what they want. No central store decides what exists.',
+  },
+];
+
+const sovereignty = [
+  {
+    emoji: '🗑️',
+    title: 'Erasure that actually erases',
+    body: 'Deleting a record means deleting it from the device that holds it and cutting the links that shared it. There is no operator archive quietly retaining a copy.',
+  },
+  {
+    emoji: '📚',
+    title: 'Clinics keep their obligations intact',
+    body: 'Institutional nodes retain the durable clinical record their own regulators require, on their own infrastructure, without that record being pooled with anyone else’s.',
+  },
+  {
+    emoji: '🧊',
+    title: 'Encrypted archival by choice',
+    body: 'Source images and documents can be backed up to a node the owner nominates — a family device, or their clinic — encrypted, and only where they put it.',
+  },
+  {
+    emoji: '🍴',
+    title: 'Forkable by design',
+    body: 'Communities can clone the codebase and run a variant shaped for their own group, on the same fabric, without asking anyone for permission.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'What does peer-to-peer mean in practice here?',
+    answer:
+      'Records move directly between the devices and systems that need them, over encrypted connections the owner has authorised, instead of being uploaded to a server that both parties read from. Nothing passes through infrastructure we control.',
+  },
+  {
+    question: 'If there is no server, how does a clinic get my history?',
+    answer:
+      'You open a direct connection to the clinic’s node — usually by scanning a code on arrival, or ahead of a remote consultation. Your data transfers over that connection. The clinic keeps what you shared on its own systems, as it would any record.',
+  },
+  {
+    question: 'What happens if I lose my phone?',
+    answer:
+      'That is what the trust network is for. You can nominate other nodes — a family member’s device, or your clinic — to hold encrypted backups, so your history survives the device. You choose who holds what, and the copies stay encrypted.',
+  },
+  {
+    question: 'How are institutional connections secured?',
+    answer:
+      'Each participating organisation runs its own certificate authority, issuing the identities and transport certificates for its node. Exchanges between a patient, a clinic and a laboratory are cryptographically signed and confined to those participants.',
+  },
+  {
+    question: 'Who decides what plugins are allowed?',
+    answer:
+      'No single party. Plugins are distributed over the same peer-to-peer fabric and verified by the community that uses them. A coach or a clinic can publish something narrow and useful without a store approving it first.',
+  },
+  {
+    question: 'Is the platform open?',
+    answer:
+      'The intent is that communities can inspect, fork and adapt what they depend on — that is the point of building it this way. Get in touch if you want to talk about building on it.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: product.name,
+  description: product.summary,
+  url: `${SITE.url}${product.slug}`,
+  isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+};
+---
+
+<Base
+  title={product.name}
+  description={product.summary}
+  path={product.slug}
+  structuredData={structuredData}
+>
+  <!-- Hero -->
+  <Section class="!pt-16 !pb-8 lg:!pt-20">
+    <div class="mx-auto max-w-3xl text-center">
+      <span class:list={['inline-block rounded-full border px-4 py-1 text-sm font-medium', chip]}>
+        {product.audience}
+      </span>
+      <h1
+        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:text-6xl lg:leading-tight dark:text-white"
+      >
+        There is no server{' '}<br class="hidden sm:block" />
+        <span class={accent}>in the middle</span>
+      </h1>
+      <p
+        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
+      >
+        Both CoSys apps run on the same peer-to-peer trust network. Records move directly between
+        the devices and institutions that need them, over connections their owner granted — and they
+        move nowhere else. We could not hand over a database of patient histories if we wanted to,
+        because we do not have one.
+      </p>
+    </div>
+  </Section>
+
+  <!-- Layers -->
+  <Section>
+    <SectionHeading
+      eyebrow="How it is put together"
+      title="Four layers,"
+      accentTitle="no centre"
+      accentClass={accent}
+      chipClass={chip}
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {layers.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- Comparison table -->
+  <Section class="!py-0">
+    <div
+      class="rounded-3xl bg-neutral-100 px-6 py-14 sm:px-10 lg:px-16 lg:py-20 dark:bg-neutral-900/60"
+    >
+      <SectionHeading
+        eyebrow="The trade"
+        title="What changes when you"
+        accentTitle="remove the middle"
+        accentClass={accent}
+        chipClass={chip}
+      />
+
+      <div
+        class="mt-12 overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <table class="w-full text-left text-sm">
+          <caption class="sr-only">
+            Centralised health platforms compared with the CoSys peer-to-peer platform
+          </caption>
+          <thead>
+            <tr class="border-b border-neutral-200 dark:border-neutral-800">
+              <th
+                scope="col"
+                class="px-5 py-4 font-semibold text-neutral-900 dark:text-neutral-100"
+              >
+                <span class="sr-only">Dimension</span>
+              </th>
+              <th
+                scope="col"
+                class="px-5 py-4 font-semibold text-neutral-500 dark:text-neutral-400"
+              >
+                Centralised platforms
+              </th>
+              <th scope="col" class="px-5 py-4 font-semibold text-violet-600 dark:text-violet-400">
+                The CoSys platform
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+            {
+              comparison.map(({ dimension, cloud, cosys }) => (
+                <tr>
+                  <th
+                    scope="row"
+                    class="px-5 py-4 align-top font-semibold text-neutral-900 dark:text-neutral-100"
+                  >
+                    {dimension}
+                  </th>
+                  <td class="px-5 py-4 align-top text-neutral-500 dark:text-neutral-400">
+                    {cloud}
+                  </td>
+                  <td class="px-5 py-4 align-top text-neutral-700 dark:text-neutral-300">
+                    {cosys}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Sovereignty -->
+  <Section>
+    <SectionHeading
+      eyebrow="Data sovereignty"
+      title="One architecture that satisfies"
+      accentTitle="two contradictory instincts"
+      accentClass={accent}
+      chipClass={chip}
+      lede="Patients want the right to erase their history. Clinical practice requires a durable record. Those pull against each other only while a single company holds one copy for everybody — so we removed that copy."
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {sovereignty.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- Marketplace -->
+  <Section>
+    <div class="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
+      <div>
+        <SectionHeading
+          eyebrow="Plugin marketplace"
+          title="A health operating system,"
+          accentTitle="extended by outsiders"
+          accentClass={accent}
+          chipClass={chip}
+          align="left"
+        />
+        <div
+          class="mt-5 space-y-4 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
+        >
+          <p>
+            A person managing several overlapping conditions does not need one vendor&rsquo;s idea
+            of what matters. They need the specific modules their own health calls for — and the
+            people best placed to build those are usually not us.
+          </p>
+          <p>
+            Dietitians can ship an on-device knowledge base so meals get scored offline against
+            their own method. A clinic can publish something for its own patients. A coach can build
+            for one sport. Distribution happens over the same peer-to-peer fabric, straight to the
+            people who asked for it.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          [
+            {
+              emoji: '👩‍⚕️',
+              title: 'Clinics',
+              body: 'Publish a module built for the way your own practice follows up.',
+            },
+            {
+              emoji: '🥗',
+              title: 'Dietitians',
+              body: 'Ship a scoring method that runs on the phone, with no connection needed.',
+            },
+            {
+              emoji: '🏋️',
+              title: 'Coaches',
+              body: 'Build for one sport, one cohort, one very specific set of needs.',
+            },
+            {
+              emoji: '🔬',
+              title: 'Researchers',
+              body: 'Offer instruments people can opt into, one category at a time.',
+            },
+          ].map((item) => <Card {...item} />)
+        }
+      </div>
+    </div>
+  </Section>
+
+  <!-- FAQ -->
+  <Section>
+    <FAQ
+      faqs={faqs}
+      lede="The architecture raises reasonable questions. Here are the direct answers."
+    />
+  </Section>
+
+  <!-- CTA -->
+  <Section>
+    <CTA
+      title="Build on the fabric"
+      body="If you are a developer, a clinic or a specialist who wants to publish something into this — or you simply want to argue with the architecture — we would like to hear from you."
+      ctaLabel="Get in touch"
+      email={CONTACT.email}
+      secondaryLabel="About CoSys"
+      secondaryHref="/company"
+    />
+  </Section>
+</Base>
