@@ -8,8 +8,8 @@ import CTA from '@/components/CTA.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const product = PRODUCTS[0]!;
-const accent = 'text-accent-diabetes';
-const chip = 'border-accent-diabetes/30 bg-accent-diabetes-tint text-accent-diabetes';
+const accent = 'text-primary';
+const chip = 'border-primary/30 bg-primary-tint text-ink';
 
 const capture = [
   {
@@ -224,7 +224,7 @@ const structuredData = {
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
           href={`mailto:${CONTACT.productEmail}`}
-          class="bg-accent-diabetes text-on-fill hover:bg-accent-diabetes inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+          class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
           Join the community
           <svg
@@ -314,10 +314,10 @@ const structuredData = {
   <!-- Safety -->
   <Section>
     <div
-      class="border-accent-diabetes/30 bg-accent-diabetes-tint flex items-start gap-4 rounded-2xl border p-6 md:p-8"
+      class="border-primary/30 bg-primary-tint flex items-start gap-4 rounded-2xl border p-6 md:p-8"
     >
       <svg
-        class="text-accent-diabetes mt-0.5 h-6 w-6 flex-shrink-0"
+        class="text-primary mt-0.5 h-6 w-6 flex-shrink-0"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -353,7 +353,7 @@ const structuredData = {
     <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
       {
         plugins.map(({ emoji, name, detail }) => (
-          <div class="border-line bg-surface hover:border-accent-diabetes/30 rounded-xl border p-5 transition hover:shadow-md">
+          <div class="border-line bg-surface hover:border-primary/30 rounded-xl border p-5 transition hover:shadow-md">
             <span class="text-3xl" aria-hidden="true">
               {emoji}
             </span>
@@ -366,7 +366,7 @@ const structuredData = {
     <p class="text-ink-muted mt-6 text-center text-sm">
       Plugins are distributed peer-to-peer and verified by the community. <a
         href="/platform"
-        class="text-accent-diabetes font-medium underline-offset-2 hover:underline"
+        class="text-primary font-medium underline-offset-2 hover:underline"
         >How the marketplace works &rarr;</a
       >
     </p>

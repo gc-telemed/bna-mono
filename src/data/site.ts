@@ -28,7 +28,6 @@ export type Product = {
   blurb: string;
   /** One-line summary used in cards and metadata. */
   summary: string;
-  accent: 'amber' | 'indigo' | 'violet';
   emoji: string;
 };
 
@@ -42,7 +41,6 @@ export const PRODUCTS: Product[] = [
       'Take-a-picture logging, a private on-device AI, and your trusted circle — all of it running on your phone, with or without a signal.',
     summary:
       'An offline-first diabetes companion. Photograph your glucometer, labs, meals and medication; the on-device AI drafts the entry and you confirm it.',
-    accent: 'amber',
     emoji: '🩸',
   },
   {
@@ -54,7 +52,6 @@ export const PRODUCTS: Product[] = [
       'Patient history arrives structured and current before the consultation starts. Less transcription, more care.',
     summary:
       'A companion app for clinics. Patient logs sync straight to the dashboard over an encrypted local connection, so the consultation starts with the full picture.',
-    accent: 'indigo',
     emoji: '🩺',
   },
   {
@@ -66,7 +63,6 @@ export const PRODUCTS: Product[] = [
       'A peer-to-peer trust network that moves medical records directly between the devices that need them — and nowhere else.',
     summary:
       'The peer-to-peer trust network underneath cosys.work apps: device-to-device sync, verified institutional nodes, and a plugin marketplace with no central gatekeeper.',
-    accent: 'violet',
     emoji: '🕸️',
   },
 ];
@@ -78,32 +74,3 @@ export const NAV = [
   { label: 'Company', href: '/company' },
   { label: 'Contact', href: '/contact' },
 ] as const;
-
-/**
- * Tailwind classes per product accent, written out so the JIT compiler sees them.
- * The tokens resolve through `data-scheme` (see src/styles/global.css), so each accent
- * has a light-side and a dark-side value and stays legible in all four themes.
- */
-export const ACCENT: Record<
-  Product['accent'],
-  { chip: string; text: string; bar: string; ring: string }
-> = {
-  amber: {
-    chip: 'border-accent-diabetes/30 bg-accent-diabetes-tint text-accent-diabetes',
-    text: 'text-accent-diabetes',
-    bar: 'bg-accent-diabetes',
-    ring: 'group-hover:border-accent-diabetes/40',
-  },
-  indigo: {
-    chip: 'border-accent-clinic/30 bg-accent-clinic-tint text-accent-clinic',
-    text: 'text-accent-clinic',
-    bar: 'bg-accent-clinic',
-    ring: 'group-hover:border-accent-clinic/40',
-  },
-  violet: {
-    chip: 'border-accent-platform/30 bg-accent-platform-tint text-accent-platform',
-    text: 'text-accent-platform',
-    bar: 'bg-accent-platform',
-    ring: 'group-hover:border-accent-platform/40',
-  },
-};

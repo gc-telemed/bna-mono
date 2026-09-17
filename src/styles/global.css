@@ -7,9 +7,8 @@
  * it compiles `bg-surface` down to `var(--p-surface)` rather than freezing the value, so
  * redefining the `--p-*` variables below repaints the whole site.
  *
- * `data-scheme` ("light" | "dark") rides alongside `data-theme` and carries the two
- * per-product accents, which have a light-side and a dark-side value rather than one per
- * theme.
+ * `data-scheme` ("light" | "dark") rides alongside it so the browser knows which way to
+ * draw its own furniture — scrollbars, form controls, the caret.
  */
 @theme inline {
   /* Nunito, matching the app (ADR-09 §V4). Devanagari there uses Mukta; this site is
@@ -44,13 +43,6 @@
   --color-warning-tint: var(--p-warning-tint);
   --color-danger: var(--p-danger);
   --color-danger-tint: var(--p-danger-tint);
-
-  --color-accent-diabetes: var(--p-accent-diabetes);
-  --color-accent-diabetes-tint: var(--p-accent-diabetes-tint);
-  --color-accent-clinic: var(--p-accent-clinic);
-  --color-accent-clinic-tint: var(--p-accent-clinic-tint);
-  --color-accent-platform: var(--p-accent-platform);
-  --color-accent-platform-tint: var(--p-accent-platform-tint);
 }
 
 /* Deep teal — the light default. Also the pre-hydration fallback on bare :root. */
@@ -140,25 +132,6 @@
   --p-primary: #5eead4;
   --p-primary-pressed: #99f6e4;
   --p-primary-tint: #0b2e29;
-}
-
-:root,
-:root[data-scheme='light'] {
-  --p-accent-diabetes: #a94e08;
-  --p-accent-diabetes-tint: #f7eedc;
-  --p-accent-clinic: #4338ca;
-  --p-accent-clinic-tint: #e7e6fb;
-  --p-accent-platform: #6d28d9;
-  --p-accent-platform-tint: #efe9fc;
-}
-
-:root[data-scheme='dark'] {
-  --p-accent-diabetes: #fcd34d;
-  --p-accent-diabetes-tint: #33280f;
-  --p-accent-clinic: #a5b4fc;
-  --p-accent-clinic-tint: #1e1b4b;
-  --p-accent-platform: #c4b5fd;
-  --p-accent-platform-tint: #2a1b4b;
 }
 
 @layer base {

@@ -8,8 +8,8 @@ import CTA from '@/components/CTA.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const product = PRODUCTS[1]!;
-const accent = 'text-accent-clinic';
-const chip = 'border-accent-clinic/30 bg-accent-clinic-tint text-accent-clinic';
+const accent = 'text-primary';
+const chip = 'border-primary/30 bg-primary-tint text-ink';
 
 const beforeAfter = {
   before: [
@@ -136,7 +136,7 @@ const structuredData = {
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
           href={`mailto:${CONTACT.clinicEmail}`}
-          class="bg-accent-clinic text-on-fill hover:bg-accent-clinic inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+          class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
           Request a walkthrough
           <svg
@@ -204,8 +204,8 @@ const structuredData = {
         </ul>
       </div>
 
-      <div class="border-accent-clinic/30 bg-accent-clinic-tint rounded-2xl border p-8">
-        <p class="text-accent-clinic mb-5 text-xs font-semibold tracking-wider uppercase">
+      <div class="border-primary/30 bg-primary-tint rounded-2xl border p-8">
+        <p class="text-primary mb-5 text-xs font-semibold tracking-wider uppercase">
           With the Clinic App
         </p>
         <ul class="space-y-3.5">
@@ -213,7 +213,7 @@ const structuredData = {
             beforeAfter.after.map((item) => (
               <li class="text-ink flex items-start gap-3 text-sm">
                 <svg
-                  class="text-accent-clinic mt-0.5 h-4.5 w-4.5 flex-shrink-0"
+                  class="text-primary mt-0.5 h-4.5 w-4.5 flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

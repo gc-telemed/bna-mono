@@ -4,7 +4,7 @@ import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
-import { SITE, CONTACT, PRODUCTS, ACCENT } from '@/data/site';
+import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const badges = [
   { icon: '📡', label: 'Offline-first' },
@@ -110,7 +110,7 @@ const structuredData = {
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
           href="/diabetes-app"
-          class="bg-primary hover:bg-primary text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+          class="bg-primary hover:bg-primary-pressed text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
           See the Diabetes App
           <svg
@@ -158,33 +158,20 @@ const structuredData = {
 
     <div class="mt-12 grid gap-5 lg:grid-cols-3">
       {
-        PRODUCTS.map(({ slug, name, audience, blurb, accent, emoji }) => (
+        PRODUCTS.map(({ slug, name, audience, blurb, emoji }) => (
           <a
             href={slug}
-            class:list={[
-              'group border-line bg-surface flex flex-col rounded-2xl border p-8 transition hover:shadow-lg',
-              ACCENT[accent].ring,
-            ]}
+            class="group border-line bg-surface hover:border-primary/40 flex flex-col rounded-2xl border p-8 transition hover:shadow-lg"
           >
             <span class="text-4xl" aria-hidden="true">
               {emoji}
             </span>
-            <span
-              class:list={[
-                'mt-5 inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium',
-                ACCENT[accent].chip,
-              ]}
-            >
+            <span class="border-primary/30 bg-primary-tint text-ink mt-5 inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium">
               {audience}
             </span>
             <h3 class="text-ink mt-3 text-xl font-bold">{name}</h3>
             <p class="text-ink-muted mt-2.5 flex-1 text-sm leading-relaxed">{blurb}</p>
-            <span
-              class:list={[
-                'mt-6 inline-flex items-center gap-1.5 text-sm font-semibold',
-                ACCENT[accent].text,
-              ]}
-            >
+            <span class="text-primary mt-6 inline-flex items-center gap-1.5 text-sm font-semibold">
               Learn more
               <svg
                 class="h-4 w-4 transition group-hover:translate-x-0.5"

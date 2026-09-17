@@ -113,9 +113,6 @@ export const trueBlack: Palette = {
   dangerTint: '#2E1717',
 };
 
-export const APPEARANCE_MODES = ['system', 'light', 'dark'] as const;
-export type AppearanceMode = (typeof APPEARANCE_MODES)[number];
-
 export const LIGHT_THEME_IDS = ['deepTeal', 'pink'] as const;
 export type LightThemeId = (typeof LIGHT_THEME_IDS)[number];
 
@@ -128,19 +125,13 @@ export const LIGHT_THEMES: Record<LightThemeId, Palette> = { deepTeal, pink };
 export const DARK_THEMES: Record<DarkThemeId, Palette> = { slate, trueBlack };
 export const THEMES: Record<ThemeId, Palette> = { ...LIGHT_THEMES, ...DARK_THEMES };
 
-export const DEFAULT_LIGHT_THEME: LightThemeId = 'deepTeal';
-export const DEFAULT_DARK_THEME: DarkThemeId = 'slate';
-
 /** Matches the app's `appearance.*` strings so both surfaces use the same words. */
 export const LABELS = {
-  title: 'Appearance',
-  mode: 'Appearance',
-  modeSystem: 'Follow system',
-  modeLight: 'Always light',
-  modeDark: 'Always dark',
-  modeHint: 'Follow system changes with your device, including at sunset.',
-  light: 'Light theme',
-  dark: 'Dark theme',
+  title: 'Theme',
+  system: 'System default',
+  systemHint: 'Follows your device, including at sunset.',
+  light: 'Light',
+  dark: 'Dark',
   theme: {
     deepTeal: 'Deep teal',
     pink: 'Pink',
@@ -149,31 +140,34 @@ export const LABELS = {
   },
 } as const;
 
+export const THEME_IDS = [...LIGHT_THEME_IDS, ...DARK_THEME_IDS] as const;
+
 /**
- * Product accents, which the app has no counterpart for — it has one primary per theme,
- * while the site needs to tell three products apart at a glance.
+ * What the OS preference resolves to when the visitor has not chosen a theme.
  *
- * Two values rather than four: the light themes share a neutral ramp and the dark ones are
- * both dark, so a light-side and a dark-side value cover all four grounds.
+ * Deep teal is the app's light default too. The dark side differs deliberately: the app
+ * defaults to slate, the site to true black, because a marketing page is read once in
+ * passing rather than lived in, and true black is the more striking first impression.
+ * Slate remains one tap away.
  */
-export const PRODUCT_ACCENTS = {
-  diabetes: { light: '#A94E08', dark: '#FCD34D', lightTint: '#F7EEDC', darkTint: '#33280F' },
-  clinic: { light: '#4338CA', dark: '#A5B4FC', lightTint: '#E7E6FB', darkTint: '#1E1B4B' },
-  platform: { light: '#6D28D9', dark: '#C4B5FD', lightTint: '#EFE9FC', darkTint: '#2A1B4B' },
-} as const;
+export const SYSTEM_LIGHT_THEME: LightThemeId = 'deepTeal';
+export const SYSTEM_DARK_THEME: DarkThemeId = 'trueBlack';
 
-export type ProductAccent = keyof typeof PRODUCT_ACCENTS;
+export function isThemeId(value: unknown): value is ThemeId {
+  return typeof value === 'string' && (THEME_IDS as readonly string[]).includes(value);
+}
 
-/** The app's `resolvePalette`, minus the palette lookup the browser does in CSS. */
-export function resolveThemeId(options: {
-  mode: AppearanceMode;
-  light: LightThemeId;
-  dark: DarkThemeId;
-  systemScheme: 'light' | 'dark' | null;
-}): ThemeId {
-  const { mode, light, dark, systemScheme } = options;
-  const isDark = mode === 'dark' || (mode === 'system' && systemScheme === 'dark');
-  return isDark ? dark : light;
+/**
+ * The visitor's stored choice if they made one, otherwise whichever theme the OS
+ * preference maps to. There is no separate light/dark mode control: choosing a theme
+ * is choosing light or dark, because each theme is one or the other.
+ */
+export function resolveThemeId(
+  stored: string | null,
+  systemScheme: 'light' | 'dark' | null,
+): ThemeId {
+  if (isThemeId(stored)) return stored;
+  return systemScheme === 'dark' ? SYSTEM_DARK_THEME : SYSTEM_LIGHT_THEME;
 }
 
 export function isDarkTheme(id: ThemeId): boolean {

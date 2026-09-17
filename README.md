@@ -29,22 +29,28 @@ Nunito with Mukta for Devanagari; this site is English-only and ships the Latin 
 
 **Four themes**, ported verbatim from the app's `src/theme/palette.ts` into
 `src/data/themes.ts`: two light on a shared warm neutral ramp (deep teal, pink) and two
-complete dark palettes (slate, true black). The picker in the header offers the same three
-controls and the same wording as the app's Appearance settings — a mode that follows the OS
-or is pinned, plus which theme applies on each side — and `resolveThemeId()` mirrors the
-app's `resolvePalette()` exactly.
+complete dark palettes (slate, true black).
+
+There is no light/dark switch, because each theme is already one or the other. The default
+follows the device: light resolves to deep teal, dark to true black. Picking any of the four
+pins it; "System default" clears the choice and hands it back to the device. One
+`localStorage` key, `theme`, holds either a theme id or nothing at all.
 
 Colour is applied through semantic utilities (`bg-surface`, `text-ink-muted`, `border-line`,
 `bg-primary-tint`, …) that compile to `var(--p-*)` via `@theme inline`. Swapping the
 `data-theme` attribute on `<html>` repaints everything; there is no `dark:` variant anywhere
-in the codebase. `data-scheme` rides alongside it and carries the three per-product accents,
-which have one light-side and one dark-side value rather than one per theme.
+in the codebase. `data-scheme` rides alongside it purely so the browser knows which way to
+draw its own furniture.
+
+Products are **not** distinguished by colour — everything uses the theme primary, and the
+current page is marked by an underline in the nav. Note that `build.format` is `'file'`, so
+at build time `Astro.url.pathname` is `/clinic-app.html` and the home page is `/index.html`;
+`Header.astro` normalises both before comparing against `NAV`.
 
 Every pairing clears WCAG AA (4.5:1 for text, 3:1 for control outlines) in all four themes.
-Two constraints fall out of that and are worth knowing before editing: tinted chips take
+One constraint falls out of that and is worth knowing before editing: tinted chips take
 `text-ink`, never `text-primary` — `primary` on `primaryTint` is 4.30:1 in pink, and the app
-only ever pairs `text`/`textMuted` with that tint — and the diabetes accent is `#A94E08`
-rather than a lighter amber so it clears 4.5:1 on its own tint.
+only ever pairs `text`/`textMuted` with that tint.
 
 ## Commands
 

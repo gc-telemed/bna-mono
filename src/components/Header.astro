@@ -3,7 +3,9 @@ import Logo from '@/components/Logo.astro';
 import ThemePicker from '@/components/ThemePicker.astro';
 import { NAV, CONTACT } from '@/data/site';
 
-const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+// build.format is 'file', so at build time the pathname is "/clinic-app.html"
+// and the home page is "/index.html". Normalise both to the href in NAV.
+const here = Astro.url.pathname.replace(/(?:index)?\.html$/, '').replace(/(.)\/$/, '$1') || '/';
 const isCurrent = (href: string) => here === href;
 ---
 
@@ -24,10 +26,11 @@ const isCurrent = (href: string) => here === href;
               href={href}
               aria-current={isCurrent(href) ? 'page' : undefined}
               class:list={[
-                'rounded-lg px-3 py-2 text-sm font-medium transition',
+                'relative rounded-lg px-3 py-2 text-sm font-medium transition',
+                'after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full',
                 isCurrent(href)
-                  ? 'text-ink bg-primary-tint font-semibold'
-                  : 'text-ink-muted hover:bg-surface-muted hover:text-ink',
+                  ? 'text-ink after:bg-primary font-semibold'
+                  : 'text-ink-muted hover:text-ink hover:after:bg-line-strong',
               ]}
             >
               {label}
@@ -41,7 +44,7 @@ const isCurrent = (href: string) => here === href;
       <ThemePicker />
       <a
         href={`mailto:${CONTACT.email}`}
-        class="bg-primary hover:bg-primary text-on-fill hidden rounded-lg px-4 py-2 text-sm font-semibold shadow-sm transition sm:inline-flex"
+        class="bg-primary hover:bg-primary-pressed text-on-fill hidden rounded-lg px-4 py-2 text-sm font-semibold shadow-sm transition sm:inline-flex"
       >
         Get in touch
       </a>
@@ -77,10 +80,10 @@ const isCurrent = (href: string) => here === href;
               href={href}
               aria-current={isCurrent(href) ? 'page' : undefined}
               class:list={[
-                'block rounded-lg px-3 py-2.5 text-sm font-medium',
+                'block rounded-r-lg border-l-2 px-3 py-2.5 text-sm font-medium',
                 isCurrent(href)
-                  ? 'text-ink bg-primary-tint font-semibold'
-                  : 'text-ink hover:bg-surface-muted',
+                  ? 'border-primary text-ink font-semibold'
+                  : 'text-ink-muted hover:bg-surface-muted hover:text-ink border-transparent',
               ]}
             >
               {label}
