@@ -8,9 +8,8 @@ import CTA from '@/components/CTA.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const product = PRODUCTS[2]!;
-const accent = 'text-violet-600 dark:text-violet-300';
-const chip =
-  'border-violet-300 bg-violet-100 text-violet-700 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-300';
+const accent = 'text-accent-platform';
+const chip = 'border-accent-platform/30 bg-accent-platform-tint text-accent-platform';
 
 const comparison = [
   {
@@ -142,14 +141,12 @@ const structuredData = {
         {product.audience}
       </span>
       <h1
-        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:text-6xl lg:leading-tight dark:text-white"
+        class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
         There is no server{' '}<br class="hidden sm:block" />
         <span class={accent}>in the middle</span>
       </h1>
-      <p
-        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-      >
+      <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
         Both cosys.work apps run on the same peer-to-peer trust network. Records move directly
         between the devices and institutions that need them, over connections their owner granted —
         and they move nowhere else. We could not hand over a database of patient histories if we
@@ -174,9 +171,7 @@ const structuredData = {
 
   <!-- Comparison table -->
   <Section class="!py-0">
-    <div
-      class="rounded-3xl bg-neutral-100 px-6 py-14 sm:px-10 lg:px-16 lg:py-20 dark:bg-neutral-900/60"
-    >
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
       <SectionHeading
         eyebrow="The trade"
         title="What changes when you"
@@ -185,48 +180,33 @@ const structuredData = {
         chipClass={chip}
       />
 
-      <div
-        class="mt-12 overflow-hidden rounded-2xl border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900"
-      >
+      <div class="border-line bg-surface mt-12 overflow-hidden rounded-2xl border">
         <table class="w-full text-left text-sm">
           <caption class="sr-only">
             Centralised health platforms compared with the cosys.work peer-to-peer platform
           </caption>
           <thead>
-            <tr class="border-b border-neutral-200 dark:border-neutral-800">
-              <th
-                scope="col"
-                class="px-5 py-4 font-semibold text-neutral-900 dark:text-neutral-100"
-              >
+            <tr class="border-line border-b">
+              <th scope="col" class="text-ink px-5 py-4 font-semibold">
                 <span class="sr-only">Dimension</span>
               </th>
-              <th
-                scope="col"
-                class="px-5 py-4 font-semibold text-neutral-500 dark:text-neutral-400"
-              >
+              <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">
                 Centralised platforms
               </th>
-              <th scope="col" class="px-5 py-4 font-semibold text-violet-600 dark:text-violet-400">
+              <th scope="col" class="text-accent-platform px-5 py-4 font-semibold">
                 The cosys.work platform
               </th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+          <tbody class="divide-line divide-y">
             {
               comparison.map(({ dimension, cloud, cosys }) => (
                 <tr>
-                  <th
-                    scope="row"
-                    class="px-5 py-4 align-top font-semibold text-neutral-900 dark:text-neutral-100"
-                  >
+                  <th scope="row" class="text-ink px-5 py-4 align-top font-semibold">
                     {dimension}
                   </th>
-                  <td class="px-5 py-4 align-top text-neutral-500 dark:text-neutral-400">
-                    {cloud}
-                  </td>
-                  <td class="px-5 py-4 align-top text-neutral-700 dark:text-neutral-300">
-                    {cosys}
-                  </td>
+                  <td class="text-ink-muted px-5 py-4 align-top">{cloud}</td>
+                  <td class="text-ink px-5 py-4 align-top">{cosys}</td>
                 </tr>
               ))
             }
@@ -263,9 +243,7 @@ const structuredData = {
           chipClass={chip}
           align="left"
         />
-        <div
-          class="mt-5 space-y-4 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-        >
+        <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
           <p>
             A person managing several overlapping conditions does not need one vendor&rsquo;s idea
             of what matters. They need the specific modules their own health calls for — and the

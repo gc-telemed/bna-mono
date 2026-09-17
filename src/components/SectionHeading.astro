@@ -15,8 +15,8 @@ const {
   title,
   accentTitle,
   lede,
-  accentClass = 'text-brand-600 dark:text-brand-400',
-  chipClass = 'border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300',
+  accentClass = 'text-primary',
+  chipClass = 'border-primary/30 bg-primary-tint text-ink',
   align = 'center',
 } = Astro.props;
 ---
@@ -33,7 +33,7 @@ const {
   }
   <h2
     class:list={[
-      'text-3xl font-bold tracking-tight text-balance text-neutral-900 md:text-4xl md:leading-tight dark:text-neutral-100',
+      'text-ink text-3xl font-bold tracking-tight text-balance md:text-4xl md:leading-tight',
       eyebrow && 'mt-4',
     ]}
   >
@@ -52,7 +52,7 @@ const {
     lede && (
       <p
         class:list={[
-          'mt-4 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400',
+          'text-ink-muted mt-4 leading-relaxed text-pretty',
           align === 'center' && 'mx-auto max-w-2xl',
         ]}
       >

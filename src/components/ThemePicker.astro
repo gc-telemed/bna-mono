@@ -1,0 +1,187 @@
+---
+/**
+ * The app's Appearance settings, on the web.
+ *
+ * Same three controls and the same words as the app's settings screen: a mode that can
+ * follow the OS or be pinned, plus which theme applies on each side. Selections persist
+ * per browser; nothing is sent anywhere.
+ */
+import {
+  APPEARANCE_MODES,
+  DARK_THEME_IDS,
+  LIGHT_THEME_IDS,
+  LABELS,
+  THEMES,
+  type AppearanceMode,
+} from '@/data/themes';
+
+const MODE_LABEL: Record<AppearanceMode, string> = {
+  system: LABELS.modeSystem,
+  light: LABELS.modeLight,
+  dark: LABELS.modeDark,
+};
+
+const optionClass =
+  'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-ink transition hover:bg-surface-muted aria-checked:bg-primary-tint aria-checked:font-semibold';
+const groupLabelClass =
+  'px-2.5 pt-3 pb-1.5 text-xs font-semibold tracking-wider text-ink-muted uppercase';
+---
+
+<details class="relative" data-theme-picker>
+  <summary
+    class="border-line text-ink-muted hover:bg-surface-muted hover:text-ink inline-flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-lg border transition"
+    aria-label={LABELS.title}
+  >
+    <svg
+      class="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" stroke="none"></path>
+    </svg>
+  </summary>
+
+  <div
+    class="border-line bg-surface absolute right-0 z-50 mt-2 w-64 rounded-xl border p-2 shadow-lg"
+    role="group"
+    aria-label={LABELS.title}
+  >
+    <p class={groupLabelClass}>{LABELS.mode}</p>
+    {
+      APPEARANCE_MODES.map((mode) => (
+        <button
+          type="button"
+          role="radio"
+          aria-checked="false"
+          data-mode={mode}
+          class={optionClass}
+        >
+          <span class="border-line-strong flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border">
+            <span class="bg-primary hidden h-2 w-2 rounded-full" data-dot />
+          </span>
+          {MODE_LABEL[mode]}
+        </button>
+      ))
+    }
+    <p class="text-ink-muted px-2.5 pt-1.5 pb-1 text-xs leading-relaxed">{LABELS.modeHint}</p>
+
+    <p class={groupLabelClass}>{LABELS.light}</p>
+    {
+      LIGHT_THEME_IDS.map((id) => (
+        <button type="button" role="radio" aria-checked="false" data-light={id} class={optionClass}>
+          <span
+            class="border-line h-4 w-4 flex-shrink-0 rounded-full border"
+            style={`background: ${THEMES[id].primary}`}
+          />
+          {LABELS.theme[id]}
+        </button>
+      ))
+    }
+
+    <p class={groupLabelClass}>{LABELS.dark}</p>
+    {
+      DARK_THEME_IDS.map((id) => (
+        <button type="button" role="radio" aria-checked="false" data-dark={id} class={optionClass}>
+          <span
+            class="border-line h-4 w-4 flex-shrink-0 rounded-full border"
+            style={`background: ${THEMES[id].ground}; box-shadow: inset 0 0 0 2px ${THEMES[id].primary}`}
+          />
+          {LABELS.theme[id]}
+        </button>
+      ))
+    }
+  </div>
+</details>
+
+<script>
+  import {
+    DARK_THEME_IDS,
+    DEFAULT_DARK_THEME,
+    DEFAULT_LIGHT_THEME,
+    LIGHT_THEME_IDS,
+    APPEARANCE_MODES,
+    isDarkTheme,
+    resolveThemeId,
+    type AppearanceMode,
+    type DarkThemeId,
+    type LightThemeId,
+  } from '@/data/themes';
+
+  const KEYS = { mode: 'appearance-mode', light: 'light-theme', dark: 'dark-theme' } as const;
+
+  function read<T extends string>(key: string, allowed: readonly T[], fallback: T): T {
+    try {
+      const stored = localStorage.getItem(key);
+      return stored && (allowed as readonly string[]).includes(stored) ? (stored as T) : fallback;
+    } catch {
+      return fallback; // private mode or blocked storage
+    }
+  }
+
+  let mode = read<AppearanceMode>(KEYS.mode, APPEARANCE_MODES, 'system');
+  let light = read<LightThemeId>(KEYS.light, LIGHT_THEME_IDS, DEFAULT_LIGHT_THEME);
+  let dark = read<DarkThemeId>(KEYS.dark, DARK_THEME_IDS, DEFAULT_DARK_THEME);
+
+  const media = matchMedia('(prefers-color-scheme: dark)');
+
+  function apply() {
+    const id = resolveThemeId({
+      mode,
+      light,
+      dark,
+      systemScheme: media.matches ? 'dark' : 'light',
+    });
+    const root = document.documentElement;
+    root.dataset.theme = id;
+    root.dataset.scheme = isDarkTheme(id) ? 'dark' : 'light';
+
+    for (const button of document.querySelectorAll<HTMLElement>(
+      '[data-mode],[data-light],[data-dark]',
+    )) {
+      const { mode: m, light: l, dark: d } = button.dataset;
+      const on = m === mode || l === light || d === dark;
+      button.setAttribute('aria-checked', String(on));
+      button.querySelector<HTMLElement>('[data-dot]')?.classList.toggle('hidden', !on);
+    }
+  }
+
+  function store(key: string, value: string) {
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      /* the choice still applies to this page view */
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const button = (event.target as Element | null)?.closest<HTMLElement>(
+      '[data-mode],[data-light],[data-dark]',
+    );
+    if (!button) return;
+    const { mode: m, light: l, dark: d } = button.dataset;
+    if (m) store(KEYS.mode, (mode = m as AppearanceMode));
+    if (l) store(KEYS.light, (light = l as LightThemeId));
+    if (d) store(KEYS.dark, (dark = d as DarkThemeId));
+    apply();
+  });
+
+  // Only matters while the mode is "system", but apply() re-resolves either way.
+  media.addEventListener('change', apply);
+
+  // Close the popover on an outside click or Escape.
+  const picker = document.querySelector<HTMLDetailsElement>('[data-theme-picker]');
+  document.addEventListener('click', (event) => {
+    if (picker?.open && !picker.contains(event.target as Node)) picker.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && picker?.open) picker.open = false;
+  });
+
+  apply();
+</script>

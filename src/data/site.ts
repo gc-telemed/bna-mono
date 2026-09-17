@@ -79,27 +79,31 @@ export const NAV = [
   { label: 'Contact', href: '/contact' },
 ] as const;
 
-/** Tailwind classes per product accent, written out so the JIT compiler sees them. */
+/**
+ * Tailwind classes per product accent, written out so the JIT compiler sees them.
+ * The tokens resolve through `data-scheme` (see src/styles/global.css), so each accent
+ * has a light-side and a dark-side value and stays legible in all four themes.
+ */
 export const ACCENT: Record<
   Product['accent'],
   { chip: string; text: string; bar: string; ring: string }
 > = {
   amber: {
-    chip: 'border-amber-300 bg-amber-100 text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300',
-    text: 'text-amber-600 dark:text-amber-300',
-    bar: 'bg-amber-400',
-    ring: 'group-hover:border-amber-300 dark:group-hover:border-amber-400/40',
+    chip: 'border-accent-diabetes/30 bg-accent-diabetes-tint text-accent-diabetes',
+    text: 'text-accent-diabetes',
+    bar: 'bg-accent-diabetes',
+    ring: 'group-hover:border-accent-diabetes/40',
   },
   indigo: {
-    chip: 'border-indigo-300 bg-indigo-100 text-indigo-700 dark:border-indigo-400/30 dark:bg-indigo-400/10 dark:text-indigo-300',
-    text: 'text-indigo-600 dark:text-indigo-300',
-    bar: 'bg-indigo-400',
-    ring: 'group-hover:border-indigo-300 dark:group-hover:border-indigo-400/40',
+    chip: 'border-accent-clinic/30 bg-accent-clinic-tint text-accent-clinic',
+    text: 'text-accent-clinic',
+    bar: 'bg-accent-clinic',
+    ring: 'group-hover:border-accent-clinic/40',
   },
   violet: {
-    chip: 'border-violet-300 bg-violet-100 text-violet-700 dark:border-violet-400/30 dark:bg-violet-400/10 dark:text-violet-300',
-    text: 'text-violet-600 dark:text-violet-300',
-    bar: 'bg-violet-400',
-    ring: 'group-hover:border-violet-300 dark:group-hover:border-violet-400/40',
+    chip: 'border-accent-platform/30 bg-accent-platform-tint text-accent-platform',
+    text: 'text-accent-platform',
+    bar: 'bg-accent-platform',
+    ring: 'group-hover:border-accent-platform/40',
   },
 };

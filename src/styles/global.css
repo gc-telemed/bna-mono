@@ -1,43 +1,188 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/inter';
+@import '@fontsource-variable/nunito';
 
-/* Class-based dark mode so the header toggle can override the OS preference. */
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
+/**
+ * Colour comes from the app's four themes (see src/data/themes.ts), swapped at runtime by
+ * the `data-theme` attribute on <html>. `@theme inline` is what makes that possible:
+ * it compiles `bg-surface` down to `var(--p-surface)` rather than freezing the value, so
+ * redefining the `--p-*` variables below repaints the whole site.
+ *
+ * `data-scheme` ("light" | "dark") rides alongside `data-theme` and carries the two
+ * per-product accents, which have a light-side and a dark-side value rather than one per
+ * theme.
+ */
+@theme inline {
+  /* Nunito, matching the app (ADR-09 §V4). Devanagari there uses Mukta; this site is
+     English-only, so the Latin cut is all it ships. */
   --font-sans:
-    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    'Nunito Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  /* cosys.work brand — teal */
-  --color-brand-50: #f0fdfa;
-  --color-brand-100: #ccfbf1;
-  --color-brand-200: #99f6e4;
-  --color-brand-300: #5eead4;
-  --color-brand-400: #2dd4bf;
-  --color-brand-500: #14b8a6;
-  --color-brand-600: #0d9488;
-  --color-brand-700: #0f766e;
-  --color-brand-800: #115e59;
-  --color-brand-900: #134e4a;
-  --color-brand-950: #042f2e;
+  /* The app ships static cuts at 400/600/700 only, so `font-medium` resolves to 600
+     rather than introducing a weight the product never uses. */
+  --font-weight-medium: 600;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --color-ground: var(--p-ground);
+  --color-surface: var(--p-surface);
+  --color-surface-muted: var(--p-surface-muted);
+  --color-line: var(--p-border);
+  --color-line-strong: var(--p-border-strong);
+  --color-focus: var(--p-focus);
+
+  --color-ink: var(--p-text);
+  --color-ink-muted: var(--p-text-muted);
+  --color-on-fill: var(--p-text-on-fill);
+
+  --color-primary: var(--p-primary);
+  --color-primary-pressed: var(--p-primary-pressed);
+  --color-primary-tint: var(--p-primary-tint);
+
+  --color-success: var(--p-success);
+  --color-success-tint: var(--p-success-tint);
+  --color-warning: var(--p-warning);
+  --color-warning-tint: var(--p-warning-tint);
+  --color-danger: var(--p-danger);
+  --color-danger-tint: var(--p-danger-tint);
+
+  --color-accent-diabetes: var(--p-accent-diabetes);
+  --color-accent-diabetes-tint: var(--p-accent-diabetes-tint);
+  --color-accent-clinic: var(--p-accent-clinic);
+  --color-accent-clinic-tint: var(--p-accent-clinic-tint);
+  --color-accent-platform: var(--p-accent-platform);
+  --color-accent-platform-tint: var(--p-accent-platform-tint);
+}
+
+/* Deep teal — the light default. Also the pre-hydration fallback on bare :root. */
+:root,
+:root[data-theme='deepTeal'] {
+  --p-ground: #faf7f2;
+  --p-surface: #ffffff;
+  --p-surface-muted: #f3eee7;
+  --p-border: #e7dfd4;
+  --p-border-strong: #8a7c6b;
+  --p-text: #2a2320;
+  --p-text-muted: #6b5f57;
+  --p-text-on-fill: #ffffff;
+  --p-success: #2e7d32;
+  --p-success-tint: #e7efe0;
+  --p-warning: #8a5a00;
+  --p-warning-tint: #f7eedc;
+  --p-danger: #b3261e;
+  --p-danger-tint: #f8e6e1;
+  --p-focus: #0f6e63;
+  --p-primary: #0f6e63;
+  --p-primary-pressed: #0b554c;
+  --p-primary-tint: #e2f0ed;
+}
+
+/* Pink — 172° from deep teal in OKLCH hue, on the same neutral ramp. */
+:root[data-theme='pink'] {
+  --p-ground: #faf7f2;
+  --p-surface: #ffffff;
+  --p-surface-muted: #f3eee7;
+  --p-border: #e7dfd4;
+  --p-border-strong: #8a7c6b;
+  --p-text: #2a2320;
+  --p-text-muted: #6b5f57;
+  --p-text-on-fill: #ffffff;
+  --p-success: #2e7d32;
+  --p-success-tint: #e7efe0;
+  --p-warning: #8a5a00;
+  --p-warning-tint: #f7eedc;
+  --p-danger: #b3261e;
+  --p-danger-tint: #f8e6e1;
+  --p-focus: #d3007d;
+  --p-primary: #d3007d;
+  --p-primary-pressed: #a80063;
+  --p-primary-tint: #fbe4f1;
+}
+
+/* Slate — the dark default. A complete palette, not the light ramp inverted. */
+:root[data-theme='slate'] {
+  --p-ground: #0f172a;
+  --p-surface: #1e293b;
+  --p-surface-muted: #273449;
+  --p-border: #334155;
+  --p-border-strong: #94a3b8;
+  --p-text: #f1f5f9;
+  --p-text-muted: #a9b6c8;
+  --p-text-on-fill: #0f172a;
+  --p-success: #5fd48c;
+  --p-success-tint: #17301f;
+  --p-warning: #e8b451;
+  --p-warning-tint: #33280f;
+  --p-danger: #f58c84;
+  --p-danger-tint: #351d1b;
+  --p-focus: #5ec2f0;
+  --p-primary: #5ec2f0;
+  --p-primary-pressed: #8fd6f6;
+  --p-primary-tint: #1b3346;
+}
+
+/* True black — high contrast, not merely dark. Cards separate by border, not by fill. */
+:root[data-theme='trueBlack'] {
+  --p-ground: #000000;
+  --p-surface: #0e0e0e;
+  --p-surface-muted: #171717;
+  --p-border: #2e2e2e;
+  --p-border-strong: #a3a3a3;
+  --p-text: #ffffff;
+  --p-text-muted: #cfcfcf;
+  --p-text-on-fill: #000000;
+  --p-success: #6ee7a8;
+  --p-success-tint: #0e2a1b;
+  --p-warning: #fcd34d;
+  --p-warning-tint: #2e2510;
+  --p-danger: #fca5a5;
+  --p-danger-tint: #2e1717;
+  --p-focus: #5eead4;
+  --p-primary: #5eead4;
+  --p-primary-pressed: #99f6e4;
+  --p-primary-tint: #0b2e29;
+}
+
+:root,
+:root[data-scheme='light'] {
+  --p-accent-diabetes: #a94e08;
+  --p-accent-diabetes-tint: #f7eedc;
+  --p-accent-clinic: #4338ca;
+  --p-accent-clinic-tint: #e7e6fb;
+  --p-accent-platform: #6d28d9;
+  --p-accent-platform-tint: #efe9fc;
+}
+
+:root[data-scheme='dark'] {
+  --p-accent-diabetes: #fcd34d;
+  --p-accent-diabetes-tint: #33280f;
+  --p-accent-clinic: #a5b4fc;
+  --p-accent-clinic-tint: #1e1b4b;
+  --p-accent-platform: #c4b5fd;
+  --p-accent-platform-tint: #2a1b4b;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Repaint the browser's own furniture — scrollbars, form controls — to match. */
+    color-scheme: light;
+  }
+
+  html[data-scheme='dark'] {
+    color-scheme: dark;
   }
 
   body {
-    @apply bg-white font-sans text-neutral-700 antialiased dark:bg-neutral-950 dark:text-neutral-300;
+    @apply bg-ground text-ink-muted font-sans antialiased;
   }
 
   :focus-visible {
-    @apply outline-brand-500 outline-2 outline-offset-2;
+    @apply outline-focus outline-2 outline-offset-2;
   }
 
   ::selection {
-    @apply bg-brand-200 text-brand-950;
+    @apply bg-primary-tint text-ink;
   }
 }
 

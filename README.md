@@ -12,10 +12,39 @@ Three flagship products are presented here:
 
 ## Stack
 
-- [Astro 7](https://astro.build) — static output, zero client JS except two small inline scripts (theme toggle, mobile nav)
+- [Astro 7](https://astro.build) — static output, no JS bundles; the theme picker and mobile nav ship as small inline scripts
 - [Tailwind CSS 4](https://tailwindcss.com) via `@tailwindcss/vite`, configured in CSS (`src/styles/global.css`), not a JS config file
 - `@astrojs/sitemap` for `sitemap-index.xml`
 - Deployed on Netlify from `netlify.toml`
+
+## Typography and theming
+
+Both are taken from the app so the two surfaces read as one product.
+
+**Nunito** (`@fontsource-variable/nunito`), matching the app's ADR-09 §V4 choice. The app
+ships static cuts at 400/600/700 because React Native on Android cannot select variable-font
+axes; the web has no such limit, so the variable file is used and `--font-weight-medium` is
+pinned to 600 so the site never renders a weight the product does not have. The app pairs
+Nunito with Mukta for Devanagari; this site is English-only and ships the Latin cut alone.
+
+**Four themes**, ported verbatim from the app's `src/theme/palette.ts` into
+`src/data/themes.ts`: two light on a shared warm neutral ramp (deep teal, pink) and two
+complete dark palettes (slate, true black). The picker in the header offers the same three
+controls and the same wording as the app's Appearance settings — a mode that follows the OS
+or is pinned, plus which theme applies on each side — and `resolveThemeId()` mirrors the
+app's `resolvePalette()` exactly.
+
+Colour is applied through semantic utilities (`bg-surface`, `text-ink-muted`, `border-line`,
+`bg-primary-tint`, …) that compile to `var(--p-*)` via `@theme inline`. Swapping the
+`data-theme` attribute on `<html>` repaints everything; there is no `dark:` variant anywhere
+in the codebase. `data-scheme` rides alongside it and carries the three per-product accents,
+which have one light-side and one dark-side value rather than one per theme.
+
+Every pairing clears WCAG AA (4.5:1 for text, 3:1 for control outlines) in all four themes.
+Two constraints fall out of that and are worth knowing before editing: tinted chips take
+`text-ink`, never `text-primary` — `primary` on `primaryTint` is 4.30:1 in pink, and the app
+only ever pairs `text`/`textMuted` with that tint — and the diabetes accent is `#A94E08`
+rather than a lighter amber so it clears 4.5:1 on its own tint.
 
 ## Commands
 

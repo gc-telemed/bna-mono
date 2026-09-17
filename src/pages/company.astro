@@ -62,19 +62,17 @@ const approach = [
   <Section class="!pt-16 !pb-8 lg:!pt-20">
     <div class="mx-auto max-w-3xl text-center">
       <span
-        class="border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300 inline-block rounded-full border px-4 py-1 text-sm font-medium"
+        class="border-primary/30 bg-primary-tint text-ink inline-block rounded-full border px-4 py-1 text-sm font-medium"
       >
         About cosys.work
       </span>
       <h1
-        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:leading-tight dark:text-white"
+        class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
       >
         We build the tools we{' '}<br class="hidden sm:block" />
-        <span class="text-brand-600 dark:text-brand-400">wanted to exist</span>
+        <span class="text-primary">wanted to exist</span>
       </h1>
-      <p
-        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-      >
+      <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
         cosys.work makes software for people managing long-term conditions and the clinicians who
         treat them. We started because the available tools asked for a permanent internet
         connection, a monthly fee, and an unconditional copy of the most private thing a person has.
@@ -84,9 +82,7 @@ const approach = [
 
   <!-- Story -->
   <Section>
-    <div
-      class="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-    >
+    <div class="text-ink-muted mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-pretty">
       <p>
         Diabetes care is mostly logging. Readings, meals, doses, symptoms — recorded by hand,
         several times a day, for the rest of someone&rsquo;s life. It is tedious enough that most
@@ -99,7 +95,7 @@ const approach = [
         most, and it quietly assumes that a company should hold everybody&rsquo;s medical history in
         one place.
       </p>
-      <p class="font-medium text-neutral-800 dark:text-neutral-200">
+      <p class="text-ink font-medium">
         We took a different route. Use the camera people already own. Run the intelligence on the
         phone. Move records directly between the patient and the clinician who needs them, and store
         nothing in the middle.
@@ -114,9 +110,7 @@ const approach = [
 
   <!-- What we believe -->
   <Section class="!py-0">
-    <div
-      class="rounded-3xl bg-neutral-100 px-6 py-14 sm:px-10 lg:px-16 lg:py-20 dark:bg-neutral-900/60"
-    >
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
       <SectionHeading
         eyebrow="What we hold to"
         title="Four commitments that make"
@@ -149,16 +143,14 @@ const approach = [
         PRODUCTS.map(({ slug, name, summary, emoji }) => (
           <a
             href={slug}
-            class="hover:border-brand-300 dark:hover:border-brand-400/40 group rounded-2xl border border-neutral-200 bg-white p-7 transition hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+            class="hover:border-primary/30 group border-line bg-surface rounded-2xl border p-7 transition hover:shadow-md"
           >
             <span class="text-3xl" aria-hidden="true">
               {emoji}
             </span>
-            <h3 class="mt-3 font-bold text-neutral-900 dark:text-neutral-100">{name}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-              {summary}
-            </p>
-            <span class="text-brand-600 dark:text-brand-400 mt-4 inline-flex items-center gap-1.5 text-sm font-semibold">
+            <h3 class="text-ink mt-3 font-bold">{name}</h3>
+            <p class="text-ink-muted mt-2 text-sm leading-relaxed">{summary}</p>
+            <span class="text-primary mt-4 inline-flex items-center gap-1.5 text-sm font-semibold">
               Learn more
               <svg
                 class="h-4 w-4 transition group-hover:translate-x-0.5"

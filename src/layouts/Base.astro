@@ -48,18 +48,32 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
       )
     }
 
-    {/* Set the theme before first paint so the page never flashes the wrong one. */}
+    {
+      /* Resolve the theme before first paint so the page never flashes the wrong one.
+        Mirrors resolveThemeId() in src/data/themes.ts; kept inline and dependency-free
+        because it has to run before the stylesheet paints. */
+    }
     <script is:inline>
       (() => {
-        try {
-          const stored = localStorage.getItem('theme');
-          const dark = stored
-            ? stored === 'dark'
-            : matchMedia('(prefers-color-scheme: dark)').matches;
-          document.documentElement.classList.toggle('dark', dark);
-        } catch {
-          /* private mode or blocked storage — fall back to the light default */
-        }
+        const LIGHT = ['deepTeal', 'pink'];
+        const DARK = ['slate', 'trueBlack'];
+        const pick = (key, allowed, fallback) => {
+          try {
+            const stored = localStorage.getItem(key);
+            return allowed.includes(stored) ? stored : fallback;
+          } catch {
+            return fallback; /* private mode or blocked storage */
+          }
+        };
+        const mode = pick('appearance-mode', ['system', 'light', 'dark'], 'system');
+        const isDark =
+          mode === 'dark' ||
+          (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        const id = isDark
+          ? pick('dark-theme', DARK, 'slate')
+          : pick('light-theme', LIGHT, 'deepTeal');
+        document.documentElement.dataset.theme = id;
+        document.documentElement.dataset.scheme = isDark ? 'dark' : 'light';
       })();
     </script>
   </head>
@@ -67,7 +81,7 @@ const fullTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
   <body class="flex min-h-screen flex-col">
     <a
       href="#main"
-      class="focus:bg-brand-600 sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      class="focus:bg-primary focus:text-on-fill sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
     >
       Skip to content
     </a>

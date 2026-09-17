@@ -5,30 +5,25 @@ import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 const year = new Date().getFullYear();
 ---
 
-<footer
-  class="border-t border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40"
->
+<footer class="border-line bg-surface-muted border-t">
   <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
     <div class="grid gap-10 md:grid-cols-4">
       <div class="md:col-span-2">
         <Logo />
-        <p class="mt-4 max-w-sm text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+        <p class="text-ink-muted mt-4 max-w-sm text-sm leading-relaxed">
           {SITE.tagline} Offline-first health software built on a peer-to-peer trust network, so medical
           records stay with the people they belong to.
         </p>
-        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">{CONTACT.locations}</p>
+        <p class="text-ink-muted mt-4 text-sm">{CONTACT.locations}</p>
       </div>
 
       <div>
-        <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Products</h2>
+        <h2 class="text-ink text-sm font-semibold">Products</h2>
         <ul class="mt-4 space-y-2.5 text-sm">
           {
             PRODUCTS.map(({ slug, name }) => (
               <li>
-                <a
-                  href={slug}
-                  class="hover:text-brand-600 dark:hover:text-brand-400 text-neutral-500 transition dark:text-neutral-400"
-                >
+                <a href={slug} class="hover:text-primary text-ink-muted transition">
                   {name}
                 </a>
               </li>
@@ -38,7 +33,7 @@ const year = new Date().getFullYear();
       </div>
 
       <div>
-        <h2 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Company</h2>
+        <h2 class="text-ink text-sm font-semibold">Company</h2>
         <ul class="mt-4 space-y-2.5 text-sm">
           {
             [
@@ -47,10 +42,7 @@ const year = new Date().getFullYear();
               { label: 'Privacy', href: '/privacy' },
             ].map(({ label, href }) => (
               <li>
-                <a
-                  href={href}
-                  class="hover:text-brand-600 dark:hover:text-brand-400 text-neutral-500 transition dark:text-neutral-400"
-                >
+                <a href={href} class="hover:text-primary text-ink-muted transition">
                   {label}
                 </a>
               </li>
@@ -59,7 +51,7 @@ const year = new Date().getFullYear();
           <li>
             <a
               href={`mailto:${CONTACT.email}`}
-              class="hover:text-brand-600 dark:hover:text-brand-400 text-neutral-500 transition dark:text-neutral-400"
+              class="hover:text-primary text-ink-muted transition"
             >
               {CONTACT.email}
             </a>
@@ -69,7 +61,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div
-      class="mt-12 flex flex-col gap-3 border-t border-neutral-200 pt-6 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between dark:border-neutral-800 dark:text-neutral-500"
+      class="border-line text-ink-muted mt-12 flex flex-col gap-3 border-t pt-6 text-sm sm:flex-row sm:items-center sm:justify-between"
     >
       <p>&copy; {year} {SITE.legalName} All rights reserved.</p>
       <p>

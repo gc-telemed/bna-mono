@@ -8,9 +8,8 @@ import CTA from '@/components/CTA.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const product = PRODUCTS[1]!;
-const accent = 'text-indigo-600 dark:text-indigo-300';
-const chip =
-  'border-indigo-300 bg-indigo-100 text-indigo-700 dark:border-indigo-400/30 dark:bg-indigo-400/10 dark:text-indigo-300';
+const accent = 'text-accent-clinic';
+const chip = 'border-accent-clinic/30 bg-accent-clinic-tint text-accent-clinic';
 
 const beforeAfter = {
   before: [
@@ -124,14 +123,12 @@ const structuredData = {
         {product.audience}
       </span>
       <h1
-        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:text-6xl lg:leading-tight dark:text-white"
+        class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
         Spend the appointment{' '}<br class="hidden sm:block" />
         <span class={accent}>on the patient</span>
       </h1>
-      <p
-        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-      >
+      <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
         Clinicians end up as data entry clerks: long waits for the patient, a handful of real
         minutes for the consultation. The Clinic App brings a structured history to your screen
         before the door opens, so the time you have goes on judgement instead of transcription.
@@ -139,7 +136,7 @@ const structuredData = {
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
           href={`mailto:${CONTACT.clinicEmail}`}
-          class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+          class="bg-accent-clinic text-on-fill hover:bg-accent-clinic inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
           Request a walkthrough
           <svg
@@ -157,7 +154,7 @@ const structuredData = {
         </a>
         <a
           href="#capabilities"
-          class="inline-flex items-center gap-2 rounded-lg border border-neutral-300 bg-white px-6 py-3 text-sm font-semibold text-neutral-800 shadow-sm transition hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          class="border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
           What it does
         </a>
@@ -177,20 +174,16 @@ const structuredData = {
     />
 
     <div class="mt-12 grid gap-5 md:grid-cols-2">
-      <div
-        class="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 dark:border-neutral-800 dark:bg-neutral-900"
-      >
-        <p
-          class="mb-5 text-xs font-semibold tracking-wider text-neutral-400 uppercase dark:text-neutral-500"
-        >
+      <div class="border-line bg-surface-muted rounded-2xl border p-8">
+        <p class="text-ink-muted mb-5 text-xs font-semibold tracking-wider uppercase">
           A typical visit today
         </p>
         <ul class="space-y-3.5">
           {
             beforeAfter.before.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400">
+              <li class="text-ink-muted flex items-start gap-3 text-sm">
                 <svg
-                  class="mt-0.5 h-4.5 w-4.5 flex-shrink-0 text-red-400"
+                  class="text-danger mt-0.5 h-4.5 w-4.5 flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -211,20 +204,16 @@ const structuredData = {
         </ul>
       </div>
 
-      <div
-        class="rounded-2xl border border-indigo-200 bg-indigo-50 p-8 dark:border-indigo-400/20 dark:bg-indigo-400/5"
-      >
-        <p
-          class="mb-5 text-xs font-semibold tracking-wider text-indigo-600 uppercase dark:text-indigo-400"
-        >
+      <div class="border-accent-clinic/30 bg-accent-clinic-tint rounded-2xl border p-8">
+        <p class="text-accent-clinic mb-5 text-xs font-semibold tracking-wider uppercase">
           With the Clinic App
         </p>
         <ul class="space-y-3.5">
           {
             beforeAfter.after.map((item) => (
-              <li class="flex items-start gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+              <li class="text-ink flex items-start gap-3 text-sm">
                 <svg
-                  class="mt-0.5 h-4.5 w-4.5 flex-shrink-0 text-indigo-500"
+                  class="text-accent-clinic mt-0.5 h-4.5 w-4.5 flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -246,9 +235,7 @@ const structuredData = {
 
   <!-- Capabilities -->
   <Section id="capabilities" class="!py-0">
-    <div
-      class="rounded-3xl bg-neutral-100 px-6 py-14 sm:px-10 lg:px-16 lg:py-20 dark:bg-neutral-900/60"
-    >
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
       <SectionHeading
         eyebrow="Capabilities"
         title="A companion for the consultation,"
@@ -274,9 +261,7 @@ const structuredData = {
           chipClass={chip}
           align="left"
         />
-        <div
-          class="mt-5 space-y-4 leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-        >
+        <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
           <p>
             Clinical records stay on your own encrypted, containerised systems, exactly where your
             existing obligations already expect them to be. Patients hold their own copy on their
@@ -287,7 +272,7 @@ const structuredData = {
             exchange between a clinic, a laboratory and a patient is signed, verifiable and
             isolated. A partner node can see what it has been granted and nothing beyond it.
           </p>
-          <p class="font-medium text-neutral-800 dark:text-neutral-200">
+          <p class="text-ink font-medium">
             Because we never hold raw records, adopting the Clinic App does not hand a new custodian
             a copy of your patients&rsquo; histories.
           </p>

@@ -45,19 +45,17 @@ const structuredData = {
   <Section class="!pt-16 !pb-8 lg:!pt-20">
     <div class="mx-auto max-w-3xl text-center">
       <span
-        class="border-brand-300 bg-brand-50 text-brand-700 dark:border-brand-400/30 dark:bg-brand-400/10 dark:text-brand-300 inline-block rounded-full border px-4 py-1 text-sm font-medium"
+        class="border-primary/30 bg-primary-tint text-ink inline-block rounded-full border px-4 py-1 text-sm font-medium"
       >
         Contact
       </span>
       <h1
-        class="mt-6 text-4xl font-bold tracking-tight text-balance text-neutral-900 sm:text-5xl lg:leading-tight dark:text-white"
+        class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
       >
         Tell us what you need{' '}<br class="hidden sm:block" />
-        <span class="text-brand-600 dark:text-brand-400">this to do</span>
+        <span class="text-primary">this to do</span>
       </h1>
-      <p
-        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-neutral-600 dark:text-neutral-400"
-      >
+      <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
         We are in the phase where feedback changes the product rather than gets filed. Pick
         whichever address fits and write properly — we read all of it.
       </p>
@@ -70,16 +68,14 @@ const structuredData = {
         routes.map(({ emoji, title, body, label, href }) => (
           <a
             href={href}
-            class="hover:border-brand-300 dark:hover:border-brand-400/40 group flex flex-col rounded-2xl border border-neutral-200 bg-white p-7 transition hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+            class="hover:border-primary/30 group border-line bg-surface flex flex-col rounded-2xl border p-7 transition hover:shadow-md"
           >
             <span class="text-3xl" aria-hidden="true">
               {emoji}
             </span>
-            <h2 class="mt-3 font-bold text-neutral-900 dark:text-neutral-100">{title}</h2>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
-              {body}
-            </p>
-            <span class="text-brand-600 dark:text-brand-400 mt-5 inline-flex items-center gap-1.5 text-sm font-semibold break-all">
+            <h2 class="text-ink mt-3 font-bold">{title}</h2>
+            <p class="text-ink-muted mt-2 flex-1 text-sm leading-relaxed">{body}</p>
+            <span class="text-primary mt-5 inline-flex items-center gap-1.5 text-sm font-semibold break-all">
               {label}
               <svg
                 class="h-4 w-4 flex-shrink-0 transition group-hover:translate-x-0.5"
@@ -99,11 +95,9 @@ const structuredData = {
       }
     </div>
 
-    <div
-      class="mt-10 rounded-2xl border border-neutral-200 bg-neutral-50 p-7 dark:border-neutral-800 dark:bg-neutral-900"
-    >
-      <h2 class="font-semibold text-neutral-900 dark:text-neutral-100">Where we are</h2>
-      <p class="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+    <div class="border-line bg-surface-muted mt-10 rounded-2xl border p-7">
+      <h2 class="text-ink font-semibold">Where we are</h2>
+      <p class="text-ink-muted mt-2 text-sm leading-relaxed">
         {CONTACT.locations}. We work remotely and asynchronously, so email reaches us faster than
         anything else.
       </p>

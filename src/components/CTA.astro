@@ -20,13 +20,13 @@ const {
 } = Astro.props;
 ---
 
-<div class="bg-brand-700 dark:bg-brand-800 rounded-3xl px-8 py-14 text-center md:px-16">
-  <h2 class="text-3xl font-bold tracking-tight text-balance text-white md:text-4xl">{title}</h2>
-  <p class="text-brand-50/90 mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">{body}</p>
+<div class="bg-primary rounded-3xl px-8 py-14 text-center md:px-16">
+  <h2 class="text-on-fill text-3xl font-bold tracking-tight text-balance md:text-4xl">{title}</h2>
+  <p class="text-on-fill/90 mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">{body}</p>
   <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
     <a
       href={`mailto:${email}`}
-      class="text-brand-800 hover:bg-brand-50 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold shadow-sm transition"
+      class="text-ink hover:bg-surface-muted bg-surface inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
     >
       {ctaLabel}
       <svg
@@ -46,7 +46,7 @@ const {
       secondaryLabel && secondaryHref && (
         <a
           href={secondaryHref}
-          class="inline-flex items-center gap-2 rounded-lg border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          class="border-on-fill/30 text-on-fill hover:bg-on-fill/10 inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold transition"
         >
           {secondaryLabel}
         </a>
