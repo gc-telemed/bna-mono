@@ -5,6 +5,7 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
+import AppPreview from '@/components/AppPreview.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const product = PRODUCTS[0]!;
@@ -241,10 +242,10 @@ const structuredData = {
           </svg>
         </a>
         <a
-          href="#capture"
+          href="#preview"
           class="border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
-          See how it works
+          Try the app
         </a>
       </div>
     </div>
@@ -262,6 +263,21 @@ const structuredData = {
     />
     <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {capture.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- The app itself -->
+  <Section id="preview" class="!pt-4">
+    <SectionHeading
+      eyebrow="See it"
+      title="This is the app."
+      accentTitle="Try it right here."
+      accentClass={accent}
+      chipClass={chip}
+      lede="A working replica of the real interface — the same screens, the same colours, the same words in English and Nepali. The lab sheet below holds the fifty-three values the app reads from one eleven-page report, which is the part that has to be seen to be believed."
+    />
+    <div class="mt-12">
+      <AppPreview />
     </div>
   </Section>
 

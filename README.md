@@ -17,6 +17,24 @@ Three flagship products are presented here:
 - `@astrojs/sitemap` for `sitemap-index.xml`
 - Deployed on Netlify from `netlify.toml`
 
+## The app preview
+
+`/diabetes-app` embeds a working replica of the diabetes app's interface — `AppPreview.astro`
+plus `src/scripts/app-preview.ts`. Nine screens, the app's own icons and four of its feed
+illustrations redrawn as inline SVG, its type scale at the line height each script needs, its
+English and Nepali strings, and the fifty-three values its lab reader pulls from one
+de-identified eleven-page report (`src/data/app-preview-rows.ts` — invented patient, real
+laboratory layout, real parser output).
+
+Two things keep it honest. **It paints with the site's `--p-*` tokens**, so the theme picker
+in the header drives the phone; the four clinical tokens the site does not otherwise carry
+(the illustration trio and the chart's target band) are defined per theme inside the
+component. And **nothing in it saves** — it is a replica, not an embedded app, and the copy
+under it says so.
+
+When the app's UI changes, this is the file that goes stale. It is worth re-checking against
+the product repository whenever a screen in it moves.
+
 ## Typography and theming
 
 Both are taken from the app so the two surfaces read as one product.
@@ -24,8 +42,13 @@ Both are taken from the app so the two surfaces read as one product.
 **Nunito** (`@fontsource-variable/nunito`), matching the app's ADR-09 §V4 choice. The app
 ships static cuts at 400/600/700 because React Native on Android cannot select variable-font
 axes; the web has no such limit, so the variable file is used and `--font-weight-medium` is
-pinned to 600 so the site never renders a weight the product does not have. The app pairs
-Nunito with Mukta for Devanagari; this site is English-only and ships the Latin cut alone.
+pinned to 600 so the site never renders a weight the product does not have.
+
+The app pairs Nunito with **Mukta** for Devanagari. The site's own copy is English, but the
+app preview on `/diabetes-app` switches between English and Nepali, so the three Devanagari
+cuts ship with that component (`@fontsource/mukta`) rather than falling back to whatever the
+visitor's device happens to have. They are imported by `AppPreview.astro`, so no other page
+carries them.
 
 **Four themes**, ported verbatim from the app's `src/theme/palette.ts` into
 `src/data/themes.ts`: two light on a shared warm neutral ramp (deep teal, pink) and two

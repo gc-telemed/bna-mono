@@ -1,0 +1,593 @@
+---
+/**
+ * The app, running in the page.
+ *
+ * A working replica of the diabetes app's interface — its screens, its icons, its feed
+ * illustrations, its English and Nepali, and the fifty-three values its lab reader pulls
+ * from one de-identified Kathmandu report. Visitors tap it the way they would the phone.
+ *
+ * **It paints with the site's own tokens.** The phone reads `--p-*` like every other
+ * surface here, so the theme a visitor picks in the header changes the phone with the
+ * page — which is the point, since the four themes came from the app in the first place.
+ * The clinical tokens the site deliberately left behind (src/data/themes.ts) are supplied
+ * per theme below, because this is the only place on the site that draws with them.
+ *
+ * The markup here is the frame and the controls; everything inside the screen is rendered
+ * by `@/scripts/app-preview`, which also carries the strings.
+ */
+// The app pairs Nunito with Mukta for Devanagari; the preview switches to Nepali, so the
+// Devanagari cuts ship with it rather than falling back to whatever the visitor's device
+// happens to have. Three weights, to match the app's static cuts.
+import '@fontsource/mukta/devanagari-400.css';
+import '@fontsource/mukta/devanagari-600.css';
+import '@fontsource/mukta/devanagari-700.css';
+
+const screens: { id: string; label: string }[] = [
+  { id: 'home', label: 'Home' },
+  { id: 'record', label: 'My record' },
+  { id: 'capture', label: 'Add' },
+  { id: 'lab', label: 'Lab report' },
+  { id: 'assistant', label: 'Assistant' },
+  { id: 'plan', label: 'Plan' },
+  { id: 'more', label: 'More' },
+  { id: 'settings', label: 'Settings' },
+];
+
+const control =
+  'rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-semibold text-ink transition hover:border-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-on-fill';
+---
+
+<div class="grid gap-8 lg:grid-cols-[390px_minmax(0,1fr)] lg:gap-12">
+  <div class="mx-auto w-full max-w-[390px]">
+    <div class="tapp-device">
+      <div id="tapp-phone" class="tapp-phone"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex flex-wrap gap-2" role="group" aria-label="Screen">
+      {
+        screens.map((screen) => (
+          <button class={control} data-preview="screen" data-to={screen.id} aria-pressed="false">
+            {screen.label}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Language">
+      <span class="text-ink-muted text-xs font-semibold tracking-wider uppercase">Language</span>
+      <button class={control} data-preview="lang" data-to="en" aria-pressed="true">English</button>
+      <button class={control} data-preview="lang" data-to="ne" aria-pressed="false">नेपाली</button>
+      <span class="text-ink-muted text-sm">· theme follows the picker in the header</span>
+    </div>
+
+    <div id="tapp-notes" class="border-line bg-surface mt-6 rounded-2xl border p-6"></div>
+
+    <p class="text-ink-muted mt-4 text-sm leading-relaxed">
+      A preview, not the app: nothing here saves, and no value shown belongs to a patient. The lab
+      rows come from a de-identified report kept in the project’s test set — invented patient, real
+      laboratory layout, and the app’s own reading of it.
+    </p>
+  </div>
+</div>
+
+<style is:global>
+  /**
+   * The phone's own surface. Everything inside it is the app's geometry rather than the
+   * site's: 20px card radius, 16px padding, 56dp rows, 48dp touch targets, and the app's
+   * type scale at the line height each script needs.
+   */
+  .tapp-device {
+    border-radius: 40px;
+    background: #0b0d10;
+    padding: 11px;
+    box-shadow: 0 26px 60px rgb(0 0 0 / 0.24);
+  }
+
+  .tapp-phone {
+    /* The four clinical tokens the site does not otherwise carry. */
+    --band: #e7efe0;
+    --ill-ink: #2a2320;
+    --ill-fill: #eadfd0;
+    --ill-accent: #e8a33d;
+
+    height: 720px;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--p-ground);
+    color: var(--p-text);
+    font-family: var(--face, 'Nunito Variable'), ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: var(--leading, 1.35);
+  }
+
+  :root[data-theme='slate'] .tapp-phone {
+    --band: #1e3a2c;
+    --ill-ink: #f1f5f9;
+    --ill-fill: #273449;
+    --ill-accent: #e8b451;
+  }
+  :root[data-theme='trueBlack'] .tapp-phone {
+    --band: #0c2a1c;
+    --ill-ink: #ffffff;
+    --ill-fill: #1f1f1f;
+    --ill-accent: #fcd34d;
+  }
+
+  .tapp-phone button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+  .tapp-phone *:focus-visible {
+    outline: 2px solid var(--p-primary);
+    outline-offset: 2px;
+  }
+
+  /* type scale, from the app */
+  .tapp-phone .metric {
+    font-size: 34px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .tapp-phone h2 {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .tapp-phone .subheading {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .tapp-phone .strong {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .tapp-phone .label,
+  .tapp-phone .grouplabel,
+  .tapp-phone .daylabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--p-text-muted);
+  }
+  .tapp-phone .caption {
+    font-size: 13px;
+    color: var(--p-text-muted);
+  }
+  .tapp-phone .disclaimer {
+    font-size: 14px;
+    color: var(--p-text-muted);
+    margin: 6px 2px 0;
+  }
+  .tapp-phone .muted {
+    color: var(--p-text-muted);
+    margin: 0;
+  }
+  .tapp-phone .centre {
+    text-align: center;
+  }
+
+  .tapp-phone .status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18px 2px;
+    font-size: 12px;
+    color: var(--p-text-muted);
+    flex: none;
+  }
+  .tapp-phone .status-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tapp-phone .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--p-primary);
+    display: inline-block;
+  }
+
+  .tapp-phone .appbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px 10px;
+    flex: none;
+  }
+  .tapp-phone .iconbtn {
+    background: none;
+    border: 0;
+    font-size: 20px;
+    line-height: 1;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .tapp-phone .scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .tapp-phone .scroll::-webkit-scrollbar {
+    width: 5px;
+  }
+  .tapp-phone .scroll::-webkit-scrollbar-thumb {
+    background: var(--p-border);
+    border-radius: 3px;
+  }
+
+  .tapp-phone .card {
+    background: var(--p-surface);
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tapp-phone .card.quiet {
+    background: var(--p-surface-muted);
+  }
+  .tapp-phone .card.tinted {
+    background: var(--p-primary-tint);
+  }
+  .tapp-phone .card.ask {
+    background: var(--p-surface-muted);
+    align-self: flex-end;
+    max-width: 85%;
+  }
+  .tapp-phone .card.list {
+    padding: 4px 16px;
+    gap: 0;
+  }
+  .tapp-phone .card.list > .label {
+    padding: 12px 0 4px;
+  }
+  .tapp-phone .examples {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .tapp-phone .feedhead {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tapp-phone .reading {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tapp-phone .listrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--p-border);
+    text-align: left;
+    padding: 8px 0;
+    min-height: 56px;
+  }
+  .tapp-phone .card.list > .listrow:first-of-type,
+  .tapp-phone .card.list > .label + .listrow,
+  .tapp-phone .card > .listrow {
+    border-top: 0;
+  }
+  .tapp-phone .rowtext {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .tapp-phone .rowvalue {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .tapp-phone button.rowvalue {
+    background: none;
+    border: 0;
+    padding: 0 0 0 8px;
+    min-height: 48px;
+  }
+
+  .tapp-phone .primary {
+    background: var(--p-primary);
+    color: var(--p-text-on-fill);
+    border: 0;
+    border-radius: 16px;
+    min-height: 56px;
+    font-size: 16px;
+    font-weight: 700;
+    width: 100%;
+  }
+  .tapp-phone .secondary {
+    background: none;
+    color: var(--p-primary);
+    border: 2px solid var(--p-primary);
+    border-radius: 16px;
+    min-height: 48px;
+    font-size: 16px;
+    font-weight: 700;
+    width: 100%;
+  }
+  .tapp-phone .link {
+    background: none;
+    border: 0;
+    color: var(--p-primary);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 0;
+  }
+
+  .tapp-phone .option {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+    width: 100%;
+    background: var(--p-surface);
+    border: 1px solid var(--p-border);
+    border-radius: 20px;
+    padding: 14px 16px;
+    min-height: 64px;
+  }
+
+  .tapp-phone .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tapp-phone .chip {
+    border: 2px solid var(--p-border);
+    background: none;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 44px;
+  }
+  .tapp-phone .chip.on {
+    border-color: var(--p-primary);
+    color: var(--p-primary);
+  }
+  .tapp-phone .field {
+    border: 1px solid var(--p-border-strong);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-variant-numeric: tabular-nums;
+    color: var(--p-text-muted);
+  }
+  .tapp-phone .field.flex {
+    flex: 1;
+  }
+
+  .tapp-phone .grouphead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 48px;
+    padding-top: 4px;
+  }
+  .tapp-phone .grouphead .label {
+    flex: 1;
+    font-size: 13px;
+  }
+  .tapp-phone .labrow {
+    border-top: 1px solid var(--p-border);
+  }
+  .tapp-phone .card.list > .labrow:first-of-type {
+    border-top: 0;
+  }
+  .tapp-phone .rowsplit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tapp-phone .tickrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    min-height: 48px;
+    background: none;
+    border: 0;
+    text-align: left;
+    padding: 8px 0;
+  }
+  .tapp-phone .box {
+    width: 26px;
+    height: 26px;
+    flex: none;
+    border-radius: 8px;
+    border: 2px solid var(--p-border-strong);
+    display: grid;
+    place-items: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--p-text-on-fill);
+  }
+  .tapp-phone .labrow.on .box {
+    background: var(--p-primary);
+    border-color: var(--p-primary);
+  }
+  .tapp-phone .editor {
+    display: flex;
+    gap: 12px;
+    padding: 0 0 12px 38px;
+  }
+  .tapp-phone .editfield {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .tapp-phone .editfield.unit {
+    flex: 1;
+  }
+  .tapp-phone .editfield input {
+    font: inherit;
+    font-size: 15px;
+    color: var(--p-text);
+    background: none;
+    border: 1px solid var(--p-border-strong);
+    border-radius: 12px;
+    padding: 9px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tapp-phone .footerbar {
+    flex: none;
+    padding: 10px 16px 16px;
+    background: var(--p-ground);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tapp-phone .footerbar.composer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .tapp-phone .footerbar.composer .primary {
+    width: auto;
+    min-width: 92px;
+    padding: 0 18px;
+  }
+  .tapp-phone .footerbar.composer .caption {
+    flex-basis: 100%;
+  }
+
+  .tapp-phone .viewfinder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #101418;
+    color: #f5f7fa;
+  }
+  .tapp-phone .viewfinder .status {
+    color: #c8d0da;
+  }
+  .tapp-phone .vf-body {
+    flex: 1;
+    display: grid;
+    place-items: center;
+  }
+  .tapp-phone .vf-frame {
+    width: 74%;
+    aspect-ratio: 1.35;
+    border: 2px dashed rgb(255 255 255 / 0.45);
+    border-radius: 18px;
+    display: grid;
+    place-items: end center;
+    padding-bottom: 10px;
+    font-size: 13px;
+    color: rgb(255 255 255 / 0.72);
+    text-align: center;
+  }
+  .tapp-phone .vf-strip {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .tapp-phone .mode {
+    background: rgb(255 255 255 / 0.12);
+    color: #f5f7fa;
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 44px;
+  }
+  .tapp-phone .mode.on {
+    background: #f5f7fa;
+    color: #101418;
+  }
+  .tapp-phone .shutter {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: #f5f7fa;
+    border: 5px solid rgb(255 255 255 / 0.35);
+    margin: 0 auto 26px;
+    display: block;
+  }
+
+  .tapp-phone .tabbar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--p-surface);
+    padding: 6px 2px 12px;
+    box-shadow: 0 -2px 10px rgb(0 0 0 / 0.06);
+  }
+  .tapp-phone .tab,
+  .tapp-phone .capture-slot {
+    background: none;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 6px;
+    min-width: 60px;
+    color: var(--p-text-muted);
+  }
+  .tapp-phone .tab.on {
+    color: var(--p-primary);
+  }
+  .tapp-phone .capture-disc {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: var(--p-primary);
+    color: var(--p-text-on-fill);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.18);
+  }
+
+  /* The assistant: a disc with a spark, over the four tab roots. */
+  .tapp-phone .fab {
+    position: absolute;
+    right: 16px;
+    bottom: 96px;
+    z-index: 2;
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    border: 0;
+    display: grid;
+    place-items: center;
+    background: var(--p-primary);
+    color: var(--p-text-on-fill);
+    box-shadow: 0 6px 16px rgb(0 0 0 / 0.22);
+  }
+</style>
+
+<script>
+  import '@/scripts/app-preview';
+</script>
