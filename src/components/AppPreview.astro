@@ -218,6 +218,13 @@ const control =
     flex-direction: column;
     gap: 16px;
   }
+  /*
+    Home draws no app bar, so its content would otherwise start under the clock. The app
+    passes `insetTop` on that screen for exactly this and nothing else.
+  */
+  .tapp-phone .scroll-inset {
+    padding-top: 12px;
+  }
   .tapp-phone .scroll::-webkit-scrollbar {
     width: 5px;
   }
@@ -536,11 +543,17 @@ const control =
   .tapp-phone .tabbar {
     flex: none;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-around;
     background: var(--p-surface);
     padding: 6px 2px 12px;
     box-shadow: 0 -2px 10px rgb(0 0 0 / 0.06);
+    /*
+      The capture disc rises out of the bar, and the part that matters is the part outside
+      it. The app carries the same note against the same geometry, because Android clips a
+      child to its parent unless told not to.
+    */
+    overflow: visible;
   }
   .tapp-phone .tab,
   .tapp-phone .capture-slot {
@@ -556,12 +569,52 @@ const control =
     min-width: 60px;
     color: var(--p-text-muted);
   }
+
+  /*
+    **The selected tab is not said in hue** (design review F16, WCAG 1.4.1). The bar used
+    to distinguish it by tint alone, and the selected and idle tokens differ by about
+    1.0:1 in greyscale on every one of the four themes — in greyscale, or to a visitor
+    with a colour vision deficiency, the five tabs were identical.
+
+    Two cues, neither of them a hue: a bar above the glyph, laid out in both states so
+    selecting a tab never moves the icon by a pixel, and a heavier stroke on the glyph
+    itself (1.8 → 2.6, which is what the app draws).
+  */
+  .tapp-phone .tab .glyph {
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+  }
+  .tapp-phone .tab .indicator {
+    width: 24px;
+    height: 3px;
+    border-radius: 999px;
+    background: transparent;
+  }
   .tapp-phone .tab.on {
     color: var(--p-primary);
   }
+  .tapp-phone .tab.on .indicator {
+    background: currentColor;
+  }
+  .tapp-phone .tab.on svg {
+    stroke-width: 2.6;
+  }
+
+  /*
+    **The flagship control, and the larger of the two** (design review F46, then founder,
+    2026-09-21). At 48 px it was smaller than the assistant's optional 56 px disc, so the
+    app stated its priorities in geometry and stated them backwards: this is the first tap
+    of the three-tap journey the whole navigation was redesigned for.
+
+    68 px now, and it breaks the bar's top edge by 19 of them — a bit over a quarter. That
+    number is a judgement made the way such things have to be, by rendering both and
+    choosing: a third clear of the bar was the other candidate and this one was picked.
+  */
   .tapp-phone .capture-disc {
-    width: 48px;
-    height: 48px;
+    width: 68px;
+    height: 68px;
+    margin-top: -19px;
     border-radius: 999px;
     background: var(--p-primary);
     color: var(--p-text-on-fill);

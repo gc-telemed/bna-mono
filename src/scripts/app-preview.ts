@@ -38,6 +38,24 @@ const S: Record<string, Record<Lang, string>> = {
   },
   'home.nextReminder': { en: 'Next reminder', ne: 'अर्को रिमाइन्डर' },
 
+  // F28's daily return: three facts, each one arithmetic over something the patient typed
+  // in themselves. Never an average, never a direction, never a word about what any of it
+  // means — the subject of every sentence is a patient action or a date they transcribed,
+  // and never a body measurement (ADR-09 §B.1).
+  'home.daily.title': { en: 'What has been written down', ne: 'के के लेखिएको छ' },
+  'home.daily.lastReading': {
+    en: 'The last reading was written down yesterday',
+    ne: 'अन्तिम नाप हिजो लेखिएको हो',
+  },
+  'home.daily.nextLabs': {
+    en: 'Next lab test in the plan: 14 Nov 2026 · HbA1c, lipid profile',
+    ne: 'योजनामा भएको अर्को ल्याब जाँच: 14 Nov 2026 · HbA1c, lipid profile',
+  },
+  'home.daily.sinceReport': {
+    en: 'Since the report on 12 Aug 2026, 46 readings have been written down',
+    ne: '12 Aug 2026 को रिपोर्टपछि ४६ नाप लेखिएका छन्',
+  },
+
   'hypo.title': { en: 'If I feel low', ne: 'सुगर घटेको जस्तो लाग्यो भने' },
   'hypo.log': { en: 'Log a low sugar', ne: 'सुगर घटेको लेख्नुहोस्' },
   'hypo.call': { en: 'Call Sabina', ne: 'सबिना लाई फोन गर्नुहोस्' },
@@ -75,23 +93,17 @@ const S: Record<string, Record<Lang, string>> = {
   'documents.valueLabel': { en: 'Value', ne: 'मान' },
   'documents.unitLabel': { en: 'Unit', ne: 'एकाइ' },
   'documents.keptEitherWay': {
-    en: 'The document is saved either way, even if you tick nothing.',
-    ne: 'टिक नलगाए पनि कागजात सुरक्षित रहन्छ।',
+    en: 'The document will be kept even if you tick nothing.',
+    ne: 'टिक नलगाए पनि कागजात राखिनेछ।',
   },
   'documents.truncated': {
-    en: 'This document is longer than 10 pages. It is stored in full; only the first 10 pages were read.',
-    ne: 'यो कागजात १० पृष्ठभन्दा लामो छ। पूरै सुरक्षित छ; पहिलो १० पृष्ठ मात्र पढियो।',
+    en: 'This document is longer than 10 pages. The whole document will be kept; the first 10 pages are the ones that were read.',
+    ne: 'यो कागजात १० पृष्ठभन्दा लामो छ। पूरै कागजात राखिनेछ; पहिलो १० पृष्ठ मात्र पढिएका हुन्।',
   },
 
   'settings.title': { en: 'Settings', ne: 'सेटिङ' },
   'settings.groupApp': { en: 'This app', ne: 'यो एप' },
   'settings.groupData': { en: 'Your data', ne: 'तपाईंको डेटा' },
-  'settings.groupSupport': { en: 'For the study', ne: 'अध्ययनका लागि' },
-  'settings.support': { en: 'Study and support', ne: 'अध्ययन र सहयोग' },
-  'settings.supportRowBody': {
-    en: 'Diagnostics, the pilot report and feature flags',
-    ne: 'डायग्नोस्टिक्स, पाइलट रिपोर्ट र फिचर फ्ल्यागहरू',
-  },
   'settings.language': { en: 'Language', ne: 'भाषा' },
   'settings.units': { en: 'Glucose unit', ne: 'ग्लुकोज युनिट' },
   'settings.unitsHint': {
@@ -99,22 +111,31 @@ const S: Record<string, Record<Lang, string>> = {
     ne: 'रिडिङ कसरी देखिन्छ भन्ने बदल्छ। लेखिसकेको कुरा उस्तै रहन्छ।',
   },
   'settings.lock': { en: 'Lock', ne: 'लक' },
-  'settings.lockDevice': { en: 'Your phone’s lock is in force', ne: 'तपाईंको फोनकै लक लागू छ' },
+  'settings.lockDevice': {
+    en: 'TApp opens with your fingerprint or your phone’s screen lock. It has no password of its own.',
+    ne: 'TApp तपाईंको औंठाछाप वा फोनको स्क्रिन लकले खुल्छ। यसको आफ्नै पासवर्ड छैन।',
+  },
   'settings.lists': { en: 'My medicine names', ne: 'मेरा औषधिका नाम' },
   'settings.deleteAll': { en: 'Delete everything', ne: 'सबै मेटाउनुहोस्' },
-  'settings.deleteAllBody': { en: 'A backup is offered first', ne: 'पहिले ब्याकअप सोधिन्छ' },
+  'settings.deleteAllBody': {
+    en: 'Removes your whole record from this phone. A backup file you already sent somewhere is not touched.',
+    ne: 'तपाईंको पूरा रेकर्ड यो फोनबाट हट्छ। पहिले कतै पठाइसकेको ब्याकअप फाइललाई यसले छुँदैन।',
+  },
   'settings.storage': { en: 'Photos and voice notes', ne: 'तस्बिर र आवाज नोट' },
   'settings.storageBody': {
     en: 'Everything you attached, on this phone only.',
     ne: 'तपाईंले जोड्नुभएको सबै, यही फोनमा मात्र।',
   },
   'settings.storageEntries': { en: 'Entries written down', ne: 'लेखिएका प्रविष्टि' },
-  'settings.assistantBody': { en: 'A switch, not a pilot flag', ne: 'एउटा स्विच, फ्ल्याग होइन' },
+  'settings.assistantBody': {
+    en: 'A screen that looks things up in what you wrote down. It gives no medical advice.',
+    ne: 'तपाईंले लेखेको कुरामा हेर्ने स्क्रिन। यसले चिकित्सकीय सल्लाह दिँदैन।',
+  },
   'settings.about': { en: 'About', ne: 'बारेमा' },
 
   'more.title': { en: 'More', ne: 'थप' },
   'more.body': {
-    en: 'The things you reach around a clinic visit, and the app’s own settings.',
+    en: 'The things you reach for around a clinic visit, and the app’s own settings.',
     ne: 'क्लिनिक जाँदा चाहिने कुराहरू, र एपका सेटिङहरू।',
   },
   'summary.title': { en: 'Visit summary', ne: 'भेट सारांश' },
@@ -342,11 +363,19 @@ const header = (title: string, back = false): string =>
      ${back ? '<button class="iconbtn" data-act="back" aria-label="Back">←</button>' : ''}
      <h2>${esc(title)}</h2></div>`;
 
-/** Four tabs and a centre action that is never selected, each with its icon *and* its label. */
+/**
+ * Four tabs and a centre action that is never selected, each with its icon *and* its label.
+ *
+ * The selected tab carries a bar above its glyph and a heavier stroke through it, because
+ * hue alone does not survive greyscale or a colour vision deficiency (design review F16).
+ * The bar is in the markup in both states and merely transparent when idle, so selecting a
+ * tab never moves the icon by a pixel.
+ */
 function tabBar(): string {
   const tab = (id: ScreenId, key: string, glyph: string) =>
     `<button class="tab ${state.screen === id ? 'on' : ''}" data-act="tab" data-to="${id}">
-       ${glyph}<span>${esc(t(key))}</span></button>`;
+       <span class="glyph"><span class="indicator"></span>${glyph}</span>
+       <span>${esc(t(key))}</span></button>`;
   return `<nav class="tabbar">
     ${tab('home', 'tabs.home', ICONS.home())}
     ${tab('record', 'tabs.timeline', ICONS.timeline())}
@@ -374,9 +403,16 @@ const listRow = (title: string, subtitle = '', value = '', attrs = ''): string =
      ${value ? `<span class="rowvalue">${esc(value)}</span>` : ''}</button>`;
 
 // ── screens ───────────────────────────────────────────────────────────────────
+/**
+ * **Home draws no app bar** (founder, 2026-09-21). It said `TApp` — the name of the app the
+ * visitor has just opened — and charged a full header's height on the one screen where
+ * vertical space is scarcest: the today card, the rolling window, the hypo card and two
+ * returns all compete for it. The other three tab roots keep theirs, because "My record",
+ * "Plan" and "More" name the screen rather than the app.
+ */
 function home(): string {
-  return `${header(t('app.name'))}
-  <div class="scroll">
+  return `
+  <div class="scroll scroll-inset">
     <div class="card">
       ${feedHeading(ILLUSTRATIONS.reading(), t('home.today'))}
       <div class="reading">
@@ -404,6 +440,18 @@ function home(): string {
       <span class="caption">${esc(t('plan.transcribedNote'))}</span>
       <button class="secondary">${esc(t('hypo.log'))}</button>
       <button class="secondary">${esc(t('hypo.call'))}</button>
+    </div>
+
+    <!--
+      F28's daily return, and it renders *below* the hypo card on purpose: a new card above
+      would push the hypo card's last button further under the fold on a fresh install, for
+      the sake of a return that can wait three seconds.
+    -->
+    <div class="card quiet">
+      <span class="label">${esc(t('home.daily.title'))}</span>
+      <span>${esc(t('home.daily.lastReading'))}</span>
+      <span>${esc(t('home.daily.nextLabs'))}</span>
+      <span>${esc(t('home.daily.sinceReport'))}</span>
     </div>
 
     <div class="card">
@@ -693,9 +741,6 @@ const settings = (): string => `${header(t('settings.title'), true)}
       ${listRow(t('settings.deleteAll'), t('settings.deleteAllBody'))}
     </div>
 
-    <span class="grouplabel">${esc(t('settings.groupSupport'))}</span>
-    <div class="card list">${listRow(t('settings.support'), t('settings.supportRowBody'))}</div>
-
     <div class="card">
       <span class="subheading">${esc(t('settings.about'))}</span>
       <p class="disclaimer">${esc(t('disclaimer.line'))}</p>
@@ -722,7 +767,8 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
     points: [
       'Your last reading is stated, never judged — no colour, no arrow, no comparison drawn for you.',
       'Progress is a rolling window: seven bars, three of them quiet. A day you missed is drawn in the paper colour, never in red.',
-      '“If I feel low” is one tap from every screen, and every word in it was transcribed from your own doctor.',
+      '“If I feel low” sits on Home, one scroll down, and every word in it was transcribed from your own doctor.',
+      'Below it, three facts and no opinion: when the last reading was written, when the next lab test is due, how many readings since the last report.',
     ],
   },
   record: {
@@ -764,6 +810,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
       'Questions are answered by looking things up in your own record — averages, what the doctor said, when a test is due.',
       'It does not answer medical questions, and the fine print says so before you ask the first one.',
       'On a capable phone the phrasing runs on the device. The question and the answer stay there.',
+      'On a phone with no model downloaded there is no assistant to open, and the disc in the corner offers the download instead.',
     ],
   },
   plan: {
@@ -775,7 +822,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
     ],
   },
   more: {
-    title: 'The things you reach around a visit',
+    title: 'The things you reach for around a visit',
     points: [
       'The visit summary, your documents, reminders and the assistant.',
       'Backup shows the date of the last one, because that is what you open it to check.',
