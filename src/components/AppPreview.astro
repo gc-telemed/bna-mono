@@ -24,7 +24,7 @@ import '@fontsource/mukta/devanagari-700.css';
 
 const screens: { id: string; label: string }[] = [
   { id: 'home', label: 'Home' },
-  { id: 'record', label: 'My record' },
+  { id: 'record', label: 'Logs' },
   { id: 'capture', label: 'Add' },
   { id: 'lab', label: 'Lab report' },
   { id: 'assistant', label: 'Assistant' },
@@ -60,6 +60,17 @@ const control =
       <button class={control} data-preview="lang" data-to="en" aria-pressed="true">English</button>
       <button class={control} data-preview="lang" data-to="ne" aria-pressed="false">नेपाली</button>
       <span class="text-ink-muted text-sm">· theme follows the picker in the header</span>
+    </div>
+
+    <!--
+      The assistant's disc has three states, decided by the phone rather than by the visitor:
+      the model is on it, it could be and is not yet, or the phone is too small for one.
+    -->
+    <div class="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Assistant model">
+      <span class="text-ink-muted text-xs font-semibold tracking-wider uppercase">Model</span>
+      <button class={control} data-preview="model" data-to="installed" aria-pressed="true">On the phone</button>
+      <button class={control} data-preview="model" data-to="download" aria-pressed="false">Not downloaded</button>
+      <button class={control} data-preview="model" data-to="none" aria-pressed="false">Phone too small</button>
     </div>
 
     <div id="tapp-notes" class="border-line bg-surface mt-6 rounded-2xl border p-6"></div>
@@ -301,9 +312,15 @@ const control =
     flex-direction: column;
     gap: 2px;
   }
+  /*
+    A value takes at most half the row and never shrinks; the title gives way instead (the
+    app's F55). A time cannot wrap, so a value that shrank lost its last digit.
+  */
   .tapp-phone .rowvalue {
     font-variant-numeric: tabular-nums;
-    white-space: nowrap;
+    flex: none;
+    max-width: 50%;
+    text-align: right;
   }
   .tapp-phone button.rowvalue {
     background: none;
@@ -383,6 +400,12 @@ const control =
     flex: 1;
   }
 
+  .tapp-phone .dayhead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
   .tapp-phone .grouphead {
     display: flex;
     align-items: center;
@@ -509,6 +532,22 @@ const control =
     font-size: 13px;
     color: rgb(255 255 255 / 0.72);
     text-align: center;
+  }
+  .tapp-phone .vf-picks {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .tapp-phone .vf-pick {
+    background: none;
+    color: #f5f7fa;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 44px;
   }
   .tapp-phone .vf-strip {
     display: flex;
