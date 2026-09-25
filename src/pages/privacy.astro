@@ -6,7 +6,8 @@ import { SITE, CONTACT } from '@/data/site';
 const siteFacts = [
   'No analytics, tracking pixels or advertising scripts.',
   'No cookies are set by this site. Your theme preference is kept in your own browser’s local storage and is never sent anywhere.',
-  'No contact forms — the links here open your own email client, so you decide what to send and when.',
+  'The waitlist and clinic forms ask only how to reach you. They are processed by our hosting provider and reach only us. Please don’t put health details in them.',
+  'We use what you send in a form only to reply to you, and we delete it if you ask.',
   'Our hosting provider records standard web server logs, as every host does.',
 ];
 
@@ -21,26 +22,26 @@ const productFacts = [
   },
   {
     title: 'You grant every connection',
-    body: 'Sharing with a family member, a carer or a clinic means opening a direct, encrypted connection to a peer you have verified. You can revoke it, and no connection is opened without you.',
+    body: 'Sharing with a family member, or later a clinic, means pairing with a device you have verified and choosing what it sees. Updates travel sealed, directly or through a mailbox that cannot open them. You can end any share, and none is opened without you.',
   },
   {
     title: 'Clinics hold what you shared with them',
-    body: 'Once you share records with a clinic, that clinic keeps them on its own systems under its own obligations — the same as any other record it holds about you. We are not a party to that copy.',
+    body: 'With the Clinic App, coming soon, a clinic keeps what you shared under its own obligations, as it would any record about you. Anything stored on a server for it is sealed with the clinic’s key, and we cannot read it. You can ask for it to be erased, and the clinic answers with a receipt.',
   },
   {
     title: 'Backups go where you put them',
-    body: 'If you choose to back up source images or documents, they go to a node you nominate — a family device or your clinic — encrypted. There is no default destination belonging to us.',
+    body: 'A backup is an encrypted file that only your passphrase opens. You choose where to keep it. There is no default destination belonging to us.',
   },
   {
-    title: 'Research participation is opt-in',
-    body: 'Contributing stripped, anonymised data to research is off unless you turn it on, category by category, and you can turn it off again.',
+    title: 'Usage counts are opt-in',
+    body: 'Sending counts of how the app is used is off unless you turn it on, and you can turn it off again. The counts carry no reading, no note and no name.',
   },
 ];
 ---
 
 <Base
   title="Privacy"
-  description={`How ${SITE.name} handles data — on this website, and in the apps.`}
+  description={`How ${SITE.name} handles data, on this website and in the apps.`}
   path="/privacy"
 >
   <Section class="!pt-16 !pb-8 lg:!pt-20">
@@ -55,7 +56,7 @@ const productFacts = [
       </h1>
       <p class="text-ink-muted mt-6 text-lg leading-relaxed text-pretty">
         The short version: as little as we can arrange, and none of your medical records. That is
-        not a policy we wrote afterwards — it is the reason the software is built the way it is.
+        not a policy we wrote afterwards. It is the reason the software is built the way it is.
       </p>
     </div>
   </Section>
@@ -90,8 +91,8 @@ const productFacts = [
       <div>
         <h2 class="text-ink text-2xl font-bold tracking-tight">The apps</h2>
         <p class="text-ink-muted mt-3 leading-relaxed text-pretty">
-          The Diabetes App and the Clinic App run on a peer-to-peer network. There is no cosys.work
-          server holding patient records in the middle of it.
+          The Diabetes App, and the Clinic App when it comes, run on a peer-to-peer network. No
+          cosys.work server holds a readable patient record anywhere in it.
         </p>
         <dl class="mt-6 space-y-5">
           {
@@ -109,7 +110,7 @@ const productFacts = [
         <h2 class="text-ink text-2xl font-bold tracking-tight">If you email us</h2>
         <p class="text-ink-muted mt-3 leading-relaxed text-pretty">
           We keep the message so we can reply and follow up. Please do not send medical records or
-          test results by email — it is not a secure channel, and we do not want a copy. If you want
+          test results by email. It is not a secure channel, and we do not want a copy. If you want
           something deleted from our inbox, ask at <a
             href={`mailto:${CONTACT.email}`}
             class="text-primary font-medium underline-offset-2 hover:underline">{CONTACT.email}</a

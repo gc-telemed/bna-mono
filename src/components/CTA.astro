@@ -6,6 +6,8 @@ interface Props {
   body: string;
   ctaLabel?: string;
   email?: string;
+  /** A page to link to instead of an email address, such as one of the forms in `FORMS`. */
+  href?: string;
   secondaryLabel?: string;
   secondaryHref?: string;
 }
@@ -15,6 +17,7 @@ const {
   body,
   ctaLabel = 'Email us',
   email = CONTACT.email,
+  href,
   secondaryLabel,
   secondaryHref,
 } = Astro.props;
@@ -25,7 +28,7 @@ const {
   <p class="text-on-fill/90 mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">{body}</p>
   <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
     <a
-      href={`mailto:${email}`}
+      href={href ?? `mailto:${email}`}
       class="text-ink hover:bg-surface-muted bg-surface inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
     >
       {ctaLabel}

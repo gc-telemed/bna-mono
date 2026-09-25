@@ -10,7 +10,8 @@ export default defineConfig({
   // 'file' emits /clinic-app.html, which Netlify serves at /clinic-app with no
   // trailing-slash redirect. Matches trailingSlash: 'never' above.
   build: { format: 'file' },
-  integrations: [sitemap()],
+  // The two form confirmations are reached by posting a form, never by search.
+  integrations: [sitemap({ filter: (page) => !page.includes('/thanks-') })],
   vite: {
     plugins: [tailwindcss()],
   },

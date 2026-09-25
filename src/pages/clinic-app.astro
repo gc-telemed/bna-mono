@@ -5,7 +5,7 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
-import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+import { SITE, PRODUCTS, FORMS } from '@/data/site';
 
 const product = PRODUCTS[1]!;
 const accent = 'text-primary';
@@ -20,11 +20,11 @@ const beforeAfter = {
     'Whether the plan was followed is a question, not a record',
   ],
   after: [
-    'Structured history is on screen before the patient sits down',
-    'Readings, labs and adherence arrive already charted and ordered',
-    'The appointment starts at interpretation, not transcription',
-    'The plan is pushed to the patient’s phone as a structured summary',
-    'Next visit opens with what actually happened in between',
+    'The history the patient chose to share is on screen before they sit down',
+    'Readings, labs and medicines taken arrive already charted and ordered',
+    'The appointment starts at the conversation, not the paperwork',
+    'The plan you set appears on the patient’s phone, signed by you',
+    'The next visit opens with what happened in between',
   ],
 };
 
@@ -32,70 +32,81 @@ const capabilities = [
   {
     emoji: '⚡',
     title: 'Sync before the visit',
-    body: 'The patient approves a direct, encrypted connection — typically by scanning a code at reception. Their longitudinal data populates your dashboard immediately.',
+    body: 'The patient scans your clinic’s QR code, and an encrypted connection brings the history they choose to share to a tablet at your front desk. Each clinic is listed in a signed directory, so the patient knows the clinic they pair with is yours.',
+  },
+  {
+    emoji: '📄',
+    title: 'A one-page summary',
+    body: 'Readings in range, readings under the low lines, medicines taken, latest labs, blood pressure and weight, and the patient’s own questions. It’s laid out to read in under a minute.',
+  },
+  {
+    emoji: '🎯',
+    title: 'Set the plan',
+    body: 'Set glucose targets for each patient, starting from WHO values. Record medicines and doses as prescribed. The plan card on the patient’s phone shows it as set by your clinic, signed by the clinician, with every earlier version kept.',
   },
   {
     emoji: '📝',
     title: 'Make-a-note',
-    body: 'Attach an observation to the exact reading that prompted it. A recurring afternoon low gets a note in place, building a living record instead of a pile of separate documents.',
-  },
-  {
-    emoji: '📈',
-    title: 'Trends, pre-computed',
-    body: 'Glucose against meals, activity and medication, with the patterns already surfaced. You start from the interpretation rather than from the arithmetic.',
+    body: 'Attach observations to specific readings, and build a record that stays with the patient.',
   },
   {
     emoji: '✅',
     title: 'Action checklists',
-    body: 'Set the labs, refills and lifestyle goals due before the next visit. They appear on the patient’s phone as concrete, trackable tasks rather than remembered advice.',
+    body: 'Tests and follow-ups appear as items on the patient’s phone, with a printable version. Each item can link to a lab or pharmacy your clinic chooses. The patient approves every step.',
   },
   {
-    emoji: '📄',
-    title: 'Structured summaries',
-    body: 'Generate a clean visit summary and updated plan, pushed straight back to the patient over the encrypted connection. No email attachments, no shared spreadsheets.',
+    emoji: '👁️',
+    title: 'Close-watch patients',
+    body: 'Ask a patient to add your clinic to their alerts. Only the patient can turn it on. Their alerts then appear on your “needs attention” list.',
   },
   {
-    emoji: '🏥',
-    title: 'Records stay yours',
-    body: 'Clinical data lives on your own containerised systems, under your existing governance. We do not hold a copy, so we are never a party to your record-keeping obligations.',
+    emoji: '📨',
+    title: 'Visit summaries without paper',
+    body: 'The patient’s summary PDF arrives in your records with the rest of their shared history.',
   },
+  {
+    emoji: '💬',
+    title: 'Messages, if both sides want them',
+    body: 'A thread for non-urgent questions between visits. Your clinic turns it on first, and then each patient chooses whether to join. It is not for emergencies.',
+  },
+];
+
+const pricing = [
+  { title: 'Free', body: 'During early access.' },
+  { title: 'Free', body: 'For up to 50 active patients.' },
+  { title: 'Rs 5,000–10,000 a month', body: 'After that, depending on clinic size.' },
 ];
 
 const faqs = [
   {
+    question: 'When can we use it?',
+    answer:
+      'The Clinic App is coming soon. The patient side of its protocol is already built into The Diabetes App, so the clinic side is being designed against something fixed. Request a walkthrough and we will show you where it stands.',
+  },
+  {
     question: 'Where is patient data stored?',
     answer:
-      'On the patient’s device, and on your clinic’s own systems once they have shared it with you. We do not run a central repository of clinical records, which means your records remain under your governance and we never become a custodian of them.',
+      'On the patient’s phone, and in your clinic’s records once they have shared it with you. Your records are written only by your clinic’s own device. Where they are stored on a server, each patient’s record is sealed with a key your clinic holds, so we cannot read it.',
   },
   {
     question: 'Does it replace our existing records system?',
     answer:
-      'No. It is a companion tool that sits alongside what you already use. It solves the intake problem — getting a patient’s real, structured history in front of you at the start of a consultation — rather than trying to be your system of record.',
-  },
-  {
-    question: 'What does onboarding a patient involve?',
-    answer:
-      'The patient installs the companion app and scans a code to establish a trusted connection with your clinic node. From then on their history syncs whenever they choose to share it, including ahead of remote consultations.',
+      'No. It sits alongside what you already use. It solves the intake problem, getting a patient’s structured history in front of you at the start of a consultation, rather than trying to be your system of record.',
   },
   {
     question: 'What if the clinic’s connection is down?',
     answer:
-      'Syncing happens over a direct local connection between the patient’s device and the clinic node, so it does not depend on either party having good internet at that moment. Anything that needs the wider network is queued and sent when a connection returns.',
+      'The patient’s phone and your clinic’s device connect directly when they are in the same room, so a visit does not depend on either side having good internet at that moment. Anything that needs the wider network waits and is sent when a connection returns.',
   },
   {
     question: 'Can we see whether patients followed the plan?',
     answer:
-      'You see what they logged, including time-stamped medication records, with the honesty and the gaps intact. The point is an accurate picture, not a compliance score — and patients decide what they share with you.',
+      'You see what they logged and chose to share, including time-stamped medicine records, with the gaps left as gaps. The point is an accurate picture, not a compliance score.',
   },
   {
     question: 'Does the app make clinical recommendations?',
     answer:
-      'No. It does not calculate doses, propose diagnoses or rank patients. The on-device AI structures and summarises what was recorded. Every clinical judgement remains yours.',
-  },
-  {
-    question: 'How do we get started?',
-    answer:
-      'We are onboarding clinics now, working closely with early practices to shape the workflow around how they actually run. Get in touch and we will arrange a walkthrough.',
+      'No. It does not calculate doses, propose diagnoses or rank patients. It structures and summarises what was recorded. Every clinical judgement remains yours.',
   },
 ];
 
@@ -129,13 +140,12 @@ const structuredData = {
         <span class={accent}>on the patient</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        Clinicians end up as data entry clerks: long waits for the patient, a handful of real
-        minutes for the consultation. The Clinic App brings a structured history to your screen
-        before the door opens, so the time you have goes on judgement instead of transcription.
+        The consultation is short because everything before it is slow. With the Clinic App, a
+        patient&rsquo;s last month will be on your screen before they sit down.
       </p>
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
-          href={`mailto:${CONTACT.clinicEmail}`}
+          href={FORMS.clinic}
           class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
           Request a walkthrough
@@ -156,9 +166,13 @@ const structuredData = {
           href="#capabilities"
           class="border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
-          What it does
+          What it will do
         </a>
       </div>
+      <p class="text-ink-muted mt-5 text-sm">
+        The Clinic App is coming soon. Our target: halve intake time.
+        <em>(A target, not yet a result.)</em>
+      </p>
     </div>
   </Section>
 
@@ -206,7 +220,7 @@ const structuredData = {
 
       <div class="border-primary/30 bg-primary-tint rounded-2xl border p-8">
         <p class="text-primary mb-5 text-xs font-semibold tracking-wider uppercase">
-          With the Clinic App
+          With the Clinic App, coming soon
         </p>
         <ul class="space-y-3.5">
           {
@@ -237,7 +251,7 @@ const structuredData = {
   <Section id="capabilities" class="!py-0">
     <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
       <SectionHeading
-        eyebrow="Capabilities"
+        eyebrow="What it will do"
         title="A companion for the consultation,"
         accentTitle="not another system of record"
         accentClass={accent}
@@ -263,18 +277,17 @@ const structuredData = {
         />
         <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
           <p>
-            Clinical records stay on your own encrypted, containerised systems, exactly where your
-            existing obligations already expect them to be. Patients hold their own copy on their
-            own device. There is no third location.
+            Your clinic&rsquo;s records are written only by your clinic&rsquo;s own device. Where
+            they&rsquo;re stored on a server, each patient&rsquo;s record is sealed with a key held by
+            your clinic, so we can&rsquo;t read it. Patients hold their own record on their own phone.
           </p>
           <p>
-            Institutional connections are established with per-organisation certificates, so an
-            exchange between a clinic, a laboratory and a patient is signed, verifiable and
-            isolated. A partner node can see what it has been granted and nothing beyond it.
+            The patient can end the share at any time, and can ask for their record to be erased,
+            with a receipt.
           </p>
           <p class="text-ink font-medium">
-            Because we never hold raw records, adopting the Clinic App does not hand a new custodian
-            a copy of your patients&rsquo; histories.
+            The Clinic App is designed to support the Nepal Medical Council&rsquo;s telemedicine
+            guidelines: consent, audit trail and encrypted records.
           </p>
         </div>
       </div>
@@ -284,18 +297,18 @@ const structuredData = {
           [
             {
               emoji: '🔐',
-              title: 'Per-organisation certificates',
-              body: 'Each participating clinic or lab issues its own identities and transport certificates.',
+              title: 'A key of its own',
+              body: 'Your clinic’s identity is a key made on your clinic’s device, listed in a signed directory patients can check.',
             },
             {
               emoji: '📦',
-              title: 'Containerised nodes',
-              body: 'Your node runs in your environment, isolated from every other organisation on the network.',
+              title: 'Sealed per patient',
+              body: 'Each patient’s record is sealed under its own key, wrapped by your clinic’s key.',
             },
             {
               emoji: '🚫',
-              title: 'No central copy',
-              body: 'We do not aggregate clinical records, so there is no repository of ours to breach or subpoena.',
+              title: 'Nothing we can read',
+              body: 'We do not pool clinical records, and what a server holds for you is sealed with your key.',
             },
             {
               emoji: '↔️',
@@ -308,6 +321,14 @@ const structuredData = {
     </div>
   </Section>
 
+  <!-- Pricing -->
+  <Section class="!pt-0">
+    <SectionHeading eyebrow="Pricing" title="Free to start," accentTitle="and free for small clinics" accentClass={accent} chipClass={chip} />
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {pricing.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
   <!-- FAQ -->
   <Section>
     <FAQ faqs={faqs} lede="Questions about fit, governance or onboarding? Ask us directly." />
@@ -316,10 +337,10 @@ const structuredData = {
   <!-- CTA -->
   <Section>
     <CTA
-      title="We are onboarding clinics now"
-      body="Early practices shape how this works. If you run a chronic care clinic and want the intake problem gone, we would like to build the workflow around how you actually operate."
-      ctaLabel="Talk to us"
-      email={CONTACT.clinicEmail}
+      title="Bring your clinic"
+      body="Early practices shape how this works. If you run a chronic care clinic and want the intake problem gone, request a walkthrough and we will build the workflow around how you actually operate."
+      ctaLabel="Request a walkthrough"
+      href={FORMS.clinic}
       secondaryLabel="See the patient side"
       secondaryHref="/diabetes-app"
     />

@@ -3,10 +3,10 @@ import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
-import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
 import AppPreview from '@/components/AppPreview.astro';
-import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+import { SITE, PRODUCTS, FORMS } from '@/data/site';
 
 const product = PRODUCTS[0]!;
 const accent = 'text-primary';
@@ -15,175 +15,129 @@ const chip = 'border-primary/30 bg-primary-tint text-ink';
 const capture = [
   {
     emoji: '🩸',
-    title: 'Glucometer readings',
-    body: 'Photograph the display and the number lands in a time-stamped log. You confirm the value before it is saved.',
+    title: 'Glucometer',
+    body: 'Take a photo of the display. The number is read on your phone, and you confirm it before it’s saved. It works with the meters sold in Nepal; no Bluetooth needed.',
   },
   {
     emoji: '📄',
     title: 'Lab reports',
-    body: 'Snap an HbA1c, lipid or eGFR report. Key values are pulled into trends without you typing a single figure.',
+    body: 'Snap or pick your HbA1c, lipid or kidney report. The values are read on your phone and saved with the report’s date once you’ve checked them.',
   },
   {
     emoji: '🍛',
     title: 'Meals',
-    body: 'Capture a plate and get a simple glycaemic colour cue — green, amber, red — rather than a calorie count nobody can stand behind.',
-  },
-  {
-    emoji: '💉',
-    title: 'Medication',
-    body: 'Log a pill or an insulin pen with a quick photo, building an honest adherence record your clinician can actually read.',
-  },
-];
-
-const features = [
-  {
-    emoji: '📡',
-    title: 'Entirely offline',
-    body: 'Logging, reminders, trend charts and the assistant all work with no cell service. Travelling, hiking, or simply out of coverage — it keeps working.',
-  },
-  {
-    emoji: '🔒',
-    title: 'On-device assistant',
-    body: 'Ask about carb counts or what a trend in your own data means. The model runs on your phone, so the question and the answer stay there.',
-  },
-  {
-    emoji: '🫂',
-    title: 'Trust Network',
-    body: 'Invite family, carers and clinicians to see your logs over a direct, encrypted connection between devices. No company sits in the middle.',
-  },
-  {
-    emoji: '🧩',
-    title: 'Plugins',
-    body: 'Add the modules your health actually needs — blood pressure, kidney markers, sleep, mental health — from coaches, clinics and community developers.',
-  },
-  {
-    emoji: '🗳️',
-    title: 'Community-governed',
-    body: 'The direction of the app is set by the people living with the condition. Any group can fork it and build the version that fits them.',
-  },
-  {
-    emoji: '🔬',
-    title: 'Research on your terms',
-    body: 'Opt in to contribute stripped, anonymised data to diabetes research, one category at a time, and withdraw whenever you like.',
-  },
-];
-
-const homeCare = [
-  {
-    emoji: '🧪',
-    title: 'Home lab collection',
-    body: 'A requested HbA1c or lipid panel becomes a home visit from a licensed collection service. No fasting in a waiting room.',
+    body: 'Add a photo and your own note of how the meal felt: light, usual or heavy. Coming soon: a colour cue from the photo, trained on Nepali food, once its fine-tuning is done and it has regulatory approval. Until then your own note is the record.',
   },
   {
     emoji: '💊',
-    title: 'Pharmacy refills',
-    body: 'An expiring prescription becomes a refill order with your clinician’s instructions attached — approved by you in one tap.',
+    title: 'Medicines',
+    body: 'Answer a reminder with Taken, or tick the medicine when you take it.',
   },
   {
-    emoji: '🥗',
-    title: 'Meals that fit the plan',
-    body: 'A dietary goal links to low-glycaemic, locally relevant options from delivery services, so eating well is the easy choice rather than the hard one.',
+    emoji: '🩺',
+    title: 'Blood pressure and weight',
+    body: 'Type the numbers from your monitor or scale.',
+  },
+  {
+    emoji: '📝',
+    title: 'Notes',
+    body: 'Type or speak a note, or mark a question “ask my doctor” so it’s on your next visit summary.',
   },
 ];
 
-const plugins = [
+const readings = [
+  'The share of your readings that were in your target range over the last 7, 14 or 30 days, with the range beside it and where it came from.',
+  'Your average for each time of day: fasting, after meals, and so on.',
+  'How many readings were under 70 mg/dL and under 54 mg/dL, each line labelled with its source.',
+  'Your HbA1c from your lab reports, over time.',
+];
+
+const shareLevels = [
+  { title: 'Numbers', body: 'Your readings, as you logged them.' },
   {
-    emoji: '🩺',
-    name: 'Blood pressure',
-    detail: 'Log systolic and diastolic next to glucose and see where they move together.',
+    title: 'Range only',
+    body: 'Whether each reading was below, in or above your range, shown as a word and a colour, without the number.',
+  },
+  { title: 'Alerts only', body: 'Nothing, unless a reading crosses one of the alert lines.' },
+];
+
+const facts = [
+  { term: 'Price', detail: 'Free, always, for patients.' },
+  {
+    term: 'Phones',
+    detail: 'Android phones, including low-cost ones. Minimum Android version to be confirmed before launch.',
   },
   {
-    emoji: '🫀',
-    name: 'Heart health',
-    detail: 'Resting heart rate, HRV and cardiovascular markers over time.',
+    term: 'Internet',
+    detail:
+      'Not needed for daily use. Updates to your family travel when you’re connected, sealed so that only their phones can read them. Syncing with your clinic arrives with the Clinic App.',
   },
   {
-    emoji: '🫘',
-    name: 'Kidney health',
-    detail: 'Track eGFR results and spot nephropathy risk while it is still early.',
+    term: 'The assistant',
+    detail:
+      'Ask about my log answers questions about your own entries, on phones with about 6 GB of memory. It never answers medical questions and never suggests a dose. Everything else works on every supported phone.',
   },
   {
-    emoji: '👁️',
-    name: 'Eye health',
-    detail: 'Retinopathy screening reminders and vision-change notes tied to your glucose history.',
+    term: 'Your data',
+    detail: 'Stays on your phone and on the phones you choose. Export it or back it up at any time.',
   },
-  {
-    emoji: '🦶',
-    name: 'Neuropathy',
-    detail: 'Daily foot-check prompts and nerve-symptom logging with severity tracking.',
-  },
-  {
-    emoji: '🧪',
-    name: 'Lipids',
-    detail: 'LDL, HDL and triglycerides alongside the rest of your metabolic panel.',
-  },
-  {
-    emoji: '⚖️',
-    name: 'Weight',
-    detail: 'BMI, waist measurement and body composition set against glucose control.',
-  },
-  {
-    emoji: '😴',
-    name: 'Sleep',
-    detail: 'Duration and quality — a major and frequently invisible driver of insulin resistance.',
-  },
-  {
-    emoji: '🧠',
-    name: 'Mental health',
-    detail: 'Burnout, anxiety and low mood. Emotional health is part of physical health.',
-  },
-  {
-    emoji: '🏃',
-    name: 'Exercise',
-    detail: 'Sport-specific glucose playbooks from coaches who work with diabetic athletes.',
-  },
+  { term: 'Languages', detail: 'English and Nepali. Maithili is planned.' },
 ];
 
 const faqs = [
   {
-    question: 'Does it really work with no internet connection?',
+    question: 'When can I use it?',
     answer:
-      'Yes. The core experience runs entirely on the device: logging, photo capture, medication reminders, trend charts and the assistant. Connectivity is used only for optional things — syncing with your Trust Network, or fetching a plugin update.',
+      'The Diabetes App is being built in Kathmandu and Janakpur, and it is not open to the public yet. Join the waitlist and we will tell you when it is ready for you.',
   },
   {
-    question: 'What does "take a picture" actually mean?',
+    question: 'Does it really work with no internet?',
     answer:
-      'Instead of typing everything, you photograph the source: a glucometer display, a lab report, a meal, or a medication package. The on-device AI reads the image and proposes a structured entry. You always review and edit it before it is saved — the AI never records anything by itself, and the photo is processed locally.',
+      'Yes. Logging, reading a photo, your summary, your plan and your reminders all run on the phone. The internet is used only to send updates to the family members you chose, and it waits until you are connected.',
   },
   {
     question: 'Does the app calculate my insulin dose?',
     answer:
-      'No, and that is deliberate. The app is a record-keeping and communication tool. It does not calculate or recommend doses. Dosing and treatment decisions belong to your licensed clinician; the app shows their guidance and logs what you actually did.',
+      'No, and it never will. The app is a record-keeping and communication tool. It does not calculate or recommend doses, and it does not estimate carbohydrates or calories. Dosing and treatment decisions belong to your doctor.',
   },
   {
-    question: 'How can there be an AI assistant with no cloud?',
+    question: 'What happens to my photos?',
     answer:
-      'We use lightweight, quantised language and vision models that run on ordinary modern smartphone hardware. Because the model lives on the phone, your questions and readings never leave it. The assistant is assistive only: it reads your logged data and summarises reports, and it does not make medical decisions.',
+      'They are read on your phone and never sent to a server. A number read from a photo is only a suggestion until you confirm it, and you can always type the value instead.',
   },
   {
-    question: 'Where do my photos go?',
+    question: 'Where do the target ranges come from?',
     answer:
-      'Raw images are kept only briefly on the phone. Once the structured information has been extracted, the heavy image file is cleared from the main view. If you want the original kept as evidence for a future second opinion, you can nominate a device in your own Trust Network — a family member’s phone, or your clinic’s system — to hold an encrypted copy.',
+      'From your doctor, when you copy their targets onto the plan card. Where a target is missing, the app uses published values from the World Health Organization, with the American Diabetes Association’s where WHO has none, and it labels every figure those values affect.',
+  },
+  {
+    question: 'Who sees my readings?',
+    answer:
+      'Only the people you add, at the level you choose for each: the numbers, the range only, or alerts only. Updates are sealed so only their phones can read them. You can change or remove anyone at any time.',
+  },
+  {
+    question: 'Is an alert an emergency service?',
+    answer:
+      'No. An alert reaches your emergency contacts when your phone next has a signal, so it is not real time. In an emergency, call for help directly. The If I feel low card puts your contact’s call button first after a reading under 54 mg/dL.',
+  },
+  {
+    question: 'What if I lose my phone?',
+    answer:
+      'Make an encrypted backup from the app and keep it somewhere safe. Only your passphrase opens it, and restoring it on a new phone brings your record back. There is no cloud copy, so the backup is the copy.',
+  },
+  {
+    question: 'What does the assistant do?',
+    answer:
+      'Ask about my log answers questions about your own entries, such as your last reading or whether you took your medicine today, on phones with about 6 GB of memory. It runs on the phone, never answers medical questions, and never suggests a dose.',
   },
   {
     question: 'How does this work with my doctor?',
     answer:
-      'There is a companion app for clinicians on the same private network. With your permission, your logs and trends sync straight to their dashboard before a visit, so less of the appointment goes on paperwork. Your clinician can attach notes and action checklists to specific readings.',
+      'Today, show or send them the one-page summary as a PDF. When your clinic uses the Clinic App, which is coming soon, you will be able to scan its QR code and share your history directly, and your doctor will be able to set your plan.',
   },
   {
-    question: 'Can it help with labs, refills and meals?',
-    answer:
-      'Yes. When your clinician adds a task — a blood test, a refill, a dietary goal — the app can turn it into a one-tap action routed to licensed local services. You review and approve every order. Nothing is ever purchased on your behalf.',
-  },
-  {
-    question: 'Who controls the app?',
-    answer:
-      'The community using it. The core experience is guided by an open community process rather than a product roadmap set in a boardroom, and groups are free to fork the codebase to build versions for teenagers with type 1, for older adults, or for any specific group.',
-  },
-  {
-    question: 'When can I use it?',
-    answer:
-      'The technical foundation is in place and we are in the community-building phase: gathering feedback, feature wishlists and design input from people living with diabetes. Get in touch and we will keep you posted.',
+    question: 'How much does it cost?',
+    answer: 'Nothing. The Diabetes App is free for patients, always.',
   },
 ];
 
@@ -191,12 +145,16 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: product.name,
+  alternateName: 'tda by cosys',
   applicationCategory: 'HealthApplication',
-  operatingSystem: 'Android, iOS',
+  operatingSystem: 'Android',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'NPR' },
   description: product.summary,
   url: `${SITE.url}${product.slug}`,
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
 };
+
+const block = 'border-line bg-surface rounded-2xl border p-7';
 ---
 
 <Base
@@ -215,19 +173,18 @@ const structuredData = {
         class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
         A diabetes companion{' '}<br class="hidden sm:block" />
-        <span class={accent}>that never quits</span>
+        <span class={accent}>that works with no signal</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        Take-a-picture logging, a private assistant that runs on your phone, your clinician&rsquo;s
-        guidance, and the people you trust. All of it works with no signal, and none of it is stored
-        anywhere you did not choose.
+        Log by photo, see your readings over time, and follow the plan your doctor gave you, all on
+        your phone. For Type 2, Type 1, gestational diabetes and prediabetes.
       </p>
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
-          href={`mailto:${CONTACT.productEmail}`}
+          href={FORMS.waitlist}
           class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
-          Join the community
+          Join the patient waitlist
           <svg
             class="h-4 w-4"
             viewBox="0 0 24 24"
@@ -248,20 +205,21 @@ const structuredData = {
           Try the app
         </a>
       </div>
+      <p class="text-ink-muted mt-5 text-sm italic">Free for patients, always.</p>
     </div>
   </Section>
 
-  <!-- Take a picture -->
+  <!-- Log in seconds -->
   <Section id="capture">
     <SectionHeading
-      eyebrow="Take-a-picture"
-      title="Logging diabetes is tedious."
-      accentTitle="So just take a picture."
+      eyebrow="Log in seconds"
+      title="Point the camera at the source."
+      accentTitle="You confirm every value."
       accentClass={accent}
       chipClass={chip}
-      lede="Manual entry is the single biggest reason people stop tracking. Point the camera at the source instead: the on-device AI drafts a structured entry and you confirm it. The AI assists, it never decides — and because it runs on the phone, the photo never reaches a server."
+      lede="Photos are read on the phone, so they never reach a server. A value read from a photo is a suggestion until you confirm it."
     />
-    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {capture.map((item) => <Card {...item} />)}
     </div>
   </Section>
@@ -274,61 +232,114 @@ const structuredData = {
       accentTitle="Try it right here."
       accentClass={accent}
       chipClass={chip}
-      lede="A working replica of the real interface — the same screens, the same colours, the same words in English and Nepali. The lab sheet below holds the fifty-three values the app reads from one eleven-page report, which is the part that has to be seen to be believed."
+      lede="A working replica of the real interface: the same screens, the same colours, the same words in English and Nepali. Nothing you do in it is saved."
     />
     <div class="mt-12">
       <AppPreview />
     </div>
   </Section>
 
-  <!-- Care comes to you -->
-  <Section>
-    <div class="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
-      <div>
-        <SectionHeading
-          eyebrow="Care that comes to you"
-          title="Stop losing a day"
-          accentTitle="to routine care"
-          accentClass={accent}
-          chipClass={chip}
-          align="left"
-        />
-        <p class="text-ink-muted mt-5 leading-relaxed text-pretty">
-          Managing diabetes should not mean a clinic queue every time you need a lab, a refill or
-          the right groceries. When your clinician sets a task, the app turns it into a one-tap
-          action routed to licensed local services — so the lab, the pharmacy and the meal come to
-          your door. Physical visits are saved for the conversations that need a clinician in the
-          room.
-        </p>
-        <p class="text-ink-muted mt-4 text-sm">
-          You review and approve every single action. The app never orders anything on its own.
-        </p>
-      </div>
-      <div class="grid gap-4">
-        {homeCare.map((item) => <Card {...item} />)}
+  <!-- Readings and plan -->
+  <Section class="!py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <div class="grid gap-5 md:grid-cols-2">
+        <div class={block}>
+          <h2 class="text-ink text-xl font-bold">See your readings over time</h2>
+          <ul class="text-ink-muted mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed">
+            {readings.map((line) => <li>{line}</li>)}
+          </ul>
+          <p class="text-ink-muted mt-4 text-sm leading-relaxed">
+            A reading outside your range is shown as it is, with no alarm colour and no verdict.
+          </p>
+        </div>
+        <div class={block}>
+          <h2 class="text-ink text-xl font-bold">Your doctor&rsquo;s plan, in your pocket</h2>
+          <p class="text-ink-muted mt-4 text-sm leading-relaxed">
+            Your targets, medicines and your doctor&rsquo;s instructions for a low sit on a plan card.
+            You copy them from your prescription, and a photo of the prescription can fill the card
+            in for you to check. Where your doctor hasn&rsquo;t set a target, the app uses published
+            values from the World Health Organization, with the American Diabetes
+            Association&rsquo;s where WHO has none, and says so beside every figure they affect.
+            Every earlier version of your plan is kept.
+          </p>
+          <p class="text-ink-muted mt-3 text-sm leading-relaxed">
+            When your clinic uses the Clinic App, your doctor will be able to set the plan directly.
+            It will show who set it and when.
+          </p>
+        </div>
+        <div class={block}>
+          <h2 class="text-ink text-xl font-bold">If you feel low</h2>
+          <p class="text-ink-muted mt-4 text-sm leading-relaxed">
+            The <em>If I feel low</em> card on your home screen shows the steps you wrote down from
+            your doctor and a button to call your emergency contact. After a reading under 54 mg/dL,
+            the call button comes first. It works with no signal.
+          </p>
+          <p class="text-ink-muted mt-3 text-sm leading-relaxed">
+            If you choose, the family members you mark as emergency contacts get a notification when
+            a reading goes under 70 or under 54 mg/dL, or reaches 325 mg/dL. The notification names
+            the line it crossed, never the number. It arrives when your phone next has a signal, so
+            it is not real time, and it is not an emergency service.
+          </p>
+        </div>
+        <div class={block}>
+          <h2 class="text-ink text-xl font-bold">Reminders</h2>
+          <p class="text-ink-muted mt-4 text-sm leading-relaxed">
+            Reminders for your medicines, with <em>Taken</em>, <em>Not now</em> and
+            <em>Snooze</em> on the notification itself. If a medicine reminder gets no answer, one
+            follow-up arrives 30 minutes later, and never more than one. You can turn the follow-up
+            off for each reminder.
+          </p>
+          <h2 class="text-ink mt-7 text-xl font-bold">Take a summary to your visit</h2>
+          <p class="text-ink-muted mt-4 text-sm leading-relaxed">
+            Make a PDF of the last 30 or 90 days in two taps. The first page is a single sheet your
+            doctor can read in a minute: time in range, readings under the low lines, your medicines
+            taken, your latest labs, blood pressure and weight, and your questions. The detail
+            follows, and a spreadsheet (CSV) comes with it.
+          </p>
+        </div>
       </div>
     </div>
   </Section>
 
-  <!-- Features -->
-  <Section class="!py-0">
-    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
-      <SectionHeading
-        eyebrow="What you get"
-        title="Everything you need."
-        accentTitle="Nothing you don’t."
-        accentClass={accent}
-        chipClass={chip}
-        lede="Built around the real daily life of managing diabetes, rather than around a business model that needs your readings."
-      />
-      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((item) => <Card {...item} />)}
-      </div>
+  <!-- Share -->
+  <Section>
+    <SectionHeading
+      eyebrow="Share the way you want"
+      title="Choose what each person"
+      accentTitle="in your family sees"
+      accentClass={accent}
+      chipClass={chip}
+      lede="Add family members who help with your diabetes and choose a level for each one. You can change or remove anyone at any time."
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {shareLevels.map((item) => <Card {...item} />)}
+    </div>
+    <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-pretty">
+      Only the people you mark as emergency contacts get alerts. A relative who lives far away can
+      follow along without being woken at night. A family member can also follow a parent&rsquo;s
+      record on their own phone, read-only, alongside their own.
+    </p>
+  </Section>
+
+  <!-- Facts -->
+  <Section class="!pt-0">
+    <div class={block}>
+      <h2 class="text-ink text-xl font-bold">The facts</h2>
+      <dl class="mt-5 grid gap-x-8 gap-y-4 text-sm md:grid-cols-2">
+        {
+          facts.map(({ term, detail }) => (
+            <div>
+              <dt class="text-ink font-semibold">{term}</dt>
+              <dd class="text-ink-muted mt-1 leading-relaxed">{detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </Section>
 
   <!-- Safety -->
-  <Section>
+  <Section class="!pt-0">
     <div
       class="border-primary/30 bg-primary-tint flex items-start gap-4 rounded-2xl border p-6 md:p-8"
     >
@@ -345,64 +356,28 @@ const structuredData = {
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path>
       </svg>
       <div>
-        <p class="text-ink font-semibold">Doctor-led by design</p>
+        <p class="text-ink font-semibold">Your doctor sets the plan, and the app helps you keep to it.</p>
         <p class="text-ink-muted mt-1 text-sm leading-relaxed text-pretty">
-          The Diabetes App is a record-keeping and communication tool. It does not calculate or
-          recommend insulin doses, and the assistant never makes a medical decision on its own.
-          Every treatment decision stays with your licensed clinician — the app keeps an honest
-          record and makes their guidance easy to follow.
+          This app does not calculate or recommend insulin doses. All dosing decisions are made
+          exclusively by your licensed physician. The app is a record-keeping and communication tool
+          only.
         </p>
       </div>
     </div>
   </Section>
 
-  <!-- Plugins -->
-  <Section>
-    <SectionHeading
-      eyebrow="Plugins"
-      title="Diabetes rarely comes alone."
-      accentTitle="Neither should the app."
-      accentClass={accent}
-      chipClass={chip}
-      lede="The same peer-to-peer network that keeps your records private also distributes plugins — no central store, no gatekeeper. Add exactly what your health requires and nothing else."
-    />
-    <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-      {
-        plugins.map(({ emoji, name, detail }) => (
-          <div class="border-line bg-surface hover:border-primary/30 rounded-xl border p-5 transition hover:shadow-md">
-            <span class="text-3xl" aria-hidden="true">
-              {emoji}
-            </span>
-            <p class="text-ink mt-3 font-semibold">{name}</p>
-            <p class="text-ink-muted mt-1 text-sm leading-relaxed">{detail}</p>
-          </div>
-        ))
-      }
-    </div>
-    <p class="text-ink-muted mt-6 text-center text-sm">
-      Plugins are distributed peer-to-peer and verified by the community. <a
-        href="/platform"
-        class="text-primary font-medium underline-offset-2 hover:underline"
-        >How the marketplace works &rarr;</a
-      >
-    </p>
-  </Section>
-
   <!-- FAQ -->
-  <Section>
-    <FAQ
-      faqs={faqs}
-      lede="Still wondering about something? Write to us and we will answer properly."
-    />
+  <Section class="!pt-0">
+    <FAQ faqs={faqs} lede="Something else on your mind? Write to us and we will answer properly." />
   </Section>
 
   <!-- CTA -->
   <Section>
     <CTA
-      title="Help design the app you will live with"
-      body="The technical foundation is built. What it becomes next should be shaped by people who actually manage diabetes every day. Bring your wishlist, your workflow, or your code."
-      ctaLabel="Email the team"
-      email={CONTACT.productEmail}
+      title="Join the patient waitlist"
+      body="We'll let you know when The Diabetes App is ready for you. We only ask how to reach you."
+      ctaLabel="Join the waitlist"
+      href={FORMS.waitlist}
       secondaryLabel="See the clinic side"
       secondaryHref="/clinic-app"
     />

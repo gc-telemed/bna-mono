@@ -4,69 +4,87 @@ import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
-import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+import { SITE, CONTACT, PRODUCTS, FORMS } from '@/data/site';
 
-const badges = [
-  { icon: '📡', label: 'Offline-first' },
-  { icon: '🔒', label: 'On-device AI' },
-  { icon: '🤝', label: 'Peer-to-peer' },
-  { icon: '🩺', label: 'Clinician-led' },
-  { icon: '🧩', label: 'Open to plugins' },
-];
-
-const principles = [
-  {
-    emoji: '📡',
-    title: 'Works with no signal',
-    body: 'Logging, reminders, trends and the assistant all run on the device. Connectivity is something the apps use when it is there, never something they wait for.',
-  },
-  {
-    emoji: '🔒',
-    title: 'The AI stays on the phone',
-    body: 'Lightweight models run locally, so health questions and personal readings are never shipped to an API. The assistant drafts and summarises; it never decides.',
-  },
-  {
-    emoji: '🗄️',
-    title: 'No corporate custody',
-    body: 'We do not operate a data lake of patient records, because there is nothing to operate. Records live on patient devices and on the clinic systems that already hold them.',
-  },
-  {
-    emoji: '🩺',
-    title: 'Doctor-led by design',
-    body: 'Our apps keep an honest record and make a clinician’s guidance easy to follow. They do not calculate doses and they do not offer a diagnosis.',
-  },
-  {
-    emoji: '🗳️',
-    title: 'Governed by the people using it',
-    body: 'The patient-facing app is shaped by the community that lives with the condition, and any group is free to fork it and build the variant they need.',
-  },
-  {
-    emoji: '🧩',
-    title: 'Extensible by outsiders',
-    body: 'Coaches, dietitians, clinics and independent developers publish plugins straight to the people who want them, over the same peer-to-peer fabric.',
-  },
-];
-
-const flow = [
+const steps = [
   {
     step: '01',
-    title: 'The patient logs by photographing',
-    body: 'A glucometer display, a lab report, a plate of food, a medication pack. The on-device AI drafts a structured entry and the patient confirms it. Seconds, not minutes.',
+    title: 'Snap',
+    body: 'Photograph your glucometer or a lab report. The number is read on your phone, and you check it before it’s saved. This works in airplane mode.',
   },
   {
     step: '02',
-    title: 'The record syncs to the clinic',
-    body: 'On arrival — or ahead of a remote consultation — the patient approves a direct, encrypted connection to the clinic. Months of structured history land on the clinician’s screen before the conversation starts.',
+    title: 'Share',
+    body: 'Choose family members who help you, and choose what each one sees. Before a visit, make a one-page summary of your last month as a PDF to show or send your doctor. When your clinic joins through the Clinic App, you’ll scan its QR code and the summary reaches your doctor directly.',
   },
   {
     step: '03',
-    title: 'The clinician annotates and plans',
-    body: 'Notes attach to the exact readings that prompted them. The visit summary and updated plan are pushed back to the patient’s phone over the same connection — no email attachments, no lost printouts.',
+    title: 'Follow',
+    body: 'Your targets, medicines and your doctor’s instructions sit on a plan card on your phone, with reminders for your medicines. Later, with the Clinic App, your clinic will be able to set the plan and send a checklist of next tests.',
+  },
+];
+
+const facts = [
+  {
+    figure: '22%',
+    body: 'of Kathmandu residents over 30 had high blood sugar in the city’s 2024–25 screening of 19,660 people.',
+    source: 'Source: Kathmandu Post, Nov 2025',
   },
   {
-    step: '04',
-    title: 'The plan turns into care at home',
-    body: 'A requested lab, a due refill or a dietary goal becomes a one-tap action routed to licensed local services. The patient approves every one. Nothing is ordered automatically.',
+    figure: '2–3 months',
+    body: 'is how often most people with diabetes see a doctor. Sugar levels change every day.',
+  },
+  {
+    figure: '1–2 hours',
+    body: 'of intake for a 5–15 minute consultation, in the clinics we’ve spoken to.',
+    source: 'What we have seen, not a formal study.',
+  },
+];
+
+const comparison = [
+  {
+    dimension: 'Works with no signal',
+    typical: 'Partly, or not at all',
+    ours: 'Yes: logging, photos, your summary and reminders (the assistant too, on phones with about 6 GB of memory)',
+  },
+  { dimension: 'Where the AI runs', typical: 'In the cloud', ours: 'On your phone' },
+  {
+    dimension: 'Who holds your record',
+    typical: 'The app company’s servers',
+    ours: 'You, on your phone',
+  },
+  {
+    dimension: 'Cost to patients',
+    typical: 'Free trial, then a subscription',
+    ours: 'Free, always',
+  },
+  {
+    dimension: 'Share with family',
+    typical: 'The full numbers',
+    ours: 'Your choice for each person: the numbers, the range only, or alerts only',
+  },
+  {
+    dimension: 'Your doctor’s targets',
+    typical: 'Typed in by you, or none',
+    ours: 'Your doctor’s, or published WHO and ADA values, always labelled with where they came from',
+  },
+];
+
+const promises = [
+  {
+    emoji: '🩺',
+    title: 'Your doctor decides; the app remembers',
+    body: 'It never calculates or recommends insulin doses, and it never estimates carbohydrates or calories.',
+  },
+  {
+    emoji: '🗄️',
+    title: 'Your record belongs to you',
+    body: 'Export it at any time as PDF or CSV, or as an encrypted backup only your passphrase opens. There is no cloud copy of your record.',
+  },
+  {
+    emoji: '📡',
+    title: 'Built for the hard case first',
+    body: 'It runs on low-cost Android phones, on slow networks and in Nepali.',
   },
 ];
 
@@ -83,36 +101,31 @@ const structuredData = {
     itemOffered: { '@type': 'SoftwareApplication', name, description: summary },
   })),
 };
+
+const primary =
+  'bg-primary hover:bg-primary-pressed text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition';
+const secondary =
+  'border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition';
 ---
 
 <Base title={SITE.name} description={SITE.description} path="/" structuredData={structuredData}>
   <!-- Hero -->
   <Section class="!pt-16 !pb-8 lg:!pt-24">
     <div class="mx-auto max-w-3xl text-center">
-      <span
-        class="border-primary/30 bg-primary-tint text-ink inline-block rounded-full border px-4 py-1 text-sm font-medium"
-      >
-        Decentralised chronic care
-      </span>
       <h1
-        class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
+        class="text-ink text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
-        Health software that leaves{' '}<br class="hidden sm:block" />
-        <span class="text-primary">your data where it belongs</span>
+        Diabetes care that keeps going{' '}<br class="hidden sm:block" />
+        <span class="text-primary">between visits</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        cosys.work builds offline-first tools for long-term conditions: an app for the person living
-        with one, an app for the clinic treating it, and a peer-to-peer network that moves records
-        directly between them. There is no server in the middle holding anyone&rsquo;s medical
-        history.
+        Snap your glucometer and your lab reports, note your meals and medicines, and follow the plan
+        your doctor gave you. It works with no signal, and your record stays on your phone.
       </p>
 
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a
-          href="/diabetes-app"
-          class="bg-primary hover:bg-primary-pressed text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
-        >
-          See the Diabetes App
+        <a href={FORMS.waitlist} class={primary}>
+          Join the patient waitlist
           <svg
             class="h-4 w-4"
             viewBox="0 0 24 24"
@@ -126,36 +139,99 @@ const structuredData = {
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </a>
-        <a
-          href="/platform"
-          class="border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition"
-        >
-          How the platform works
-        </a>
+        <a href={FORMS.clinic} class={secondary}>Bring your clinic</a>
       </div>
-
-      <ul class="text-ink-muted mt-10 flex flex-wrap items-center justify-center gap-2.5 text-sm">
-        {
-          badges.map(({ icon, label }) => (
-            <li class="bg-surface-muted flex items-center gap-1.5 rounded-full px-3 py-1">
-              <span aria-hidden="true">{icon}</span>
-              <span>{label}</span>
-            </li>
-          ))
-        }
-      </ul>
+      <p class="text-ink-muted mt-5 text-sm italic">
+        Free for patients, always. Being built in Kathmandu and Janakpur.
+      </p>
     </div>
   </Section>
 
-  <!-- Flagship products -->
+  <!-- How it works -->
+  <Section class="!py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading eyebrow="How it works" title="Snap, share," accentTitle="follow the plan" />
+      <ol class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          steps.map(({ step, title, body }) => (
+            <li class="border-line bg-surface rounded-2xl border p-6">
+              <span class="text-primary text-sm font-bold tabular-nums">{step}</span>
+              <h3 class="text-ink mt-2 font-semibold text-pretty">{title}</h3>
+              <p class="text-ink-muted mt-2 text-sm leading-relaxed">{body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Section>
+
+  <!-- Why Nepal -->
+  <Section>
+    <SectionHeading
+      eyebrow="Why Nepal, why now"
+      title="Sugar changes every day."
+      accentTitle="Visits come every few months."
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {
+        facts.map(({ figure, body, source }) => (
+          <div class="border-line bg-surface rounded-2xl border p-6">
+            <p class="text-primary text-3xl font-bold tabular-nums">{figure}</p>
+            <p class="text-ink mt-2 text-sm leading-relaxed">{body}</p>
+            {source && <p class="text-ink-muted mt-3 text-xs italic">{source}</p>}
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- What makes it different -->
+  <Section class="!py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow="What makes it different"
+        title="The Diabetes App, next to"
+        accentTitle="a typical diabetes app"
+      />
+      <div class="border-line bg-surface mt-12 overflow-x-auto rounded-2xl border">
+        <table class="w-full text-left text-sm">
+          <caption class="sr-only">Typical diabetes apps compared with The Diabetes App</caption>
+          <thead>
+            <tr class="border-line border-b">
+              <th scope="col" class="text-ink px-5 py-4 font-semibold">
+                <span class="sr-only">What</span>
+              </th>
+              <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">
+                Typical diabetes apps
+              </th>
+              <th scope="col" class="text-primary px-5 py-4 font-semibold">The Diabetes App</th>
+            </tr>
+          </thead>
+          <tbody class="divide-line divide-y">
+            {
+              comparison.map(({ dimension, typical, ours }) => (
+                <tr>
+                  <th scope="row" class="text-ink px-5 py-4 align-top font-semibold">
+                    {dimension}
+                  </th>
+                  <td class="text-ink-muted px-5 py-4 align-top">{typical}</td>
+                  <td class="text-ink px-5 py-4 align-top">{ours}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Products -->
   <Section id="products">
     <SectionHeading
-      eyebrow="Three products, one fabric"
+      eyebrow="Three products, one network"
       title="Built for both sides of the"
       accentTitle="consulting room door"
-      lede="Each product is useful on its own. Together they close the loop between what happens in a patient's day and what a clinician can actually see."
     />
-
     <div class="mt-12 grid gap-5 lg:grid-cols-3">
       {
         PRODUCTS.map(({ slug, name, audience, blurb, emoji }) => (
@@ -192,154 +268,23 @@ const structuredData = {
     </div>
   </Section>
 
-  <!-- The problem -->
+  <!-- Promises -->
   <Section>
-    <div class="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
-      <div>
-        <SectionHeading
-          eyebrow="Why we build this way"
-          title="A health record on someone else’s server"
-          accentTitle="is a liability for everyone"
-          align="left"
-        />
-        <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
-          <p>
-            The standard architecture for digital health pools everybody&rsquo;s readings into one
-            place. That makes the pool valuable to the company holding it — and valuable to whoever
-            breaches it. A single failure exposes millions of people at once, and the recovery is
-            measured in months of disrupted care.
-          </p>
-          <p>
-            It also fails quietly, every day, in a more ordinary way: the moment the connection
-            drops, a cloud-dependent app stops being a medical tool. For anyone outside a city with
-            reliable bandwidth, that is most of the time.
-          </p>
-          <p class="text-ink font-medium">
-            We took the pool away. Records stay on the patient&rsquo;s device and on the systems of
-            the clinics they explicitly trust. There is no third copy for us to lose.
-          </p>
-        </div>
-      </div>
-
-      <div class="grid gap-4">
-        <div class="border-line bg-surface-muted rounded-2xl border p-7">
-          <p class="text-ink-muted mb-4 text-xs font-semibold tracking-wider uppercase">
-            Centralised health platforms
-          </p>
-          <ul class="space-y-3">
-            {
-              [
-                'One breach exposes every patient at once',
-                'Care stops working where the bandwidth stops',
-                'The operator holds raw records, and the liability that comes with them',
-                'Terms and ownership can change without the patient',
-              ].map((item) => (
-                <li class="text-ink-muted flex items-start gap-3 text-sm">
-                  <svg
-                    class="text-danger mt-0.5 h-4.5 w-4.5 flex-shrink-0"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <>
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="m15 9-6 6M9 9l6 6" />
-                    </>
-                  </svg>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="border-primary/30 bg-primary-tint rounded-2xl border p-7">
-          <p class="text-primary mb-4 text-xs font-semibold tracking-wider uppercase">
-            The cosys.work approach
-          </p>
-          <ul class="space-y-3">
-            {
-              [
-                'Breaking one device gets you one device',
-                'The full experience runs offline, by default',
-                'Clinics keep records where they already keep them, under their own control',
-                'The patient grants and revokes every connection',
-              ].map((item) => (
-                <li class="text-ink flex items-start gap-3 text-sm">
-                  <svg
-                    class="text-primary mt-0.5 h-4.5 w-4.5 flex-shrink-0"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-  </Section>
-
-  <!-- How it fits together -->
-  <Section class="!py-0">
-    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
-      <SectionHeading
-        eyebrow="The loop"
-        title="From a photo on a phone"
-        accentTitle="to care at the front door"
-        lede="Routine chronic care asks the patient to travel: to the clinic, to the lab, to the pharmacy. We run that in the other direction."
-      />
-
-      <ol class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {
-          flow.map(({ step, title, body }) => (
-            <li class="border-line bg-surface rounded-2xl border p-6">
-              <span class="text-primary text-sm font-bold tabular-nums">{step}</span>
-              <h3 class="text-ink mt-2 font-semibold text-pretty">{title}</h3>
-              <p class="text-ink-muted mt-2 text-sm leading-relaxed">{body}</p>
-            </li>
-          ))
-        }
-      </ol>
-
-      <p class="text-ink-muted mt-8 text-center text-sm">
-        Physical visits are reserved for the part that genuinely needs a clinician in the room.
-      </p>
-    </div>
-  </Section>
-
-  <!-- Principles -->
-  <Section>
-    <SectionHeading
-      eyebrow="What we hold to"
-      title="Commitments we designed around,"
-      accentTitle="not features we added later"
-    />
-    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-      {principles.map((item) => <Card {...item} />)}
+    <SectionHeading eyebrow="Our promises" title="What the app will" accentTitle="always and never do" />
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {promises.map((item) => <Card {...item} />)}
     </div>
   </Section>
 
   <!-- CTA -->
   <Section>
     <CTA
-      title="Building this with clinics, coaches and patients"
-      body="If you run a clinic that is tired of transcribing paperwork, live with a condition and have opinions about the tools, or write software and want to work on this — we want to hear from you."
-      ctaLabel="Start a conversation"
-      secondaryLabel="Read about cosys.work"
-      secondaryHref="/company"
+      title="Being built in Kathmandu and Janakpur"
+      body="Clinics: see the Clinic App and request a walkthrough. Patients: join the waitlist and we'll tell you when the app is ready for you."
+      ctaLabel="Bring your clinic"
+      href={FORMS.clinic}
+      secondaryLabel="Join the patient waitlist"
+      secondaryHref={FORMS.waitlist}
     />
   </Section>
 </Base>

@@ -15,7 +15,7 @@ const comparison = [
   {
     dimension: 'Where records live',
     cloud: 'Centralised corporate servers and data lakes',
-    cosys: 'On the patient’s device, and on the institutional nodes they explicitly trust',
+    cosys: 'On the patient’s phone, and with the people and clinics they choose to share with',
   },
   {
     dimension: 'Dependency',
@@ -24,18 +24,18 @@ const comparison = [
   },
   {
     dimension: 'Risk profile',
-    cloud: 'Systemic — one breach exposes an entire population',
-    cosys: 'Fragmented — compromising the network means compromising devices one at a time',
+    cloud: 'Systemic: one breach exposes an entire population',
+    cosys: 'Fragmented: compromising the network means compromising devices one at a time',
   },
   {
     dimension: 'Custody',
     cloud: 'The operator holds raw records, and answers for them',
-    cosys: 'No operator copy exists; custody sits with the patient and their clinic',
+    cosys: 'No readable operator copy: anything a server holds on the way is sealed',
   },
   {
     dimension: 'Extension',
     cloud: 'A single vendor roadmap and an approval queue',
-    cosys: 'Anyone can publish a plugin directly to the people who want it',
+    cosys: 'Planned: plugins published directly to the people who want them',
   },
 ];
 
@@ -48,17 +48,17 @@ const layers = [
   {
     emoji: '🔗',
     title: 'The trust fabric',
-    body: 'Devices connect directly and only to peers the owner has verified — a family member, a carer, a clinician. Each link is granted deliberately and can be severed the same way.',
+    body: 'Devices connect only to peers the owner has verified: a family member, a carer, and later a clinic. Each link is granted deliberately and can be ended the same way.',
   },
   {
     emoji: '🏛️',
     title: 'Institutional nodes',
-    body: 'Clinics and laboratories join as isolated, containerised organisations, each running its own certificate authority so exchanges are signed, verifiable and confined to their participants.',
+    body: 'Coming with the Clinic App: each clinic holds a key of its own, listed in a signed directory, and keeps each patient’s record sealed under a key only it holds.',
   },
   {
     emoji: '🧩',
     title: 'The plugin fabric',
-    body: 'The same network distributes extensions. Developers, dietitians, coaches and clinics publish directly, and users install only what they want. No central store decides what exists.',
+    body: 'Planned: the same network will distribute extensions from dietitians, coaches, researchers and clinics, and people will install only what they want.',
   },
 ];
 
@@ -66,7 +66,7 @@ const sovereignty = [
   {
     emoji: '🗑️',
     title: 'Erasure that actually erases',
-    body: 'Deleting a record means deleting it from the device that holds it and cutting the links that shared it. There is no operator archive quietly retaining a copy.',
+    body: 'Ending a share can also ask the other side to erase what it received, and a clinic answers with a receipt. There is no operator archive quietly keeping a readable copy.',
   },
   {
     emoji: '📚',
@@ -75,13 +75,13 @@ const sovereignty = [
   },
   {
     emoji: '🧊',
-    title: 'Encrypted archival by choice',
-    body: 'Source images and documents can be backed up to a node the owner nominates — a family device, or their clinic — encrypted, and only where they put it.',
+    title: 'Encrypted backup, kept by you',
+    body: 'A backup is a file only the owner’s passphrase opens, kept wherever they choose. There is no cloud copy to fall back on, so the backup is the copy.',
   },
   {
     emoji: '🍴',
-    title: 'Forkable by design',
-    body: 'Communities can clone the codebase and run a variant shaped for their own group, on the same fabric, without asking anyone for permission.',
+    title: 'What leaves is decided on the phone',
+    body: 'A family member on Range only receives words like “below” or “in range” and never a number, because the number is removed before anything is sealed.',
   },
 ];
 
@@ -89,32 +89,32 @@ const faqs = [
   {
     question: 'What does peer-to-peer mean in practice here?',
     answer:
-      'Records move directly between the devices and systems that need them, over encrypted connections the owner has authorised, instead of being uploaded to a server that both parties read from. Nothing passes through infrastructure we control.',
+      'Records move directly between the devices that need them, over encrypted connections the owner has authorised, using iroh, an open-source peer-to-peer library. A relay helps two phones find each other when they cannot connect directly. It passes on sealed traffic and cannot read it.',
   },
   {
-    question: 'If there is no server, how does a clinic get my history?',
+    question: 'Is there a server at all?',
     answer:
-      'You open a direct connection to the clinic’s node — usually by scanning a code on arrival, or ahead of a remote consultation. Your data transfers over that connection. The clinic keeps what you shared on its own systems, as it would any record.',
+      'Yes, three small ones, and none of them can read a record. A relay helps phones connect. A mailbox holds sealed envelopes for a phone that is offline, until it collects them. And a wake-up service tells a phone that something is waiting, with a message that carries nothing: no reading, no name, not even who sent it.',
+  },
+  {
+    question: 'How will a clinic get my history?',
+    answer:
+      'With the Clinic App, which is coming soon: you scan your clinic’s QR code and choose to share. Your history travels over the encrypted connection, and the clinic keeps what you shared, sealed under its own key.',
   },
   {
     question: 'What happens if I lose my phone?',
     answer:
-      'That is what the trust network is for. You can nominate other nodes — a family member’s device, or your clinic — to hold encrypted backups, so your history survives the device. You choose who holds what, and the copies stay encrypted.',
+      'Your record is on your phone and in any encrypted backup you made. A backup opens only with your passphrase, and restoring it on a new phone brings your record back. Keep the backup somewhere safe, because there is no cloud copy to fall back on.',
   },
   {
-    question: 'How are institutional connections secured?',
+    question: 'How do I know a clinic is really my clinic?',
     answer:
-      'Each participating organisation runs its own certificate authority, issuing the identities and transport certificates for its node. Exchanges between a patient, a clinic and a laboratory are cryptographically signed and confined to those participants.',
+      'Each clinic will be listed in a signed directory with its name, registration and key, so the app can check that the clinic you pair with is the one you walked into. A person is checked differently, by a short code you read aloud to each other.',
   },
   {
     question: 'Who decides what plugins are allowed?',
     answer:
-      'No single party. Plugins are distributed over the same peer-to-peer fabric and verified by the community that uses them. A coach or a clinic can publish something narrow and useful without a store approving it first.',
-  },
-  {
-    question: 'Is the platform open?',
-    answer:
-      'The intent is that communities can inspect, fork and adapt what they depend on — that is the point of building it this way. Get in touch if you want to talk about building on it.',
+      'Plugins are planned, not built. The intent is that they travel over the same network, straight to the people who want them. Get in touch if you would like to be an early builder.',
   },
 ];
 
@@ -143,14 +143,14 @@ const structuredData = {
       <h1
         class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
-        There is no server{' '}<br class="hidden sm:block" />
-        <span class={accent}>in the middle</span>
+        No server that can{' '}<br class="hidden sm:block" />
+        <span class={accent}>read your record</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        Both cosys.work apps run on the same peer-to-peer trust network. Records move directly
-        between the devices and institutions that need them, over connections their owner granted —
-        and they move nowhere else. We could not hand over a database of patient histories if we
-        wanted to, because we do not have one.
+        Both apps run on the same peer-to-peer network. Records move directly between the devices
+        that need them, over connections their owner granted. When a device is offline, the update
+        waits in a mailbox as a sealed envelope. We could not hand over a database of patient
+        histories if we wanted to, because we do not have one.
       </p>
     </div>
   </Section>
@@ -166,6 +166,54 @@ const structuredData = {
     />
     <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {layers.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- How the network works -->
+  <Section class="!pt-0">
+    <div class="grid gap-10 md:grid-cols-2 md:items-center md:gap-16">
+      <div>
+        <SectionHeading
+          eyebrow="How the network works"
+          title="Direct when it can be,"
+          accentTitle="sealed when it can't"
+          accentClass={accent}
+          chipClass={chip}
+          align="left"
+        />
+        <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
+          <p>
+            Every phone and every clinic has its own key, made on the device. Phones talk to each
+            other directly when they can, over
+            <a
+              href="https://github.com/n0-computer/iroh"
+              class="text-primary font-medium underline-offset-2 hover:underline">iroh</a
+            >, an open-source peer-to-peer library, with a relay for when they can&rsquo;t reach each
+            other.
+          </p>
+          <p>
+            When the other phone is offline, the update waits in a mailbox. The mailbox holds only
+            sealed envelopes, and it can&rsquo;t read what&rsquo;s inside. When an alert is waiting,
+            the emergency contact&rsquo;s phone gets a wake-up signal that carries no content at all,
+            not even who sent it.
+          </p>
+          <p class="text-ink font-medium">
+            What leaves a phone is decided on the phone. A family member on <em>Range only</em>
+            receives words like &ldquo;below&rdquo; or &ldquo;in range&rdquo; and never a number,
+            because the number is removed before anything is sealed.
+          </p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          [
+            { emoji: '📱', title: 'Patient phone', body: 'Holds the record. Decides what each person sees.' },
+            { emoji: '👪', title: 'Family phones', body: 'Receive only the level the patient chose for them.' },
+            { emoji: '📮', title: 'Sealed mailbox', body: 'Keeps envelopes for an offline phone. Cannot open them.' },
+            { emoji: '🔁', title: 'Relay', body: 'Helps two phones connect. Passes on traffic it cannot read.' },
+          ].map((item) => <Card {...item} />)
+        }
+      </div>
     </div>
   </Section>
 
@@ -224,7 +272,7 @@ const structuredData = {
       accentTitle="two contradictory instincts"
       accentClass={accent}
       chipClass={chip}
-      lede="Patients want the right to erase their history. Clinical practice requires a durable record. Those pull against each other only while a single company holds one copy for everybody — so we removed that copy."
+      lede="Patients want the right to erase their history. Clinical practice requires a durable record. Those pull against each other only while a single company holds one readable copy for everybody, so we removed that copy."
     />
     <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {sovereignty.map((item) => <Card {...item} />)}
@@ -246,14 +294,14 @@ const structuredData = {
         <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
           <p>
             A person managing several overlapping conditions does not need one vendor&rsquo;s idea
-            of what matters. They need the specific modules their own health calls for — and the
+            of what matters. They need the specific modules their own health calls for, and the
             people best placed to build those are usually not us.
           </p>
           <p>
-            Dietitians can ship an on-device knowledge base so meals get scored offline against
-            their own method. A clinic can publish something for its own patients. A coach can build
-            for one sport. Distribution happens over the same peer-to-peer fabric, straight to the
-            people who asked for it.
+            Plugins are planned, not built. The idea: a dietitian ships an on-device knowledge base,
+            a clinic publishes something for its own patients, a coach builds for one sport, and
+            each travels over the same peer-to-peer network, straight to the people who asked for
+            it.
           </p>
         </div>
       </div>
@@ -299,7 +347,7 @@ const structuredData = {
   <Section>
     <CTA
       title="Build on the fabric"
-      body="If you are a developer, a clinic or a specialist who wants to publish something into this — or you simply want to argue with the architecture — we would like to hear from you."
+      body="If you are a developer, a clinic or a specialist who wants to publish something into this, or you simply want to argue with the architecture, we would like to hear from you."
       ctaLabel="Get in touch"
       email={CONTACT.email}
       secondaryLabel="About cosys.work"

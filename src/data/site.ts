@@ -9,7 +9,7 @@ export const SITE = {
   url: 'https://cosys.work',
   tagline: 'Health software that leaves your data where it belongs.',
   description:
-    'cosys.work builds offline-first, peer-to-peer health software. The Diabetes App for patients, the Clinic App for care teams, and the P2P platform that connects them — with medical records that never touch a corporate server.',
+    'cosys.work builds offline-first health software. The Diabetes App for patients, the Clinic App for care teams (coming soon), and the peer-to-peer network that connects them, with no cloud copy of anyone\'s record.',
 } as const;
 
 export const CONTACT = {
@@ -17,6 +17,12 @@ export const CONTACT = {
   productEmail: 'diabetes@cosys.work',
   clinicEmail: 'clinics@cosys.work',
   locations: 'Kathmandu · Janakpur, Nepal',
+} as const;
+
+/** Where the two sign-up forms live. Every call to action points at one of these. */
+export const FORMS = {
+  waitlist: '/contact#waitlist',
+  clinic: '/contact#clinic',
 } as const;
 
 export type Product = {
@@ -38,9 +44,9 @@ export const PRODUCTS: Product[] = [
     shortName: 'Diabetes App',
     audience: 'For people living with diabetes',
     blurb:
-      'Take-a-picture logging, a private on-device AI, and your trusted circle — all of it running on your phone, with or without a signal.',
+      'Photograph your glucometer and lab reports, follow the plan your doctor gave you, and choose who in your family sees what. It works with no signal.',
     summary:
-      'An offline-first diabetes companion. Photograph your glucometer, labs, meals and medication; the on-device AI drafts the entry and you confirm it.',
+      'An offline-first diabetes companion, free for patients. Photograph your glucometer and lab reports; the number is read on your phone and you confirm it. Also called tda by cosys.',
     emoji: '🩸',
   },
   {
@@ -49,9 +55,9 @@ export const PRODUCTS: Product[] = [
     shortName: 'Clinic App',
     audience: 'For clinicians and care teams',
     blurb:
-      'Patient history arrives structured and current before the consultation starts. Less transcription, more care.',
+      'Coming soon. A patient\'s last month on your screen before they sit down, and a plan you set that appears on their phone.',
     summary:
-      'A companion app for clinics. Patient logs sync straight to the dashboard over an encrypted local connection, so the consultation starts with the full picture.',
+      'Coming soon: a companion app for clinics. The history a patient chooses to share arrives over an encrypted connection before the consultation starts.',
     emoji: '🩺',
   },
   {
@@ -60,9 +66,9 @@ export const PRODUCTS: Product[] = [
     shortName: 'P2P Platform',
     audience: 'The fabric underneath both apps',
     blurb:
-      'A peer-to-peer trust network that moves medical records directly between the devices that need them — and nowhere else.',
+      'A peer-to-peer network that moves records directly between the devices that need them. Anything it stores on the way is sealed, and we cannot read it.',
     summary:
-      'The peer-to-peer trust network underneath cosys.work apps: device-to-device sync, verified institutional nodes, and a plugin marketplace with no central gatekeeper.',
+      'The peer-to-peer network underneath both apps: device-to-device sync over iroh, a mailbox that holds only sealed envelopes, and verified clinic nodes.',
     emoji: '🕸️',
   },
 ];

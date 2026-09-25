@@ -1,7 +1,7 @@
 ---
 import Logo from '@/components/Logo.astro';
 import ThemePicker from '@/components/ThemePicker.astro';
-import { NAV, CONTACT } from '@/data/site';
+import { NAV, FORMS } from '@/data/site';
 
 // build.format is 'file', so at build time the pathname is "/clinic-app.html"
 // and the home page is "/index.html". Normalise both to the href in NAV.
@@ -14,7 +14,7 @@ const isCurrent = (href: string) => here === href;
     class="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8"
     aria-label="Main"
   >
-    <a href="/" class="rounded-lg" aria-label="cosys.work — home">
+    <a href="/" class="rounded-lg" aria-label="cosys.work home">
       <Logo />
     </a>
 
@@ -43,10 +43,10 @@ const isCurrent = (href: string) => here === href;
     <div class="ml-auto flex items-center gap-2 lg:ml-0">
       <ThemePicker />
       <a
-        href={`mailto:${CONTACT.email}`}
+        href={FORMS.waitlist}
         class="bg-primary hover:bg-primary-pressed text-on-fill hidden rounded-lg px-4 py-2 text-sm font-semibold shadow-sm transition sm:inline-flex"
       >
-        Get in touch
+        Join the waitlist
       </a>
       <button
         type="button"

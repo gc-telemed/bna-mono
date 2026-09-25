@@ -4,7 +4,7 @@ import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
-import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+import { SITE, PRODUCTS, FORMS } from '@/data/site';
 
 const beliefs = [
   {
@@ -20,12 +20,12 @@ const beliefs = [
   {
     emoji: '🩺',
     title: 'Clinicians decide, software remembers',
-    body: 'We build record-keeping and communication. We do not calculate doses or suggest diagnoses. The moment software starts making the call, the accountability gets blurry.',
+    body: 'No dose calculations and no automated diagnosis. We build record-keeping and communication, and the clinician makes the call.',
   },
   {
     emoji: '🫱',
     title: 'The people who live with it should steer it',
-    body: 'Chronic conditions are managed by patients, daily, for decades. The product direction belongs to them, and to the clinicians treating them, rather than to a roadmap.',
+    body: 'Our diabetes trainers, one of whom lives with Type 1, shape what we build.',
   },
 ];
 
@@ -33,7 +33,7 @@ const approach = [
   {
     emoji: '🏔️',
     title: 'Start where the constraints are real',
-    body: 'We build first for places with patchy bandwidth, expensive hardware and long journeys to clinics. Software that holds up there works comfortably everywhere else — the reverse is almost never true.',
+    body: 'We build first for places with patchy bandwidth, expensive hardware and long journeys to clinics. Software that holds up there works comfortably everywhere else, and the reverse is almost never true.',
   },
   {
     emoji: '📷',
@@ -55,7 +55,7 @@ const approach = [
 
 <Base
   title="Company"
-  description={`About ${SITE.name} — why we build offline-first, peer-to-peer health software, and what we hold to.`}
+  description={`About ${SITE.name}: why we build offline-first, peer-to-peer health software, and what we hold to.`}
   path="/company"
 >
   <!-- Hero -->
@@ -77,6 +77,9 @@ const approach = [
         treat them. We started because the available tools asked for a permanent internet
         connection, a monthly fee, and an unconditional copy of the most private thing a person has.
       </p>
+      <p class="text-ink mt-5 font-medium">
+        Being built in Kathmandu and Janakpur. The patient app is free, always.
+      </p>
     </div>
   </Section>
 
@@ -84,7 +87,7 @@ const approach = [
   <Section>
     <div class="text-ink-muted mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-pretty">
       <p>
-        Diabetes care is mostly logging. Readings, meals, doses, symptoms — recorded by hand,
+        Diabetes care is mostly logging. Readings, meals, doses and symptoms, recorded by hand
         several times a day, for the rest of someone&rsquo;s life. It is tedious enough that most
         people stop, and when the logging stops the clinician loses the only honest view of what is
         actually happening between appointments.
@@ -97,13 +100,13 @@ const approach = [
       </p>
       <p class="text-ink font-medium">
         We took a different route. Use the camera people already own. Run the intelligence on the
-        phone. Move records directly between the patient and the clinician who needs them, and store
-        nothing in the middle.
+        phone. Move records directly between the patient and the people who need them, and let
+        nothing in the middle read them.
       </p>
       <p>
         That turned out to require three things rather than one: an app for the patient, an app for
-        the clinic, and a peer-to-peer network connecting them without a server. All three are what
-        we work on.
+        the clinic, and a peer-to-peer network connecting them. The patient app and the network come
+        first; the Clinic App is coming soon.
       </p>
     </div>
   </Section>
@@ -175,9 +178,9 @@ const approach = [
   <Section>
     <CTA
       title="Work with us"
-      body="Clinics willing to shape the workflow, people living with diabetes who have strong opinions, and developers who want to build on a peer-to-peer fabric — all welcome."
-      ctaLabel="Say hello"
-      email={CONTACT.email}
+      body="Clinics willing to shape the workflow, people living with diabetes who have strong opinions, and developers who want to build on a peer-to-peer network are all welcome."
+      ctaLabel="Bring your clinic"
+      href={FORMS.clinic}
       secondaryLabel="Contact details"
       secondaryHref="/contact"
     />

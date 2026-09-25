@@ -1,0 +1,121 @@
+---
+/**
+ * The two sign-up forms: a clinic asking for a walkthrough, and a patient joining the waitlist.
+ *
+ * Plain HTML handled by Netlify Forms, so the site still ships no script for them. Netlify finds
+ * a form by its `name` when it parses the built HTML, which is why each form carries a
+ * `form-name` field with the same value, and `bot-field` is the honeypot it checks.
+ *
+ * The waitlist asks only how to reach someone. Nothing clinical is collected here, and the note
+ * under it says so, because a person with diabetes will otherwise write their readings into the
+ * message box.
+ */
+interface Props {
+  kind: 'clinic' | 'waitlist';
+}
+const { kind } = Astro.props;
+
+type Field = {
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'select' | 'textarea';
+  required?: boolean;
+  optional?: boolean;
+  autocomplete?: string;
+  options?: string[];
+};
+
+const forms: Record<Props['kind'], { title: string; lede: string; submit: string; note?: string; fields: Field[] }> = {
+  clinic: {
+    title: 'Bring your clinic',
+    lede: 'Tell us about your clinic and we will arrange a walkthrough of the Clinic App as it takes shape.',
+    submit: 'Request a walkthrough',
+    fields: [
+      { name: 'name', label: 'Name', required: true, autocomplete: 'name' },
+      { name: 'clinic', label: 'Clinic name', required: true, autocomplete: 'organization' },
+      { name: 'city', label: 'City', required: true, autocomplete: 'address-level2' },
+      { name: 'contact', label: 'Phone or email', required: true, autocomplete: 'email' },
+      {
+        name: 'patients',
+        label: 'Number of patients with diabetes',
+        type: 'select',
+        required: true,
+        options: ['Fewer than 50', '50 to 200', '200 to 500', 'More than 500', 'Not sure'],
+      },
+      { name: 'message', label: 'Message', type: 'textarea', optional: true },
+    ],
+  },
+  waitlist: {
+    title: 'Join the patient waitlist',
+    lede: 'We will let you know when The Diabetes App is ready for you. It is free for patients, always.',
+    submit: 'Join the waitlist',
+    note: "We only ask how to reach you. Please don't include health details here.",
+    fields: [
+      { name: 'name', label: 'Name', required: true, autocomplete: 'name' },
+      { name: 'city', label: 'City', required: true, autocomplete: 'address-level2' },
+      { name: 'contact', label: 'Phone or email', required: true, autocomplete: 'email' },
+      { name: 'clinic', label: 'Your clinic', optional: true, autocomplete: 'organization' },
+    ],
+  },
+};
+
+const form = forms[kind];
+const input =
+  'border-line-strong bg-surface text-ink focus:border-primary mt-1.5 block w-full rounded-lg border px-3.5 py-2.5 text-sm outline-none';
+---
+
+<form
+  id={kind}
+  name={kind}
+  method="POST"
+  action={`/thanks-${kind}`}
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  class="border-line bg-surface scroll-mt-24 rounded-2xl border p-7"
+>
+  <input type="hidden" name="form-name" value={kind} />
+  <p class="hidden">
+    <label>Leave this empty: <input name="bot-field" /></label>
+  </p>
+
+  <h2 class="text-ink text-xl font-bold">{form.title}</h2>
+  <p class="text-ink-muted mt-2 text-sm leading-relaxed">{form.lede}</p>
+
+  <div class="mt-6 grid gap-4">
+    {
+      form.fields.map((field) => (
+        <label class="text-ink block text-sm font-medium">
+          {field.label}
+          {field.optional && <span class="text-ink-muted font-normal"> (optional)</span>}
+          {field.type === 'select' ? (
+            <select name={field.name} required={field.required} class={input}>
+              <option value="">Choose one</option>
+              {field.options?.map((option) => (
+                <option>{option}</option>
+              ))}
+            </select>
+          ) : field.type === 'textarea' ? (
+            <textarea name={field.name} rows="4" class={input} />
+          ) : (
+            <input
+              name={field.name}
+              type="text"
+              required={field.required}
+              autocomplete={field.autocomplete}
+              class={input}
+            />
+          )}
+        </label>
+      ))
+    }
+  </div>
+
+  {form.note && <p class="text-ink-muted mt-4 text-sm">{form.note}</p>}
+
+  <button
+    type="submit"
+    class="bg-primary hover:bg-primary-pressed text-on-fill mt-6 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+  >
+    {form.submit}
+  </button>
+</form>
