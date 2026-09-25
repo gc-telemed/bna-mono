@@ -20,7 +20,7 @@ Three flagship products are presented here:
 ## The app preview
 
 `/diabetes-app` embeds a working replica of the diabetes app's interface — `AppPreview.astro`
-plus `src/scripts/app-preview.ts`. Nine screens, the app's own icons and four of its feed
+plus `src/scripts/app-preview.ts`. Ten screens, the app's own icons and four of its feed
 illustrations redrawn as inline SVG, its type scale at the line height each script needs, its
 English and Nepali strings, and the fifty-three values its lab reader pulls from one
 de-identified eleven-page report (`src/data/app-preview-rows.ts` — invented patient, real

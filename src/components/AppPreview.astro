@@ -25,6 +25,7 @@ import '@fontsource/mukta/devanagari-700.css';
 const screens: { id: string; label: string }[] = [
   { id: 'home', label: 'Home' },
   { id: 'record', label: 'Logs' },
+  { id: 'review', label: 'Review' },
   { id: 'capture', label: 'Add' },
   { id: 'lab', label: 'Lab report' },
   { id: 'assistant', label: 'Assistant' },
@@ -77,7 +78,7 @@ const control =
 
     <p class="text-ink-muted mt-4 text-sm leading-relaxed">
       A preview, not the app: nothing here saves, and no value shown belongs to a patient. The lab
-      rows come from a de-identified report kept in the project’s test set — invented patient, real
+      rows come from a de-identified report kept in the project’s test set: an invented patient, a real
       laboratory layout, and the app’s own reading of it.
     </p>
   </div>
@@ -97,8 +98,14 @@ const control =
   }
 
   .tapp-phone {
-    /* The four clinical tokens the site does not otherwise carry. */
+    /*
+      The clinical tokens the site does not otherwise carry: the chart's target band and
+      grid, the time-in-target bar's gap (the filled half is the primary, as in the app),
+      and the illustration trio, whose ink is also the chart's point colour.
+    */
     --band: #e7efe0;
+    --grid: #ebe5dc;
+    --gap: #e7dfd4;
     --ill-ink: #2a2320;
     --ill-fill: #eadfd0;
     --ill-accent: #e8a33d;
@@ -118,12 +125,16 @@ const control =
 
   :root[data-theme='slate'] .tapp-phone {
     --band: #1e3a2c;
+    --grid: #273449;
+    --gap: #334155;
     --ill-ink: #f1f5f9;
     --ill-fill: #273449;
     --ill-accent: #e8b451;
   }
   :root[data-theme='trueBlack'] .tapp-phone {
     --band: #0c2a1c;
+    --grid: #171717;
+    --gap: #2e2e2e;
     --ill-ink: #ffffff;
     --ill-fill: #1f1f1f;
     --ill-accent: #fcd34d;
@@ -169,10 +180,14 @@ const control =
     font-size: 13px;
     color: var(--p-text-muted);
   }
+  /* The app's `Disclaimer compact`: body text on a quiet tinted box, never a warning. */
   .tapp-phone .disclaimer {
     font-size: 14px;
     color: var(--p-text-muted);
-    margin: 6px 2px 0;
+    background: var(--p-primary-tint);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0;
   }
   .tapp-phone .muted {
     color: var(--p-text-muted);
@@ -270,6 +285,51 @@ const control =
   .tapp-phone .card.list > .label {
     padding: 12px 0 4px;
   }
+  /* A row standing on its own in a scroll, as Logs' door to Review does. */
+  .tapp-phone .scroll > .listrow {
+    border-top: 0;
+  }
+  .tapp-phone .caption.padded {
+    padding: 4px 0 12px;
+  }
+
+  /* Review: the chart, its legend, and the time-in-target bar. */
+  .tapp-phone .chart {
+    display: block;
+    font-size: 11px;
+    fill: var(--p-text-muted);
+  }
+  .tapp-phone .legend {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .tapp-phone .legendrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tapp-phone .swatch {
+    width: 12px;
+    height: 12px;
+    flex: none;
+    border-radius: 2px;
+    background: var(--band);
+  }
+  .tapp-phone .tit-bar {
+    display: flex;
+    height: 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--gap);
+  }
+  .tapp-phone .tit-bar .fill {
+    background: var(--p-primary);
+  }
+  .tapp-phone .tit-bar .gap {
+    background: var(--gap);
+  }
+
   .tapp-phone .examples {
     display: flex;
     flex-direction: column;

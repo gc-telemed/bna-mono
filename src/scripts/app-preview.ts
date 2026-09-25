@@ -146,6 +146,18 @@ const S: Record<string, Record<Lang, string>> = {
     en: 'Looks things up in what you wrote down. It gives no medical advice.',
     ne: 'तपाईंले लेखेका कुरामा खोज्छ। यसले चिकित्सकीय सल्लाह दिँदैन।',
   },
+  // Since 2026-09-25 (M11 D8): the pilot report is gone, and the two screens that sat behind
+  // it get ordinary rows. AI features beside the assistant, diagnostics under About.
+  'flags.title': { en: 'AI features', ne: 'AI सुविधाहरू' },
+  'settings.flagsBody': {
+    en: 'What reads your photos and reports, and switches for each',
+    ne: 'तपाईंका फोटो र रिपोर्ट के ले पढ्छ, र प्रत्येकको स्विच',
+  },
+  'settings.diagnostics': { en: 'Diagnostics', ne: 'डायग्नोस्टिक' },
+  'settings.diagnosticsBody': {
+    en: 'A log of what the app did, for whoever is helping you. It holds no readings.',
+    ne: 'एपले गरेका कामको लग, तपाईंलाई सहयोग गर्नेका लागि। यसमा कुनै रिडिङ हुँदैन।',
+  },
   'settings.lists': { en: 'My medicine names', ne: 'मेरा औषधिका नाम' },
   'settings.storage': { en: 'Photos and voice notes', ne: 'तस्बिर र आवाज नोट' },
   'settings.storageBody': {
@@ -162,7 +174,13 @@ const S: Record<string, Record<Lang, string>> = {
     ne: 'तपाईंको पूरै रेकर्ड यो फोनबाट हटाउँछ। पहिले पठाइसकेका ब्याकअपमा केही हुँदैन।',
   },
   'settings.about': { en: 'About', ne: 'बारेमा' },
-  'scope.rowTitle': { en: 'What TApp does not do', ne: 'TApp ले के गर्दैन' },
+  // The app's own strings say "TApp" here and in `disclaimer.line`. On cosys.work the product
+  // is "The Diabetes App" (founder, 2026-09-25), so these two are the only strings in the
+  // table that are not the app's verbatim. There is no Nepali rendering of the name.
+  'scope.rowTitle': {
+    en: 'What The Diabetes App does not do',
+    ne: 'The Diabetes App ले के गर्दैन',
+  },
   'scope.rowBody': {
     en: 'Where the app stands on sensors, carbohydrate counts, doses and sharing, and why.',
     ne: 'सेन्सर, कार्बोहाइड्रेट, मात्रा र आदानप्रदानमा एप कहाँ उभिन्छ, र किन।',
@@ -186,9 +204,14 @@ const S: Record<string, Record<Lang, string>> = {
     en: 'Times to check, and medicines to take.',
     ne: 'जाँच्ने समय, र खाने औषधि।',
   },
+  // The founder's plan-screen sentence (2026-09-25), shown word for word under the plan.
+  'disclaimer.dosing': {
+    en: 'This app does not calculate or recommend insulin doses. All dosing decisions are made exclusively by your licensed physician. The app is a record-keeping and communication tool only.',
+    ne: 'यो एपले इन्सुलिनको डोज गणना गर्दैन र सिफारिस पनि गर्दैन। डोजसम्बन्धी सबै निर्णय तपाईंको इजाजतप्राप्त चिकित्सकले मात्र गर्नुहुन्छ। यो एप रेकर्ड राख्ने र सञ्चार गर्ने साधन मात्र हो।',
+  },
   'disclaimer.line': {
-    en: 'TApp keeps the record you write down. It does not give medical advice, and it does not replace your doctor or your clinic.',
-    ne: 'TApp ले तपाईंले लेखेको रेकर्ड राख्छ। यसले चिकित्सकीय सल्लाह दिँदैन, र तपाईंको डाक्टर वा क्लिनिकको ठाउँ लिँदैन।',
+    en: 'The Diabetes App keeps the record you write down. It does not give medical advice, and it does not replace your doctor or your clinic.',
+    ne: 'The Diabetes App ले तपाईंले लेखेको रेकर्ड राख्छ। यसले चिकित्सकीय सल्लाह दिँदैन, र तपाईंको डाक्टर वा क्लिनिकको ठाउँ लिँदैन।',
   },
 
   'assistant.title': { en: 'Ask about your logs', ne: 'आफ्नो लगबारे सोध्नुहोस्' },
@@ -279,6 +302,7 @@ const S: Record<string, Record<Lang, string>> = {
   // rows use their own keys, which the Nepali words differently.
   'context.fasting': { en: 'Fasting', ne: 'फास्टिङ' },
   'context.afterMeal': { en: 'After a meal', ne: 'खानापछि' },
+  'context.bedtime': { en: 'Bedtime', ne: 'बेडटाइम' },
 
   'plan.title': { en: "Doctor's plan", ne: 'डाक्टरको योजना' },
   'plan.effectiveFrom': { en: 'From 12 Aug 2026', ne: '१२ अगस्ट २०२६ देखि' },
@@ -294,15 +318,105 @@ const S: Record<string, Record<Lang, string>> = {
   'plan.nextLabs': { en: 'Next lab tests', ne: 'अर्को ल्याब परीक्षण' },
   'plan.history': { en: 'Earlier versions · 2 versions', ne: 'अघिल्ला संस्करण · २ संस्करण' },
   'plan.update': { en: 'Update from a prescription', ne: 'प्रेस्क्रिप्सनबाट अद्यावधिक' },
+
+  // Where a band came from (M11 F02). The patient's own, or a published default, named.
+  'defaults.origin.plan': { en: 'Your own range', ne: 'तपाईंको आफ्नै दायरा' },
+  'defaults.origin.who_pen': { en: 'Default (WHO)', ne: 'पूर्वनिर्धारित (WHO)' },
+  'defaults.origin.ada_2026': { en: 'Default (ADA)', ne: 'पूर्वनिर्धारित (ADA)' },
+
+  // The review screen (M11 F01), reached from the top of Logs. Templates are the app's own,
+  // placeholders included, and filled by `tf`.
+  'review.open': { en: 'Figures from your readings', ne: 'तपाईंका रिडिङबाट निकालिएका सङ्ख्या' },
+  'review.openBody': {
+    en: 'Time in range, averages and {{hba1c}}',
+    ne: 'दायराभित्रको समय, औसत र {{hba1c}}',
+  },
+  'analyte.hba1c': { en: 'HbA1c', ne: 'HbA1c' },
+  'review.title': { en: 'Review', ne: 'समीक्षा' },
+  'review.rangeLabel': { en: 'Period', ne: 'अवधि' },
+  'review.range.d7': { en: '7 days', ne: '७ दिन' },
+  'review.range.d14': { en: '14 days', ne: '१४ दिन' },
+  'review.range.d30': { en: '30 days', ne: '३० दिन' },
+  'review.chart.title': { en: 'Glucose', ne: 'ग्लुकोज' },
+  'review.chart.band.fasting': { en: 'Fasting range', ne: 'खाली पेटको दायरा' },
+  'review.chart.band.postMeal': { en: 'After-meal range', ne: 'खानापछिको दायरा' },
+  'review.chart.bandLabel': {
+    en: '{{band}}: {{min}}–{{max}} {{unit}}',
+    ne: '{{band}}: {{min}}–{{max}} {{unit}}',
+  },
+  'review.chart.bandWithOrigin': { en: '{{label}} · {{origin}}', ne: '{{label}} · {{origin}}' },
+  'review.chart.readings_one': {
+    en: '{{count}} reading in this period',
+    ne: 'यो अवधिमा {{count}} रिडिङ',
+  },
+  'review.chart.readings_other': {
+    en: '{{count}} readings in this period',
+    ne: 'यो अवधिमा {{count}} रिडिङ',
+  },
+  'review.timeInTarget.title': { en: "In your doctor's range", ne: 'डाक्टरले दिएको दायराभित्र' },
+  'review.timeInTarget.titleMixed': { en: 'In the target range', ne: 'लक्षित दायराभित्र' },
+  'review.timeInTarget.value': { en: '{{percent}}%', ne: '{{percent}}%' },
+  'review.timeInTarget.basis': {
+    en: 'Counted from {{measured}} of {{total}} readings',
+    ne: '{{total}} रिडिङमध्ये {{measured}} बाट गणना गरिएको',
+  },
+  'review.timeInTarget.unbanded_one': {
+    en: '{{count}} reading was taken at a time no range covers.',
+    ne: '{{count}} रिडिङ कुनै दायराले नसमेट्ने समयमा लिइएको हो।',
+  },
+  'review.timeInTarget.unbanded_other': {
+    en: '{{count}} readings were taken at times no range covers.',
+    ne: '{{count}} रिडिङ कुनै दायराले नसमेट्ने समयमा लिइएका हुन्।',
+  },
+  'review.timeInTarget.band': {
+    en: '{{band}}: {{min}}–{{max}} {{unit}} · {{origin}}',
+    ne: '{{band}}: {{min}}–{{max}} {{unit}} · {{origin}}',
+  },
+  'review.under.heading': {
+    en: 'Readings under the default lines',
+    ne: 'पूर्वनिर्धारित रेखाभन्दा तलका रिडिङ',
+  },
+  'review.under.title': { en: 'Readings under {{value}}', ne: '{{value}} भन्दा तलका रिडिङ' },
+  'review.averages.title': { en: 'Average by time of day', ne: 'समयअनुसार औसत' },
+  'review.averages.spread_one': {
+    en: '{{min}} to {{max}} · {{count}} reading',
+    ne: '{{min}} देखि {{max}} · {{count}} रिडिङ',
+  },
+  'review.averages.spread_other': {
+    en: '{{min}} to {{max}} · {{count}} readings',
+    ne: '{{min}} देखि {{max}} · {{count}} रिडिङ',
+  },
+  'review.hba1c.value': { en: '{{value}} {{unit}}', ne: '{{value}} {{unit}}' },
+  'review.hba1c.basis': {
+    en: 'As printed on your lab reports.',
+    ne: 'तपाईंका ल्याब रिपोर्टमा छापिएजस्तै।',
+  },
 };
 
 const t = (key: string): string => S[key]?.[state.lang] ?? key;
 
 /**
+ * A template with its placeholders filled, as i18next fills them in the app. A number is
+ * written in the reading language's numerals (the app's `numeralFormatter`); a string goes
+ * in as it is, because whoever formatted it already knew what it was. `count` picks the
+ * `_one` or `_other` form.
+ */
+function tf(key: string, vars: Record<string, string | number>): string {
+  const count = vars.count;
+  const plural = typeof count === 'number' ? `${key}_${count === 1 ? 'one' : 'other'}` : key;
+  const template = S[plural] ? t(plural) : t(key);
+  return template.replace(/\{\{(\w+)\}\}/g, (_, name: string) => {
+    const value = vars[name];
+    return typeof value === 'number' ? n(String(value)) : (value ?? '');
+  });
+}
+
+/**
  * Nepali prints every number the app formats in Devanagari: glucose, times, dates and
  * counts (ADR-09 §B.11, F52). What the patient typed stays as typed, and so does what the
- * app passes through raw: a plan's target range, its medicine times and its next-visit date,
- * a lab value on the review screen. The replica follows the app on both sides of that line,
+ * app passes through raw: a plan's medicine times and its next-visit date, a lab value on the
+ * lab review screen. A plan's target range is no longer on that list: since M11 F02 the
+ * targets card formats it in the patient's unit, and so in the reading language's digits. The replica follows the app on both sides of that line,
  * which is why this is applied per value rather than to the whole screen.
  */
 const DEVANAGARI = '०१२३४५६७८९';
@@ -416,7 +530,16 @@ const ILLUSTRATIONS = {
 
 // ── state ─────────────────────────────────────────────────────────────────────
 type ScreenId =
-  'home' | 'record' | 'capture' | 'chooser' | 'lab' | 'assistant' | 'plan' | 'more' | 'settings';
+  | 'home'
+  | 'record'
+  | 'review'
+  | 'capture'
+  | 'chooser'
+  | 'lab'
+  | 'assistant'
+  | 'plan'
+  | 'more'
+  | 'settings';
 
 const TAB_ROOTS: ScreenId[] = ['home', 'record', 'plan', 'more'];
 
@@ -592,8 +715,15 @@ function record(): string {
   const dayCount = (count: number) =>
     state.lang === 'ne' ? `${n(String(count))} प्रविष्टि` : `${count} ${count === 1 ? 'entry' : 'entries'}`;
 
+  // M11 F01: the figures behind the list, one tap away, above the filters.
   return `${header(t('timeline.title'))}
   <div class="scroll">
+    ${listRow(
+      t('review.open'),
+      tf('review.openBody', { hba1c: t('analyte.hba1c') }),
+      '',
+      'data-act="go" data-to="review"',
+    )}
     <div class="card">
       <span class="label">${esc(t('timeline.filterLabel'))}</span>
       <div class="chips">
@@ -777,6 +907,261 @@ function labRow(row: LabRow, index: number): string {
   </div>`;
 }
 
+// ── the review screen ─────────────────────────────────────────────────────────
+/** A band in force and where it came from (the app's `bandsInForce`). */
+type Band = { min: number; max: number; origin: 'plan' | 'who_pen' | 'ada_2026' };
+const BANDS: Record<'fasting' | 'postMeal', Band> = {
+  fasting: { min: 80, max: 130, origin: 'plan' },
+  // The default target: the WHO PEN low line (70) to one under ADA's post-meal line (180).
+  postMeal: { min: 70, max: 179, origin: 'ada_2026' },
+};
+
+/**
+ * Seven days of readings, the same ones Home and Logs show where they overlap: written on 5
+ * of the 7 days, yesterday's 122 and 186, today's 140. Every figure on the review screen is
+ * computed from this list at render time rather than typed in, so the screen cannot disagree
+ * with itself.
+ */
+type Context = 'fasting' | 'afterMeal' | 'bedtime';
+const READINGS: { day: number; at: string; mgdl: number; context: Context }[] = [
+  { day: 10, at: '06:50', mgdl: 118, context: 'fasting' },
+  { day: 10, at: '21:00', mgdl: 168, context: 'afterMeal' },
+  { day: 12, at: '06:40', mgdl: 124, context: 'fasting' },
+  { day: 12, at: '20:30', mgdl: 142, context: 'afterMeal' },
+  { day: 12, at: '22:10', mgdl: 138, context: 'bedtime' },
+  { day: 14, at: '06:55', mgdl: 138, context: 'fasting' },
+  { day: 14, at: '21:15', mgdl: 204, context: 'afterMeal' },
+  { day: 14, at: '22:20', mgdl: 150, context: 'bedtime' },
+  { day: 15, at: '06:58', mgdl: 122, context: 'fasting' },
+  { day: 15, at: '21:05', mgdl: 186, context: 'afterMeal' },
+  { day: 16, at: '07:12', mgdl: 140, context: 'fasting' },
+];
+/** HbA1c as the labs printed it: today's report (the one on the lab screen) and August's. */
+const HBA1C = [
+  { date: { en: '12 Aug 2026', ne: '१२ अगस्ट २०२६' }, value: '7.6', unit: '%' },
+  { date: { en: '16 Sep 2026', ne: '१६ सेप्टेम्बर २०२६' }, value: '7.2', unit: '%' },
+];
+/** The lines no plan overrides (`glucose-defaults.ts`): under 70 is WHO PEN, under 54 ADA. */
+const LOW_LINES = [
+  { below: 70, origin: 'who_pen' },
+  { below: 54, origin: 'ada_2026' },
+] as const;
+
+const hoursOf = (r: { day: number; at: string }): number => {
+  const [h, m] = r.at.split(':').map(Number) as [number, number];
+  return r.day * 24 + h + m / 60;
+};
+const glucose = (mgdl: number): string => `${n(String(mgdl))} mg/dL`;
+
+/**
+ * The chart as `layoutGlucoseChart` draws it: the bands shaded across the plot, every reading
+ * the same dot in the same ink whatever its value, readings more than a day apart left
+ * unjoined, and the value axis padded 10 mg/dL beyond the lowest and highest of the readings
+ * and bands. Nothing changes colour at any value.
+ */
+function reviewChart(): string {
+  const W = 304;
+  const H = 180;
+  const pad = { top: 8, right: 8, bottom: 24, left: 40 };
+  const plot = { x: pad.left, y: pad.top, w: W - pad.left - pad.right, h: H - pad.top - pad.bottom };
+  const values = [...READINGS.map((r) => r.mgdl), ...Object.values(BANDS).flatMap((b) => [b.min, b.max])];
+  const lo = Math.min(...values) - 10;
+  const hi = Math.max(...values) + 10;
+  const from = 9 * 24 + 14; // a week back from now
+  const to = 16 * 24 + 14; // 16 Sep, 2 pm
+  const x = (hours: number) => plot.x + ((hours - from) / (to - from)) * plot.w;
+  const y = (mgdl: number) => plot.y + plot.h - ((mgdl - lo) / (hi - lo)) * plot.h;
+
+  const bands = Object.values(BANDS)
+    .map(
+      (b) =>
+        `<rect x="${plot.x}" y="${y(b.max)}" width="${plot.w}" height="${y(b.min) - y(b.max)}" fill="var(--band)"/>`,
+    )
+    .join('');
+  const ticks = [100, 150, 200]
+    .map(
+      (v) => `<line x1="${plot.x}" x2="${plot.x + plot.w}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/>
+        <text x="${plot.x - 6}" y="${y(v) + 4}" text-anchor="end">${n(String(v))}</text>`,
+    )
+    .join('');
+  // Nepali month names are twice the width, so the axis drops to the two ends there, as the
+  // app does when its day labels would collide.
+  const days =
+    state.lang === 'ne'
+      ? [
+          { at: from, label: '९ सेप्टेम्बर २०२६', anchor: 'start' },
+          { at: to, label: '१६ सेप्टेम्बर २०२६', anchor: 'end' },
+        ]
+      : [
+          { at: from, label: '9 Sep 2026', anchor: 'start' },
+          { at: (from + to) / 2, label: '13 Sep 2026', anchor: 'middle' },
+          { at: to, label: '16 Sep 2026', anchor: 'end' },
+        ];
+  const dayText = days
+    .map((d) => `<text x="${x(d.at)}" y="${plot.y + plot.h + 16}" text-anchor="${d.anchor}">${d.label}</text>`)
+    .join('');
+
+  const runs: string[][] = [];
+  READINGS.forEach((r, i) => {
+    const previous = READINGS[i - 1];
+    if (!previous || hoursOf(r) - hoursOf(previous) > 24) runs.push([]);
+    runs[runs.length - 1]!.push(`${runs[runs.length - 1]!.length === 0 ? 'M' : 'L'}${x(hoursOf(r))} ${y(r.mgdl)}`);
+  });
+  const lines = runs
+    .filter((run) => run.length > 1)
+    .map((run) => `<path d="${run.join(' ')}" fill="none" stroke="var(--p-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`)
+    .join('');
+  const points = READINGS.map(
+    (r) => `<circle cx="${x(hoursOf(r))}" cy="${y(r.mgdl)}" r="3.5" fill="var(--ill-ink)"/>`,
+  ).join('');
+
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" aria-hidden="true">
+    ${bands}${ticks}
+    <line x1="${plot.x}" x2="${plot.x + plot.w}" y1="${plot.y + plot.h}" y2="${plot.y + plot.h}" stroke="var(--p-border-strong)" stroke-width="1"/>
+    ${dayText}${lines}${points}</svg>`;
+}
+
+/**
+ * The HbA1c card's drawing: the results joined, 96 high, with a base line and nothing else.
+ * No target line, no band and no colour of its own; every value it joins is a row below.
+ */
+function hba1cLine(): string {
+  const W = 304;
+  const H = 96;
+  const inset = 12;
+  const values = HBA1C.map((p) => Number(p.value));
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  const pad = Math.max((hi - lo) * 0.2, 0.5);
+  const y = (v: number) => H - inset - ((v - (lo - pad)) / (hi + pad - (lo - pad))) * (H - 2 * inset);
+  const x = (i: number) => inset + (i / (HBA1C.length - 1)) * (W - 2 * inset);
+  const d = values.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i)},${y(v)}`).join(' ');
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" aria-hidden="true">
+    <line x1="${inset}" x2="${W - inset}" y1="${H - inset}" y2="${H - inset}" stroke="var(--p-border-strong)" stroke-width="1"/>
+    <path d="${d}" fill="none" stroke="var(--p-primary)" stroke-width="1.5"/>
+    ${values.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="3.5" fill="var(--ill-ink)"/>`).join('')}</svg>`;
+}
+
+/**
+ * Review (M11 F01): the period, the chart, time in target, the counts under the two low
+ * lines, averages by time of day, and HbA1c as printed. Values only; no sentence says what a
+ * number means, and no reading or row is drawn differently from another. Every figure a
+ * default drives names the body that published it.
+ */
+function review(): string {
+  const bandKey = (c: Context): 'fasting' | 'postMeal' | null =>
+    c === 'fasting' ? 'fasting' : c === 'afterMeal' ? 'postMeal' : null;
+  let inBand = 0;
+  let measured = 0;
+  for (const r of READINGS) {
+    const key = bandKey(r.context);
+    if (!key) continue;
+    measured += 1;
+    if (r.mgdl >= BANDS[key].min && r.mgdl <= BANDS[key].max) inBand += 1;
+  }
+  const unbanded = READINGS.length - measured;
+  const allOwn = BANDS.fasting.origin === 'plan' && BANDS.postMeal.origin === 'plan';
+  const bandLine = (key: 'fasting' | 'postMeal') =>
+    tf('review.timeInTarget.band', {
+      band: t(`review.chart.band.${key}`),
+      min: n(String(BANDS[key].min)),
+      max: n(String(BANDS[key].max)),
+      unit: 'mg/dL',
+      origin: t(`defaults.origin.${BANDS[key].origin}`),
+    });
+  const legend = (key: 'fasting' | 'postMeal') =>
+    `<span class="legendrow"><span class="swatch"></span><span class="caption">${esc(
+      tf('review.chart.bandWithOrigin', {
+        label: tf('review.chart.bandLabel', {
+          band: t(`review.chart.band.${key}`),
+          min: n(String(BANDS[key].min)),
+          max: n(String(BANDS[key].max)),
+          unit: 'mg/dL',
+        }),
+        origin: t(`defaults.origin.${BANDS[key].origin}`),
+      }),
+    )}</span></span>`;
+
+  const averages = (['fasting', 'afterMeal', 'bedtime'] as const)
+    .map((context) => {
+      const values = READINGS.filter((r) => r.context === context).map((r) => r.mgdl);
+      if (values.length === 0) return '';
+      const mean = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+      return listRow(
+        t(`context.${context}`),
+        tf('review.averages.spread', {
+          min: glucose(Math.min(...values)),
+          max: glucose(Math.max(...values)),
+          count: values.length,
+        }),
+        glucose(mean),
+      );
+    })
+    .join('');
+
+  return `${header(t('review.title'), true)}
+  <div class="scroll">
+    <div class="card">
+      <span class="label">${esc(t('review.rangeLabel'))}</span>
+      <div class="chips">
+        <button class="chip on">${esc(t('review.range.d7'))}</button>
+        <button class="chip">${esc(t('review.range.d14'))}</button>
+        <button class="chip">${esc(t('review.range.d30'))}</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="label">${esc(t('review.chart.title'))}</span>
+      ${reviewChart()}
+      <div class="legend">
+        ${legend('fasting')}
+        ${legend('postMeal')}
+        <span class="caption">${esc(tf('review.chart.readings', { count: READINGS.length }))}</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="label">${esc(t(allOwn ? 'review.timeInTarget.title' : 'review.timeInTarget.titleMixed'))}</span>
+      <span class="metric">${esc(tf('review.timeInTarget.value', { percent: Math.round((inBand / measured) * 100) }))}</span>
+      <div class="tit-bar" aria-hidden="true">
+        <span class="fill" style="flex-grow:${inBand}"></span><span class="gap" style="flex-grow:${measured - inBand}"></span>
+      </div>
+      <span class="caption">${esc(tf('review.timeInTarget.basis', { measured, total: READINGS.length }))}</span>
+      ${unbanded > 0 ? `<span class="caption">${esc(tf('review.timeInTarget.unbanded', { count: unbanded }))}</span>` : ''}
+      <span class="caption">${esc(bandLine('fasting'))}</span>
+      <span class="caption">${esc(bandLine('postMeal'))}</span>
+    </div>
+
+    <div class="card list">
+      <span class="label">${esc(t('review.under.heading'))}</span>
+      ${LOW_LINES.map((line) =>
+        listRow(
+          tf('review.under.title', { value: glucose(line.below) }),
+          t(`defaults.origin.${line.origin}`),
+          n(String(READINGS.filter((r) => r.mgdl < line.below).length)),
+        ),
+      ).join('')}
+    </div>
+
+    <div class="card list">
+      <span class="label">${esc(t('review.averages.title'))}</span>
+      ${averages}
+    </div>
+
+    <div class="card list">
+      <span class="label">${esc(t('analyte.hba1c'))}</span>
+      ${hba1cLine()}
+      ${[...HBA1C]
+        .reverse()
+        .map((point) =>
+          listRow(point.date[state.lang], '', tf('review.hba1c.value', { value: n(point.value), unit: point.unit })),
+        )
+        .join('')}
+      <span class="caption padded">${esc(t('review.hba1c.basis'))}</span>
+    </div>
+  </div>`;
+}
+
 function assistant(): string {
   const examples = ['question', 'action', 'plan', 'reminder', 'help']
     .map((key) => `<span class="caption">${esc(t(`assistant.example.${key}`))}</span>`)
@@ -812,10 +1197,22 @@ function assistant(): string {
 /**
  * The plan as the app lays it out since F52 and the prescription import: the date it took
  * effect first, then who wrote it, the targets, the medicines, what to do if low, whom to
- * call, and what is next. Every value is shown as the patient typed it; the app passes the
- * target range, the medicine times and the next dates through unformatted, so they stay in
- * the digits they were typed in, in either language.
+ * call, and what is next. The medicine times and the next dates are passed through as typed,
+ * so they stay in the digits they were typed in, in either language.
+ *
+ * **The targets card always shows both bands, each with where it came from** (M11 F02). This
+ * patient wrote down a fasting range and no after-meal one, so the fasting row is their own
+ * and the after-meal row is the published default: ADA's line of 180, as an inclusive range
+ * from the WHO PEN low line of 70. Both are printed in the patient's unit, so in Nepali the
+ * digits are Devanagari. The founder's dosing sentence closes the screen.
  */
+const targetRow = (title: string, band: Band): string =>
+  listRow(
+    title,
+    t(`defaults.origin.${band.origin}`),
+    `${n(String(band.min))}–${n(String(band.max))} mg/dL`,
+  );
+
 const plan = (): string => `${header(t('plan.title'))}
   <div class="scroll">
     <span class="caption">${esc(t('plan.effectiveFrom'))}</span>
@@ -825,8 +1222,8 @@ const plan = (): string => `${header(t('plan.title'))}
     </div>
     <div class="card list">
       <span class="subheading">${esc(t('plan.targets'))}</span>
-      ${listRow(t('plan.targetsFasting'), '', '80–130 mg/dL')}
-      ${listRow(t('plan.targetsPostMeal'), '', '140–180 mg/dL')}
+      ${targetRow(t('plan.targetsFasting'), BANDS.fasting)}
+      ${targetRow(t('plan.targetsPostMeal'), BANDS.postMeal)}
     </div>
     <div class="card list">
       <span class="subheading">${esc(t('plan.medications'))}</span>
@@ -847,6 +1244,7 @@ const plan = (): string => `${header(t('plan.title'))}
     </div>
     <span class="caption">${esc(t('plan.transcribedNote'))}</span>
     <button class="link">${esc(t('plan.history'))}</button>
+    <p class="disclaimer">${esc(t('disclaimer.dosing'))}</p>
   </div>
   <div class="footerbar">
     <button class="primary">${esc(t('plan.update'))}</button>
@@ -878,6 +1276,12 @@ const more = (): string => `${header(t('more.title'))}
     <p class="disclaimer">${esc(t('disclaimer.line'))}</p>
   </div>`;
 
+/**
+ * Settings. Since M11 the medicine-name count is in the reading language's digits, and the
+ * storage size always was (`formatBytes`, which keeps one decimal only under 10, so 12 MB).
+ * The entry and file counts are still printed with `String()`, so they stay ASCII in Nepali,
+ * as they do in the app.
+ */
 const settings = (): string => `${header(t('settings.title'), true)}
   <div class="scroll">
     <div class="card">
@@ -901,12 +1305,13 @@ const settings = (): string => `${header(t('settings.title'), true)}
       ${listRow(t('relationships.title'), t('relationships.rowBody'))}
       ${listRow(t('settings.lock'), t('settings.lockDevice'))}
       ${listRow(t('assistant.title'), t('settings.assistantBody'), 'On')}
+      ${listRow(t('flags.title'), t('settings.flagsBody'))}
     </div>
 
     <span class="grouplabel">${esc(t('settings.groupData'))}</span>
     <div class="card list">
-      ${listRow(t('settings.lists'), '6')}
-      ${listRow(t('settings.storage'), t('settings.storageBody'), '12.4 MB')}
+      ${listRow(t('settings.lists'), n('6'))}
+      ${listRow(t('settings.storage'), t('settings.storageBody'), n('12 MB'))}
       ${listRow(t('settings.storageEntries'), '', '168')}
       ${listRow(t('settings.storageFiles'), '', '23')}
       ${listRow(t('telemetry.rowTitle'), t('telemetry.rowOff'))}
@@ -917,6 +1322,7 @@ const settings = (): string => `${header(t('settings.title'), true)}
       <span class="subheading">${esc(t('settings.about'))}</span>
       <p class="disclaimer">${esc(t('disclaimer.line'))}</p>
       ${listRow(t('scope.rowTitle'), t('scope.rowBody'))}
+      ${listRow(t('settings.diagnostics'), t('settings.diagnosticsBody'))}
       <span class="caption">${esc(t('settings.version'))}</span>
     </div>
   </div>`;
@@ -924,6 +1330,7 @@ const settings = (): string => `${header(t('settings.title'), true)}
 const SCREENS: Record<ScreenId, () => string> = {
   home,
   record,
+  review,
   capture,
   chooser,
   lab,
@@ -938,25 +1345,37 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
   home: {
     title: 'Home is a feed, not a hub',
     points: [
-      'Your last reading is stated, never judged — no colour, no arrow, no comparison drawn for you.',
-      'Progress is a rolling window: seven bars, three of them quiet. A day you missed is drawn in the paper colour, never in red.',
+      'Your last reading is stated, never judged: no colour, no arrow, no comparison drawn for you.',
+      'Progress is a rolling window: seven bars, three of them quiet. A day with nothing written is drawn in the paper colour, never in red.',
       '“If I feel low” sits on Home, one scroll down, and every word in it was transcribed from your own doctor.',
+      'After a reading under 54 mg/dL in the last hour, Call moves to the top of that card. The reading itself looks the same as any other.',
       'Below it, three facts and no opinion: when the last reading was written, when the next lab test is due, how many readings since the last report.',
     ],
   },
   record: {
     title: 'Everything, newest first',
     points: [
-      'Nine kinds of entry share one timeline: readings, insulin, medicines, meals, activity, symptoms, notes, documents and lab values.',
-      'Each row says where it came from — typed, or read from a photo you confirmed.',
+      'Eleven kinds of entry share one timeline: readings, insulin, medicines, meals, activity, blood pressure, weight, symptoms, notes, documents and lab values.',
+      'Each row says where it came from: typed, or read from a photo you confirmed.',
       'Nothing is overwritten. An edit supersedes; the earlier version stays in the record.',
+      'The row at the top opens Review, the figures worked out from these readings.',
+    ],
+  },
+  review: {
+    title: 'Figures, and where each line came from',
+    points: [
+      'Time in target, the readings under 70 and 54 mg/dL, averages by time of day, and HbA1c as the lab printed it. No sentence says what any of it means.',
+      'Where the plan gives no range, the app uses a published default: WHO PEN first, ADA where WHO PEN has none. Every figure it drives is labelled with its source.',
+      'Here the fasting range is the patient’s own and the after-meal range is the ADA default, so the card is titled “In the target range”, not “In your doctor’s range”.',
+      'A count of zero looks the same as a count of five. No reading is drawn in a different colour.',
+      'HbA1c is only ever what a lab report printed. The app does not estimate one from fingerstick readings.',
     ],
   },
   capture: {
     title: 'The camera is the middle button',
     points: [
-      'It opens on Photo, always — never the last mode you used.',
-      'Type and Speak sit beside it at the same size: six of the nine kinds have no photo to take.',
+      'It opens on Photo, always, never on the last mode you used.',
+      'Type and Speak sit beside it at the same size: most of the eleven kinds have no photo to take.',
       'Speech is recognised on the phone. Nothing is sent anywhere to be transcribed.',
     ],
   },
@@ -980,7 +1399,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
   assistant: {
     title: 'It answers from your logs, and nothing else',
     points: [
-      'Questions are answered by looking things up in your own record — averages, what the doctor said, when a test is due.',
+      'Questions are answered by looking things up in your own record: averages, what the doctor said, when a test is due.',
       'It does not answer medical questions, and the fine print says so before you ask the first one.',
       'The figures come from your record and appear as soon as you ask. A model on the phone may add a sentence afterwards, and a sentence that names a number your record did not produce is dropped.',
       'The model runs on the phone. The question and the answer stay there.',
@@ -991,7 +1410,8 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
     title: 'The plan is transcribed, never authored',
     points: [
       'Every word here was typed in from what your doctor said, or read from a photo of the prescription and confirmed. The app never writes medical instructions of its own.',
-      'The range your charts shade comes from this screen — which is why a plan nobody has filled in shades nothing.',
+      'Each target row says where its range came from. This patient wrote down a fasting range, and the after-meal row is the published ADA default, labelled as one.',
+      'The screen ends with one sentence, word for word: the app does not calculate or recommend insulin doses.',
       'Updating it keeps the earlier version readable.',
     ],
   },
@@ -1006,10 +1426,11 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
   settings: {
     title: 'Two languages, four themes, no account',
     points: [
-      'English and Nepali at full parity — switch the language here and the whole preview follows.',
+      'English and Nepali at full parity. Switch the language here and the whole preview follows.',
       'The theme picker in the site header drives the phone: the app ships the same four.',
       'There is nothing to sign in to, and nothing to sign out of.',
-      'Sharing is with someone you pair with, and you choose what they see. What travels between the two phones is sealed, and the server that carries it cannot read it.',
+      'Sharing is with someone you pair with, at one of three levels: everything with the numbers, ranges without the numbers, or alerts only. What travels between the two phones is sealed, and the server that carries it cannot read it.',
+      'A person you mark as an emergency contact gets a message when a reading is past a default line. It may arrive late, and it is not an emergency service.',
     ],
   },
 };
@@ -1058,7 +1479,8 @@ document.addEventListener('click', (event) => {
 
   if (act === 'lang') state.lang = to as Lang;
   else if (act === 'tab' || act === 'go' || act === 'screen') state.screen = to as ScreenId;
-  else if (act === 'back') state.screen = state.screen === 'lab' ? 'chooser' : 'home';
+  else if (act === 'back')
+    state.screen = state.screen === 'lab' ? 'chooser' : state.screen === 'review' ? 'record' : 'home';
   else if (act === 'filter') state.filter = to!;
   else if (act === 'model') {
     state.model = to as typeof state.model;
