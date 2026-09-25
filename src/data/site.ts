@@ -7,9 +7,9 @@ export const SITE = {
   name: 'cosys.work',
   legalName: 'CoSys Work Pvt. Ltd.',
   url: 'https://cosys.work',
-  tagline: 'Health software that leaves your data where it belongs.',
+  tagline: 'Collaborative systems for your own care, between clinic visits.',
   description:
-    'cosys.work builds offline-first health software. The Diabetes App for patients, the Clinic App for care teams (coming soon), and the peer-to-peer network that connects them, with no cloud copy of anyone\'s record.',
+    'cosys.work builds collaborative systems for the care you do yourself between clinic visits, for chronic and comorbid conditions: diabetes first, then blood pressure, menopause, arthritis and more. Peer-to-peer, private and sovereign.',
 } as const;
 
 export const CONTACT = {

@@ -6,6 +6,38 @@ import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import { SITE, CONTACT, PRODUCTS, FORMS } from '@/data/site';
 
+const conditions = [
+  {
+    emoji: '🩸',
+    title: 'Diabetes',
+    body: 'The Diabetes App, the first of them. Photo logging, your doctor’s plan, and family who help.',
+    href: '/diabetes-app',
+    status: 'Being built now',
+  },
+  { emoji: '🩺', title: 'Blood pressure', body: 'Readings, medicines and your doctor’s targets, over time.', status: 'Coming soon' },
+  { emoji: '🌸', title: 'Menopause', body: 'Symptoms, cycles and treatments, noted in your own words.', status: 'Coming soon' },
+  { emoji: '🦴', title: 'Arthritis', body: 'Pain, stiffness, medicines and what helps, day by day.', status: 'Coming soon' },
+  { emoji: '➕', title: 'And more', body: 'Conditions rarely come alone. The apps share one record, so they work together.', status: 'Coming soon' },
+];
+
+const pillars = [
+  {
+    emoji: '🤝',
+    title: 'Peer-to-peer',
+    body: 'Your record moves directly between your phone and the people you choose: family who help, and later your clinic. No central server holds it.',
+  },
+  {
+    emoji: '🔒',
+    title: 'Private',
+    body: 'Photos are read and questions answered on your phone. Anything that travels is sealed so only the phones you chose can open it.',
+  },
+  {
+    emoji: '🗝️',
+    title: 'Sovereign',
+    body: 'The record is yours. You decide who sees what, you can end any share, and you can take the whole of it with you as a file.',
+  },
+];
+
 const steps = [
   {
     step: '01',
@@ -115,12 +147,13 @@ const secondary =
       <h1
         class="text-ink text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
-        Diabetes care that keeps going{' '}<br class="hidden sm:block" />
+        Health care that keeps going{' '}<br class="hidden sm:block" />
         <span class="text-primary">between visits</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        Snap your glucometer and your lab reports, note your meals and medicines, and follow the plan
-        your doctor gave you. It works with no signal, and your record stays on your phone.
+        Most care happens at home, in the months between clinic visits. cosys.work builds
+        collaborative systems for that part: you, the family who help you, and your doctor, working
+        on your care together. For chronic and comorbid conditions, starting with diabetes.
       </p>
 
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
@@ -142,15 +175,68 @@ const secondary =
         <a href={FORMS.clinic} class={secondary}>Bring your clinic</a>
       </div>
       <p class="text-ink-muted mt-5 text-sm italic">
-        Free for patients, always. Being built in Kathmandu and Janakpur.
+        Peer-to-peer, private and sovereign. Being built in Kathmandu and Janakpur.
       </p>
+    </div>
+  </Section>
+
+  <!-- Conditions -->
+  <Section class="!pt-4">
+    <SectionHeading
+      eyebrow="One app for each condition"
+      title="Specialised apps, coming soon."
+      accentTitle="Starting with diabetes."
+      lede="Each condition gets an app built for it, with the words, the readings and the plans that condition needs. They share one record on your phone, because many people live with more than one."
+    />
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        conditions.map(({ emoji, title, body, href, status }) => {
+          const Tag = href ? 'a' : 'div';
+          return (
+            <Tag
+              href={href}
+              class:list={[
+                'border-line bg-surface flex flex-col rounded-2xl border p-6',
+                href && 'hover:border-primary/40 transition hover:shadow-lg',
+              ]}
+            >
+              <span class="text-3xl" aria-hidden="true">
+                {emoji}
+              </span>
+              <p class="text-ink mt-3 font-semibold">{title}</p>
+              <p class="text-ink-muted mt-1.5 flex-1 text-sm leading-relaxed">{body}</p>
+              <span
+                class:list={[
+                  'mt-4 inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium',
+                  href
+                    ? 'border-primary/30 bg-primary-tint text-ink'
+                    : 'border-line text-ink-muted',
+                ]}
+              >
+                {status}
+              </span>
+            </Tag>
+          );
+        })
+      }
+    </div>
+  </Section>
+
+  <!-- Pillars -->
+  <Section class="!pt-0">
+    <div class="grid gap-5 md:grid-cols-3">
+      {pillars.map((item) => <Card {...item} />)}
     </div>
   </Section>
 
   <!-- How it works -->
   <Section class="!py-0">
     <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
-      <SectionHeading eyebrow="How it works" title="Snap, share," accentTitle="follow the plan" />
+      <SectionHeading
+        eyebrow="How it works, starting with diabetes"
+        title="Snap, share,"
+        accentTitle="follow the plan"
+      />
       <ol class="mt-12 grid gap-5 md:grid-cols-3">
         {
           steps.map(({ step, title, body }) => (
@@ -169,7 +255,7 @@ const secondary =
   <Section>
     <SectionHeading
       eyebrow="Why Nepal, why now"
-      title="Sugar changes every day."
+      title="Your body changes every day."
       accentTitle="Visits come every few months."
     />
     <div class="mt-12 grid gap-5 md:grid-cols-3">
@@ -280,7 +366,7 @@ const secondary =
   <Section>
     <CTA
       title="Being built in Kathmandu and Janakpur"
-      body="Clinics: see the Clinic App and request a walkthrough. Patients: join the waitlist and we'll tell you when the app is ready for you."
+      body="Clinics: see the Clinic App and request a walkthrough. Patients: join the waitlist for The Diabetes App, the first of the apps, and we'll tell you when it is ready for you."
       ctaLabel="Bring your clinic"
       href={FORMS.clinic}
       secondaryLabel="Join the patient waitlist"
