@@ -4,6 +4,7 @@ import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
+import Comparison from '@/components/Comparison.astro';
 import { SITE, CONTACT, PRODUCTS, FORMS } from '@/data/site';
 
 const conditions = [
@@ -12,7 +13,7 @@ const conditions = [
     title: 'Diabetes',
     body: 'The Diabetes App, the first of them. Photo logging, your doctor’s plan, and family who help.',
     href: '/diabetes-app',
-    status: 'Being built now',
+    status: 'In closed pilot',
   },
   { emoji: '🩺', title: 'Blood pressure', body: 'Readings, medicines and your doctor’s targets, over time.', status: 'Coming soon' },
   { emoji: '🌸', title: 'Menopause', body: 'Symptoms, cycles and treatments, noted in your own words.', status: 'Coming soon' },
@@ -59,7 +60,7 @@ const steps = [
 const facts = [
   {
     figure: '22%',
-    body: 'of Kathmandu residents over 30 had high blood sugar in the city’s 2024–25 screening of 19,660 people.',
+    body: 'of adults over 30 had high blood sugar in the capital’s 2024–25 screening of 19,660 people.',
     source: 'Source: Kathmandu Post, Nov 2025',
   },
   {
@@ -88,7 +89,7 @@ const comparison = [
   {
     dimension: 'Cost to patients',
     typical: 'Free trial, then a subscription',
-    ours: 'Free, always',
+    ours: 'Free forever, with optional services from others in the app'
   },
   {
     dimension: 'Share with family',
@@ -175,7 +176,7 @@ const secondary =
         <a href={FORMS.clinic} class={secondary}>Bring your clinic</a>
       </div>
       <p class="text-ink-muted mt-5 text-sm italic">
-        Peer-to-peer, private and sovereign. Being built in Kathmandu and Janakpur.
+        Peer-to-peer, private and sovereign. Built in Nepal.
       </p>
     </div>
   </Section>
@@ -188,7 +189,7 @@ const secondary =
       accentTitle="Starting with diabetes."
       lede="Each condition gets an app built for it, with the words, the readings and the plans that condition needs. They share one record on your phone, because many people live with more than one."
     />
-    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+    <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-5 lg:gap-5">
       {
         conditions.map(({ emoji, title, body, href, status }) => {
           const Tag = href ? 'a' : 'div';
@@ -196,25 +197,39 @@ const secondary =
             <Tag
               href={href}
               class:list={[
-                'border-line bg-surface flex flex-col rounded-2xl border p-6',
+                'border-line bg-surface flex gap-4 rounded-2xl border p-5 lg:flex-col lg:gap-0 lg:p-6',
                 href && 'hover:border-primary/40 transition hover:shadow-lg',
               ]}
             >
-              <span class="text-3xl" aria-hidden="true">
+              <span class="text-3xl leading-none" aria-hidden="true">
                 {emoji}
               </span>
-              <p class="text-ink mt-3 font-semibold">{title}</p>
-              <p class="text-ink-muted mt-1.5 flex-1 text-sm leading-relaxed">{body}</p>
-              <span
-                class:list={[
-                  'mt-4 inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium',
-                  href
-                    ? 'border-primary/30 bg-primary-tint text-ink'
-                    : 'border-line text-ink-muted',
-                ]}
-              >
-                {status}
-              </span>
+              <div class="flex flex-1 flex-col lg:mt-3">
+                <p class="text-ink flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold">
+                  {title}
+                  <span
+                    class:list={[
+                      'inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium lg:hidden',
+                      href
+                        ? 'border-primary/30 bg-primary-tint text-ink'
+                        : 'border-line text-ink-muted',
+                    ]}
+                  >
+                    {status}
+                  </span>
+                </p>
+                <p class="text-ink-muted mt-1.5 flex-1 text-sm leading-relaxed">{body}</p>
+                <span
+                  class:list={[
+                    'mt-4 hidden w-fit rounded-full border px-3 py-0.5 text-xs font-medium lg:inline-block',
+                    href
+                      ? 'border-primary/30 bg-primary-tint text-ink'
+                      : 'border-line text-ink-muted',
+                  ]}
+                >
+                  {status}
+                </span>
+              </div>
             </Tag>
           );
         })
@@ -279,35 +294,12 @@ const secondary =
         title="The Diabetes App, next to"
         accentTitle="a typical diabetes app"
       />
-      <div class="border-line bg-surface mt-12 overflow-x-auto rounded-2xl border">
-        <table class="w-full text-left text-sm">
-          <caption class="sr-only">Typical diabetes apps compared with The Diabetes App</caption>
-          <thead>
-            <tr class="border-line border-b">
-              <th scope="col" class="text-ink px-5 py-4 font-semibold">
-                <span class="sr-only">What</span>
-              </th>
-              <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">
-                Typical diabetes apps
-              </th>
-              <th scope="col" class="text-primary px-5 py-4 font-semibold">The Diabetes App</th>
-            </tr>
-          </thead>
-          <tbody class="divide-line divide-y">
-            {
-              comparison.map(({ dimension, typical, ours }) => (
-                <tr>
-                  <th scope="row" class="text-ink px-5 py-4 align-top font-semibold">
-                    {dimension}
-                  </th>
-                  <td class="text-ink-muted px-5 py-4 align-top">{typical}</td>
-                  <td class="text-ink px-5 py-4 align-top">{ours}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
+      <Comparison
+        caption="Typical diabetes apps compared with The Diabetes App"
+        theirs="Typical diabetes apps"
+        ours="The Diabetes App"
+        rows={comparison.map(({ dimension, typical, ours }) => ({ dimension, theirs: typical, ours }))}
+      />
     </div>
   </Section>
 
@@ -365,8 +357,8 @@ const secondary =
   <!-- CTA -->
   <Section>
     <CTA
-      title="Being built in Kathmandu and Janakpur"
-      body="Clinics: see the Clinic App and request a walkthrough. Patients: join the waitlist for The Diabetes App, the first of the apps, and we'll tell you when it is ready for you."
+      title="Built in Nepal"
+      body="Patients: The Diabetes App is in closed pilot, so join the waitlist and we'll tell you when it is ready for you. Clinics: the Clinic App is in development, and a preview is available on request."
       ctaLabel="Bring your clinic"
       href={FORMS.clinic}
       secondaryLabel="Join the patient waitlist"

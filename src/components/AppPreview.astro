@@ -114,6 +114,13 @@ const control =
     border-radius: 30px;
     overflow: hidden;
     position: relative;
+    /*
+      iOS Safari clips a rounded overflow-hidden box badly once a child is composited
+      (the scroller is), and repaints the clip on every scroll: the capture disc flickered.
+      Its own stacking context and layer make the clip stable.
+    */
+    isolation: isolate;
+    transform: translateZ(0);
     display: flex;
     flex-direction: column;
     background: var(--p-ground);
@@ -237,6 +244,8 @@ const control =
   }
 
   .tapp-phone .scroll {
+    position: relative;
+    z-index: 0;
     flex: 1;
     overflow-y: auto;
     padding: 0 16px 16px;
@@ -653,6 +662,13 @@ const control =
       child to its parent unless told not to.
     */
     overflow: visible;
+    /*
+      Above the scroller, explicitly. A scrolling box is its own layer on iOS, and an
+      unpositioned later sibling loses to it: the 19 px of the disc that rise out of the bar
+      were painted under the screen, so its top was missing, and redrawn on each scroll.
+    */
+    position: relative;
+    z-index: 1;
   }
   .tapp-phone .tab,
   .tapp-phone .capture-slot {

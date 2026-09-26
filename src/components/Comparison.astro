@@ -1,0 +1,65 @@
+---
+/**
+ * A two-way comparison, phone first.
+ *
+ * On a phone each row is a card: the question as its heading, then the two answers stacked
+ * and labelled, ours last and in full ink. A three-column table squeezed into 390 px wraps
+ * every cell to a word or two a line, which is how the first version read on an iPhone. From
+ * `md` up, where the columns have room, it is a real table again.
+ */
+interface Props {
+  caption: string;
+  theirs: string;
+  ours: string;
+  rows: { dimension: string; theirs: string; ours: string }[];
+}
+const { caption, theirs, ours, rows } = Astro.props;
+---
+
+<ul class="mt-10 grid gap-3 md:hidden" aria-label={caption}>
+  {
+    rows.map((row) => (
+      <li class="border-line bg-surface rounded-2xl border p-5">
+        <p class="text-ink font-semibold">{row.dimension}</p>
+        <dl class="mt-3 grid gap-2.5 text-sm leading-relaxed">
+          <div>
+            <dt class="text-ink-muted text-xs font-semibold tracking-wider uppercase">{theirs}</dt>
+            <dd class="text-ink-muted mt-0.5">{row.theirs}</dd>
+          </div>
+          <div class="border-primary/30 bg-primary-tint rounded-xl border p-3">
+            <dt class="text-primary text-xs font-semibold tracking-wider uppercase">{ours}</dt>
+            <dd class="text-ink mt-0.5">{row.ours}</dd>
+          </div>
+        </dl>
+      </li>
+    ))
+  }
+</ul>
+
+<div class="border-line bg-surface mt-12 hidden overflow-hidden rounded-2xl border md:block">
+  <table class="w-full text-left text-sm">
+    <caption class="sr-only">{caption}</caption>
+    <thead>
+      <tr class="border-line border-b">
+        <th scope="col" class="text-ink w-1/4 px-5 py-4 font-semibold">
+          <span class="sr-only">Question</span>
+        </th>
+        <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">{theirs}</th>
+        <th scope="col" class="text-primary px-5 py-4 font-semibold">{ours}</th>
+      </tr>
+    </thead>
+    <tbody class="divide-line divide-y">
+      {
+        rows.map((row) => (
+          <tr>
+            <th scope="row" class="text-ink px-5 py-4 align-top font-semibold">
+              {row.dimension}
+            </th>
+            <td class="text-ink-muted px-5 py-4 align-top">{row.theirs}</td>
+            <td class="text-ink px-5 py-4 align-top">{row.ours}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
