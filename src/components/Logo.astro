@@ -5,22 +5,32 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-{/* Three peers, connected directly to each other — the P2P mark. */}
-<span class:list={['inline-flex items-center gap-2', className]}>
-  <svg
-    viewBox="0 0 32 32"
-    class="h-7 w-7 flex-shrink-0"
-    fill="none"
-    stroke="currentColor"
-    aria-hidden="true"
-  >
-    <path d="M16 7.5 7 24.5h18L16 7.5Z" stroke-width="1.75" class="text-primary/40"></path>
-    <circle cx="16" cy="7.5" r="3.6" class="fill-primary stroke-none"></circle>
-    <circle cx="7" cy="24.5" r="3.6" class="fill-primary/80 stroke-none"></circle>
-    <circle cx="25" cy="24.5" r="3.6" class="fill-primary/60 stroke-none"></circle>
-  </svg>
-  {/* The domain is the brand, so the wordmark is always lowercase. */}
-  <span class="text-ink text-xl font-bold tracking-tight lowercase">
-    cosys<span class="text-primary">.work</span>
-  </span>
+{/*
+  The cosys.work wordmark, from the brand's logo canvas: Nunito at 800, tracked in by 3%,
+  one ink with an orange dot. Reversed on the two dark themes. The domain is the brand, so
+  it is always lowercase, and it is text rather than an image so it stays sharp and theme-aware.
+*/}
+<span class:list={['cosys-wordmark', className]}>
+  cosys<span class="cosys-dot">.</span>work
 </span>
+
+<style>
+  .cosys-wordmark {
+    font-family: 'Nunito Variable', 'Nunito', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #12312c;
+    white-space: nowrap;
+  }
+  .cosys-dot {
+    color: #e8702a;
+  }
+  :global(:root[data-scheme='dark']) .cosys-wordmark {
+    color: #f6f4ee;
+  }
+  :global(:root[data-scheme='dark']) .cosys-dot {
+    color: #f08a4b;
+  }
+</style>
