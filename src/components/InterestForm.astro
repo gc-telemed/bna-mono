@@ -1,6 +1,6 @@
 ---
 /**
- * The two sign-up forms: a clinic asking for a walkthrough, and a patient joining the waitlist.
+ * The two sign-up forms: a clinic asking for a preview, and a patient joining the waitlist.
  *
  * Plain HTML handled by Netlify Forms, so the site still ships no script for them. Netlify finds
  * a form by its `name` when it parses the built HTML, which is why each form carries a
@@ -28,8 +28,8 @@ type Field = {
 const forms: Record<Props['kind'], { title: string; lede: string; submit: string; note?: string; fields: Field[] }> = {
   clinic: {
     title: 'Bring your clinic',
-    lede: 'Tell us about your clinic and we will arrange a walkthrough of the Clinic App as it takes shape.',
-    submit: 'Request a walkthrough',
+    lede: 'The Clinic App is in development. Tell us about your clinic and we will arrange a preview.',
+    submit: 'Request a preview',
     fields: [
       { name: 'name', label: 'Name', required: true, autocomplete: 'name' },
       { name: 'clinic', label: 'Clinic name', required: true, autocomplete: 'organization' },
@@ -47,7 +47,7 @@ const forms: Record<Props['kind'], { title: string; lede: string; submit: string
   },
   waitlist: {
     title: 'Join the patient waitlist',
-    lede: 'We will let you know when The Diabetes App is ready for you. It is free for patients, always.',
+    lede: 'The Diabetes App is in a closed pilot. We will let you know when it is ready for you. It is free forever.',
     submit: 'Join the waitlist',
     note: "We only ask how to reach you. Please don't include health details here.",
     fields: [

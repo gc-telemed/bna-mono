@@ -5,6 +5,7 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
+import Comparison from '@/components/Comparison.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
 const product = PRODUCTS[2]!;
@@ -35,7 +36,7 @@ const comparison = [
   {
     dimension: 'Extension',
     cloud: 'A single vendor roadmap and an approval queue',
-    cosys: 'Planned: plugins published directly to the people who want them',
+    cosys: 'A marketplace inside the app, where providers offer services straight to the people who want them',
   },
 ];
 
@@ -58,7 +59,7 @@ const layers = [
   {
     emoji: '🧩',
     title: 'The plugin fabric',
-    body: 'Planned: the same network will distribute extensions from dietitians, coaches, researchers and clinics, and people will install only what they want.',
+    body: 'Coming to the apps: a marketplace of third-party services and plugins, from lab tests to device plugins, bought in the app and paid to the provider.',
   },
 ];
 
@@ -99,7 +100,7 @@ const faqs = [
   {
     question: 'How will a clinic get my history?',
     answer:
-      'With the Clinic App, which is coming soon: you scan your clinic’s QR code and choose to share. Your history travels over the encrypted connection, and the clinic keeps what you shared, sealed under its own key.',
+      'With the Clinic App, now in development: you scan your clinic’s QR code and choose to share. Your history travels over the encrypted connection, and the clinic keeps what you shared, sealed under its own key.',
   },
   {
     question: 'What happens if I lose my phone?',
@@ -114,7 +115,7 @@ const faqs = [
   {
     question: 'Who decides what plugins are allowed?',
     answer:
-      'Plugins are planned, not built. The intent is that they travel over the same network, straight to the people who want them. Get in touch if you would like to be an early builder.',
+      'Providers are listed in the in-app marketplace, and each purchase is between you and the provider. What a service can see of your record is your choice, as with any share. Get in touch if you would like to offer a service.',
   },
 ];
 
@@ -228,39 +229,12 @@ const structuredData = {
         chipClass={chip}
       />
 
-      <div class="border-line bg-surface mt-12 overflow-hidden rounded-2xl border">
-        <table class="w-full text-left text-sm">
-          <caption class="sr-only">
-            Centralised health platforms compared with the cosys.work peer-to-peer platform
-          </caption>
-          <thead>
-            <tr class="border-line border-b">
-              <th scope="col" class="text-ink px-5 py-4 font-semibold">
-                <span class="sr-only">Dimension</span>
-              </th>
-              <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">
-                Centralised platforms
-              </th>
-              <th scope="col" class="text-primary px-5 py-4 font-semibold">
-                The cosys.work platform
-              </th>
-            </tr>
-          </thead>
-          <tbody class="divide-line divide-y">
-            {
-              comparison.map(({ dimension, cloud, cosys }) => (
-                <tr>
-                  <th scope="row" class="text-ink px-5 py-4 align-top font-semibold">
-                    {dimension}
-                  </th>
-                  <td class="text-ink-muted px-5 py-4 align-top">{cloud}</td>
-                  <td class="text-ink px-5 py-4 align-top">{cosys}</td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
+      <Comparison
+        caption="Centralised health platforms compared with the cosys.work peer-to-peer platform"
+        theirs="Centralised platforms"
+        ours="The cosys.work platform"
+        rows={comparison.map(({ dimension, cloud, cosys }) => ({ dimension, theirs: cloud, ours: cosys }))}
+      />
     </div>
   </Section>
 
@@ -298,10 +272,11 @@ const structuredData = {
             people best placed to build those are usually not us.
           </p>
           <p>
-            Plugins are planned, not built. The idea: a dietitian ships an on-device knowledge base,
-            a clinic publishes something for its own patients, a coach builds for one sport, and
-            each travels over the same peer-to-peer network, straight to the people who asked for
-            it.
+            The marketplace is coming to the apps. Labs, home sample collection, clinic and
+            physiotherapy appointments, dietitians, coaches with at-home exercise videos, and
+            plugins for CGMs and glucometers, each offered by its provider inside the app and paid
+            to them. Telemedicine and online appointments will come the same way, as services
+            from third parties.
           </p>
         </div>
       </div>

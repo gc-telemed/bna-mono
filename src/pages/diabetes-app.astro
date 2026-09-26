@@ -61,8 +61,20 @@ const shareLevels = [
   { title: 'Alerts only', body: 'Nothing, unless a reading crosses one of the alert lines.' },
 ];
 
+const marketplace = [
+  { emoji: '🧪', title: 'Lab tests', body: 'Book the tests on your doctor’s list.' },
+  { emoji: '🏠', title: 'Home sample collection', body: 'A collector comes to you, so there is no queue.' },
+  { emoji: '🏥', title: 'Clinic appointments', body: 'Book your next visit from the app.' },
+  { emoji: '🦵', title: 'Physiotherapy', body: 'Appointments with physiotherapists.' },
+  { emoji: '🥗', title: 'Dietitians', body: 'Appointments for help with what you eat.' },
+  { emoji: '🏋️', title: 'Exercise at home', body: 'Video packages from gym coaches, to follow at home.' },
+  { emoji: '📟', title: 'CGM plugins', body: 'Bring readings from a continuous glucose monitor.' },
+  { emoji: '🩸', title: 'Glucometer plugins', body: 'Bring readings from a connected meter.' },
+  { emoji: '💬', title: 'Telemedicine', body: 'Online consultations and appointments, from third-party providers.' },
+];
+
 const facts = [
-  { term: 'Price', detail: 'Free, always, for patients.' },
+  { term: 'Price', detail: 'Free forever. Services from third parties in the in-app marketplace, when it opens, are optional and paid to the provider.' },
   {
     term: 'Phones',
     detail: 'Android phones, including low-cost ones. Minimum Android version to be confirmed before launch.',
@@ -88,7 +100,7 @@ const faqs = [
   {
     question: 'When can I use it?',
     answer:
-      'The Diabetes App is being built in Kathmandu and Janakpur, and it is not open to the public yet. Join the waitlist and we will tell you when it is ready for you.',
+      'The Diabetes App is in a closed pilot in Nepal, and it is not open to the public yet. Join the waitlist and we will tell you when it is ready for you.',
   },
   {
     question: 'Does it really work with no internet?',
@@ -133,11 +145,11 @@ const faqs = [
   {
     question: 'How does this work with my doctor?',
     answer:
-      'Today, show or send them the one-page summary as a PDF. When your clinic uses the Clinic App, which is coming soon, you will be able to scan its QR code and share your history directly, and your doctor will be able to set your plan.',
+      'Today, show or send them the one-page summary as a PDF. When your clinic uses the Clinic App, now in development, you will be able to scan its QR code and share your history directly, and your doctor will be able to set your plan.',
   },
   {
     question: 'How much does it cost?',
-    answer: 'Nothing. The Diabetes App is free for patients, always.',
+    answer: 'Nothing. The Diabetes App is free forever. The marketplace, when it opens, will offer optional services from third parties, such as lab tests or a dietitian appointment, which you pay the provider for.',
   },
 ];
 
@@ -205,7 +217,7 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
           Try the app
         </a>
       </div>
-      <p class="text-ink-muted mt-5 text-sm italic">Free for patients, always.</p>
+      <p class="text-ink-muted mt-5 text-sm italic">In closed pilot. Free forever.</p>
     </div>
   </Section>
 
@@ -284,7 +296,7 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
         <div class={block}>
           <h2 class="text-ink text-xl font-bold">Reminders</h2>
           <p class="text-ink-muted mt-4 text-sm leading-relaxed">
-            Reminders for your medicines, with <em>Taken</em>, <em>Not now</em> and
+            Reminders for your medicines, with <em>Taken</em>, <em>Not now</em> and{' '}
             <em>Snooze</em> on the notification itself. If a medicine reminder gets no answer, one
             follow-up arrives 30 minutes later, and never more than one. You can turn the follow-up
             off for each reminder.
@@ -319,6 +331,21 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
       follow along without being woken at night. A family member can also follow a parent&rsquo;s
       record on their own phone, read-only, alongside their own.
     </p>
+  </Section>
+
+  <!-- Marketplace -->
+  <Section class="!pt-0">
+    <SectionHeading
+      eyebrow="The marketplace, coming soon"
+      title="Free forever."
+      accentTitle="Services from others, if you want them."
+      accentClass={accent}
+      chipClass={chip}
+      lede="The app itself costs nothing, now or later. Inside it, a marketplace on the same peer-to-peer network will list services from third parties. Buying one is optional, the payment goes to the provider, and what they see of your record is your choice, as with any share."
+    />
+    <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:mt-12 lg:gap-5">
+      {marketplace.map((item) => <Card {...item} />)}
+    </div>
   </Section>
 
   <!-- Facts -->

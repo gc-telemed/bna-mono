@@ -16,7 +16,7 @@ export const CONTACT = {
   email: 'hello@cosys.work',
   productEmail: 'diabetes@cosys.work',
   clinicEmail: 'clinics@cosys.work',
-  locations: 'Kathmandu · Janakpur, Nepal',
+  locations: 'Nepal',
 } as const;
 
 /** Where the two sign-up forms live. Every call to action points at one of these. */
@@ -46,7 +46,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Photograph your glucometer and lab reports, follow the plan your doctor gave you, and choose who in your family sees what. It works with no signal.',
     summary:
-      'An offline-first diabetes companion, free for patients. Photograph your glucometer and lab reports; the number is read on your phone and you confirm it. Also called tda by cosys.',
+      'An offline-first diabetes companion, in closed pilot, free forever. Photograph your glucometer and lab reports; the number is read on your phone and you confirm it. Also called tda by cosys.',
     emoji: '🩸',
   },
   {
@@ -55,9 +55,9 @@ export const PRODUCTS: Product[] = [
     shortName: 'Clinic App',
     audience: 'For clinicians and care teams',
     blurb:
-      'Coming soon. A patient\'s last month on your screen before they sit down, and a plan you set that appears on their phone.',
+      'In development, with a preview on request. A patient\'s last month on your screen before they sit down, and a plan you set that appears on their phone.',
     summary:
-      'Coming soon: a companion app for clinics. The history a patient chooses to share arrives over an encrypted connection before the consultation starts.',
+      'In development, preview on request: a companion app for clinics. The history a patient chooses to share arrives over an encrypted connection before the consultation starts.',
     emoji: '🩺',
   },
   {

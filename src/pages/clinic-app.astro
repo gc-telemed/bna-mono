@@ -72,8 +72,8 @@ const capabilities = [
 ];
 
 const pricing = [
-  { title: 'Free', body: 'During early access.' },
-  { title: 'Free', body: 'For up to 50 active patients.' },
+  { title: 'Free', body: 'During the preview.' },
+  { title: 'Free', body: 'For up to 10 active patients.' },
   { title: 'Rs 5,000–10,000 a month', body: 'After that, depending on clinic size.' },
 ];
 
@@ -81,7 +81,7 @@ const faqs = [
   {
     question: 'When can we use it?',
     answer:
-      'The Clinic App is coming soon. The patient side of its protocol is already built into The Diabetes App, so the clinic side is being designed against something fixed. Request a walkthrough and we will show you where it stands.',
+      'The Clinic App is in development, and a preview is available on request. The patient side of its protocol is already built into The Diabetes App, so the clinic side is being built against something fixed.',
   },
   {
     question: 'Where is patient data stored?',
@@ -148,7 +148,7 @@ const structuredData = {
           href={FORMS.clinic}
           class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
         >
-          Request a walkthrough
+          Request a preview
           <svg
             class="h-4 w-4"
             viewBox="0 0 24 24"
@@ -170,7 +170,7 @@ const structuredData = {
         </a>
       </div>
       <p class="text-ink-muted mt-5 text-sm">
-        The Clinic App is coming soon. Our target: halve intake time.
+        In development. Preview available on request. Our target: halve intake time.{' '}
         <em>(A target, not yet a result.)</em>
       </p>
     </div>
@@ -220,7 +220,7 @@ const structuredData = {
 
       <div class="border-primary/30 bg-primary-tint rounded-2xl border p-8">
         <p class="text-primary mb-5 text-xs font-semibold tracking-wider uppercase">
-          With the Clinic App, coming soon
+          With the Clinic App
         </p>
         <ul class="space-y-3.5">
           {
@@ -338,8 +338,8 @@ const structuredData = {
   <Section>
     <CTA
       title="Bring your clinic"
-      body="Early practices shape how this works. If you run a chronic care clinic and want the intake problem gone, request a walkthrough and we will build the workflow around how you actually operate."
-      ctaLabel="Request a walkthrough"
+      body="Early practices shape how this works. If you run a chronic care clinic and want the intake problem gone, request a preview and we will build the workflow around how you actually operate."
+      ctaLabel="Request a preview"
       href={FORMS.clinic}
       secondaryLabel="See the patient side"
       secondaryHref="/diabetes-app"
