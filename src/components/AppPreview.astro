@@ -34,6 +34,15 @@ const screens: { id: string; label: string }[] = [
   { id: 'settings', label: 'Settings' },
 ];
 
+const asks: { id: string; label: string }[] = [
+  { id: 'question', label: 'An average' },
+  { id: 'action', label: 'Log a reading' },
+  { id: 'plan', label: 'The plan' },
+  { id: 'reminder', label: 'A reminder' },
+  { id: 'help', label: 'The visit summary' },
+  { id: 'typed', label: 'A dose question' },
+];
+
 const control =
   'rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-semibold text-ink transition hover:border-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-on-fill';
 ---
@@ -69,17 +78,38 @@ const control =
     -->
     <div class="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Assistant model">
       <span class="text-ink-muted text-xs font-semibold tracking-wider uppercase">Model</span>
-      <button class={control} data-preview="model" data-to="installed" aria-pressed="true">On the phone</button>
-      <button class={control} data-preview="model" data-to="download" aria-pressed="false">Not downloaded</button>
-      <button class={control} data-preview="model" data-to="none" aria-pressed="false">Phone too small</button>
+      <button class={control} data-preview="model" data-to="installed" aria-pressed="true"
+        >On the phone</button
+      >
+      <button class={control} data-preview="model" data-to="download" aria-pressed="false"
+        >Not downloaded</button
+      >
+      <button class={control} data-preview="model" data-to="none" aria-pressed="false"
+        >Phone too small</button
+      >
+    </div>
+
+    <!--
+      The app's five example questions, askable from here once the phone's own card has gone
+      from the thread. They need the model on the phone, as the assistant does.
+    -->
+    <div class="mt-4 flex flex-wrap items-center gap-2" role="group" aria-label="Ask the assistant">
+      <span class="text-ink-muted text-xs font-semibold tracking-wider uppercase">Ask</span>
+      {
+        asks.map((ask) => (
+          <button class={`${control} disabled:opacity-40`} data-preview="ask" data-to={ask.id}>
+            {ask.label}
+          </button>
+        ))
+      }
     </div>
 
     <div id="tapp-notes" class="border-line bg-surface mt-6 rounded-2xl border p-6"></div>
 
     <p class="text-ink-muted mt-4 text-sm leading-relaxed">
       A preview, not the app: nothing here saves, and no value shown belongs to a patient. The lab
-      rows come from a de-identified report kept in the project’s test set: an invented patient, a real
-      laboratory layout, and the app’s own reading of it.
+      rows come from a de-identified report kept in the project’s test set: an invented patient, a
+      real laboratory layout, and the app’s own reading of it.
     </p>
   </div>
 </div>
@@ -281,11 +311,6 @@ const control =
   }
   .tapp-phone .card.tinted {
     background: var(--p-primary-tint);
-  }
-  .tapp-phone .card.ask {
-    background: var(--p-surface-muted);
-    align-self: flex-end;
-    max-width: 85%;
   }
   .tapp-phone .card.list {
     padding: 4px 16px;
@@ -563,16 +588,96 @@ const control =
   }
   .tapp-phone .footerbar.composer {
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
   }
-  .tapp-phone .footerbar.composer .primary {
-    width: auto;
-    min-width: 92px;
-    padding: 0 18px;
+  .tapp-phone .footerbar.composer .field {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .tapp-phone .footerbar.composer .caption {
-    flex-basis: 100%;
+
+  /* The assistant's thread: the patient's sentence in a tinted bubble, then the reply. */
+  .tapp-phone .turn {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tapp-phone .asked {
+    align-self: flex-end;
+    max-width: 85%;
+    background: var(--p-primary-tint);
+    border-radius: 14px;
+    padding: 8px 12px;
+  }
+  .tapp-phone .waiting {
+    font-size: 14px;
+    color: var(--p-text-muted);
+  }
+  .tapp-phone .example {
+    background: none;
+    border: 0;
+    padding: 0;
+    text-align: left;
+    color: var(--p-text);
+  }
+  .tapp-phone .example:disabled {
+    cursor: default;
+  }
+  .tapp-phone .plines {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tapp-phone .pline {
+    display: flex;
+    flex-direction: column;
+  }
+  .tapp-phone .settled {
+    font-weight: 600;
+    color: var(--p-primary);
+  }
+  .tapp-phone .field.typed {
+    color: var(--p-text);
+  }
+  /* Microphone and send: a square each, beside the field, as every messaging app has them. */
+  .tapp-phone .roundbtn {
+    width: 48px;
+    height: 48px;
+    flex: none;
+    border-radius: 999px;
+    border: 0;
+    display: grid;
+    place-items: center;
+    background: var(--p-surface-muted);
+    color: var(--p-text);
+  }
+  .tapp-phone .roundbtn.send {
+    background: var(--p-primary);
+    color: var(--p-text-on-fill);
+  }
+  .tapp-phone .roundbtn.send.off {
+    background: var(--p-border);
+    color: var(--p-text-muted);
+    cursor: default;
+  }
+  .tapp-phone .labelrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tapp-phone .infobtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 2px solid var(--p-text-muted);
+    background: none;
+    font-size: 14px;
+    font-weight: 700;
+    font-style: italic;
+    display: grid;
+    place-items: center;
+    line-height: 1;
   }
 
   .tapp-phone .viewfinder {

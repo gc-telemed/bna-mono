@@ -58,7 +58,7 @@ const S: Record<string, Record<Lang, string>> = {
     ne: '१२ अगस्ट २०२६ को रिपोर्टपछि ४६ नाप लेखिएका छन्',
   },
 
-  'hypo.title': { en: 'If I feel low', ne: 'सुगर घटेको जस्तो लाग्यो भने' },
+  'hypo.title': { en: 'If I feel unwell', ne: 'अस्वस्थ महसुस भयो भने' },
   'hypo.log': { en: 'Log a low sugar', ne: 'सुगर घटेको लेख्नुहोस्' },
   'hypo.call': { en: 'Call Sabina', ne: 'सबिना लाई फोन गर्नुहोस्' },
   'plan.transcribedNote': {
@@ -188,7 +188,10 @@ const S: Record<string, Record<Lang, string>> = {
   'settings.version': { en: 'Version 1.0.0', ne: 'संस्करण 1.0.0' },
 
   'more.title': { en: 'More', ne: 'थप' },
-  'more.body': { en: "For clinic visits, and the app's settings.", ne: 'क्लिनिक भेटका लागि, र एपका सेटिङ।' },
+  'more.body': {
+    en: "For clinic visits, and the app's settings.",
+    ne: 'क्लिनिक भेटका लागि, र एपका सेटिङ।',
+  },
   'summary.title': { en: 'Visit summary', ne: 'भेट सारांश' },
   'summary.subtitle': {
     en: 'A record to take to your next appointment',
@@ -267,6 +270,79 @@ const S: Record<string, Record<Lang, string>> = {
     ne: 'तपाईंले लेखेको बुझ्नअघि यसलाई तपाईंको फोनमा एउटा मोडेल चाहिन्छ।',
   },
   'models.fabLabel': { en: 'Get the AI assistant', ne: 'एआई सहायक ल्याउनुहोस्' },
+  // The composer's two icons: labelled for a screen reader, drawn without words.
+  'assistant.speak': { en: 'Speak', ne: 'बोल्नुहोस्' },
+  // What a visitor "typed", so the send button has something to send: a dosing question,
+  // which the safety gate refuses before any model sees it.
+  'assistant.typed': {
+    en: 'did I take enough insulin today',
+    ne: 'आज मैले पुग्ने जति इन्सुलिन लिएँ?',
+  },
+  'assistant.question.plan': {
+    en: 'what did the doctor say about my medicines',
+    ne: 'डाक्टरले औषधिबारे के भन्नुभयो',
+  },
+  // The waiting line: what the app is doing with the question, one stage at a time.
+  'assistant.waiting.reading': { en: 'Reading your question…', ne: 'तपाईंको प्रश्न पढ्दै…' },
+  'assistant.waiting.searching': { en: 'Checking your log…', ne: 'तपाईंको लग हेर्दै…' },
+  'assistant.waiting.plan': { en: 'Looking at your plan…', ne: 'तपाईंको योजना हेर्दै…' },
+  'assistant.waiting.preparing': { en: 'Preparing a reply…', ne: 'जवाफ तयार गर्दै…' },
+  // A sentence the model may add above the figures. Every number in it is one the tool
+  // produced; a sentence that names any other number is dropped and the card stands alone.
+  'assistant.phrasing': {
+    en: 'The average fasting reading this week is 128 mg/dL, from 9 entries.',
+    ne: 'यो साता फास्टिङ रिडिङको औसत १२८ mg/dL छ, ९ रेकर्डबाट।',
+  },
+  'assistant.disclaimerRefusal': {
+    en: 'This is not medical advice. Ask your doctor before changing any treatment.',
+    ne: 'यो चिकित्सकीय सल्लाह होइन। उपचारमा केही परिवर्तन गर्नुअघि आफ्नो डाक्टरसँग सोध्नुहोस्।',
+  },
+  'assistant.refusal.dosing': {
+    en: 'The Diabetes App does not work out doses. Only a doctor can change what is taken.',
+    ne: 'The Diabetes App ले मात्रा निकाल्दैन। के खाने भन्ने डाक्टरले मात्र बदल्न सक्नुहुन्छ।',
+  },
+  'assistant.refusalAskDoctor': {
+    en: 'Write the question down and take it to the next visit.',
+    ne: 'प्रश्न लेखेर अर्को भेटमा लैजानुहोस्।',
+  },
+  'assistant.planSection.medications': {
+    en: 'Your medicines, as you wrote them down',
+    ne: 'तपाईंले लेख्नुभएका औषधि',
+  },
+  // Changes are proposed in a card and saved only when the patient confirms (ADR-19 §5).
+  'assistant.confirm.log.glucose': { en: 'Write down this reading?', ne: 'यो रिडिङ लेख्ने?' },
+  'assistant.confirm.reminderCreate': { en: 'Set this reminder?', ne: 'यो रिमाइन्डर राख्ने?' },
+  'assistant.confirm.summary': { en: 'Make the visit summary?', ne: 'भेट सारांश बनाउने?' },
+  'assistant.confirm.summaryNote': {
+    en: 'Once the PDF is made, your phone asks where to send it.',
+    ne: 'PDF बनेपछि, कहाँ पठाउने भनेर फोनले सोध्छ।',
+  },
+  'assistant.confirm.settled.saved': { en: 'Saved.', ne: 'सुरक्षित भयो।' },
+  'assistant.confirm.settled.shared': {
+    en: 'The visit summary is ready.',
+    ne: 'भेट सारांश तयार छ।',
+  },
+  'glucose.valueLabel': { en: 'Reading', ne: 'रिडिङ' },
+  'glucose.contextLabel': { en: 'When was this taken?', ne: 'यो कहिले लिइएको हो?' },
+  'context.beforeMeal': { en: 'Before a meal', ne: 'खानाअघि' },
+  'context.other': { en: 'Another time', ne: 'अर्को बेला' },
+  'entry.occurredAt': { en: 'When', ne: 'कहिले' },
+  'common.now': { en: 'Now', ne: 'अहिले' },
+  'common.confirm': { en: 'Confirm', ne: 'पक्का गर्नुहोस्' },
+  'common.edit': { en: 'Edit', ne: 'सम्पादन' },
+  'reminders.kindLabel': { en: 'What is it for?', ne: 'केका लागि?' },
+  'reminders.kind.glucose_check': { en: 'Glucose check', ne: 'ग्लुकोज जाँच' },
+  'reminders.labelLabel': { en: 'Name it', ne: 'नाम दिनुहोस्' },
+  'reminders.label.sugar': { en: 'Check sugar', ne: 'चिनी जाँच' },
+  'reminders.timesLabel': { en: 'Times', ne: 'समय' },
+  'reminders.weekdaysLabel': { en: 'Days', ne: 'दिन' },
+  'reminders.everyDay': { en: 'Every day', ne: 'हरेक दिन' },
+  'summary.periodLabel': { en: 'Period', ne: 'अवधि' },
+  'help.title': { en: 'Help', ne: 'मद्दत' },
+  'help.rowSubtitle': {
+    en: 'Questions about using The Diabetes App',
+    ne: 'The Diabetes App प्रयोग गर्ने बारेका प्रश्नहरू',
+  },
 
   'chooser.title': { en: 'What is this a photo of?', ne: 'यो केको तस्बिर हो?' },
   'chooser.body': {
@@ -337,6 +413,7 @@ const S: Record<string, Record<Lang, string>> = {
   'review.range.d7': { en: '7 days', ne: '७ दिन' },
   'review.range.d14': { en: '14 days', ne: '१४ दिन' },
   'review.range.d30': { en: '30 days', ne: '३० दिन' },
+  'review.range.d90': { en: '90 days', ne: '९० दिन' },
   'review.chart.title': { en: 'Glucose', ne: 'ग्लुकोज' },
   'review.chart.band.fasting': { en: 'Fasting range', ne: 'खाली पेटको दायरा' },
   'review.chart.band.postMeal': { en: 'After-meal range', ne: 'खानापछिको दायरा' },
@@ -476,6 +553,14 @@ const ICONS = {
        <path d="M14.8 21.2h6.4" stroke-linecap="round"/>`,
       size,
     ),
+  /** The composer's two glyphs, the app's own paths (`src/ui/icons.tsx`). */
+  mic: () =>
+    icon(`<rect x="9" y="2.5" width="6" height="11" rx="3"/>
+          <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0" stroke-linecap="round"/>
+          <path d="M12 18v3.5" stroke-linecap="round"/>`),
+  send: () =>
+    icon(`<path d="M3.5 12 20.5 4l-8 17-2.2-6.8z" stroke-linejoin="round"/>
+          <path d="m10.3 14.2 10.2-10.2" stroke-linecap="round"/>`),
   assistant: (size = 26) =>
     icon(
       `<path d="M11 3.2c1.15 4.3 2.5 5.65 6.8 6.8-4.3 1.15-5.65 2.5-6.8 6.8-1.15-4.3-2.5-5.65-6.8-6.8 4.3-1.15 5.65-2.5 6.8-6.8Z" fill="currentColor" stroke-linejoin="round"/>
@@ -543,6 +628,17 @@ type ScreenId =
 
 const TAB_ROOTS: ScreenId[] = ['home', 'record', 'plan', 'more'];
 
+/**
+ * What the replica's assistant can be asked: the app's five example sentences, plus one a
+ * visitor "typed" into the composer, which is a dosing question.
+ */
+type TurnKind = 'question' | 'action' | 'plan' | 'reminder' | 'help' | 'typed';
+interface Turn {
+  readonly kind: TurnKind;
+  /** A proposal card, once its Confirm has been pressed. */
+  settled: boolean;
+}
+
 const state = {
   lang: 'en' as Lang,
   screen: 'home' as ScreenId,
@@ -551,7 +647,14 @@ const state = {
   /** Which ticked rows are open for editing — taking a section must not unfold fifty-three. */
   open: new Set<number>(),
   edits: new Map<number, string>(),
-  asked: false,
+  /** The thread: one turn per question asked, oldest first. */
+  turns: [] as Turn[],
+  /** A question the app is still working on, and which line of the waiting text shows. */
+  pending: null as { kind: TurnKind; stage: number } | null,
+  /** Whether the visitor has sent the question sitting in the composer. */
+  typedSent: false,
+  /** Settings' "i" beside the glucose unit, open or shut. */
+  aboutUnits: false,
   /**
    * Whether this phone holds the assistant's model (ADR-19 §3). `installed`: the disc opens
    * the assistant. `download`: a phone that passes the gate and has not fetched it, so the
@@ -704,7 +807,12 @@ function record(): string {
     {
       day: t('timeline.yesterday'),
       rows: [
-        [`${n('186')} mg/dL`, 'glucose', `${t('kind.glucose')} · ${t('context.afterMeal')}`, '21:05'],
+        [
+          `${n('186')} mg/dL`,
+          'glucose',
+          `${t('kind.glucose')} · ${t('context.afterMeal')}`,
+          '21:05',
+        ],
         ['Dal bhat, amber', 'meal', t('kind.meal'), '20:10'],
         [`${n('122')} mg/dL`, 'glucose', `${t('kind.glucose')} · ${t('context.fasting')}`, '06:58'],
       ],
@@ -713,7 +821,9 @@ function record(): string {
   const visible = (kind: string) => state.filter === 'all' || state.filter === kind;
   // Each day's heading carries its count (`timeline.dayCount`), counted after the filter.
   const dayCount = (count: number) =>
-    state.lang === 'ne' ? `${n(String(count))} प्रविष्टि` : `${count} ${count === 1 ? 'entry' : 'entries'}`;
+    state.lang === 'ne'
+      ? `${n(String(count))} प्रविष्टि`
+      : `${count} ${count === 1 ? 'entry' : 'entries'}`;
 
   // M11 F01: the figures behind the list, one tap away, above the filters.
   return `${header(t('timeline.title'))}
@@ -963,8 +1073,16 @@ function reviewChart(): string {
   const W = 304;
   const H = 180;
   const pad = { top: 8, right: 8, bottom: 24, left: 40 };
-  const plot = { x: pad.left, y: pad.top, w: W - pad.left - pad.right, h: H - pad.top - pad.bottom };
-  const values = [...READINGS.map((r) => r.mgdl), ...Object.values(BANDS).flatMap((b) => [b.min, b.max])];
+  const plot = {
+    x: pad.left,
+    y: pad.top,
+    w: W - pad.left - pad.right,
+    h: H - pad.top - pad.bottom,
+  };
+  const values = [
+    ...READINGS.map((r) => r.mgdl),
+    ...Object.values(BANDS).flatMap((b) => [b.min, b.max]),
+  ];
   const lo = Math.min(...values) - 10;
   const hi = Math.max(...values) + 10;
   const from = 9 * 24 + 14; // a week back from now
@@ -980,7 +1098,9 @@ function reviewChart(): string {
     .join('');
   const ticks = [100, 150, 200]
     .map(
-      (v) => `<line x1="${plot.x}" x2="${plot.x + plot.w}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/>
+      (
+        v,
+      ) => `<line x1="${plot.x}" x2="${plot.x + plot.w}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/>
         <text x="${plot.x - 6}" y="${y(v) + 4}" text-anchor="end">${n(String(v))}</text>`,
     )
     .join('');
@@ -998,18 +1118,26 @@ function reviewChart(): string {
           { at: to, label: '16 Sep 2026', anchor: 'end' },
         ];
   const dayText = days
-    .map((d) => `<text x="${x(d.at)}" y="${plot.y + plot.h + 16}" text-anchor="${d.anchor}">${d.label}</text>`)
+    .map(
+      (d) =>
+        `<text x="${x(d.at)}" y="${plot.y + plot.h + 16}" text-anchor="${d.anchor}">${d.label}</text>`,
+    )
     .join('');
 
   const runs: string[][] = [];
   READINGS.forEach((r, i) => {
     const previous = READINGS[i - 1];
     if (!previous || hoursOf(r) - hoursOf(previous) > 24) runs.push([]);
-    runs[runs.length - 1]!.push(`${runs[runs.length - 1]!.length === 0 ? 'M' : 'L'}${x(hoursOf(r))} ${y(r.mgdl)}`);
+    runs[runs.length - 1]!.push(
+      `${runs[runs.length - 1]!.length === 0 ? 'M' : 'L'}${x(hoursOf(r))} ${y(r.mgdl)}`,
+    );
   });
   const lines = runs
     .filter((run) => run.length > 1)
-    .map((run) => `<path d="${run.join(' ')}" fill="none" stroke="var(--p-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`)
+    .map(
+      (run) =>
+        `<path d="${run.join(' ')}" fill="none" stroke="var(--p-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`,
+    )
     .join('');
   const points = READINGS.map(
     (r) => `<circle cx="${x(hoursOf(r))}" cy="${y(r.mgdl)}" r="3.5" fill="var(--ill-ink)"/>`,
@@ -1033,7 +1161,8 @@ function hba1cLine(): string {
   const lo = Math.min(...values);
   const hi = Math.max(...values);
   const pad = Math.max((hi - lo) * 0.2, 0.5);
-  const y = (v: number) => H - inset - ((v - (lo - pad)) / (hi + pad - (lo - pad))) * (H - 2 * inset);
+  const y = (v: number) =>
+    H - inset - ((v - (lo - pad)) / (hi + pad - (lo - pad))) * (H - 2 * inset);
   const x = (i: number) => inset + (i / (HBA1C.length - 1)) * (W - 2 * inset);
   const d = values.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i)},${y(v)}`).join(' ');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" aria-hidden="true">
@@ -1154,7 +1283,11 @@ function review(): string {
       ${[...HBA1C]
         .reverse()
         .map((point) =>
-          listRow(point.date[state.lang], '', tf('review.hba1c.value', { value: n(point.value), unit: point.unit })),
+          listRow(
+            point.date[state.lang],
+            '',
+            tf('review.hba1c.value', { value: n(point.value), unit: point.unit }),
+          ),
         )
         .join('')}
       <span class="caption padded">${esc(t('review.hba1c.basis'))}</span>
@@ -1162,35 +1295,183 @@ function review(): string {
   </div>`;
 }
 
+/** The sentence a turn asked, as it appears in the patient's bubble. */
+function askedText(kind: TurnKind): string {
+  if (kind === 'typed') return t('assistant.typed');
+  if (kind === 'plan') return t('assistant.question.plan');
+  // The examples are printed in quotation marks on the empty card; a sent question is not.
+  return t(`assistant.example.${kind}`).replace(/^[“"]|[”"]$/g, '');
+}
+
+/** The waiting line's stages for a kind of question, as the app names them. */
+function waitingStages(kind: TurnKind): string[] {
+  if (kind === 'typed') return ['reading'];
+  if (kind === 'plan') return ['reading', 'plan'];
+  if (kind === 'question') return ['reading', 'searching', 'preparing'];
+  return ['reading', 'preparing'];
+}
+
+/** A labelled line on a proposal card: caption above, value below. */
+const proposalLine = (label: string, value: string): string =>
+  `<div class="pline"><span class="caption">${esc(label)}</span><span>${esc(value)}</span></div>`;
+
+/**
+ * A change, proposed in a card and saved only when the patient confirms it (ADR-19 §5). The
+ * Edit button opens the full form with the same values, for anything the card cannot hold.
+ */
+function proposalCard(
+  index: number,
+  title: string,
+  lines: string,
+  settled: boolean,
+  extra = '',
+  settledKey = 'assistant.confirm.settled.saved',
+): string {
+  return `<div class="card">
+    <span class="strong">${esc(title)}</span>
+    <div class="plines">${lines}</div>
+    ${extra}
+    ${
+      settled
+        ? `<span class="settled" role="status">${esc(t(settledKey))}</span>`
+        : `<button class="primary" data-act="confirm" data-i="${index}">${esc(t('common.confirm'))}</button>
+           <button class="secondary">${esc(t('common.edit'))}</button>`
+    }
+  </div>`;
+}
+
+/**
+ * One reply, as the card the app draws for it. Every figure is the tool's; the only text a
+ * model contributes is the one sentence above the average, and the card stands without it.
+ */
+function replyCard(turn: Turn, index: number): string {
+  switch (turn.kind) {
+    case 'question':
+      return `<span>${esc(t('assistant.phrasing'))}</span>
+        <div class="card">
+          <span class="label">${esc(t('assistant.answerLabel'))}</span>
+          <span class="metric">${n('128')} mg/dL</span>
+          <span class="caption">${esc(t('assistant.basedOn'))}</span>
+        </div>`;
+    case 'action':
+      return proposalCard(
+        index,
+        t('assistant.confirm.log.glucose'),
+        proposalLine(t('glucose.valueLabel'), `${n('140')} mg/dL`) +
+          proposalLine(t('entry.occurredAt'), t('common.now')),
+        turn.settled,
+        // The context is asked, never assumed; "before lunch" preselects Before a meal.
+        `<span class="label">${esc(t('glucose.contextLabel'))}</span>
+         <div class="chips">
+           ${[
+             'context.fasting',
+             'context.beforeMeal',
+             'context.afterMeal',
+             'context.bedtime',
+             'context.other',
+           ]
+             .map(
+               (key) =>
+                 `<span class="chip${key === 'context.beforeMeal' ? ' on' : ''}">${esc(t(key))}</span>`,
+             )
+             .join('')}
+         </div>`,
+      );
+    case 'reminder':
+      return proposalCard(
+        index,
+        t('assistant.confirm.reminderCreate'),
+        proposalLine(t('reminders.kindLabel'), t('reminders.kind.glucose_check')) +
+          proposalLine(t('reminders.labelLabel'), t('reminders.label.sugar')) +
+          proposalLine(t('reminders.timesLabel'), tm('21:00')) +
+          proposalLine(t('reminders.weekdaysLabel'), t('reminders.everyDay')),
+        turn.settled,
+      );
+    case 'help':
+      return proposalCard(
+        index,
+        t('assistant.confirm.summary'),
+        proposalLine(t('summary.periodLabel'), t('review.range.d30')),
+        turn.settled,
+        `<span class="caption">${esc(t('assistant.confirm.summaryNote'))}</span>`,
+        'assistant.confirm.settled.shared',
+      );
+    case 'plan':
+      return `<div class="card">
+          <span class="label">${esc(t('assistant.planSection.medications'))}</span>
+          ${listRow('Metformin', '500 mg · 08:00, 20:00')}
+          ${listRow('Glimepiride', '1 mg · 08:00')}
+          <span class="caption">${esc(t('plan.effectiveFrom'))}</span>
+        </div>`;
+    case 'typed':
+      return `<div class="card quiet">
+          <span class="strong">${esc(t('assistant.refusal.dosing'))}</span>
+          <span class="muted">${esc(t('assistant.refusalAskDoctor'))}</span>
+        </div>`;
+  }
+}
+
+/**
+ * The assistant as the app draws it since model-first routing (ADR-19 §1 as amended
+ * 2026-09-27). The empty card carries no heading, because the header already says what the
+ * screen is; its fine print shows only before the first question. Each turn is the patient's
+ * sentence in a tinted bubble, the reply's card, and the fixed line under it, which drops
+ * "a summary of your own logs" under a refusal because a refusal read nothing. The composer
+ * is a field and two icons, microphone and send, as every messaging app on the phone has them.
+ *
+ * In the replica the example sentences can be tapped, the same five sit beside the phone once
+ * the card has gone, and the composer holds one question already typed, so the send button
+ * has something to send.
+ */
 function assistant(): string {
   const examples = ['question', 'action', 'plan', 'reminder', 'help']
-    .map((key) => `<span class="caption">${esc(t(`assistant.example.${key}`))}</span>`)
+    .map(
+      (key) =>
+        `<button class="example caption" data-act="ask" data-to="${key}"${
+          state.pending ? ' disabled' : ''
+        }>${esc(t(`assistant.example.${key}`))}</button>`,
+    )
     .join('');
-  // The answer is the tool's figures, shown the moment the question is sent. A model may add
-  // a sentence above them afterwards, only if it parses and names no number the tool did
-  // not produce; the replica shows the figures, which are what every answer is guaranteed.
+  const thread = state.turns
+    .map(
+      (turn, index) => `<div class="turn">
+        <div class="asked">${esc(askedText(turn.kind))}</div>
+        ${replyCard(turn, index)}
+        <span class="caption">${esc(
+          t(turn.kind === 'typed' ? 'assistant.disclaimerRefusal' : 'assistant.disclaimer'),
+        )}</span>
+      </div>`,
+    )
+    .join('');
+  const pending = state.pending
+    ? `<div class="turn">
+        <div class="asked">${esc(askedText(state.pending.kind))}</div>
+        <span class="waiting" role="status">${esc(
+          t(`assistant.waiting.${waitingStages(state.pending.kind)[state.pending.stage]}`),
+        )}</span>
+      </div>`
+    : '';
+  const typed = !state.typedSent;
   return `${header(t('assistant.title'), true)}
-  <div class="scroll">
+  <div class="scroll" data-thread>
     ${
-      state.asked
-        ? `<div class="card ask"><span>${esc(t('assistant.example.question'))}</span></div>
-           <div class="card">
-             <span class="label">${esc(t('assistant.answerLabel'))}</span>
-             <span class="metric">${n('128')} mg/dL</span>
-             <span class="caption">${esc(t('assistant.basedOn'))}</span>
-           </div>
-           <span class="caption">${esc(t('assistant.disclaimer'))}</span>`
-        : `<div class="card">
-             <span class="subheading">${esc(t('assistant.title'))}</span>
+      state.turns.length === 0 && !state.pending
+        ? `<div class="card">
              <span class="muted">${esc(t('assistant.emptyBody'))}</span>
              <div class="examples">${examples}</div>
+             <span class="caption">${esc(t('assistant.finePrint'))}</span>
            </div>`
+        : ''
     }
+    ${thread}${pending}
   </div>
   <div class="footerbar composer">
-    <div class="field flex">${esc(t('assistant.placeholder'))}</div>
-    <button class="primary" data-act="ask">${esc(t('assistant.send'))}</button>
-    <span class="caption">${esc(t('assistant.finePrint'))}</span>
+    <div class="field flex${typed ? ' typed' : ''}">${esc(
+      typed ? t('assistant.typed') : t('assistant.placeholder'),
+    )}</div>
+    <button class="roundbtn" aria-label="${esc(t('assistant.speak'))}">${ICONS.mic()}</button>
+    <button class="roundbtn send${typed && !state.pending ? '' : ' off'}" data-act="ask" data-to="typed"
+      aria-label="${esc(t('assistant.send'))}"${typed && !state.pending ? '' : ' disabled'}>${ICONS.send()}</button>
   </div>`;
 }
 
@@ -1263,7 +1544,12 @@ const more = (): string => `${header(t('more.title'))}
       ${listRow(t('reminders.title'), t('settings.remindersBody'))}
       ${
         state.model === 'installed'
-          ? listRow(t('assistant.title'), t('assistant.emptyBody'), '', 'data-act="go" data-to="assistant"')
+          ? listRow(
+              t('assistant.title'),
+              t('assistant.emptyBody'),
+              '',
+              'data-act="go" data-to="assistant"',
+            )
           : state.model === 'download'
             ? listRow(t('assistant.needsModelTitle'), t('assistant.needsModelBody'))
             : ''
@@ -1272,6 +1558,7 @@ const more = (): string => `${header(t('more.title'))}
     <div class="card list">
       ${listRow(t('backup.title'), t('backup.lastBackup'))}
       ${listRow(t('settings.title'), '', '', 'data-act="go" data-to="settings"')}
+      ${listRow(t('help.title'), t('help.rowSubtitle'))}
     </div>
     <p class="disclaimer">${esc(t('disclaimer.line'))}</p>
   </div>`;
@@ -1290,11 +1577,16 @@ const settings = (): string => `${header(t('settings.title'), true)}
         <button class="chip ${state.lang === 'en' ? 'on' : ''}" data-act="lang" data-to="en">English</button>
         <button class="chip ${state.lang === 'ne' ? 'on' : ''}" data-act="lang" data-to="ne">नेपाली</button>
       </div>
-      <span class="label">${esc(t('settings.units'))}</span>
+      <!-- Since 2026-09-27 a field's "why" sits behind an "i" beside its label, not under it. -->
+      <div class="labelrow">
+        <span class="label">${esc(t('settings.units'))}</span>
+        <button class="infobtn" data-act="about" aria-expanded="${state.aboutUnits}"
+          aria-label="${esc(t('settings.units'))}">i</button>
+      </div>
       <div class="chips">
         <button class="chip on">mg/dL</button><button class="chip">mmol/L</button>
       </div>
-      <span class="caption">${esc(t('settings.unitsHint'))}</span>
+      ${state.aboutUnits ? `<span class="caption">${esc(t('settings.unitsHint'))}</span>` : ''}
     </div>
 
     <span class="grouplabel">${esc(t('settings.groupApp'))}</span>
@@ -1347,7 +1639,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
     points: [
       'Your last reading is stated, never judged: no colour, no arrow, no comparison drawn for you.',
       'Progress is a rolling window: seven bars, three of them quiet. A day with nothing written is drawn in the paper colour, never in red.',
-      '“If I feel low” sits on Home, one scroll down, and every word in it was transcribed from your own doctor.',
+      '“If I feel unwell” sits on Home, one scroll down, and every word in it was transcribed from your own doctor.',
       'After a reading under 54 mg/dL in the last hour, Call moves to the top of that card. The reading itself looks the same as any other.',
       'Below it, three facts and no opinion: when the last reading was written, when the next lab test is due, how many readings since the last report.',
     ],
@@ -1399,11 +1691,12 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
   assistant: {
     title: 'It answers from your logs, and nothing else',
     points: [
-      'Questions are answered by looking things up in your own record: averages, what the doctor said, when a test is due.',
-      'It does not answer medical questions, and the fine print says so before you ask the first one.',
-      'The figures come from your record and appear as soon as you ask. A model on the phone may add a sentence afterwards, and a sentence that names a number your record did not produce is dropped.',
-      'The model runs on the phone. The question and the answer stay there.',
-      'A phone that could hold the model and has not downloaded it shows the download on the disc instead. A phone too small for it shows no disc at all. Try the three with the control beside the phone.',
+      'The model on the phone works out what you asked. The answer itself is looked up in your own record, so every figure on the card comes from what you wrote down.',
+      'A sentence may appear above the figures. It is dropped if it names a number your record did not produce.',
+      'Asking it to write something down, set a reminder or make the visit summary brings a card first. Nothing is saved until you press Confirm, and Edit opens the full form.',
+      'A question about doses is refused before the model sees it, with a fixed sentence nobody generated. Send the one typed in the box to see it.',
+      'While it works, one line says what it is doing: reading the question, checking your log.',
+      'The question and the answer stay on the phone. A phone too small for the model shows no disc at all; try the three states with the control beside the phone.',
     ],
   },
   plan: {
@@ -1419,6 +1712,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
     title: 'The things you reach for around a visit',
     points: [
       'The visit summary, your documents, reminders and the assistant.',
+      'Help answers questions about using the app, and says where each thing lives.',
       'Backup shows the date of the last one, because that is what you open it to check.',
       'A backup is one encrypted file with a passphrase you choose. No account, and no copy anywhere else.',
     ],
@@ -1429,6 +1723,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
       'English and Nepali at full parity. Switch the language here and the whole preview follows.',
       'The theme picker in the site header drives the phone: the app ships the same four.',
       'There is nothing to sign in to, and nothing to sign out of.',
+      'Why a setting exists sits behind the small “i” beside it, so the screen stays short. Tap the one next to the glucose unit.',
       'Sharing is with someone you pair with, at one of three levels: everything with the numbers, ranges without the numbers, or alerts only. What travels between the two phones is sealed, and the server that carries it cannot read it.',
       'A person you mark as an emergency contact gets a message when a reading is past a default line. It may arrive late, and it is not an emergency service.',
     ],
@@ -1448,9 +1743,15 @@ function render(): void {
 
   const full = state.screen === 'capture';
   const root = TAB_ROOTS.includes(state.screen);
+  // The bar is on the four tab roots only. Review, the lab sheet, the chooser, the assistant
+  // and Settings are pushed over it in the app, and come back with the header's arrow.
   phone.innerHTML = `${full ? '' : statusBar()}${SCREENS[state.screen]()}${
-    root ? assistantFab() : ''
-  }${full ? '' : tabBar()}`;
+    root ? assistantFab() + tabBar() : ''
+  }`;
+
+  // The app scrolls the thread to its end whenever it grows.
+  const threadView = phone.querySelector<HTMLElement>('[data-thread]');
+  if (threadView) threadView.scrollTop = threadView.scrollHeight;
 
   if (notes) {
     const note = NOTES[state.screen];
@@ -1465,6 +1766,11 @@ function render(): void {
       (element.dataset.preview === 'screen' && element.dataset.to === state.screen) ||
       (element.dataset.preview === 'lang' && element.dataset.to === state.lang) ||
       (element.dataset.preview === 'model' && element.dataset.to === state.model);
+    if (element.dataset.preview === 'ask') {
+      const off = state.model !== 'installed' || state.pending !== null;
+      element.toggleAttribute('disabled', off);
+      continue;
+    }
     element.classList.toggle('on', on);
     element.setAttribute('aria-pressed', String(on));
   }
@@ -1480,14 +1786,28 @@ document.addEventListener('click', (event) => {
   if (act === 'lang') state.lang = to as Lang;
   else if (act === 'tab' || act === 'go' || act === 'screen') state.screen = to as ScreenId;
   else if (act === 'back')
-    state.screen = state.screen === 'lab' ? 'chooser' : state.screen === 'review' ? 'record' : 'home';
+    state.screen =
+      state.screen === 'lab'
+        ? 'chooser'
+        : state.screen === 'review'
+          ? 'record'
+          : state.screen === 'settings'
+            ? 'more'
+            : 'home';
   else if (act === 'filter') state.filter = to!;
   else if (act === 'model') {
     state.model = to as typeof state.model;
     if (state.model !== 'installed' && state.screen === 'assistant') state.screen = 'home';
-  }
-  else if (act === 'ask') state.asked = !state.asked;
-  else if (act === 'tick') {
+  } else if (act === 'ask') {
+    // From the controls beside the phone, which can be pressed from any screen.
+    if (state.model !== 'installed') return;
+    state.screen = 'assistant';
+    ask(to as TurnKind);
+  } else if (act === 'about') state.aboutUnits = !state.aboutUnits;
+  else if (act === 'confirm') {
+    const turn = state.turns[Number(target.dataset.i)];
+    if (turn) turn.settled = true;
+  } else if (act === 'tick') {
     // Ticking one row is a statement about that row, so it opens with it.
     const index = Number(target.dataset.i);
     if (state.accepted.has(index)) {
@@ -1520,6 +1840,29 @@ document.addEventListener('click', (event) => {
 
   render();
 });
+
+/**
+ * A question, sent: the patient's bubble and the waiting line at once, one stage of the line
+ * at a time, and then the reply. The pace is the replica's; on a phone it is the model's.
+ */
+function ask(kind: TurnKind): void {
+  if (state.pending) return;
+  if (kind === 'typed') state.typedSent = true;
+  state.pending = { kind, stage: 0 };
+  const stages = waitingStages(kind).length;
+  const step = (): void => {
+    if (!state.pending) return;
+    if (state.pending.stage < stages - 1) {
+      state.pending.stage += 1;
+      window.setTimeout(step, 650);
+    } else {
+      state.turns.push({ kind, settled: false });
+      state.pending = null;
+    }
+    render();
+  };
+  window.setTimeout(step, 650);
+}
 
 document.addEventListener('input', (event) => {
   const input = event.target as HTMLInputElement;
