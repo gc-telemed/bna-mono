@@ -140,7 +140,12 @@ const control =
     --ill-fill: #eadfd0;
     --ill-accent: #e8a33d;
 
-    height: 720px;
+    /*
+      An iPhone Pro Max screen's proportions, 430 × 932 points, at whatever width the column
+      gives it (about 800 px tall at the desktop width). It was a fixed 720 px, which left a
+      phone shorter than any a visitor holds.
+    */
+    aspect-ratio: 430 / 932;
     border-radius: 30px;
     overflow: hidden;
     position: relative;
@@ -590,11 +595,10 @@ const control =
     flex-direction: row;
     align-items: center;
   }
+  /* A typed question wraps and the field grows, as a messaging app's box does, never cut off. */
   .tapp-phone .footerbar.composer .field {
     min-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
   }
 
   /* The assistant's thread: the patient's sentence in a tinted bubble, then the reply. */
