@@ -219,8 +219,8 @@ const S: Record<string, Record<Lang, string>> = {
 
   'assistant.title': { en: 'Ask about your logs', ne: 'आफ्नो लगबारे सोध्नुहोस्' },
   'assistant.placeholder': {
-    en: 'Ask about what you wrote down',
-    ne: 'तपाईंले लेखेको कुराबारे सोध्नुहोस्',
+    en: 'Ask about your logs or this app',
+    ne: 'आफ्नो रेकर्ड वा यो एपबारे सोध्नुहोस्',
   },
   'assistant.send': { en: 'Ask', ne: 'सोध्नुहोस्' },
   'assistant.emptyBody': {

@@ -602,6 +602,10 @@ const control =
     min-width: 0;
     overflow-wrap: anywhere;
   }
+  /* The placeholder at the caption size, as the app draws it while the field is empty (tda #89). */
+  .tapp-phone .footerbar.composer .field:not(.typed) {
+    font-size: 13px;
+  }
 
   /* The assistant's thread: the patient's sentence in a tinted bubble, then the reply. */
   .tapp-phone .turn {
