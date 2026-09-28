@@ -272,26 +272,26 @@ const S: Record<string, Record<Lang, string>> = {
   'models.fabLabel': { en: 'Get the AI assistant', ne: 'एआई सहायक ल्याउनुहोस्' },
   // The composer's two icons: labelled for a screen reader, drawn without words.
   'assistant.speak': { en: 'Speak', ne: 'बोल्नुहोस्' },
-  // What a visitor "typed", so the send button has something to send: a question the app
-  // answers from the record, as it answered this one on the Galaxy M16 (2026-09-24).
+  // What a visitor "typed", so the send button has something to send. "How was" invites a
+  // verdict and the app gives none: it lists what was written down (ADR-09 §B). A named
+  // day is one of its periods; "three days ago" is not, so the replica does not ask it.
   'assistant.typed': {
-    en: 'did I take my medicine today',
-    ne: 'आज मैले औषधि खाएँ?',
+    en: 'how was my sugar yesterday',
+    ne: 'हिजो मेरो सुगर कस्तो थियो?',
+  },
+  'assistant.listLabel': {
+    en: 'Written down · Glucose · yesterday',
+    ne: 'लेखिएका · ग्लुकोज · हिजो',
+  },
+  'assistant.yesterdayDate': { en: '15 Sep 2026', ne: '१५ सेप्टेम्बर २०२६' },
+  'assistant.basedOn_other': {
+    en: 'From {{count}} entries you wrote down',
+    ne: 'तपाईंले लेखेको {{count}} रेकर्डबाट',
   },
   // A dosing question, which the safety gate refuses before any model sees it.
   'assistant.question.dose': {
     en: 'did I take enough insulin today',
     ne: 'आज मैले पुग्ने जति इन्सुलिन लिएँ?',
-  },
-  // The lookup card for "did I take my medicine today": metric, kind and period, then the counts.
-  'assistant.medicineLabel': { en: 'How many · Medicine · today', ne: 'कति वटा · औषधि · आज' },
-  'review.adherence.counts': {
-    en: '{{taken}} taken · {{skipped}} skipped',
-    ne: '{{taken}} खाइयो · {{skipped}} खाइएन',
-  },
-  'assistant.basedOn_one': {
-    en: 'From {{count}} entry you wrote down',
-    ne: 'तपाईंले लेखेको {{count}} रेकर्डबाट',
   },
   'assistant.question.plan': {
     en: 'what did the doctor say about my medicines',
@@ -1421,10 +1421,13 @@ function replyCard(turn: Turn, index: number): string {
           <span class="caption">${esc(t('plan.effectiveFrom'))}</span>
         </div>`;
     case 'typed':
+      // Yesterday's two readings from Logs, newest first, each a row that opens its entry.
       return `<div class="card">
-          <span class="label">${esc(t('assistant.medicineLabel'))}</span>
-          <span class="strong">${esc(tf('review.adherence.counts', { taken: 1, skipped: 0 }))}</span>
-          <span class="caption">${esc(tf('assistant.basedOn', { count: 1 }))}</span>
+          <span class="label">${esc(t('assistant.listLabel'))}</span>
+          <span class="metric">${n('2')}</span>
+          <span class="caption">${esc(tf('assistant.basedOn', { count: 2 }))}</span>
+          ${listRow(`${n('186')} mg/dL`, '', `${t('assistant.yesterdayDate')}, ${tm('21:05')}`)}
+          ${listRow(`${n('122')} mg/dL`, '', `${t('assistant.yesterdayDate')}, ${tm('06:58')}`)}
         </div>`;
     case 'dose':
       return `<div class="card quiet">
