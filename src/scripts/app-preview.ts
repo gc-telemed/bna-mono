@@ -272,11 +272,26 @@ const S: Record<string, Record<Lang, string>> = {
   'models.fabLabel': { en: 'Get the AI assistant', ne: 'एआई सहायक ल्याउनुहोस्' },
   // The composer's two icons: labelled for a screen reader, drawn without words.
   'assistant.speak': { en: 'Speak', ne: 'बोल्नुहोस्' },
-  // What a visitor "typed", so the send button has something to send: a dosing question,
-  // which the safety gate refuses before any model sees it.
+  // What a visitor "typed", so the send button has something to send: a question the app
+  // answers from the record, as it answered this one on the Galaxy M16 (2026-09-24).
   'assistant.typed': {
+    en: 'did I take my medicine today',
+    ne: 'आज मैले औषधि खाएँ?',
+  },
+  // A dosing question, which the safety gate refuses before any model sees it.
+  'assistant.question.dose': {
     en: 'did I take enough insulin today',
     ne: 'आज मैले पुग्ने जति इन्सुलिन लिएँ?',
+  },
+  // The lookup card for "did I take my medicine today": metric, kind and period, then the counts.
+  'assistant.medicineLabel': { en: 'How many · Medicine · today', ne: 'कति वटा · औषधि · आज' },
+  'review.adherence.counts': {
+    en: '{{taken}} taken · {{skipped}} skipped',
+    ne: '{{taken}} खाइयो · {{skipped}} खाइएन',
+  },
+  'assistant.basedOn_one': {
+    en: 'From {{count}} entry you wrote down',
+    ne: 'तपाईंले लेखेको {{count}} रेकर्डबाट',
   },
   'assistant.question.plan': {
     en: 'what did the doctor say about my medicines',
@@ -632,7 +647,7 @@ const TAB_ROOTS: ScreenId[] = ['home', 'record', 'plan', 'more'];
  * What the replica's assistant can be asked: the app's five example sentences, plus one a
  * visitor "typed" into the composer, which is a dosing question.
  */
-type TurnKind = 'question' | 'action' | 'plan' | 'reminder' | 'help' | 'typed';
+type TurnKind = 'question' | 'action' | 'plan' | 'reminder' | 'help' | 'typed' | 'dose';
 interface Turn {
   readonly kind: TurnKind;
   /** A proposal card, once its Confirm has been pressed. */
@@ -1298,6 +1313,7 @@ function review(): string {
 /** The sentence a turn asked, as it appears in the patient's bubble. */
 function askedText(kind: TurnKind): string {
   if (kind === 'typed') return t('assistant.typed');
+  if (kind === 'dose') return t('assistant.question.dose');
   if (kind === 'plan') return t('assistant.question.plan');
   // The examples are printed in quotation marks on the empty card; a sent question is not.
   return t(`assistant.example.${kind}`).replace(/^[“"]|[”"]$/g, '');
@@ -1305,7 +1321,8 @@ function askedText(kind: TurnKind): string {
 
 /** The waiting line's stages for a kind of question, as the app names them. */
 function waitingStages(kind: TurnKind): string[] {
-  if (kind === 'typed') return ['reading'];
+  if (kind === 'dose') return ['reading'];
+  if (kind === 'typed') return ['reading', 'searching'];
   if (kind === 'plan') return ['reading', 'plan'];
   if (kind === 'question') return ['reading', 'searching', 'preparing'];
   return ['reading', 'preparing'];
@@ -1404,6 +1421,12 @@ function replyCard(turn: Turn, index: number): string {
           <span class="caption">${esc(t('plan.effectiveFrom'))}</span>
         </div>`;
     case 'typed':
+      return `<div class="card">
+          <span class="label">${esc(t('assistant.medicineLabel'))}</span>
+          <span class="strong">${esc(tf('review.adherence.counts', { taken: 1, skipped: 0 }))}</span>
+          <span class="caption">${esc(tf('assistant.basedOn', { count: 1 }))}</span>
+        </div>`;
+    case 'dose':
       return `<div class="card quiet">
           <span class="strong">${esc(t('assistant.refusal.dosing'))}</span>
           <span class="muted">${esc(t('assistant.refusalAskDoctor'))}</span>
@@ -1438,7 +1461,7 @@ function assistant(): string {
         <div class="asked">${esc(askedText(turn.kind))}</div>
         ${replyCard(turn, index)}
         <span class="caption">${esc(
-          t(turn.kind === 'typed' ? 'assistant.disclaimerRefusal' : 'assistant.disclaimer'),
+          t(turn.kind === 'dose' ? 'assistant.disclaimerRefusal' : 'assistant.disclaimer'),
         )}</span>
       </div>`,
     )
@@ -1694,7 +1717,7 @@ const NOTES: Record<ScreenId, { title: string; points: string[] }> = {
       'The model on the phone works out what you asked. The answer itself is looked up in your own record, so every figure on the card comes from what you wrote down.',
       'A sentence may appear above the figures. It is dropped if it names a number your record did not produce.',
       'Asking it to write something down, set a reminder or make the visit summary brings a card first. Nothing is saved until you press Confirm, and Edit opens the full form.',
-      'A question about doses is refused before the model sees it, with a fixed sentence nobody generated. Send the one typed in the box to see it.',
+      'A question about doses is refused before the model sees it, with a fixed sentence nobody generated. Ask the dose question beside the phone to see it.',
       'While it works, one line says what it is doing: reading the question, checking your log.',
       'The question and the answer stay on the phone. A phone too small for the model shows no disc at all; try the three states with the control beside the phone.',
     ],
