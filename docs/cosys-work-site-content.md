@@ -1,4 +1,4 @@
-# cosys.work site content (v4.3, 2026-09-26)
+# cosys.work site content (v5, 2026-11-01)
 
 This is the English source copy. Nepali (`ne`) versions are needed for every block before launch and must be reviewed by a native speaker. English stays the default language. Keep the current visual design. `[Screenshot: …]` marks where an image goes. No em dashes anywhere in the copy, in either language.
 
@@ -6,31 +6,105 @@ This is the English source copy. Nepali (`ne`) versions are needed for every blo
 
 **Positioning.** cosys.work is collaborative systems for the care people do themselves between clinic visits, across chronic and comorbid conditions (diabetes, blood pressure, menopause, arthritis and more), with a specialised app for each, starting with diabetes. Peer-to-peer, private and sovereign.
 
-**Naming.** The app is **The Diabetes App**, or **tda by cosys** where a short name is needed. Don't call it TApp on the site, and don't use cosys.work as the app's name: cosys.work is the company.
+**Naming.** The app is **The Diabetes App**, or **tda by cosys** where a short name is needed. Don't call it TApp on the site, and don't use cosys.work as the app's name: cosys.work is the company. The company's three names are **cosys.work** (collaborative systems), **nep.work** (the peer-to-peer network, also called nepwork; the Platform page) and **coplanetary.work** (systems for many places at once). The public posts app is **SoMA**, spelled that way everywhere.
+
+**Positioning (v5).** The homepage now introduces the company before the health apps: collaborative systems that people own, that work offline and sync peer to peer, with chronic care in Nepal as the first proof. The health positioning above still holds for the health apps and their pages.
+
+**What changed from v4.3.** The homepage leads with the company: a new hero and *Who we are*, a band explaining cosys.work, nep.work and coplanetary.work, three sections with drawings (collaborative systems, peer-to-peer DNA, beyond Earth), *What we build* with SoMA and the open `@cosys` framework, and *Work with us* with the two consulting offers. Health keeps its own band with the condition apps, the Nepal figures and both buttons; the Snap, Share, Follow steps and the comparison with typical diabetes apps moved to the Diabetes App page. SoMA gets its own page at `/soma` with an invitation form that asks for no name and no phone number. The header gains SoMA; the footer gains the three names, "Built in Nepal" and a link to the open libraries (the app repositories stay private). The Platform page names the network nep.work, and the Company page gains *Work with us* and the three names. The EGU and NASA ADS line, SoMA's price and status line, and the language switch all still wait (see the checks at the end). Every new block needs its Nepali version, reviewed by a native speaker, before launch.
 
 **What changed from v3.** Brought in line with the app as built through Milestone 11 and with the Clinic App as proposed (ADR-20). The patient app's features are stated as they work. Clinic features are marked as coming with the Clinic App, because none of it is built yet. The Platform section now describes the network the app actually uses. See *Check before publishing* at the end for four points that need a decision.
 
-Global header: **Home · Diabetes App · Clinic App · Platform · Company** · language switch **English | नेपाली**
+Global header: **Diabetes App · Clinic App · SoMA · Platform · Company · Contact**. The language switch **English | नेपाली** waits until reviewed Nepali pages exist; don't ship a switch that leads nowhere.
 
-Global footer: "cosys.work · Nepal, Nepal · hello@cosys.work · Privacy" *(add "Open source on GitHub" only once the repository is public; see the checks at the end)*
+Global footer: "cosys.work · nep.work · coplanetary.work" (plain text until those domains serve pages) · "Built in Nepal" · **Open libraries on GitHub** (`github.com/cosys-work/cosys`; the libraries are open, the apps are not) · hello@cosys.work · Privacy
 
 ---
 
 ## Home (`/`)
 
+The homepage introduces the company first, then the ideas, then what we build, then health. Every section below is new or rewritten in v5 except *Health in Nepal* and *Our promises*, which are kept from v4.3 and shortened.
+
 ### Hero
-**Health care that keeps going between visits.**
+**Systems you own, that keep working when the connection doesn't.**
 
-Most care happens at home, in the months between clinic visits. cosys.work builds collaborative systems for that part: you, the family who help you, and your doctor, working on your care together. For chronic and comorbid conditions, starting with diabetes.
+CoSys Work builds collaborative software that runs on the devices people already own. It works offline, syncs directly between the people who share it, and keeps every record with the people it belongs to. We started with chronic care in Nepal, where patients, families and clinics share one record without a central server.
 
-Buttons: **[Join the patient waitlist]** **[Bring your clinic]**
+Buttons: **[See what we build]** **[Work with us]**
 
-Small print under the buttons: *Peer-to-peer, private and sovereign. Built in Nepal.*
+Links under the buttons: *Living with diabetes?* **Join the waitlist** · *Run a clinic?* **Bring your clinic**
 
-### One app for each condition
-**Specialised apps, coming soon. Starting with diabetes.**
+Small print: *Built in Nepal. Open-source libraries under Apache-2.0.*
 
-Each condition gets an app built for it, with the words, the readings and the plans that condition needs. They share one record on your phone, because many people live with more than one.
+[Drawing: a phone, a laptop and a small clinic box joined by lines, with an empty dashed space where a central server would usually sit]
+
+### Who we are
+CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.
+
+### cosys.work, nep.work and coplanetary.work
+Three columns, each linking down to its own section.
+
+- **cosys.work: collaborative systems.** Software for people who work together. Each family, clinic, team or community holds its own keys and its own copy of what concerns it, and every entry is signed by whoever wrote it. Collaborative editors, signed authorship and trust circles are the building blocks. *For example:* a family and their clinic keep one diabetes record in step.
+- **nep.work: the peer-to-peer network, also called nepwork.** The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and any community can run its own node. *For example:* a patient's phone reaches a clinic's computer across Nepal with nothing in the middle that can read the record.
+- **coplanetary.work: systems for many places at once.** Systems built for distance and delay. Every copy is signed, can wait, and catches up with the others within known sync times: across town, across a country when the power goes out, and one day across planets. Eventually consistent social media is the first. *For example:* SoMA: write once on your phone, publish to every network, keep proof it's yours.
+
+### Collaborative systems
+**Built for people who work together**
+
+Most software treats you as one account on someone else's server. Ours starts from the groups people already belong to: a family, a clinic, a team, a cooperative. Each group holds its own keys, its own copy of what concerns it, and its own rules for who joins. Someone who belongs to two groups links them, and each group stays itself.
+
+Shared editing works offline and merges when people reconnect. Every entry is signed by whoever wrote it, and edits keep their history. You decide who sees what, and you can take it back.
+
+*In the Diabetes App, a patient chooses whether family sees the numbers, a colour, or only an alert.*
+
+[Drawing: Family, Clinic and Community as overlapping circles, each with "own keys, own copy"; a patient in Family and Clinic, a nurse in Clinic and Community. Title: "Each group holds its own keys and its own copy". Caption: "No server in the middle: each circle syncs among its own members."]
+
+### Peer-to-peer DNA
+**Peer to peer is in our DNA**
+
+Everything we build starts from the same rules, and they come with every product, every engagement and every library we publish.
+
+Your keys stay on your devices, and every entry is signed with them. Your copy of the record is the record, and it syncs with the people you chose whenever there is a connection. Relays carry sealed mail they cannot read. Everything works offline and catches up later. The code is open under Apache-2.0, so anyone can check that all of this is true.
+
+*The Diabetes App logs readings, reads photos and shows trends in airplane mode. Its mailbox carries sealed deposits it cannot open.*
+
+[Drawing: a double helix, titled "The same rules come with everything we build". Five rungs pair what stays with you with what the network does: Your keys / Entries signed · Your copy / Syncs when online · Sealed records / Relays can't read · Works offline / Catches up later · Open source / Apache-2.0]
+
+Under the drawing: *Our libraries are published on npm, JSR and crates.io.* **[See the source on GitHub]**
+
+### Beyond Earth
+**Built for distance and delay**
+
+Most software assumes the connection is instant and always there. Ours treats delay and disconnection as normal: every copy is signed, can wait as long as it needs to, and catches up with the others in a known time.
+
+That is what keeps a clinic in rural Nepal working through a power cut, and it is the discipline a network between planets needs. Light takes about 1.3 seconds to reach the Moon, and between about 4 and 24 minutes to reach Mars, depending on where the planets are. A clinic that is offline for a day is, in network terms, further away than Mars.
+
+Space agencies solve this with delay-tolerant networking, which stores a message and forwards it when the next link opens. Signed, self-contained records suit that way of travelling. coplanetary.work is where we take it further: social media and shared records that stay consistent across any distance. Nothing we run is in space today. This is a design rule, and the direction we are heading.
+
+*(The EGU and NASA ADS line stays out until the founder confirms it; see the checks at the end.)*
+
+[Drawing: one-way delay, titled "A clinic offline for a day is further away than Mars". Same room: milliseconds · Across a country: a fraction of a second · Earth to Moon: about 1.3 seconds · Earth to Mars: 4 to 24 minutes · Clinic offline (highlighted): hours to days. Axis: "One-way delay, longer to the right (not to scale)". Bracket: "One rule for the whole range: sign every copy, let it wait, catch up later".]
+
+### What we build
+**Our own products, and the framework under them**
+
+- **The Diabetes App and the Clinic App.** Apps for people living with diabetes and the clinics that care for them. The record stays on the patient's phone and at the clinic, and family see only what the patient chooses. The Diabetes App is in closed pilot, and the Clinic App is in development. Links: **[The Diabetes App]** **[The Clinic App]**
+- **SoMA.** Write once on your phone, post to every network, and keep proof that the words are yours. Anonymous by default, and joined by invitation. Link: **[About SoMA]**
+- **The open @cosys framework.** The libraries our products run on, free under Apache-2.0: `@cosys` packages on npm and JSR, and `cosys-` crates on crates.io. Link: **[See it on GitHub]**
+
+### Work with us
+**Your own systems, in production**
+
+For teams who want their own systems in production, on machines they own. No prices on the site.
+
+- **MVP to Production.** For teams with a working prototype and a reason to launch: a review across eight areas, a clear verdict, and a roadmap into production on systems you own.
+- **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
+
+Both cards link to *Work with us* on the Company page.
+
+### Health in Nepal
+**Specialised apps for each condition. Starting with diabetes.**
+
+Each condition gets an app built for it, and they share one record on your phone, because many people live with more than one.
 
 - **Diabetes** *(in closed pilot)*: The Diabetes App, the first of them. Photo logging, your doctor's plan, and family who help.
 - **Blood pressure** *(coming soon)*: readings, medicines and your doctor's targets, over time.
@@ -38,43 +112,24 @@ Each condition gets an app built for it, with the words, the readings and the pl
 - **Arthritis** *(coming soon)*: pain, stiffness, medicines and what helps, day by day.
 - **And more** *(coming soon)*: conditions rarely come alone. The apps share one record, so they work together.
 
-### Peer-to-peer, private and sovereign
-- **Peer-to-peer.** Your record moves directly between your phone and the people you choose: family who help, and later your clinic. No central server holds it.
-- **Private.** Photos are read and questions answered on your phone. Anything that travels is sealed so only the phones you chose can open it.
-- **Sovereign.** The record is yours. You decide who sees what, you can end any share, and you can take the whole of it with you as a file.
+Why Nepal, why now:
 
-### How it works, starting with diabetes
-1. **Snap.** Photograph your glucometer or a lab report. The number is read on your phone, and you check it before it's saved. This works in airplane mode.
-2. **Share.** Choose family members who help you, and choose what each one sees. Before a visit, make a one-page summary of your last month as a PDF to show or send your doctor. When your clinic joins through the Clinic App, you'll scan its QR code and the summary reaches your doctor directly.
-3. **Follow.** Your targets, medicines and your doctor's instructions sit on a plan card on your phone, with reminders for your medicines. Later, with the Clinic App, your clinic will be able to set the plan and send a checklist of next tests.
-
-[Screenshot: the three steps on the phone]
-
-### Why Nepal, why now
 - **22%** of adults over 30 had high blood sugar in the capital's 2024–25 screening of 19,660 people. *(Source: Kathmandu Post, Nov 2025)*
 - Most people with diabetes see a doctor every **2–3 months**. Sugar levels change every day.
 - In the clinics we've spoken to, intake takes **1–2 hours** for a **5–15 minute** consultation. *(What we have seen, not a formal study.)*
 
-### What makes it different
+**Built in Nepal.** Patients: the Diabetes App is in closed pilot, so join the waitlist and we'll tell you when it is ready for you. Clinics: the Clinic App is in development, and a preview is available on request.
 
-| | Typical diabetes apps | The Diabetes App |
-|---|---|---|
-| Works with no signal | Partly, or not at all | Yes: logging, photos, your summary and reminders (the assistant too, on phones with about 6 GB of memory) |
-| Where the AI runs | In the cloud | On your phone |
-| Who holds your record | The app company's servers | You, on your phone |
-| Cost to patients | Free trial, then a subscription | Free, always |
-| Share with family | The full numbers | Your choice for each person: the numbers, the range only, or alerts only |
-| Your doctor's targets | Typed in by you, or none | Your doctor's, or published WHO and ADA values, always labelled with where they came from |
+Buttons: **[Join the patient waitlist]** **[Bring your clinic]**
 
 ### Our promises
+**What our health apps will always and never do**
+
 - **Your doctor decides; the app remembers.** It never calculates or recommends insulin doses, and it never estimates carbohydrates or calories.
 - **Your record belongs to you.** Export it at any time as PDF or CSV, or as an encrypted backup only your passphrase opens. There is no cloud copy of your record.
 - **Built for the hard case first.** It runs on low-cost Android phones, on slow networks and in Nepali.
 
-### Closing call to action
-**Being built in Nepal.** Clinics: see the Clinic App and request a walkthrough. Patients: join the waitlist and we'll tell you when the app is ready for you.
-
-Buttons: **[Bring your clinic]** **[Join the patient waitlist]**
+*Moved to the Diabetes App page in v5:* "How it works, starting with diabetes" (Snap, Share, Follow) and "What makes it different" (the comparison with typical diabetes apps). Their copy is under that page below.
 
 ---
 
@@ -86,6 +141,25 @@ Buttons: **[Bring your clinic]** **[Join the patient waitlist]**
 Log by photo, see your readings over time, and follow the plan your doctor gave you, all on your phone. For Type 2, Type 1, gestational diabetes and prediabetes.
 
 Button: **[Join the patient waitlist]** · *Free for patients, always.*
+
+### How it works
+*Moved here from the homepage in v5.*
+
+1. **Snap.** Photograph your glucometer or a lab report. The number is read on your phone, and you check it before it's saved. This works in airplane mode.
+2. **Share.** Choose family members who help you, and choose what each one sees. Before a visit, make a one-page summary of your last month as a PDF to show or send your doctor. When your clinic joins through the Clinic App, you'll scan its QR code and the summary reaches your doctor directly.
+3. **Follow.** Your targets, medicines and your doctor's instructions sit on a plan card on your phone, with reminders for your medicines. Later, with the Clinic App, your clinic will be able to set the plan and send a checklist of next tests.
+
+### What makes it different
+*Moved here from the homepage in v5.*
+
+| | Typical diabetes apps | The Diabetes App |
+|---|---|---|
+| Works with no signal | Partly, or not at all | Yes: logging, photos, your summary and reminders (the assistant too, on phones with about 6 GB of memory) |
+| Where the AI runs | In the cloud | On your phone |
+| Who holds your record | The app company's servers | You, on your phone |
+| Cost to patients | Free trial, then a subscription | Free forever, with optional services from others in the app |
+| Share with family | The full numbers | Your choice for each person: the numbers, the range only, or alerts only |
+| Your doctor's targets | Typed in by you, or none | Your doctor's, or published WHO and ADA values, always labelled with where they came from |
 
 ### Log in seconds
 - **Glucometer:** take a photo of the display. The number is read on your phone, and you confirm it before it's saved. It works with the meters sold in Nepal; no Bluetooth needed.
@@ -206,7 +280,77 @@ Buttons: **[Request a walkthrough]** · **[See the patient side]**
 
 ---
 
+## SoMA (`/soma`)
+
+The name is **SoMA**, spelled that way everywhere. It is a separate app from the health apps, for people who post in public. Status line and price wait for the founder (see the checks at the end); the page carries neither until then.
+
+### Hero
+**Write once. Post everywhere. Keep the proof.**
+
+SoMA lets you write a post on your own phone and publish it to Nostr, Mastodon and the rest of the Fediverse, Bluesky, and the apps you already use. Every version is signed and timestamped, so you can always show the words are yours. You post under a name you choose, and your posts stay with you.
+
+Buttons: **[Ask for an invitation]** **[How it works]**
+
+Small print: *By invitation. Anonymous by default. Separate from our health apps.*
+
+[Preview: the composer with its Post everywhere button]
+
+### How it works
+1. **Write once.** Write on your phone and add photos, sound, PDFs or video clips of up to two minutes. The post is signed on your phone before it goes anywhere, and drafts follow you to your other devices.
+2. **Post everywhere.** SoMA shapes the post for each network. Nostr gets it straight from your phone, and Mastodon and Bluesky get it through bridges. For apps like Instagram, X or LinkedIn, your phone's share sheet opens them with the post ready to go.
+3. **Keep the proof.** Every edit is a new signed version of the same post. The final version is timestamped with OpenTimestamps, which anchors it in Bitcoin within a few hours, with no wallet and no coins. Share the post back from another app and SoMA keeps the link to that copy, private unless you choose to publish it.
+
+[Preview: one post's journey from the phone to each network] · [Preview: the proof screen with its OpenTimestamps seal]
+
+### Anonymous and safe
+**Anonymous by default, safe by design**
+
+Your account starts as a fresh key with a generated name. We never ask for a phone number, an email or your legal name. You can keep separate personas that nobody can link unless you do, and photos lose their location and camera details before they leave your phone.
+
+Anonymous doesn't mean anything goes. You join by invitation from an operator who vets new members, so your pseudonym answers to a community without being tied to your identity. Every post has report, block and mute, and reports go to the operator's moderators. Private messages reach only people who follow you back, or people in your circles. There is no random chat.
+
+### Where your posts go
+**One post, every network**
+
+Nostr is an open network where your identity is a key you hold. The Fediverse is thousands of independent servers that talk to each other, Mastodon being the best known. Bluesky is an open network built on the AT Protocol. SoMA reaches all of them, and the apps you already use.
+
+| Network | How your post gets there | Replies |
+|---|---|---|
+| Nostr | Straight from your phone to your relays | Come back to SoMA |
+| Mastodon and the Fediverse | Through a bridge your operator runs; videos through PeerTube | Come back to SoMA |
+| Bluesky | Through a bridge your operator runs | Come back to SoMA |
+| Instagram, X, LinkedIn and others | Your phone's share sheet opens the app with the post ready | Share the link back to SoMA; it stays private unless you publish it |
+
+### Circles, files and your data
+- **Your circles.** Share with a family, a club or a team as a circle. Circle posts are sealed so only members can read them, and they pass from phone to phone with no server in the middle. When someone leaves, the circle gets a new key, so they can't read what comes next.
+- **Works with no signal.** Write, read and edit offline. SoMA catches up as soon as you're connected, and shows when each post last synced.
+- **Photos, sound, PDFs and video.** Post photos, sound, PDFs, maps and data files, and video clips of up to two minutes in playlists. Only open, safe file types are allowed, and nothing plays until you tap it.
+- **Your posts stay yours.** Your posts live on your phone and your own relays first, and every network's copy links back to the signed original. Take everything with you whenever you like, or delete your account from inside the app. The app tells you plainly that copies other people kept may remain.
+- **Plugins in plain sight.** Extras, such as viewers for new file types, come built into the app and are listed in Settings with what each can read and write. Nothing is downloaded behind your back.
+
+### The facts
+- **Where it runs:** iPhone, Android, desktop and the web.
+- **Joining:** by invitation from an operator. The first operator runs on nep.work, and any community can run its own.
+- **Languages:** English and Nepali.
+- **Internet:** not needed to write or read. Posts go out when you're connected.
+- **Your keys:** kept in your phone's secure keychain, or in a signer app you choose.
+- **Open source:** the libraries it runs on are open under Apache-2.0.
+
+*(Price: left out until the founder sets one. Never publish a placeholder.)*
+
+### Separate from our health apps
+SoMA is a separate app with its own identity. It cannot see any health record, and nothing from the Diabetes App or the Clinic App can be posted here. If you use both, they are two accounts that nothing links.
+
+### Closing call to action
+**Post under your own terms.** Ask for an invitation, or run an operator for your community.
+
+Buttons: **[Ask for an invitation]** **[Run an operator]**
+
+---
+
 ## Platform (`/platform`)
+
+*v5:* the page names the network **nep.work** in its hero and metadata; the URL stays `/platform` and the nav label stays "Platform". Hero eyebrow: "nep.work, the network underneath our apps". Under the headline: "Both apps run on nep.work, our peer-to-peer network." followed by the existing paragraph.
 
 Keep the current architecture copy (device layer, trust fabric, institutional nodes, plugin fabric) and replace the open-infrastructure section with this:
 
@@ -247,6 +391,19 @@ Keep the four commitments. Update them as follows:
 
 Add a status line: "Being built in Nepal. The patient app is free, always."
 
+### Our names (v5)
+cosys.work, nep.work and coplanetary.work in one short block, with the same one line for each as the homepage band: collaborative systems; the peer-to-peer network, also called nepwork; systems for many places at once.
+
+### Work with us (v5, `#work-with-us`)
+**Your own systems, in production**
+
+We also help companies, organisations and ministries move their systems onto machines they own. No prices on the site.
+
+- **MVP to Production.** For teams with a working prototype and a reason to launch: a review across eight areas, a clear verdict, and a roadmap into production on systems you own.
+- **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
+
+Button: **[Write to us]** (hello@cosys.work, until the founder decides whether *Work with us* gets a form; see the checks at the end)
+
 ---
 
 ## Privacy (`/privacy`)
@@ -266,6 +423,12 @@ Update it to match the site and the app:
 - Fields: Name · Clinic name · City · Phone or email · Number of patients with diabetes (range) · Message
 - Confirmation text: "Thank you. We'll contact you within a week to arrange a walkthrough."
 
+**Ask for an invitation to SoMA** (v5, `/contact#soma`):
+- Fields: Email or Nostr address · Your community (optional)
+- No name and no phone number, to match the anonymity promise.
+- Note under the form: "We only ask how to reach you. A Nostr address works as well as an email."
+- Confirmation text: "Thank you. We'll be in touch about an invitation to SoMA."
+
 **Join the patient waitlist:**
 - Fields: Name · City · Phone or email · Your clinic (optional)
 - Note under the form: "We only ask how to reach you. Please don't include health details here."
@@ -283,7 +446,12 @@ Update it to match the site and the app:
 ---
 
 ## Check before publishing
-1. **Open source.** v3 said "Open source. Anyone can inspect the code" and linked GitHub in the footer. The repository is private today, so both are left out of v4. Put them back once it is public.
-2. **The European Geosciences Union / NASA ADS line.** v3 said the platform's data-access architecture was presented at the EGU. It sat inside the GotChoices section and has been removed with it. Restore it only if the presented work is the architecture the app uses now.
+1. **Open source.** The app repositories are private. The `@cosys` libraries are open under Apache-2.0 at `github.com/cosys-work/cosys`, so v5 links the libraries, never the apps, and says the libraries are open.
+2. **The European Geosciences Union / NASA ADS line.** v3 said the platform's data-access architecture was presented at the EGU. It sat inside the GotChoices section and has been removed with it. The v5 Beyond Earth section holds it back too. Restore it only if the presented work is the architecture the apps use now, and only once the founder confirms.
 3. **Minimum Android version.** The build currently allows Android 7.0 and newer. It has been tested on Android 12 and on a Samsung M16, so confirm a floor before printing one.
 4. **The alert lines.** The numbers on the Diabetes App page (70, 54 and 325 mg/dL) are the app's published defaults. If the defaults change, for example to Nepal's national PEN values, change the page too.
+5. **SoMA's price and status line,** and the link from "an operator who vets new members" to the operator's published vetting standard, once it exists.
+6. **Where Work with us leads:** the Company section only, or also a form on the Contact page.
+7. **nep.work and coplanetary.work:** whether either domain serves a page yet. Until then the footer names them as plain text.
+8. **The link-preview image** (`public/og.png`) still shows the v4 hero line; make a new one with the v5 line.
+9. **Nepali:** every v5 block needs its Nepali version, reviewed by a native speaker, before the language switch ships.
