@@ -366,8 +366,63 @@
   opacity: 0;
   visibility: hidden;
 }
+/* The pause control: a small icon whose label shows on hover and keyboard focus. The checkbox
+   inside is what screen readers and keyboards use; its name is "Pause headlines". */
 .headline-pause {
   display: none;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  cursor: pointer;
+  /* 0.8 keeps the resting icon above 3:1 against the ground in the light themes. */
+  opacity: 0.8;
+  transition:
+    opacity 150ms,
+    background-color 150ms;
+}
+.headline-pause:hover,
+.headline-pause:has(:focus-visible) {
+  opacity: 1;
+  background-color: var(--p-surface-muted);
+}
+.headline-pause:has(:focus-visible) {
+  outline: 2px solid var(--p-focus);
+  outline-offset: 2px;
+}
+.headline-pause .icon-play,
+.headline-pause:has(:checked) .icon-pause,
+.headline-pause .tip-play,
+.headline-pause:has(:checked) .tip-pause {
+  display: none;
+}
+.headline-pause:has(:checked) .icon-play,
+.headline-pause:has(:checked) .tip-play {
+  display: block;
+}
+.headline-tip {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  border-radius: 0.375rem;
+  background: var(--p-text);
+  color: var(--p-ground);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms;
+  z-index: 10;
+}
+.headline-pause:hover .headline-tip,
+.headline-pause:has(:focus-visible) .headline-tip {
+  opacity: 1;
 }
 
 @keyframes headline-cycle {

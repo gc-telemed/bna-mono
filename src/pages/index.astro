@@ -36,6 +36,7 @@ const hero = {
     },
   ],
   pause: 'Pause headlines',
+  play: 'Play headlines',
   body: SITE.description,
   primary: { label: 'See what we build', href: '#what-we-build' },
   secondary: { label: 'Work with us', href: '#work-with-us' },
@@ -302,11 +303,29 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
               ))
             }
           </h1>
-          <label
-            class="headline-pause text-ink-muted hover:text-ink mt-4 inline-flex cursor-pointer items-center gap-2 text-sm"
-          >
-            <input type="checkbox" class="accent-primary h-4 w-4" />
-            {hero.pause}
+          <label class="headline-pause text-ink-muted hover:text-ink mt-3">
+            <input type="checkbox" class="sr-only" />
+            <span class="sr-only">{hero.pause}</span>
+            <svg
+              class="icon-pause h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+              <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+            </svg>
+            <svg
+              class="icon-play h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
+              ></path>
+            </svg>
+            <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
+            <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
           </label>
         </div>
         <p
