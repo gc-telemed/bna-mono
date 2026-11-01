@@ -9,7 +9,7 @@ import HeroArt from '@/components/HeroArt.astro';
 import Circles from '@/components/Circles.astro';
 import Helix from '@/components/Helix.astro';
 import DelayLadder from '@/components/DelayLadder.astro';
-import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS } from '@/data/site';
+import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS, THREADS } from '@/data/site';
 
 // Every block below is new in v5 except `conditions`, `facts` and `promises`, kept from v4.3.
 // needs_review: each block needs a Nepali version reviewed by a native speaker before launch.
@@ -152,6 +152,9 @@ const workWithUs = {
   accentTitle: 'in production',
   lede: 'For teams who want their own systems in production, on machines they own.',
   more: 'How we work together',
+  // v5.1: the band under the two cards. Items come from THREADS in site.ts and link to their
+  // thread on About us. needs_review: Nepali version, reviewed by a native speaker.
+  bandTitle: 'What stays with you',
 };
 
 const health = {
@@ -463,6 +466,37 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
         ))
       }
     </div>
+
+    <h3 class="text-ink mt-14 text-center text-xl font-bold">{workWithUs.bandTitle}</h3>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4">
+      {
+        THREADS.map(({ id, label, line }) => (
+          <li class="flex">
+            <a
+              href={`/company#${id}`}
+              class="group reveal lift border-line bg-surface hover:border-primary/40 flex w-full flex-col rounded-2xl border p-5 transition hover:shadow-lg focus-visible:shadow-lg"
+            >
+              <span class="text-ink inline-flex items-center gap-1.5 font-semibold">
+                {label}
+                <svg
+                  class="text-primary h-4 w-4 flex-shrink-0 transition group-hover:translate-x-0.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={arrow} />
+                </svg>
+              </span>
+              <span class="text-ink-muted mt-1.5 text-sm leading-relaxed">{line}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <!-- Health in Nepal -->
