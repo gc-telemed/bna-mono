@@ -29,7 +29,7 @@ The homepage introduces the company first, then the ideas, then what we build, t
 ### Hero
 *v5.1:* the headline rotates every five seconds through five lines. The first is the page's h1 and the site tagline; the others show in turn, and a "Pause headlines" control stops them. With reduced motion only the first shows. Founder to sign off the wording (see the checks at the end).
 
-1. **Collaborative software with no centre to fail.**
+1. **Collaborative systems with no centre to fail.**
 2. **Families, clinics and offices working together, each keeping its own copy.**
 3. **Your records, your models and your bills, under your own roof.**
 4. **A clinic offline for a day is further away than Mars. We build for both.**

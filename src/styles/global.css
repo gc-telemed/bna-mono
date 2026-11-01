@@ -368,9 +368,13 @@
 }
 /* The pause control: a small icon whose label shows on hover and keyboard focus. The checkbox
    inside is what screen readers and keyboards use; its name is "Pause headlines". */
+/* It sits in the hero's top padding, above the headline's top right corner, so it takes no
+   height of its own and never covers a headline. */
 .headline-pause {
   display: none;
-  position: relative;
+  position: absolute;
+  top: -2.75rem;
+  right: 0;
   width: 2rem;
   height: 2rem;
   align-items: center;
@@ -404,9 +408,9 @@
 }
 .headline-tip {
   position: absolute;
-  left: 50%;
-  top: calc(100% + 6px);
-  transform: translateX(-50%);
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
   white-space: nowrap;
   border-radius: 0.375rem;
   background: var(--p-text);
