@@ -65,7 +65,7 @@ const capture = [
   {
     emoji: '🩸',
     title: 'Glucometer',
-    body: 'Take a photo of the display. The number is read on your phone, and you confirm it before it’s saved. It works with the meters sold in Nepal; no Bluetooth needed.',
+    body: 'Take a photo of the display. The number is read on your phone, and you confirm it before it’s saved. It works with the meters sold in Nepal and does not need Bluetooth.',
   },
   {
     emoji: '📄',
@@ -202,7 +202,7 @@ const faqs = [
   {
     question: 'What if I lose my phone?',
     answer:
-      'Make an encrypted backup from the app and keep it somewhere safe. Only your passphrase opens it, and restoring it on a new phone brings your record back. There is no cloud copy, so the backup is the copy.',
+      'Make an encrypted backup from the app and keep it somewhere safe. Only your passphrase opens it, and restoring it on a new phone brings your record back. There is no cloud copy, so the backup is your only copy.',
   },
   {
     question: 'What does the assistant do?',
@@ -336,7 +336,7 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
       accentTitle="Try it right here."
       accentClass={accent}
       chipClass={chip}
-      lede="A working replica of the real interface: the same screens, the same colours, the same words in English and Nepali. Nothing you do in it is saved."
+      lede="A working replica of the real interface, with its screens, colours and wording in English and Nepali. Nothing you do in it is saved."
     />
     <div class="mt-12">
       <AppPreview />
@@ -353,7 +353,7 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
             {readings.map((line) => <li>{line}</li>)}
           </ul>
           <p class="text-ink-muted mt-4 text-sm leading-relaxed">
-            A reading outside your range is shown as it is, with no alarm colour and no verdict.
+            A reading outside your range is shown as it is, without an alarm colour or a verdict.
           </p>
         </div>
         <div class={block}>

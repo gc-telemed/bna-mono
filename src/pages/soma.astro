@@ -39,7 +39,7 @@ const steps = [
   {
     step: '03',
     title: 'Keep the proof',
-    body: 'Every edit is a new signed version of the same post. The final version is timestamped with OpenTimestamps, which anchors it in Bitcoin within a few hours, with no wallet and no coins. Share the post back from another app and SoMA keeps the link to that copy, private unless you choose to publish it.',
+    body: 'Every edit is a new signed version of the same post. The final version is timestamped with OpenTimestamps, which anchors it in Bitcoin within a few hours. You don’t need a wallet or any coins. Share the post back from another app and SoMA keeps the link to that copy, private unless you choose to publish it.',
   },
 ];
 
@@ -116,11 +116,11 @@ const whitepaper = {
   eyebrow: 'For technical readers',
   title: 'The white paper:',
   accentTitle: 'the ideas SoMA rests on',
-  lede: 'Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can check. It describes ideas, not code, and it says plainly what SoMA does not claim.',
+  lede: 'Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can check. It contains no code, and it says plainly what SoMA does not claim.',
   topics: [
     'The record as a hypergraph: each signed post names what it refers to, and those references form a category, so every figure the app shows can be traced back to what someone wrote.',
     'Copies on other networks as structure-preserving maps that remember their original, so two copies of one post are always recognised as the same post.',
-    'The law every bridge between two networks keeps: a post that goes out and comes back is the same post, never a second one.',
+    'The law every bridge between two networks keeps: a post that goes out and comes back is still the same post and is not duplicated.',
     'Trust published as a relation between keys, never as a number about a person. Each reader orders their own feed, and that order is never published.',
     'How copies agree without coordination, how a circle’s history is split into key epochs when someone leaves, and how a post is shown to have existed by a point in public time.',
   ],
