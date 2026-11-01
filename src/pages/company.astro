@@ -130,17 +130,17 @@ const beliefs = [
   {
     emoji: '🧭',
     title: 'The record belongs to the patient',
-    body: 'Not to us, and not to whoever acquires us later. If a company can monetise a health history, sooner or later it is asked to. We removed the option by removing the copy.',
+    body: 'It does not belong to us or to whoever acquires us later. A company that can monetise a health history is sooner or later asked to, so we keep no copy.',
   },
   {
     emoji: '📡',
     title: 'Connectivity is a luxury, not a premise',
-    body: 'Software that stops working when the signal drops is not a medical tool, it is a website. Everything essential runs on the device, and the network is a bonus.',
+    body: 'A medical tool has to keep working when the signal drops, so everything essential runs on the device and the network is a bonus.',
   },
   {
     emoji: '🩺',
     title: 'Clinicians decide, software remembers',
-    body: 'No dose calculations and no automated diagnosis. We build record-keeping and communication, and the clinician makes the call.',
+    body: 'We build record-keeping and communication. The software does not calculate doses or diagnose, and the clinician makes the call.',
   },
   {
     emoji: '🫱',
@@ -168,7 +168,7 @@ const approach = [
   {
     emoji: '🔁',
     title: 'Generalise from one condition, carefully',
-    body: 'Diabetes is where we start because the daily logging burden is severe and the clinical loop is tight. The same fabric extends to other long-term conditions once it is genuinely proven on one.',
+    body: 'Diabetes is where we start because the daily logging burden is severe and the clinical loop is tight. The same fabric extends to other long-term conditions once it is proven on one.',
   },
 ];
 ---
@@ -209,18 +209,18 @@ const approach = [
       <p>
         The usual answer is more hardware and more cloud: a continuous monitor, a subscription, a
         dashboard hosted somewhere far away. That answer excludes most of the people who need it
-        most, and it quietly assumes that a company should hold everybody&rsquo;s medical history in
-        one place.
+        most, and it assumes that a company should hold everybody&rsquo;s medical history in one
+        place.
       </p>
       <p class="text-ink font-medium">
-        We took a different route. Use the camera people already own. Run the intelligence on the
-        phone. Move records directly between the patient and the people who need them, and let
-        nothing in the middle read them.
+        So we use the camera people already own and run the intelligence on the phone. Records move
+        directly between the patient and the people who need them, and nothing in the middle can
+        read them.
       </p>
       <p>
-        That turned out to require three things rather than one: an app for the patient, an app for
-        the clinic, and a peer-to-peer network connecting them. The patient app and the network come
-        first; the Clinic App is in development.
+        That turned out to need three things: an app for the patient, an app for the clinic, and a
+        peer-to-peer network connecting them. The patient app and the network come first; the Clinic
+        App is in development.
       </p>
     </div>
   </Section>
@@ -244,8 +244,8 @@ const approach = [
     <SectionHeading
       eyebrow="How we work"
       title="Built for the hard case first,"
-      accentTitle="not retrofitted to it"
-      lede="We work out of Nepal, and we build for it before we build for anywhere else. That is a design constraint as much as a market."
+      accentTitle="then for everywhere else"
+      lede="We work out of Nepal and build for it before anywhere else, as a market and as a design constraint."
     />
     <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {approach.map((item) => <Card {...item} />)}
