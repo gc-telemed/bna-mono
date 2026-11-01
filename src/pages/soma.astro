@@ -1,0 +1,390 @@
+---
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import Card from '@/components/Card.astro';
+import CTA from '@/components/CTA.astro';
+import SomaPreview from '@/components/SomaPreview.astro';
+import { SITE, PRODUCTS, FORMS } from '@/data/site';
+
+// Copy from the SoMA page draft (docs/handoff/2026-11-01-soma-page-copy.md) and copy source v5.
+// needs_review: every block needs a Nepali version reviewed by a native speaker before launch.
+// Left out until the founder decides: the price, the status line, and the link to the
+// operator's vetting standard. Never publish a placeholder for them.
+
+const product = PRODUCTS.find((p) => p.slug === '/soma')!;
+const accent = 'text-primary';
+const chip = 'border-primary/30 bg-primary-tint text-ink';
+
+const hero = {
+  title: 'Write once. Post everywhere.',
+  accentTitle: 'Keep the proof.',
+  body: 'SoMA lets you write a post on your own phone and publish it to Nostr, Mastodon and the rest of the Fediverse, Bluesky, and the apps you already use. Every version is signed and timestamped, so you can always show the words are yours. You post under a name you choose, and your posts stay with you.',
+  primary: 'Ask for an invitation',
+  secondary: 'How it works',
+  smallPrint: 'By invitation. Anonymous by default. Separate from our health apps.',
+};
+
+const steps = [
+  {
+    step: '01',
+    title: 'Write once',
+    body: 'Write on your phone and add photos, sound, PDFs or video clips of up to two minutes. The post is signed on your phone before it goes anywhere, and drafts follow you to your other devices.',
+  },
+  {
+    step: '02',
+    title: 'Post everywhere',
+    body: 'SoMA shapes the post for each network. Nostr gets it straight from your phone, and Mastodon and Bluesky get it through bridges. For apps like Instagram, X or LinkedIn, your phone’s share sheet opens them with the post ready to go.',
+  },
+  {
+    step: '03',
+    title: 'Keep the proof',
+    body: 'Every edit is a new signed version of the same post. The final version is timestamped with OpenTimestamps, which anchors it in Bitcoin within a few hours, with no wallet and no coins. Share the post back from another app and SoMA keeps the link to that copy, private unless you choose to publish it.',
+  },
+];
+
+const safety = {
+  eyebrow: 'Anonymous and safe',
+  title: 'Anonymous by default,',
+  accentTitle: 'safe by design',
+  body: [
+    'Your account starts as a fresh key with a generated name. We never ask for a phone number, an email or your legal name. You can keep separate personas that nobody can link unless you do, and photos lose their location and camera details before they leave your phone.',
+    'Anonymous doesn’t mean anything goes. You join by invitation from an operator who vets new members, so your pseudonym answers to a community without being tied to your identity. Every post has report, block and mute, and reports go to the operator’s moderators. Private messages reach only people who follow you back, or people in your circles. There is no random chat.',
+  ],
+};
+
+const networks = {
+  eyebrow: 'Where your posts go',
+  title: 'One post,',
+  accentTitle: 'every network',
+  lede: 'Nostr is an open network where your identity is a key you hold. The Fediverse is thousands of independent servers that talk to each other, Mastodon being the best known. Bluesky is an open network built on the AT Protocol. SoMA reaches all of them, and the apps you already use.',
+  caption: 'How a SoMA post reaches each network, and where the replies go',
+  columns: { network: 'Network', how: 'How your post gets there', replies: 'Replies' },
+  rows: [
+    {
+      network: 'Nostr',
+      how: 'Straight from your phone to your relays',
+      replies: 'Come back to SoMA',
+    },
+    {
+      network: 'Mastodon and the Fediverse',
+      how: 'Through a bridge your operator runs; videos through PeerTube',
+      replies: 'Come back to SoMA',
+    },
+    {
+      network: 'Bluesky',
+      how: 'Through a bridge your operator runs',
+      replies: 'Come back to SoMA',
+    },
+    {
+      network: 'Instagram, X, LinkedIn and others',
+      how: 'Your phone’s share sheet opens the app with the post ready',
+      replies: 'Share the link back to SoMA; it stays private unless you publish it',
+    },
+  ],
+};
+
+const yours = [
+  {
+    title: 'Your circles',
+    body: 'Share with a family, a club or a team as a circle. Circle posts are sealed so only members can read them, and they pass from phone to phone with no server in the middle. When someone leaves, the circle gets a new key, so they can’t read what comes next.',
+  },
+  {
+    title: 'Works with no signal',
+    body: 'Write, read and edit offline. SoMA catches up as soon as you’re connected, and shows when each post last synced.',
+  },
+  {
+    title: 'Photos, sound, PDFs and video',
+    body: 'Post photos, sound, PDFs, maps and data files, and video clips of up to two minutes in playlists. Only open, safe file types are allowed, and nothing plays until you tap it.',
+  },
+  {
+    title: 'Your posts stay yours',
+    body: 'Your posts live on your phone and your own relays first, and every network’s copy links back to the signed original. Take everything with you whenever you like, or delete your account from inside the app. The app tells you plainly that copies other people kept may remain.',
+  },
+  {
+    title: 'Plugins in plain sight',
+    body: 'Extras, such as viewers for new file types, come built into the app and are listed in Settings with what each can read and write. Nothing is downloaded behind your back.',
+  },
+];
+
+// No price row until the founder sets a price.
+const facts = [
+  { term: 'Where it runs', detail: 'iPhone, Android, desktop and the web' },
+  {
+    term: 'Joining',
+    detail:
+      'By invitation from an operator. The first operator runs on nep.work, and any community can run its own.',
+  },
+  { term: 'Languages', detail: 'English and Nepali' },
+  { term: 'Internet', detail: 'Not needed to write or read. Posts go out when you’re connected.' },
+  {
+    term: 'Your keys',
+    detail: 'Kept in your phone’s secure keychain, or in a signer app you choose',
+  },
+  { term: 'Open source', detail: 'The libraries it runs on are open under Apache-2.0' },
+];
+
+const separate = {
+  title: 'Separate from our health apps',
+  body: 'SoMA is a separate app with its own identity. It cannot see any health record, and nothing from the Diabetes App or the Clinic App can be posted here. If you use both, they are two accounts that nothing links.',
+};
+
+const closing = {
+  title: 'Post under your own terms',
+  body: 'Ask for an invitation, or run an operator for your community.',
+  primary: 'Ask for an invitation',
+  secondary: 'Run an operator',
+};
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: product.name,
+  applicationCategory: 'SocialNetworkingApplication',
+  operatingSystem: 'iOS, Android, desktop, web',
+  description: product.summary,
+  url: `${SITE.url}${product.slug}`,
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+};
+
+const block = 'border-line bg-surface rounded-2xl border p-7';
+---
+
+<Base
+  title={product.name}
+  description={product.summary}
+  path={product.slug}
+  structuredData={structuredData}
+>
+  <!-- Hero -->
+  <Section class="!pt-16 !pb-8 lg:!pt-20">
+    <div class="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16">
+      <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+        <span class:list={['inline-block rounded-full border px-4 py-1 text-sm font-medium', chip]}>
+          {product.audience}
+        </span>
+        <h1
+          class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
+        >
+          {hero.title}{' '}<br class="hidden sm:block" />
+          <span class={accent}>{hero.accentTitle}</span>
+        </h1>
+        <p class="text-ink-muted mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
+          {hero.body}
+        </p>
+        <div class="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <a
+            href={FORMS.soma}
+            class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+          >
+            {hero.primary}
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          <a
+            href="#how-it-works"
+            class="border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition"
+          >
+            {hero.secondary}
+          </a>
+        </div>
+        <p class="text-ink-muted mt-5 text-sm italic">{hero.smallPrint}</p>
+      </div>
+      <SomaPreview screen="composer" />
+    </div>
+  </Section>
+
+  <!-- How it works -->
+  <Section id="how-it-works" class="scroll-mt-20 !py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow="How it works"
+        title="Write once, post everywhere,"
+        accentTitle="keep the proof"
+        accentClass={accent}
+        chipClass={chip}
+      />
+      <ol class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          steps.map(({ step, title, body }) => (
+            <li class="border-line bg-surface rounded-2xl border p-6">
+              <span class="text-primary text-sm font-bold tabular-nums">{step}</span>
+              <h3 class="text-ink mt-2 font-semibold text-pretty">{title}</h3>
+              <p class="text-ink-muted mt-2 text-sm leading-relaxed">{body}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="mt-12 grid gap-10 sm:grid-cols-2">
+        <SomaPreview screen="journey" />
+        <SomaPreview screen="proof" />
+      </div>
+    </div>
+  </Section>
+
+  <!-- Anonymous and safe -->
+  <Section>
+    <SectionHeading
+      eyebrow={safety.eyebrow}
+      title={safety.title}
+      accentTitle={safety.accentTitle}
+      accentClass={accent}
+      chipClass={chip}
+    />
+    <div class="text-ink-muted mx-auto mt-8 max-w-3xl space-y-4 leading-relaxed text-pretty">
+      {safety.body.map((line) => <p>{line}</p>)}
+    </div>
+  </Section>
+
+  <!-- Where your posts go -->
+  <Section class="!py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow={networks.eyebrow}
+        title={networks.title}
+        accentTitle={networks.accentTitle}
+        accentClass={accent}
+        chipClass={chip}
+        lede={networks.lede}
+      />
+
+      <ul class="mt-10 grid gap-3 md:hidden" aria-label={networks.caption}>
+        {
+          networks.rows.map((row) => (
+            <li class="border-line bg-surface rounded-2xl border p-5">
+              <p class="text-ink font-semibold">{row.network}</p>
+              <dl class="mt-3 grid gap-2.5 text-sm leading-relaxed">
+                <div>
+                  <dt class="text-ink-muted text-xs font-semibold tracking-wider uppercase">
+                    {networks.columns.how}
+                  </dt>
+                  <dd class="text-ink mt-0.5">{row.how}</dd>
+                </div>
+                <div>
+                  <dt class="text-ink-muted text-xs font-semibold tracking-wider uppercase">
+                    {networks.columns.replies}
+                  </dt>
+                  <dd class="text-ink mt-0.5">{row.replies}</dd>
+                </div>
+              </dl>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="border-line bg-surface mt-12 hidden overflow-hidden rounded-2xl border md:block">
+        <table class="w-full text-left text-sm">
+          <caption class="sr-only">{networks.caption}</caption>
+          <thead>
+            <tr class="border-line border-b">
+              <th scope="col" class="text-ink w-1/4 px-5 py-4 font-semibold">
+                {networks.columns.network}
+              </th>
+              <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">
+                {networks.columns.how}
+              </th>
+              <th scope="col" class="text-ink-muted px-5 py-4 font-semibold">
+                {networks.columns.replies}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-line divide-y">
+            {
+              networks.rows.map((row) => (
+                <tr>
+                  <th scope="row" class="text-ink px-5 py-4 align-top font-semibold">
+                    {row.network}
+                  </th>
+                  <td class="text-ink px-5 py-4 align-top">{row.how}</td>
+                  <td class="text-ink-muted px-5 py-4 align-top">{row.replies}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Circles, files and your data -->
+  <Section>
+    <SectionHeading
+      eyebrow="Circles, files and your data"
+      title="Yours to share,"
+      accentTitle="yours to take with you"
+      accentClass={accent}
+      chipClass={chip}
+    />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {yours.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- Facts -->
+  <Section class="!pt-0">
+    <div class={block}>
+      <h2 class="text-ink text-xl font-bold">The facts</h2>
+      <dl class="mt-5 grid gap-x-8 gap-y-4 text-sm md:grid-cols-2">
+        {
+          facts.map(({ term, detail }) => (
+            <div>
+              <dt class="text-ink font-semibold">{term}</dt>
+              <dd class="text-ink-muted mt-1 leading-relaxed">{detail}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </Section>
+
+  <!-- Separate from the health apps -->
+  <Section class="!pt-0">
+    <div
+      class="border-primary/30 bg-primary-tint flex items-start gap-4 rounded-2xl border p-6 md:p-8"
+    >
+      <svg
+        class="text-ink mt-0.5 h-6 w-6 flex-shrink-0"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="3" y="5" width="7" height="14" rx="2"></rect><rect
+          x="14"
+          y="5"
+          width="7"
+          height="14"
+          rx="2"></rect>
+      </svg>
+      <div>
+        <h2 class="text-ink font-semibold">{separate.title}</h2>
+        <p class="text-ink-muted mt-1 text-sm leading-relaxed text-pretty">{separate.body}</p>
+      </div>
+    </div>
+  </Section>
+
+  <!-- CTA -->
+  <Section>
+    <CTA
+      title={closing.title}
+      body={closing.body}
+      ctaLabel={closing.primary}
+      href={FORMS.soma}
+      secondaryLabel={closing.secondary}
+      secondaryHref={FORMS.soma}
+    />
+  </Section>
+</Base>

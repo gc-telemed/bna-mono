@@ -1,0 +1,89 @@
+---
+/**
+ * The homepage hero drawing: a phone, a laptop and a small clinic box joined directly by
+ * lines, with an empty dashed space where a central server would usually sit.
+ *
+ * Inline SVG painted only with `--p-*` tokens, so all four themes work with no extra code.
+ * Its words come from the page's frontmatter so the Nepali versions can be dropped in later.
+ * `.hero-art` is what the motion stage drifts as the hero leaves the screen.
+ */
+interface Props {
+  label: string;
+  devices: { phone: string; laptop: string; clinic: string };
+  gap: readonly string[];
+  class?: string;
+}
+const { label, devices, gap, class: className } = Astro.props;
+---
+
+<svg
+  class:list={['hero-art h-auto w-full', className]}
+  viewBox="0 0 400 320"
+  role="img"
+  aria-label={label}
+>
+  <!-- Direct links between the three devices; none passes through the middle. -->
+  <g class="stroke-primary" fill="none" stroke-width="2.5" stroke-linecap="round">
+    <path class="draw" pathLength="1" d="M104 186 C 160 150, 200 118, 246 104"></path>
+    <path class="draw" pathLength="1" d="M104 236 C 160 252, 220 254, 268 240"></path>
+    <path class="draw" pathLength="1" d="M318 124 C 326 150, 326 172, 318 198"></path>
+  </g>
+
+  <!-- The empty place where a server would usually sit. -->
+  <circle
+    cx="196"
+    cy="186"
+    r="52"
+    class="stroke-line-strong fill-none"
+    stroke-width="1.5"
+    stroke-dasharray="5 6"></circle>
+  <text class="fill-ink-muted" font-size="14" text-anchor="middle">
+    {
+      gap.map((line, i) => (
+        <tspan x="196" y={186 + (i - (gap.length - 1) / 2) * 17 + 5}>
+          {line}
+        </tspan>
+      ))
+    }
+  </text>
+
+  <!-- Phone -->
+  <g class="stroke-ink" fill="none" stroke-width="2.5" stroke-linejoin="round">
+    <rect x="44" y="150" width="58" height="108" rx="11" class="fill-surface"></rect>
+    <path d="M64 162h18" stroke-linecap="round"></path>
+  </g>
+  <rect x="54" y="176" width="38" height="8" rx="3" class="fill-primary-tint"></rect>
+  <rect x="54" y="190" width="28" height="8" rx="3" class="fill-primary-tint"></rect>
+  <rect x="54" y="204" width="34" height="8" rx="3" class="fill-primary-tint"></rect>
+  <text x="73" y="282" class="fill-ink" font-size="16" font-weight="600" text-anchor="middle"
+    >{devices.phone}</text
+  >
+
+  <!-- Laptop -->
+  <g class="stroke-ink" fill="none" stroke-width="2.5" stroke-linejoin="round">
+    <rect x="248" y="48" width="118" height="74" rx="7" class="fill-surface"></rect>
+    <path d="M232 132h150l-8 10H240z" class="fill-surface"></path>
+  </g>
+  <rect x="262" y="62" width="60" height="8" rx="3" class="fill-primary-tint"></rect>
+  <rect x="262" y="78" width="88" height="8" rx="3" class="fill-primary-tint"></rect>
+  <rect x="262" y="94" width="44" height="8" rx="3" class="fill-primary-tint"></rect>
+  <text x="307" y="32" class="fill-ink" font-size="16" font-weight="600" text-anchor="middle"
+    >{devices.laptop}</text
+  >
+
+  <!-- Clinic box -->
+  <g class="stroke-ink" fill="none" stroke-width="2.5" stroke-linejoin="round">
+    <rect x="272" y="200" width="92" height="66" rx="9" class="fill-surface"></rect>
+    <path d="M272 220h92"></path>
+  </g>
+  <path
+    d="M318 230v26M305 243h26"
+    class="stroke-primary"
+    stroke-width="4"
+    stroke-linecap="round"
+    fill="none"></path>
+  <circle cx="284" cy="210" r="3" class="fill-primary"></circle>
+  <text x="318" y="290" class="fill-ink" font-size="16" font-weight="600" text-anchor="middle"
+    >{devices.clinic}</text
+  >
+</svg>

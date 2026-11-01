@@ -1,0 +1,72 @@
+---
+/**
+ * The company's three names, one column each: cosys.work, nep.work and coplanetary.work.
+ *
+ * The homepage shows it straight after the introduction, so the names are explained before a
+ * visitor meets them anywhere else, and each column links down to its own section. The copy
+ * comes from `NAMES` in site.ts; the Company page uses the short form (`compact`), without the
+ * introductions and examples.
+ */
+interface Props {
+  names: readonly { name: string; line: string; intro: string; example: string; href: string }[];
+  title?: string;
+  compact?: boolean;
+  /** Label for the link down to each name's section. */
+  more?: string;
+  exampleLabel?: string;
+}
+
+const {
+  names,
+  title = 'cosys.work, nep.work and coplanetary.work',
+  compact = false,
+  more = 'Read more',
+  exampleLabel = 'For example',
+} = Astro.props;
+---
+
+<div>
+  <h2 class="text-ink text-center text-2xl font-bold tracking-tight text-balance md:text-3xl">
+    {title}
+  </h2>
+  <ul class="mt-8 grid gap-5 md:grid-cols-3">
+    {
+      names.map(({ name, line, intro, example, href }, i) => (
+        <li
+          class="name-card border-line bg-surface flex flex-col rounded-2xl border p-6 lg:p-7"
+          style={`--i: ${i}`}
+        >
+          <p class="text-primary text-lg font-bold">{name}</p>
+          <p class="text-ink mt-1 font-semibold text-pretty">{line}</p>
+          {!compact && (
+            <>
+              <p class="text-ink-muted mt-3 flex-1 text-sm leading-relaxed">{intro}</p>
+              <p class="text-ink mt-4 text-sm leading-relaxed">
+                <span class="font-semibold">{exampleLabel}:</span> {example}
+              </p>
+              <a
+                href={href}
+                class="text-primary mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold"
+              >
+                {more}
+                <span class="sr-only"> about {name}</span>
+                <svg
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </a>
+            </>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

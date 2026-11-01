@@ -4,7 +4,17 @@ import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
-import { SITE, PRODUCTS, FORMS } from '@/data/site';
+import NameBand from '@/components/NameBand.astro';
+import { SITE, CONTACT, PRODUCTS, FORMS, NAMES, OFFERS } from '@/data/site';
+
+// New in v5. needs_review: Nepali versions, reviewed by a native speaker.
+const workWithUs = {
+  eyebrow: 'Work with us',
+  title: 'Your own systems,',
+  accentTitle: 'in production',
+  lede: 'We also help companies, organisations and ministries move their systems onto machines they own.',
+  action: 'Write to us',
+};
 
 const beliefs = [
   {
@@ -138,15 +148,43 @@ const approach = [
     </div>
   </Section>
 
+  <!-- Our names -->
+  <Section class="!pt-0">
+    <NameBand names={NAMES} title="Our names" compact />
+  </Section>
+
+  <!-- Work with us -->
+  <Section id="work-with-us" class="scroll-mt-20 !py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow={workWithUs.eyebrow}
+        title={workWithUs.title}
+        accentTitle={workWithUs.accentTitle}
+        lede={workWithUs.lede}
+      />
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {OFFERS.map((item) => <Card {...item} />)}
+      </div>
+      <div class="mt-8 text-center">
+        <a
+          href={`mailto:${CONTACT.email}`}
+          class="bg-primary hover:bg-primary-pressed text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+        >
+          {workWithUs.action}
+        </a>
+      </div>
+    </div>
+  </Section>
+
   <!-- Products recap -->
   <Section>
-    <SectionHeading title="What we make" lede="Three products, one peer-to-peer fabric." />
-    <div class="mt-12 grid gap-5 md:grid-cols-3">
+    <SectionHeading title="What we make" lede="Our products, and the network under them." />
+    <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {
         PRODUCTS.map(({ slug, name, summary, emoji }) => (
           <a
             href={slug}
-            class="hover:border-primary/30 group border-line bg-surface rounded-2xl border p-7 transition hover:shadow-md"
+            class="lift reveal hover:border-primary/30 group border-line bg-surface rounded-2xl border p-7 transition hover:shadow-md focus-visible:shadow-md"
           >
             <span class="text-3xl" aria-hidden="true">
               {emoji}

@@ -5,11 +5,13 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-{/*
+{
+  /*
   The cosys.work wordmark, from the brand's logo canvas: Nunito at 800, tracked in by 3%,
   one ink with an orange dot. Reversed on the two dark themes. The domain is the brand, so
   it is always lowercase, and it is text rather than an image so it stays sharp and theme-aware.
-*/}
+*/
+}
 <span class:list={['cosys-wordmark', className]}>
   cosys<span class="cosys-dot">.</span>work
 </span>

@@ -7,7 +7,7 @@ import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import { SITE, PRODUCTS, FORMS } from '@/data/site';
 
-const product = PRODUCTS[1]!;
+const product = PRODUCTS.find((p) => p.slug === '/clinic-app')!;
 const accent = 'text-primary';
 const chip = 'border-primary/30 bg-primary-tint text-ink';
 
@@ -278,8 +278,9 @@ const structuredData = {
         <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
           <p>
             Your clinic&rsquo;s records are written only by your clinic&rsquo;s own device. Where
-            they&rsquo;re stored on a server, each patient&rsquo;s record is sealed with a key held by
-            your clinic, so we can&rsquo;t read it. Patients hold their own record on their own phone.
+            they&rsquo;re stored on a server, each patient&rsquo;s record is sealed with a key held
+            by your clinic, so we can&rsquo;t read it. Patients hold their own record on their own
+            phone.
           </p>
           <p>
             The patient can end the share at any time, and can ask for their record to be erased,
@@ -323,7 +324,13 @@ const structuredData = {
 
   <!-- Pricing -->
   <Section class="!pt-0">
-    <SectionHeading eyebrow="Pricing" title="Free to start," accentTitle="and free for small clinics" accentClass={accent} chipClass={chip} />
+    <SectionHeading
+      eyebrow="Pricing"
+      title="Free to start,"
+      accentTitle="and free for small clinics"
+      accentClass={accent}
+      chipClass={chip}
+    />
     <div class="mt-12 grid gap-5 md:grid-cols-3">
       {pricing.map((item) => <Card {...item} />)}
     </div>

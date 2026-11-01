@@ -8,7 +8,7 @@ interface Props {
 const { emoji, title, body, class: className } = Astro.props;
 ---
 
-<div class:list={['border-line bg-surface rounded-2xl border p-6', className]}>
+<div class:list={['reveal border-line bg-surface rounded-2xl border p-6', className]}>
   {
     emoji && (
       <span class="text-3xl" aria-hidden="true">

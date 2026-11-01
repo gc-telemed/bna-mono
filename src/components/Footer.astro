@@ -1,6 +1,13 @@
 ---
 import Logo from '@/components/Logo.astro';
-import { SITE, CONTACT, PRODUCTS } from '@/data/site';
+import { SITE, CONTACT, PRODUCTS, NAMES, LINKS } from '@/data/site';
+
+// The three names are plain text until their domains serve pages (an open item for the founder).
+// The libraries are open; the app repositories stay private, so the link says libraries.
+const footer = {
+  builtIn: 'Built in Nepal',
+  libraries: 'Open libraries on GitHub',
+};
 
 const year = new Date().getFullYear();
 ---
@@ -11,10 +18,20 @@ const year = new Date().getFullYear();
       <div class="md:col-span-2">
         <Logo />
         <p class="text-ink-muted mt-4 max-w-sm text-sm leading-relaxed">
-          {SITE.tagline} Offline-first and peer-to-peer, so medical
-          records stay with the people they belong to.
+          {SITE.tagline} Offline-first and peer to peer, so records stay with the people they belong to.
         </p>
-        <p class="text-ink-muted mt-4 text-sm">{CONTACT.locations}</p>
+        <p class="text-ink mt-4 text-sm font-semibold">
+          {NAMES.map(({ name }) => name).join(' · ')}
+        </p>
+        <p class="text-ink-muted mt-2 text-sm">
+          {footer.builtIn} ·{' '}
+          <a
+            href={LINKS.framework}
+            class="hover:text-primary text-ink-muted underline underline-offset-2 transition"
+          >
+            {footer.libraries}
+          </a>
+        </p>
       </div>
 
       <div>
