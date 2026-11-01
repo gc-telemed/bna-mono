@@ -303,30 +303,36 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
               ))
             }
           </h1>
-          <label class="headline-pause text-ink-muted hover:text-ink">
-            <input type="checkbox" class="sr-only" />
-            <span class="sr-only">{hero.pause}</span>
-            <svg
-              class="icon-pause h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <rect x="6" y="5" width="4" height="14" rx="1"></rect>
-              <rect x="14" y="5" width="4" height="14" rx="1"></rect>
-            </svg>
-            <svg
-              class="icon-play h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
-              ></path>
-            </svg>
-            <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
-            <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
-          </label>
+          <div class="headline-controls">
+            <span class="headline-dots" aria-hidden="true">
+              {hero.headlines.map((_, i) => <span class="headline-dot" style={`--n: ${i}`} />)}
+            </span>
+            <label class="headline-pause text-ink-muted hover:text-ink">
+              <input type="checkbox" class="sr-only" />
+              <span class="sr-only">{hero.pause}</span>
+              <svg
+                class="icon-pause h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+                <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+              </svg>
+              <svg
+                class="icon-play h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
+                ></path>
+              </svg>
+              <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
+              <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
+            </label>
+          </div>
         </div>
         <p
           class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty lg:mx-0"
