@@ -15,8 +15,27 @@ import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS, THREADS } from '@
 // needs_review: each block needs a Nepali version reviewed by a native speaker before launch.
 
 const hero = {
-  title: 'Systems you own, that keep working',
-  accentTitle: 'when the connection doesn’t.',
+  // The hero rotates through these every five seconds (CSS only, paused on hover, on focus, by
+  // the Pause control, and for reduced motion). The first is the h1 that search engines and
+  // screen readers get, and SITE.tagline repeats it. The others are aria-hidden.
+  // needs_review: Nepali versions, and founder sign-off on the wording.
+  headlines: [
+    { title: 'Collaborative software', accentTitle: 'with no centre to fail.' },
+    {
+      title: 'Families, clinics and offices working together,',
+      accentTitle: 'each keeping its own copy.',
+    },
+    { title: 'Your records, your models and your bills,', accentTitle: 'under your own roof.' },
+    {
+      title: 'A clinic offline for a day is further away than Mars.',
+      accentTitle: 'We build for both.',
+    },
+    {
+      title: 'Built in Nepal, where the line drops every day,',
+      accentTitle: 'and the work carries on.',
+    },
+  ],
+  pause: 'Pause headlines',
   body: SITE.description,
   primary: { label: 'See what we build', href: '#what-we-build' },
   secondary: { label: 'Work with us', href: '#work-with-us' },
@@ -266,12 +285,30 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
   <Section class="!pt-16 !pb-8 lg:!pt-24">
     <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14">
       <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
-        <h1
-          class="text-ink text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
-        >
-          {hero.title}{' '}<br class="hidden sm:block" />
-          <span class="text-primary">{hero.accentTitle}</span>
-        </h1>
+        <div class="headline-rotator">
+          <h1
+            class="text-ink grid items-center text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
+          >
+            {
+              hero.headlines.map(({ title, accentTitle }, i) => (
+                <span
+                  class="headline"
+                  style={`--n: ${i}`}
+                  aria-hidden={i === 0 ? undefined : 'true'}
+                >
+                  {title} <br class="hidden sm:block" />
+                  <span class="text-primary">{accentTitle}</span>
+                </span>
+              ))
+            }
+          </h1>
+          <label
+            class="headline-pause text-ink-muted hover:text-ink mt-4 inline-flex cursor-pointer items-center gap-2 text-sm"
+          >
+            <input type="checkbox" class="accent-primary h-4 w-4" />
+            {hero.pause}
+          </label>
+        </div>
         <p
           class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty lg:mx-0"
         >

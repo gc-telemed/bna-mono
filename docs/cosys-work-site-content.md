@@ -10,7 +10,7 @@ This is the English source copy. Nepali (`ne`) versions are needed for every blo
 
 **Positioning (v5).** The homepage now introduces the company before the health apps: collaborative systems that people own, that work offline and sync peer to peer, with chronic care in Nepal as the first proof. The health positioning above still holds for the health apps and their pages.
 
-**What changed from v5.** The Company page is now called **About us** in the header and footer (the URL stays `/company`, and `/about` redirects there). Its hero lede is rewritten, and it gains *Technology in Nepal*: data at home, local AI first with large models abroad only through one guarded line, work through outages, business intelligence from an organisation's own record, and lower running costs, with a drawing of the guarded line. *Work with us* says everything in Technology in Nepal comes with both offers. The homepage gains a band, *What stays with you*, under the Work with us cards, linking to each thread. nep.work's introduction now ends "and anyone can run one". No savings figure and no prices anywhere. Every new block needs its Nepali version, reviewed by a native speaker.
+**What changed from v5.** The Company page is now called **About us** in the header and footer (the URL stays `/company`, and `/about` redirects there). Its hero lede is rewritten, and it gains *Technology in Nepal*: data at home, local AI first with large models abroad only through one guarded line, work through outages, business intelligence from an organisation's own record, and lower running costs, with a drawing of the guarded line. *Work with us* says everything in Technology in Nepal comes with both offers. The homepage gains a band, *What stays with you*, under the Work with us cards, linking to each thread. nep.work's introduction now ends "and anyone can run one". The homepage headline now rotates through five lines drawn from the About us threads, the drawings and Who we are. No savings figure and no prices anywhere. Every new block needs its Nepali version, reviewed by a native speaker.
 
 **What changed from v4.3.** The homepage leads with the company: a new hero and *Who we are*, a band explaining cosys.work, nep.work and coplanetary.work, three sections with drawings (collaborative systems, peer-to-peer DNA, beyond Earth), *What we build* with SoMA and the open `@cosys` framework, and *Work with us* with the two consulting offers. Health keeps its own band with the condition apps, the Nepal figures and both buttons; the Snap, Share, Follow steps and the comparison with typical diabetes apps moved to the Diabetes App page. SoMA gets its own page at `/soma` with an invitation form that asks for no name and no phone number. The header gains SoMA; the footer gains the three names, "Built in Nepal" and a link to the open libraries (the app repositories stay private). The Platform page names the network nep.work, and the Company page gains *Work with us* and the three names. The EGU and NASA ADS line, SoMA's price and status line, and the language switch all still wait (see the checks at the end). Every new block needs its Nepali version, reviewed by a native speaker, before launch.
 
@@ -27,7 +27,15 @@ Global footer: "cosys.work · nep.work · coplanetary.work" (plain text until th
 The homepage introduces the company first, then the ideas, then what we build, then health. Every section below is new or rewritten in v5 except *Health in Nepal* and *Our promises*, which are kept from v4.3 and shortened.
 
 ### Hero
-**Systems you own, that keep working when the connection doesn't.**
+*v5.1:* the headline rotates every five seconds through five lines. The first is the page's h1 and the site tagline; the others show in turn, and a "Pause headlines" control stops them. With reduced motion only the first shows. Founder to sign off the wording (see the checks at the end).
+
+1. **Collaborative software with no centre to fail.**
+2. **Families, clinics and offices working together, each keeping its own copy.**
+3. **Your records, your models and your bills, under your own roof.**
+4. **A clinic offline for a day is further away than Mars. We build for both.**
+5. **Built in Nepal, where the line drops every day, and the work carries on.**
+
+*(v5 headline, retired in v5.1: "Systems you own, that keep working when the connection doesn't.")*
 
 CoSys Work builds collaborative software that runs on the devices people already own. It works offline, syncs directly between the people who share it, and keeps every record with the people it belongs to. We started with chronic care in Nepal, where patients, families and clinics share one record without a central server.
 
@@ -559,3 +567,4 @@ Update it to match the site and the app:
 11. **The base egress templates and guidelines.** Link them from the Local AI first thread once they are published.
 12. **"Local body".** The copy reads it as each organisation, and each local body that runs public services. Founder to confirm.
 13. **When a key holder leaves.** The site says nothing about handing over keys until that is decided.
+14. **The rotating headlines** are new wording. Founder to sign them off; `public/og.png` should then carry the first.

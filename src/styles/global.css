@@ -350,3 +350,61 @@
     }
   }
 }
+
+/**
+ * Rotating hero headlines (v5.1). Every headline sits in the same grid cell, so the block is
+ * as tall as the longest and nothing below it moves. Without motion (reduced motion, or before
+ * the animation starts) only the first shows. Each headline gets five seconds of a 25-second
+ * cycle, fading out while the next fades in; the negative offset starts the first already
+ * visible, so the hero is never blank on load.
+ * The Pause checkbox, hover and keyboard focus stop the cycle where it is (WCAG 2.2.2).
+ */
+.headline-rotator .headline {
+  grid-area: 1 / 1;
+}
+.headline-rotator .headline:not(:first-child) {
+  opacity: 0;
+  visibility: hidden;
+}
+.headline-pause {
+  display: none;
+}
+
+@keyframes headline-cycle {
+  0% {
+    opacity: 0;
+    visibility: visible;
+    transform: translateY(6px);
+  }
+  3%,
+  20% {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  23%,
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .headline-pause {
+    display: inline-flex;
+  }
+  .headline-rotator .headline {
+    animation-name: headline-cycle;
+    animation-duration: 25s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-fill-mode: backwards;
+    animation-delay: calc(var(--n) * 5s - 1.5s);
+  }
+  .headline-rotator:has(input:checked) .headline,
+  .headline-rotator:has(h1:hover) .headline,
+  .headline-rotator:focus-within .headline {
+    animation-play-state: paused;
+  }
+}

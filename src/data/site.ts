@@ -7,7 +7,7 @@ export const SITE = {
   name: 'cosys.work',
   legalName: 'CoSys Work Pvt. Ltd.',
   url: 'https://cosys.work',
-  tagline: 'Systems you own, that keep working when the connection doesn’t.',
+  tagline: 'Collaborative software with no centre to fail.',
   description:
     'CoSys Work builds collaborative software that runs on the devices people already own. It works offline, syncs directly between the people who share it, and keeps every record with the people it belongs to. We started with chronic care in Nepal, where patients, families and clinics share one record without a central server.',
 } as const;
