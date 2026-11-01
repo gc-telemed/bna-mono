@@ -358,7 +358,7 @@ Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can 
 - Trust published as a relation between keys, never as a number about a person. Each reader orders their own feed, and that order is never published.
 - How copies agree without coordination, how a circle's history is split into key epochs when someone leaves, and how a post is shown to have existed by a point in public time.
 
-Button: **[Read the white paper]** (`/soma-whitepaper.pdf`) · *PDF, 8 pages, 166 KB. Free to share and adapt under CC BY 4.0.*
+Button: **[Read the white paper]** (`/soma-whitepaper.pdf`) · *PDF, 8 pages, 172 KB. Free to share and adapt under CC BY 4.0.*
 
 The PDF's source and build live in the tda repository (`docs/whitepaper`). The paper spells the name SOMA; the site's own copy keeps SoMA.
 
