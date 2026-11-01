@@ -5,6 +5,10 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import NameBand from '@/components/NameBand.astro';
+import HeroArt from '@/components/HeroArt.astro';
+import Circles from '@/components/Circles.astro';
+import Helix from '@/components/Helix.astro';
+import DelayLadder from '@/components/DelayLadder.astro';
 import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS } from '@/data/site';
 
 // Every block below is new in v5 except `conditions`, `facts` and `promises`, kept from v4.3.
@@ -21,6 +25,12 @@ const hero = {
     { lead: 'Run a clinic?', label: 'Bring your clinic', href: FORMS.clinic },
   ],
   smallPrint: 'Built in Nepal. Open-source libraries under Apache-2.0.',
+  art: {
+    label:
+      'A phone, a laptop and a clinic box joined directly to each other, with an empty space where a central server would usually sit',
+    devices: { phone: 'Phone', laptop: 'Laptop', clinic: 'Clinic' },
+    gap: ['no server', 'in the middle'],
+  },
 };
 
 const whoWeAre =
@@ -62,6 +72,50 @@ const ideas = {
       'Space agencies solve this with delay-tolerant networking, which stores a message and forwards it when the next link opens. Signed, self-contained records suit that way of travelling. coplanetary.work is where we take it further: social media and shared records that stay consistent across any distance. Nothing we run is in space today. This is a design rule, and the direction we are heading.',
     ],
   },
+};
+
+// Words inside the drawings, kept here like the rest of the copy so the Nepali versions can be
+// dropped in later.
+const circles = {
+  title: 'Each group holds its own keys and its own copy',
+  label:
+    'Family, Clinic and Community as overlapping circles. Each group holds its own keys and its own copy. A patient belongs to Family and Clinic, a nurse to Clinic and Community, and no server sits in the middle.',
+  groups: ['Family', 'Clinic', 'Community'],
+  own: ['own keys', 'own copy'],
+  people: ['a patient, in both', 'a nurse, in both'],
+  caption: 'No server in the middle: each circle syncs among its own members.',
+};
+
+// Grew from v4.3's three pillars (peer-to-peer, private, sovereign) into five rules.
+const helix = {
+  title: 'The same rules come with everything we build',
+  label:
+    'A double helix pairing what stays with you with what the network does: your keys and entries signed, your copy and syncs when online, sealed records and relays can’t read, works offline and catches up later, open source and Apache-2.0.',
+  withYou: 'With you',
+  onNetwork: 'On the network',
+  rungs: [
+    { stays: 'Your keys', network: 'Entries signed' },
+    { stays: 'Your copy', network: 'Syncs when online' },
+    { stays: 'Sealed records', network: 'Relays can’t read' },
+    { stays: 'Works offline', network: 'Catches up later' },
+    { stays: 'Open source', network: 'Apache-2.0' },
+  ],
+};
+
+const delay = {
+  title: 'A clinic offline for a day is further away than Mars',
+  label:
+    'One-way delays, not to scale: milliseconds in the same room, a fraction of a second across a country, about 1.3 seconds from Earth to the Moon, 4 to 24 minutes from Earth to Mars, and hours to days for a clinic offline. One rule covers the whole range: sign every copy, let it wait, catch up later.',
+  axis: 'One-way delay, longer to the right (not to scale)',
+  axisNarrow: 'One-way delay, longer further down (not to scale)',
+  rule: 'One rule for the whole range: sign every copy, let it wait, catch up later',
+  steps: [
+    { place: 'Same room', delay: ['milliseconds'] },
+    { place: 'Across a country', delay: ['a fraction', 'of a second'] },
+    { place: 'Earth to Moon', delay: ['about 1.3 seconds'] },
+    { place: 'Earth to Mars', delay: ['4 to 24 minutes'] },
+    { place: 'Clinic offline', delay: ['hours to days'], highlight: true },
+  ],
 };
 
 const diabetesApp = PRODUCTS.find((p) => p.slug === '/diabetes-app')!;
@@ -206,50 +260,55 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
 <Base title={SITE.name} description={SITE.description} path="/" structuredData={structuredData}>
   <!-- Hero -->
   <Section class="!pt-16 !pb-8 lg:!pt-24">
-    <div class="mx-auto max-w-3xl text-center">
-      <h1
-        class="text-ink text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
-      >
-        {hero.title}{' '}<br class="hidden sm:block" />
-        <span class="text-primary">{hero.accentTitle}</span>
-      </h1>
-      <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        {hero.body}
-      </p>
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14">
+      <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+        <h1
+          class="text-ink text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
+        >
+          {hero.title}{' '}<br class="hidden sm:block" />
+          <span class="text-primary">{hero.accentTitle}</span>
+        </h1>
+        <p
+          class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty lg:mx-0"
+        >
+          {hero.body}
+        </p>
 
-      <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a href={hero.primary.href} class={primary}>
-          {hero.primary.label}
-          <svg
-            class="h-4 w-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d={arrow}></path>
-          </svg>
-        </a>
-        <a href={hero.secondary.href} class={secondary}>{hero.secondary.label}</a>
+        <div class="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <a href={hero.primary.href} class={primary}>
+            {hero.primary.label}
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d={arrow}></path>
+            </svg>
+          </a>
+          <a href={hero.secondary.href} class={secondary}>{hero.secondary.label}</a>
+        </div>
+        <ul
+          class="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-sm sm:flex-row lg:justify-start"
+        >
+          {
+            hero.links.map(({ lead, label, href }) => (
+              <li class="text-ink-muted">
+                {lead}{' '}
+                <a href={href} class={textLink}>
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="text-ink-muted mt-5 text-sm italic">{hero.smallPrint}</p>
       </div>
-      <ul
-        class="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-sm sm:flex-row"
-      >
-        {
-          hero.links.map(({ lead, label, href }) => (
-            <li class="text-ink-muted">
-              {lead}{' '}
-              <a href={href} class={textLink}>
-                {label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="text-ink-muted mt-5 text-sm italic">{hero.smallPrint}</p>
+      <HeroArt {...hero.art} class="mx-auto max-w-sm lg:max-w-none" />
     </div>
   </Section>
 
@@ -277,6 +336,9 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
       {ideas.collaborative.body.map((line) => <p>{line}</p>)}
     </div>
     <p class:list={['mx-auto mt-6 max-w-3xl', example]}>{ideas.collaborative.example}</p>
+    <div class="mt-12">
+      <Circles {...circles} />
+    </div>
   </Section>
 
   <!-- Peer-to-peer DNA -->
@@ -291,6 +353,9 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
         {ideas.dna.body.map((line) => <p>{line}</p>)}
       </div>
       <p class:list={['mx-auto mt-6 max-w-3xl', example]}>{ideas.dna.example}</p>
+      <div class="mt-12">
+        <Helix {...helix} />
+      </div>
       <p class="text-ink-muted mx-auto mt-6 max-w-3xl text-center text-sm">
         {ideas.dna.libraries}{' '}
         <a href={LINKS.framework} class={textLink}>{ideas.dna.librariesLink}</a>
@@ -307,6 +372,9 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
     />
     <div class:list={['mx-auto mt-8 max-w-3xl', prose]}>
       {ideas.beyond.body.map((line) => <p>{line}</p>)}
+    </div>
+    <div class="mt-12">
+      <DelayLadder {...delay} />
     </div>
   </Section>
 

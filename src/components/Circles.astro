@@ -1,0 +1,135 @@
+---
+/**
+ * Collaborative systems: Family, Clinic and Community as overlapping circles, each holding
+ * its own keys and its own copy, with a patient in Family and Clinic and a nurse in Clinic and
+ * Community. Nothing sits in the middle.
+ *
+ * Two drawings of the same picture: a wide one, and one laid out for phones under 640 px so
+ * the labels never fall below 12 px. Words come from the page's frontmatter; colour only from
+ * the `--p-*` tokens. Outlines use `pathLength="1"` so the motion stage can draw them in.
+ */
+interface Props {
+  title: string;
+  label: string;
+  groups: readonly string[];
+  own: readonly string[];
+  people: readonly string[];
+  caption: string;
+}
+const { title, label, groups, own, people, caption } = Astro.props;
+
+type Layout = {
+  width: number;
+  height: number;
+  cy: number;
+  r: number;
+  cx: number[];
+  /** How far the outer names sit away from the overlaps. */
+  nudge: number;
+  name: number;
+  small: number;
+  /** Where each person's label sits below the circles. */
+  peopleY: number[];
+};
+
+const wide: Layout = {
+  width: 660,
+  height: 330,
+  cy: 150,
+  r: 112,
+  cx: [180, 330, 480],
+  nudge: 30,
+  name: 19,
+  small: 14,
+  peopleY: [300, 300],
+};
+
+const narrow: Layout = {
+  width: 320,
+  height: 250,
+  cy: 90,
+  r: 60,
+  cx: [70, 160, 250],
+  nudge: 12,
+  name: 14,
+  small: 12,
+  peopleY: [184, 222],
+};
+
+const circlePath = (cx: number, cy: number, r: number) =>
+  `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`;
+
+const layouts = [
+  { key: 'wide', layout: wide, class: 'hidden sm:block' },
+  { key: 'narrow', layout: narrow, class: 'sm:hidden mx-auto max-w-sm' },
+];
+---
+
+<figure class="illustration mx-auto max-w-3xl">
+  <p class="text-ink text-center text-lg font-bold text-balance">{title}</p>
+  {
+    layouts.map(({ layout: l, class: cls }) => {
+      const dots = [(l.cx[0]! + l.cx[1]!) / 2, (l.cx[1]! + l.cx[2]!) / 2];
+      return (
+        <svg
+          class:list={['mt-6 h-auto w-full', cls]}
+          viewBox={`0 0 ${l.width} ${l.height}`}
+          role="img"
+          aria-label={label}
+        >
+          <g class="stroke-line-strong" fill="none" stroke-width="1.5">
+            {l.cx.map((cx) => (
+              <path class="draw" pathLength="1" d={circlePath(cx, l.cy, l.r)} />
+            ))}
+          </g>
+          {groups.map((group, i) => {
+            const x = l.cx[i]! + (i === 0 ? -l.nudge : i === 2 ? l.nudge : 0);
+            return (
+              <text text-anchor="middle">
+                <tspan
+                  x={x}
+                  y={l.cy - l.small}
+                  class="fill-ink"
+                  font-size={l.name}
+                  font-weight="700"
+                >
+                  {group}
+                </tspan>
+                {own.map((line, j) => (
+                  <tspan
+                    x={x}
+                    y={l.cy + l.small * 0.6 + j * l.small * 1.25}
+                    class="fill-ink-muted"
+                    font-size={l.small}
+                  >
+                    {line}
+                  </tspan>
+                ))}
+              </text>
+            );
+          })}
+          {dots.map((x, i) => (
+            <>
+              <path
+                d={`M${x} ${l.cy} V${l.peopleY[i]! - l.small - 2}`}
+                class="stroke-line-strong"
+                stroke-width="1.5"
+              />
+              <circle cx={x} cy={l.cy} r={l.small * 0.5} class="fill-primary" />
+              <text
+                x={x}
+                y={l.peopleY[i]}
+                text-anchor="middle"
+                class="fill-ink"
+                font-size={l.small}
+              >
+                {people[i]}
+              </text>
+            </>
+          ))}
+        </svg>
+      );
+    })
+  }
+  <figcaption class="text-ink-muted mt-4 text-center text-sm text-pretty">{caption}</figcaption>
+</figure>

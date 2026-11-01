@@ -1,0 +1,184 @@
+---
+/**
+ * Peer-to-peer DNA: two strands and five rungs. Each rung pairs something that stays with you
+ * (your keys, your copy, sealed records, works offline, open source) with what the network
+ * does (entries signed, syncs when online, relays can't read, catches up later, Apache-2.0).
+ *
+ * Horizontal on wide screens; turned upright under 640 px, with the labels left and right of
+ * the strands. Words come from the page's frontmatter; colour only from the `--p-*` tokens.
+ * The strands carry `pathLength="1"` so the motion stage can draw them in, and sit in
+ * `.helix-drift` so their phase can shift a little as the section scrolls past.
+ */
+interface Props {
+  title: string;
+  label: string;
+  withYou: string;
+  onNetwork: string;
+  rungs: readonly { stays: string; network: string }[];
+}
+const { title, label, withYou, onNetwork, rungs } = Astro.props;
+
+/** A sine strand sampled finely enough to read as a curve. `sign` picks which strand. */
+function strand(
+  sign: 1 | -1,
+  from: number,
+  to: number,
+  first: number,
+  spacing: number,
+  mid: number,
+  amp: number,
+  upright: boolean,
+) {
+  const points: string[] = [];
+  for (let t = from; t <= to + 0.01; t += 4) {
+    const offset = sign * amp * Math.cos((Math.PI * (t - first)) / spacing);
+    const along = t.toFixed(1);
+    const across = (mid - offset).toFixed(1);
+    points.push(upright ? `${across} ${along}` : `${along} ${across}`);
+  }
+  return `M${points.join('L')}`;
+}
+
+// Wide: rungs run left to right.
+const W = { first: 200, spacing: 142, mid: 150, amp: 50, top: 76, bottom: 236 };
+const wideRungs = rungs.map((_, i) => W.first + i * W.spacing);
+const wideFrom = W.first - W.spacing / 2;
+const wideTo = W.first + (rungs.length - 0.5) * W.spacing;
+
+// Narrow: rungs run top to bottom, labels either side.
+const N = { first: 84, spacing: 80, mid: 140, amp: 26 };
+const narrowRungs = rungs.map((_, i) => N.first + i * N.spacing);
+const narrowFrom = N.first - N.spacing / 2;
+const narrowTo = N.first + (rungs.length - 0.5) * N.spacing;
+const narrowHeight = narrowTo + 16;
+---
+
+<figure class="illustration mx-auto max-w-5xl">
+  <p class="text-ink text-center text-lg font-bold text-balance">{title}</p>
+
+  <!-- Wide -->
+  <svg
+    class="mt-6 hidden h-auto w-full sm:block"
+    viewBox="0 0 860 250"
+    role="img"
+    aria-label={label}
+  >
+    <text x="0" y={W.top} class="fill-ink-muted" font-size="15">{withYou}</text>
+    <text x="0" y={W.bottom} class="fill-ink-muted" font-size="15">{onNetwork}</text>
+    {
+      wideRungs.map((x) => (
+        <>
+          <path
+            d={`M${x} ${W.mid - W.amp}V${W.mid + W.amp}`}
+            class="stroke-line-strong"
+            stroke-width="1.5"
+          />
+          <circle cx={x} cy={W.mid - W.amp} r="4" class="fill-line-strong" />
+          <circle cx={x} cy={W.mid + W.amp} r="4" class="fill-line-strong" />
+        </>
+      ))
+    }
+    <g class="helix-drift" fill="none" stroke-width="3" stroke-linecap="round">
+      <path
+        class="draw stroke-primary"
+        pathLength="1"
+        d={strand(1, wideFrom, wideTo, W.first, W.spacing, W.mid, W.amp, false)}></path>
+      <path
+        class="draw stroke-ink-muted"
+        pathLength="1"
+        d={strand(-1, wideFrom, wideTo, W.first, W.spacing, W.mid, W.amp, false)}></path>
+    </g>
+    {
+      rungs.map(({ stays, network }, i) => (
+        <>
+          <text
+            x={wideRungs[i]}
+            y={W.top}
+            text-anchor="middle"
+            class="fill-ink"
+            font-size="16"
+            font-weight="700"
+          >
+            {stays}
+          </text>
+          <text
+            x={wideRungs[i]}
+            y={W.bottom}
+            text-anchor="middle"
+            class="fill-ink-muted"
+            font-size="15"
+          >
+            {network}
+          </text>
+        </>
+      ))
+    }
+  </svg>
+
+  <!-- Narrow: turned upright -->
+  <svg
+    class="mx-auto mt-6 h-auto w-full max-w-sm sm:hidden"
+    viewBox={`0 0 280 ${narrowHeight}`}
+    role="img"
+    aria-label={label}
+  >
+    <text
+      x={N.mid - N.amp - 10}
+      y="18"
+      text-anchor="end"
+      class="fill-ink-muted"
+      font-size="12"
+      font-weight="700">{withYou}</text
+    >
+    <text x={N.mid + N.amp + 10} y="18" class="fill-ink-muted" font-size="12" font-weight="700"
+      >{onNetwork}</text
+    >
+    {
+      narrowRungs.map((y) => (
+        <>
+          <path
+            d={`M${N.mid - N.amp} ${y}H${N.mid + N.amp}`}
+            class="stroke-line-strong"
+            stroke-width="1.5"
+          />
+          <circle cx={N.mid - N.amp} cy={y} r="3" class="fill-line-strong" />
+          <circle cx={N.mid + N.amp} cy={y} r="3" class="fill-line-strong" />
+        </>
+      ))
+    }
+    <g class="helix-drift" fill="none" stroke-width="2.5" stroke-linecap="round">
+      <path
+        class="draw stroke-primary"
+        pathLength="1"
+        d={strand(1, narrowFrom, narrowTo, N.first, N.spacing, N.mid, N.amp, true)}></path>
+      <path
+        class="draw stroke-ink-muted"
+        pathLength="1"
+        d={strand(-1, narrowFrom, narrowTo, N.first, N.spacing, N.mid, N.amp, true)}></path>
+    </g>
+    {
+      rungs.map(({ stays, network }, i) => (
+        <>
+          <text
+            x={N.mid - N.amp - 10}
+            y={narrowRungs[i]! + 4}
+            text-anchor="end"
+            class="fill-ink"
+            font-size="13"
+            font-weight="700"
+          >
+            {stays}
+          </text>
+          <text
+            x={N.mid + N.amp + 10}
+            y={narrowRungs[i]! + 4}
+            class="fill-ink-muted"
+            font-size="12"
+          >
+            {network}
+          </text>
+        </>
+      ))
+    }
+  </svg>
+</figure>
