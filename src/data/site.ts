@@ -23,6 +23,7 @@ export const CONTACT = {
 export const FORMS = {
   waitlist: '/contact#waitlist',
   clinic: '/contact#clinic',
+  soma: '/contact#soma',
 } as const;
 
 /** Places off this site that the copy links to. */
@@ -111,6 +112,17 @@ export const PRODUCTS: Product[] = [
     emoji: '🩺',
   },
   {
+    slug: '/soma',
+    name: 'SoMA',
+    shortName: 'SoMA',
+    audience: 'For people who post in public',
+    blurb:
+      'Write once on your phone, post to every network, and keep proof that the words are yours. Anonymous by default, and joined by invitation.',
+    summary:
+      'SoMA: write a post on your own phone and publish it to Nostr, the Fediverse, Bluesky and the apps you already use. Every version is signed and timestamped. Anonymous by default, and joined by invitation.',
+    emoji: '✍️',
+  },
+  {
     slug: '/platform',
     name: 'nep.work, the P2P network',
     shortName: 'nep.work',
@@ -126,6 +138,7 @@ export const PRODUCTS: Product[] = [
 export const NAV = [
   { label: 'Diabetes App', href: '/diabetes-app' },
   { label: 'Clinic App', href: '/clinic-app' },
+  { label: 'SoMA', href: '/soma' },
   { label: 'Platform', href: '/platform' },
   { label: 'Company', href: '/company' },
   { label: 'Contact', href: '/contact' },

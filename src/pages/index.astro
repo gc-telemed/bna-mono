@@ -66,6 +66,7 @@ const ideas = {
 
 const diabetesApp = PRODUCTS.find((p) => p.slug === '/diabetes-app')!;
 const clinicApp = PRODUCTS.find((p) => p.slug === '/clinic-app')!;
+const soma = PRODUCTS.find((p) => p.slug === '/soma')!;
 
 const build = [
   {
@@ -76,6 +77,12 @@ const build = [
       { label: diabetesApp.name, href: diabetesApp.slug },
       { label: clinicApp.name, href: clinicApp.slug },
     ],
+  },
+  {
+    title: soma.name,
+    audience: soma.audience,
+    body: soma.blurb,
+    links: [{ label: `About ${soma.name}`, href: soma.slug }],
   },
   {
     title: 'The open @cosys framework',

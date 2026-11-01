@@ -21,7 +21,7 @@ const structuredData = {
 
 <Base
   title="Contact"
-  description={`Join the waitlist for The Diabetes App, bring your clinic to the Clinic App, or write to ${SITE.name}.`}
+  description={`Join the waitlist for The Diabetes App, bring your clinic to the Clinic App, ask for an invitation to SoMA, or write to ${SITE.name}.`}
   path="/contact"
   structuredData={structuredData}
 >
@@ -41,15 +41,16 @@ const structuredData = {
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
         Patients: The Diabetes App is in closed pilot, so join the waitlist and we&rsquo;ll tell you
         when it is ready for you. Clinics: the Clinic App is in development, and we&rsquo;ll arrange
-        a preview.
+        a preview. SoMA is joined by invitation, so ask for one below.
       </p>
     </div>
   </Section>
 
   <Section class="!pt-4">
-    <div class="grid gap-5 md:grid-cols-2 md:items-start">
+    <div class="grid gap-5 md:grid-cols-2 md:items-start xl:grid-cols-3">
       <InterestForm kind="waitlist" />
       <InterestForm kind="clinic" />
+      <InterestForm kind="soma" />
     </div>
 
     <div class="border-line bg-surface-muted mt-10 rounded-2xl border p-7">

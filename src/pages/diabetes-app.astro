@@ -9,7 +9,7 @@ import AppPreview from '@/components/AppPreview.astro';
 import Comparison from '@/components/Comparison.astro';
 import { SITE, PRODUCTS, FORMS } from '@/data/site';
 
-const product = PRODUCTS[0]!;
+const product = PRODUCTS.find((p) => p.slug === '/diabetes-app')!;
 const accent = 'text-primary';
 const chip = 'border-primary/30 bg-primary-tint text-ink';
 

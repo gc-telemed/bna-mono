@@ -1,6 +1,7 @@
 ---
 /**
- * The two sign-up forms: a clinic asking for a preview, and a patient joining the waitlist.
+ * The three sign-up forms: a clinic asking for a preview, a patient joining the waitlist, and
+ * someone asking for an invitation to SoMA.
  *
  * Plain HTML handled by Netlify Forms, so the site still ships no script for them. Netlify finds
  * a form by its `name` when it parses the built HTML, which is why each form carries a
@@ -9,9 +10,12 @@
  * The waitlist asks only how to reach someone. Nothing clinical is collected here, and the note
  * under it says so, because a person with diabetes will otherwise write their readings into the
  * message box.
+ *
+ * The SoMA form asks for even less: a way to reach you (an email or a Nostr address) and,
+ * optionally, a community. No name and no phone number, to match SoMA's anonymity promise.
  */
 interface Props {
-  kind: 'clinic' | 'waitlist';
+  kind: 'clinic' | 'waitlist' | 'soma';
 }
 const { kind } = Astro.props;
 
@@ -25,7 +29,10 @@ type Field = {
   options?: string[];
 };
 
-const forms: Record<Props['kind'], { title: string; lede: string; submit: string; note?: string; fields: Field[] }> = {
+const forms: Record<
+  Props['kind'],
+  { title: string; lede: string; submit: string; note?: string; fields: Field[] }
+> = {
   clinic: {
     title: 'Bring your clinic',
     lede: 'The Clinic App is in development. Tell us about your clinic and we will arrange a preview.',
@@ -55,6 +62,17 @@ const forms: Record<Props['kind'], { title: string; lede: string; submit: string
       { name: 'city', label: 'City', required: true, autocomplete: 'address-level2' },
       { name: 'contact', label: 'Phone or email', required: true, autocomplete: 'email' },
       { name: 'clinic', label: 'Your clinic', optional: true, autocomplete: 'organization' },
+    ],
+  },
+  // needs_review: Nepali version of this form's copy, reviewed by a native speaker.
+  soma: {
+    title: 'Ask for an invitation to SoMA',
+    lede: 'SoMA is joined by invitation. Leave a way to reach you and we will be in touch. Want to run an operator for your community? Name it below.',
+    submit: 'Ask for an invitation',
+    note: 'We only ask how to reach you. A Nostr address works as well as an email.',
+    fields: [
+      { name: 'contact', label: 'Email or Nostr address', required: true, autocomplete: 'email' },
+      { name: 'community', label: 'Your community', optional: true, autocomplete: 'off' },
     ],
   },
 };

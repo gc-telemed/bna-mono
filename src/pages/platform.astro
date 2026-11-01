@@ -8,7 +8,7 @@ import CTA from '@/components/CTA.astro';
 import Comparison from '@/components/Comparison.astro';
 import { SITE, CONTACT, PRODUCTS } from '@/data/site';
 
-const product = PRODUCTS[2]!;
+const product = PRODUCTS.find((p) => p.slug === '/platform')!;
 const accent = 'text-primary';
 const chip = 'border-primary/30 bg-primary-tint text-ink';
 
@@ -36,7 +36,8 @@ const comparison = [
   {
     dimension: 'Extension',
     cloud: 'A single vendor roadmap and an approval queue',
-    cosys: 'A marketplace inside the app, where providers offer services straight to the people who want them',
+    cosys:
+      'A marketplace inside the app, where providers offer services straight to the people who want them',
   },
 ];
 
@@ -148,9 +149,9 @@ const structuredData = {
         <span class={accent}>read your record</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        Both apps run on the same peer-to-peer network. Records move directly between the devices
-        that need them, over connections their owner granted. When a device is offline, the update
-        waits in a mailbox as a sealed envelope. We could not hand over a database of patient
+        Both apps run on nep.work, our peer-to-peer network. Records move directly between the
+        devices that need them, over connections their owner granted. When a device is offline, the
+        update waits in a mailbox as a sealed envelope. We could not hand over a database of patient
         histories if we wanted to, because we do not have one.
       </p>
     </div>
@@ -189,29 +190,45 @@ const structuredData = {
             <a
               href="https://github.com/n0-computer/iroh"
               class="text-primary font-medium underline-offset-2 hover:underline">iroh</a
-            >, an open-source peer-to-peer library, with a relay for when they can&rsquo;t reach each
-            other.
+            >, an open-source peer-to-peer library, with a relay for when they can&rsquo;t reach
+            each other.
           </p>
           <p>
             When the other phone is offline, the update waits in a mailbox. The mailbox holds only
             sealed envelopes, and it can&rsquo;t read what&rsquo;s inside. When an alert is waiting,
-            the emergency contact&rsquo;s phone gets a wake-up signal that carries no content at all,
-            not even who sent it.
+            the emergency contact&rsquo;s phone gets a wake-up signal that carries no content at
+            all, not even who sent it.
           </p>
           <p class="text-ink font-medium">
             What leaves a phone is decided on the phone. A family member on <em>Range only</em>
-            receives words like &ldquo;below&rdquo; or &ldquo;in range&rdquo; and never a number,
-            because the number is removed before anything is sealed.
+            receives words like &ldquo;below&rdquo; or &ldquo;in range&rdquo; and never a number, because
+            the number is removed before anything is sealed.
           </p>
         </div>
       </div>
       <div class="grid gap-4 sm:grid-cols-2">
         {
           [
-            { emoji: '📱', title: 'Patient phone', body: 'Holds the record. Decides what each person sees.' },
-            { emoji: '👪', title: 'Family phones', body: 'Receive only the level the patient chose for them.' },
-            { emoji: '📮', title: 'Sealed mailbox', body: 'Keeps envelopes for an offline phone. Cannot open them.' },
-            { emoji: '🔁', title: 'Relay', body: 'Helps two phones connect. Passes on traffic it cannot read.' },
+            {
+              emoji: '📱',
+              title: 'Patient phone',
+              body: 'Holds the record. Decides what each person sees.',
+            },
+            {
+              emoji: '👪',
+              title: 'Family phones',
+              body: 'Receive only the level the patient chose for them.',
+            },
+            {
+              emoji: '📮',
+              title: 'Sealed mailbox',
+              body: 'Keeps envelopes for an offline phone. Cannot open them.',
+            },
+            {
+              emoji: '🔁',
+              title: 'Relay',
+              body: 'Helps two phones connect. Passes on traffic it cannot read.',
+            },
           ].map((item) => <Card {...item} />)
         }
       </div>
@@ -233,7 +250,11 @@ const structuredData = {
         caption="Centralised health platforms compared with the cosys.work peer-to-peer platform"
         theirs="Centralised platforms"
         ours="The cosys.work platform"
-        rows={comparison.map(({ dimension, cloud, cosys }) => ({ dimension, theirs: cloud, ours: cosys }))}
+        rows={comparison.map(({ dimension, cloud, cosys }) => ({
+          dimension,
+          theirs: cloud,
+          ours: cosys,
+        }))}
       />
     </div>
   </Section>
@@ -275,8 +296,8 @@ const structuredData = {
             The marketplace is coming to the apps. Labs, home sample collection, clinic and
             physiotherapy appointments, dietitians, coaches with at-home exercise videos, and
             plugins for CGMs and glucometers, each offered by its provider inside the app and paid
-            to them. Telemedicine and online appointments will come the same way, as services
-            from third parties.
+            to them. Telemedicine and online appointments will come the same way, as services from
+            third parties.
           </p>
         </div>
       </div>
