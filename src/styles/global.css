@@ -186,6 +186,9 @@
  *   smooth-scroll library: nothing takes the scroll away from the reader.
  * - Each rule uses longhands. Given `animation` plus `animation-timeline`, the minifier folds
  *   the timeline into the shorthand, which browsers reject, and the rule silently does nothing.
+ * - v5.1 makes them easier to see, as the founder asked: reveals rise 40 px, the hero drawing
+ *   drifts up to 72 px, drawings have a parallax of 32 px each way and draw in over most of
+ *   their crossing, the helix turns about its axis, and cards lift 4 px.
  * - Reveals finish when the element has fully entered (`entry 100%`) rather than at a cover
  *   percentage, so an element at the very end of a page can always finish and is never left
  *   faint.
@@ -193,7 +196,7 @@
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -203,7 +206,17 @@
 
 @keyframes hero-depth {
   to {
-    transform: translateY(24px);
+    transform: translateY(72px);
+  }
+}
+
+/* Gentle parallax for the section drawings: they rise a little faster than the page. */
+@keyframes drawing-parallax {
+  from {
+    transform: translateY(32px);
+  }
+  to {
+    transform: translateY(-32px);
   }
 }
 
@@ -216,27 +229,31 @@
   }
 }
 
-@keyframes helix-drift-x {
-  from {
-    transform: translateX(-18px);
+/* The helix turns a full half-turn and back about its own axis: the strands flatten, swap
+   sides and return, as a double helix does when it rotates. */
+@keyframes helix-twist-x {
+  0%,
+  100% {
+    transform: scaleY(1);
   }
-  to {
-    transform: translateX(18px);
+  50% {
+    transform: scaleY(-1);
   }
 }
 
-@keyframes helix-drift-y {
-  from {
-    transform: translateY(-14px);
+@keyframes helix-twist-y {
+  0%,
+  100% {
+    transform: scaleX(1);
   }
-  to {
-    transform: translateY(14px);
+  50% {
+    transform: scaleX(-1);
   }
 }
 
 @keyframes stretch {
   from {
-    transform: scaleX(0.4);
+    transform: scaleX(0.05);
   }
   to {
     transform: none;
@@ -266,7 +283,7 @@
   .lift:hover,
   .lift:focus-visible,
   .lift:focus-within {
-    translate: 0 -2px;
+    translate: 0 -4px;
   }
 
   @supports (animation-timeline: view()) {
@@ -292,7 +309,7 @@
     }
 
     /* Hero depth: the drawing drifts at about half the page's speed as the hero leaves,
-       24 px at most. */
+       72 px at most. (v5.1: the founder asked for the effects to read more clearly.) */
     .hero-art {
       animation-name: hero-depth;
       animation-timing-function: linear;
@@ -301,8 +318,8 @@
       animation-range: exit 0% exit 100%;
     }
 
-    /* Drawing in: outlines and strands draw themselves within the first third of the
-       drawing's way onto the screen. `pathLength="1"` means no measuring. */
+    /* Drawing in: outlines and strands draw themselves as the drawing comes onto the screen,
+       finishing a little before it is centred. `pathLength="1"` means no measuring. */
     .illustration,
     .hero-art {
       view-timeline: --drawing block;
@@ -313,20 +330,31 @@
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: --drawing;
-      animation-range: entry 0% cover 33%;
+      animation-range: entry 10% cover 40%;
     }
 
-    /* Helix drift: the strands' phase shifts a little as the section scrolls past, well
-       under a quarter turn. */
-    .helix-drift {
-      animation-name: helix-drift-x;
+    /* Parallax: each section drawing rises a little faster than the page around it. */
+    .illustration > svg {
+      animation-name: drawing-parallax;
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: --drawing;
       animation-range: cover 0% cover 100%;
     }
-    .helix-drift[data-axis='y'] {
-      animation-name: helix-drift-y;
+
+    /* Helix twist: the helix turns about its axis as it crosses the screen, so the two
+       strands flatten, swap sides and come back. Rungs turn with them; labels stay put. */
+    .helix-twist {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation-name: helix-twist-x;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: both;
+      animation-timeline: --drawing;
+      animation-range: cover 10% cover 90%;
+    }
+    .helix-twist[data-axis='y'] {
+      animation-name: helix-twist-y;
     }
 
     /* The delay bracket stretches out from its middle. */
@@ -337,7 +365,7 @@
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-timeline: --drawing;
-      animation-range: entry 0% cover 33%;
+      animation-range: entry 10% cover 40%;
     }
 
     /* Header hairline: the border and a soft shadow appear once the page has scrolled 64 px. */

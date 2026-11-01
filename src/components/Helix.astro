@@ -7,7 +7,8 @@
  * Horizontal on wide screens; turned upright under 640 px, with the labels left and right of
  * the strands. Words come from the page's frontmatter; colour only from the `--p-*` tokens.
  * The strands carry `pathLength="1"` so the motion stage can draw them in, and sit in
- * `.helix-drift` so their phase can shift a little as the section scrolls past.
+ * `.helix-twist` with the rungs, so the helix turns about its axis as the section scrolls past
+ * and the two strands swap sides.
  */
 interface Props {
   title: string;
@@ -65,28 +66,30 @@ const narrowHeight = narrowTo + 16;
   >
     <text x="0" y={W.top} class="fill-ink-muted" font-size="15">{withYou}</text>
     <text x="0" y={W.bottom} class="fill-ink-muted" font-size="15">{onNetwork}</text>
-    {
-      wideRungs.map((x) => (
-        <>
-          <path
-            d={`M${x} ${W.mid - W.amp}V${W.mid + W.amp}`}
-            class="stroke-line-strong"
-            stroke-width="1.5"
-          />
-          <circle cx={x} cy={W.mid - W.amp} r="4" class="fill-line-strong" />
-          <circle cx={x} cy={W.mid + W.amp} r="4" class="fill-line-strong" />
-        </>
-      ))
-    }
-    <g class="helix-drift" fill="none" stroke-width="3" stroke-linecap="round">
-      <path
-        class="draw stroke-primary"
-        pathLength="1"
-        d={strand(1, wideFrom, wideTo, W.first, W.spacing, W.mid, W.amp, false)}></path>
-      <path
-        class="draw stroke-ink-muted"
-        pathLength="1"
-        d={strand(-1, wideFrom, wideTo, W.first, W.spacing, W.mid, W.amp, false)}></path>
+    <g class="helix-twist">
+      {
+        wideRungs.map((x) => (
+          <>
+            <path
+              d={`M${x} ${W.mid - W.amp}V${W.mid + W.amp}`}
+              class="stroke-line-strong"
+              stroke-width="1.5"
+            />
+            <circle cx={x} cy={W.mid - W.amp} r="4" class="fill-line-strong" />
+            <circle cx={x} cy={W.mid + W.amp} r="4" class="fill-line-strong" />
+          </>
+        ))
+      }
+      <g fill="none" stroke-width="3" stroke-linecap="round">
+        <path
+          class="draw stroke-primary"
+          pathLength="1"
+          d={strand(1, wideFrom, wideTo, W.first, W.spacing, W.mid, W.amp, false)}></path>
+        <path
+          class="draw stroke-ink-muted"
+          pathLength="1"
+          d={strand(-1, wideFrom, wideTo, W.first, W.spacing, W.mid, W.amp, false)}></path>
+      </g>
     </g>
     {
       rungs.map(({ stays, network }, i) => (
@@ -133,28 +136,30 @@ const narrowHeight = narrowTo + 16;
     <text x={N.mid + N.amp + 10} y="18" class="fill-ink-muted" font-size="12" font-weight="700"
       >{onNetwork}</text
     >
-    {
-      narrowRungs.map((y) => (
-        <>
-          <path
-            d={`M${N.mid - N.amp} ${y}H${N.mid + N.amp}`}
-            class="stroke-line-strong"
-            stroke-width="1.5"
-          />
-          <circle cx={N.mid - N.amp} cy={y} r="3" class="fill-line-strong" />
-          <circle cx={N.mid + N.amp} cy={y} r="3" class="fill-line-strong" />
-        </>
-      ))
-    }
-    <g class="helix-drift" data-axis="y" fill="none" stroke-width="2.5" stroke-linecap="round">
-      <path
-        class="draw stroke-primary"
-        pathLength="1"
-        d={strand(1, narrowFrom, narrowTo, N.first, N.spacing, N.mid, N.amp, true)}></path>
-      <path
-        class="draw stroke-ink-muted"
-        pathLength="1"
-        d={strand(-1, narrowFrom, narrowTo, N.first, N.spacing, N.mid, N.amp, true)}></path>
+    <g class="helix-twist" data-axis="y">
+      {
+        narrowRungs.map((y) => (
+          <>
+            <path
+              d={`M${N.mid - N.amp} ${y}H${N.mid + N.amp}`}
+              class="stroke-line-strong"
+              stroke-width="1.5"
+            />
+            <circle cx={N.mid - N.amp} cy={y} r="3" class="fill-line-strong" />
+            <circle cx={N.mid + N.amp} cy={y} r="3" class="fill-line-strong" />
+          </>
+        ))
+      }
+      <g fill="none" stroke-width="2.5" stroke-linecap="round">
+        <path
+          class="draw stroke-primary"
+          pathLength="1"
+          d={strand(1, narrowFrom, narrowTo, N.first, N.spacing, N.mid, N.amp, true)}></path>
+        <path
+          class="draw stroke-ink-muted"
+          pathLength="1"
+          d={strand(-1, narrowFrom, narrowTo, N.first, N.spacing, N.mid, N.amp, true)}></path>
+      </g>
     </g>
     {
       rungs.map(({ stays, network }, i) => (
