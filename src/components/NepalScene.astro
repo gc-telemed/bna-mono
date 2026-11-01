@@ -1,0 +1,176 @@
+---
+/**
+ * Nepal from Sagarmatha to the Terai, in one view: the high range at the back with Everest
+ * (Sagarmatha) standing above Nuptse, Lhotse, Cho Oyu and Makalu, its west face in shadow and
+ * a plume of wind-blown snow off the summit; the Mahabharat hills and the low Chure range in
+ * between; and the flat Terai in front, its fields running in perspective, a river widening
+ * towards the viewer, and a treeline on the horizon.
+ *
+ * A companion to Himalaya.astro, built the same way: drawn at build time from fixed seeds,
+ * painted only with `--p-*` tokens (read inside `.band-dark`, the night palette), stretched to
+ * fill its positioned parent, and decorative. Each layer carries `--rise` for the scroll-driven
+ * parallax in global.css (`.himalaya .ridge`): the far range sinks most, the Terai not at all.
+ */
+import { SCENE_W as W, SCENE_H as H, ridge, rng } from '@/scripts/ridges';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+
+// The high range. Everest's summit is the anchor at x 1132; the neighbours are lower.
+const range = ridge(
+  101,
+  [
+    [0, 330],
+    [180, 300],
+    [330, 322],
+    [480, 282],
+    [620, 300],
+    [760, 262], // Cho Oyu
+    [880, 300],
+    [980, 268],
+    [1040, 252], // Nuptse
+    [1088, 258],
+    [1132, 158], // Sagarmatha
+    [1176, 238],
+    [1236, 222], // Lhotse
+    [1300, 262],
+    [1385, 250],
+    [1480, 244], // Makalu
+    [1560, 272],
+    [1600, 262],
+  ],
+  20,
+  3,
+);
+
+// Everest's west face, in shadow, fading out below the summit.
+const westFace = 'M1132 158L1088 258L1104 330L1150 330Z';
+
+// The plume of snow that streams east off the summit.
+const plume = 'M1134 164C1185 152 1250 156 1320 172C1265 168 1205 170 1152 178Z';
+
+const mahabharat = ridge(
+  113,
+  [
+    [0, 420],
+    [260, 396],
+    [520, 426],
+    [800, 392],
+    [1080, 420],
+    [1340, 398],
+    [1600, 416],
+  ],
+  18,
+  4,
+);
+
+const chure = ridge(
+  127,
+  [
+    [0, 500],
+    [320, 486],
+    [660, 504],
+    [980, 490],
+    [1300, 502],
+    [1600, 492],
+  ],
+  10,
+  4,
+);
+
+// The Terai: flat, at the foot of the Chure hills.
+const horizon = 548;
+const terai = `M0 ${horizon + 2}C400 ${horizon - 2} 1200 ${horizon + 3} ${W} ${horizon - 1}L${W} ${H}L0 ${H}Z`;
+
+// Fields: soft furrows that widen towards the viewer.
+const furrows = [556, 566, 580, 600, 628, 664, 708].map((y) => `M0 ${y}H${W}`).join('');
+
+// A river from the hills to the foreground, widening as it comes.
+const river =
+  'M968 550C930 570 1010 594 900 620C790 648 760 684 540 720L720 720C880 684 910 652 1004 624C1090 598 992 572 975 550Z';
+
+// A treeline along the horizon: many small, overlapping crowns of uneven height, broken where
+// the river comes out of the hills.
+const tr = rng(139);
+const trees = Array.from({ length: 120 }, (_, i) => {
+  const x = i * 13.5 + tr() * 8;
+  return { x, rx: 5 + tr() * 6, ry: 6 + tr() * 9 };
+}).filter(({ x }) => x < 930 || x > 1010);
+---
+
+<div
+  class:list={['himalaya pointer-events-none absolute inset-0 overflow-hidden', className]}
+  aria-hidden="true"
+>
+  <svg class="h-full w-full" viewBox={`0 150 ${W} ${H - 150}`} preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="nepal-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color: var(--p-ground)"></stop>
+        <stop offset="0.75" style="stop-color: var(--p-surface)"></stop>
+      </linearGradient>
+      <radialGradient id="nepal-glow" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" style="stop-color: var(--p-primary); stop-opacity: 0.32"></stop>
+        <stop offset="1" style="stop-color: var(--p-primary); stop-opacity: 0"></stop>
+      </radialGradient>
+      <clipPath id="nepal-range">
+        <path d={range}></path>
+      </clipPath>
+      <linearGradient id="nepal-snow" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color: var(--p-text); stop-opacity: 0.75"></stop>
+        <stop offset="1" style="stop-color: var(--p-text); stop-opacity: 0"></stop>
+      </linearGradient>
+      <linearGradient id="nepal-plume" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" style="stop-color: var(--p-text); stop-opacity: 0.45"></stop>
+        <stop offset="1" style="stop-color: var(--p-text); stop-opacity: 0"></stop>
+      </linearGradient>
+      <linearGradient id="nepal-face" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" style="stop-color: var(--p-ground); stop-opacity: 0.45"></stop>
+        <stop offset="1" style="stop-color: var(--p-ground); stop-opacity: 0"></stop>
+      </linearGradient>
+      <clipPath id="nepal-plain">
+        <path d={terai}></path>
+      </clipPath>
+    </defs>
+
+    <rect y="150" width={W} height={H - 150} fill="url(#nepal-sky)"></rect>
+    <g class="ridge" style="--rise: 170px">
+      <circle cx="1132" cy="330" r="180" fill="url(#nepal-glow)"></circle>
+    </g>
+    <g class="ridge" style="--rise: 120px">
+      <path d={range} class="fill-surface-muted"></path>
+      <g clip-path="url(#nepal-range)">
+        <path d={westFace} fill="url(#nepal-face)"></path>
+        <rect y="150" width={W} height="110" fill="url(#nepal-snow)"></rect>
+      </g>
+      <path d={plume} fill="url(#nepal-plume)"></path>
+    </g>
+    <g class="ridge" style="--rise: 70px">
+      <path d={mahabharat} class="fill-surface"></path>
+    </g>
+    <g class="ridge" style="--rise: 30px">
+      <path d={chure} style="fill: color-mix(in srgb, var(--p-surface) 55%, var(--p-ground))"
+      ></path>
+    </g>
+    <g>
+      <path d={terai} style="fill: color-mix(in srgb, var(--p-surface) 30%, var(--p-ground))"
+      ></path>
+      <g
+        clip-path="url(#nepal-plain)"
+        fill="none"
+        class="stroke-line"
+        stroke-width="1.2"
+        opacity="0.55"
+      >
+        <path d={furrows}></path>
+      </g>
+      <path d={river} style="fill: var(--p-primary); opacity: 0.35"></path>
+      {
+        trees.map(({ x, rx, ry }) => (
+          <ellipse cx={x} cy={horizon - ry * 0.55} rx={rx} ry={ry} class="fill-ground" />
+        ))
+      }
+    </g>
+  </svg>
+</div>

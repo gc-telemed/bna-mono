@@ -6,6 +6,8 @@ import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import NameBand from '@/components/NameBand.astro';
 import LineOut from '@/components/LineOut.astro';
+import NepalScene from '@/components/NepalScene.astro';
+import Himalaya from '@/components/Himalaya.astro';
 import { CONTACT, PRODUCTS, FORMS, NAMES, OFFERS, THREADS } from '@/data/site';
 
 // v5.1. needs_review: Nepali versions of every block below, reviewed by a native speaker.
@@ -173,27 +175,35 @@ const approach = [
 ];
 ---
 
-<Base title="Company" description={page.description} path="/company">
-  <!-- Hero -->
-  <Section class="!pt-16 !pb-8 lg:!pt-20">
-    <div class="mx-auto max-w-3xl text-center">
-      <span class="text-ink-muted inline-block text-xs font-semibold tracking-[0.22em] uppercase">
-        About cosys.work
-      </span>
-      <h1
-        class="text-ink mt-6 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
-      >
-        We build the tools we{' '}<br class="hidden sm:block" />
-        <span class="text-primary">wanted to exist</span>
-      </h1>
-      <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        {page.lede}
-      </p>
-      <p class="text-ink mt-5 font-medium">
-        Built in Nepal. The Diabetes App is in closed pilot and free forever.
-      </p>
+<Base title="About us" description={page.description} path="/company" headerTone="dark">
+  <!-- Hero: on the dark band, over Nepal from Sagarmatha to the Terai (NepalScene.astro) -->
+  <div class="band-dark relative overflow-hidden pb-10 sm:pb-16">
+    <div
+      class="absolute inset-x-0 bottom-0 h-[clamp(220px,32vw,400px)] sm:h-[calc(clamp(220px,32vw,400px)+24px)]"
+    >
+      <NepalScene />
     </div>
-  </Section>
+    <Section class="relative !pt-20 !pb-[clamp(220px,32vw,400px)] lg:!pt-28">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="text-ink-muted inline-block text-xs font-semibold tracking-[0.22em] uppercase">
+          About cosys.work
+        </span>
+        <h1
+          class="text-ink mt-5 text-5xl leading-[1.04] font-semibold text-balance sm:text-6xl lg:text-7xl"
+        >
+          We build the tools we{' '}<br class="hidden sm:block" />
+          <span class="text-primary">wanted to exist</span>
+        </h1>
+        <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
+          {page.lede}
+        </p>
+        <p class="text-ink mt-5 font-medium">
+          Built in Nepal. The Diabetes App is in closed pilot and free forever.
+        </p>
+      </div>
+    </Section>
+    <Himalaya part="fog" />
+  </div>
 
   <!-- Story -->
   <Section>

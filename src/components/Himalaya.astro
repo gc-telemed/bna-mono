@@ -19,38 +19,7 @@ interface Props {
 }
 const { part, class: className } = Astro.props;
 
-const W = 1600;
-const H = 720;
-
-/** A small deterministic generator, so the range is the same on every build. */
-function rng(seed: number) {
-  let s = seed >>> 0;
-  return () => {
-    s = (s * 1664525 + 1013904223) >>> 0;
-    return s / 4294967296;
-  };
-}
-
-/** A ridgeline by midpoint displacement between fixed peaks, closed to the bottom edge. */
-function ridge(seed: number, anchors: [number, number][], rough: number, depth: number) {
-  const r = rng(seed);
-  let pts = anchors.map(([x, y]) => [x, y] as [number, number]);
-  let spread = rough;
-  for (let d = 0; d < depth; d++) {
-    const next: [number, number][] = [];
-    for (let i = 0; i < pts.length - 1; i++) {
-      const [x1, y1] = pts[i]!;
-      const [x2, y2] = pts[i + 1]!;
-      next.push([x1, y1]);
-      next.push([(x1 + x2) / 2, (y1 + y2) / 2 + (r() - 0.5) * spread]);
-    }
-    next.push(pts[pts.length - 1]!);
-    pts = next;
-    spread *= 0.55;
-  }
-  const line = pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join('L');
-  return `M${line}L${W} ${H}L0 ${H}Z`;
-}
+import { SCENE_W as W, SCENE_H as H, ridge } from '@/scripts/ridges';
 
 // Far: the high range, a few tall sharp summits with snow. Mid and near: rolling ridges.
 // Nearest: the foothills, almost smooth, in the band's ground colour.
@@ -149,7 +118,7 @@ const shore = `M0 ${H}L0 690C260 662 520 660 800 676C1080 692 1340 688 1600 664L
 
         <rect y="150" width={W} height={H - 150} fill="url(#himalaya-sky)" />
         <g class="ridge" style="--rise: 180px">
-          <circle cx="1220" cy="300" r="220" fill="url(#himalaya-glow)" />
+          <circle cx="1220" cy="330" r="180" fill="url(#himalaya-glow)" />
         </g>
         <g class="ridge" style="--rise: 130px">
           <path d={far} class="fill-surface-muted" />
