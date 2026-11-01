@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={[align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-2xl']}>
+<div class:list={['reveal', align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-2xl']}>
   {
     eyebrow && (
       <span

@@ -250,6 +250,7 @@ const primary =
   'bg-primary hover:bg-primary-pressed text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition';
 const secondary =
   'border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition';
+// Primary on the muted band is 4.47:1 in pink, so links inside a band use ink, underlined.
 const textLink = 'text-primary font-semibold underline-offset-2 hover:underline';
 const prose = 'text-ink-muted space-y-4 leading-relaxed text-pretty';
 const example =
@@ -358,7 +359,9 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
       </div>
       <p class="text-ink-muted mx-auto mt-6 max-w-3xl text-center text-sm">
         {ideas.dna.libraries}{' '}
-        <a href={LINKS.framework} class={textLink}>{ideas.dna.librariesLink}</a>
+        <a href={LINKS.framework} class="text-ink font-semibold underline underline-offset-2">
+          {ideas.dna.librariesLink}</a
+        >
       </p>
     </div>
   </Section>
@@ -388,7 +391,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
     <div class="mt-12 grid gap-5 lg:grid-cols-3">
       {
         build.map(({ title, audience, body, links }) => (
-          <div class="border-line bg-surface flex flex-col rounded-2xl border p-8">
+          <div class="reveal border-line bg-surface flex flex-col rounded-2xl border p-8">
             <span class="border-primary/30 bg-primary-tint text-ink inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium">
               {audience}
             </span>
@@ -437,7 +440,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
         OFFERS.map(({ title, body }) => (
           <a
             href="/company#work-with-us"
-            class="group border-line bg-surface hover:border-primary/40 flex flex-col rounded-2xl border p-8 transition hover:shadow-lg"
+            class="group reveal lift border-line bg-surface hover:border-primary/40 flex flex-col rounded-2xl border p-8 transition hover:shadow-lg focus-visible:shadow-lg"
           >
             <h3 class="text-ink text-xl font-bold">{title}</h3>
             <p class="text-ink-muted mt-2.5 flex-1 text-sm leading-relaxed">{body}</p>
@@ -479,8 +482,9 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
               <Tag
                 href={href}
                 class:list={[
-                  'border-line bg-surface flex gap-4 rounded-2xl border p-5 lg:flex-col lg:gap-0 lg:p-6',
-                  href && 'hover:border-primary/40 transition hover:shadow-lg',
+                  'reveal border-line bg-surface flex gap-4 rounded-2xl border p-5 lg:flex-col lg:gap-0 lg:p-6',
+                  href &&
+                    'lift hover:border-primary/40 transition hover:shadow-lg focus-visible:shadow-lg',
                 ]}
               >
                 <span class="text-3xl leading-none" aria-hidden="true">
@@ -522,7 +526,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
       <div class="mt-6 grid gap-5 md:grid-cols-3">
         {
           facts.map(({ figure, body, source }) => (
-            <div class="border-line bg-surface rounded-2xl border p-6">
+            <div class="reveal border-line bg-surface rounded-2xl border p-6">
               <p class="text-primary text-3xl font-bold tabular-nums">{figure}</p>
               <p class="text-ink mt-2 text-sm leading-relaxed">{body}</p>
               {source && <p class="text-ink-muted mt-3 text-xs italic">{source}</p>}
