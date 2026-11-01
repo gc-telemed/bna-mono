@@ -26,6 +26,8 @@ const technology = {
 
 // One block per thread, keyed by its id in THREADS (site.ts), which sets the anchor and the
 // jump link's label.
+// The blocks don't fade in: on a phone each is taller than the screen, and a reveal would still
+// be fading while someone reads its first lines.
 const threads: Record<
   (typeof THREADS)[number]['id'],
   { title: string; body: string[]; list: string[]; example: string }
@@ -283,7 +285,7 @@ const approach = [
             return (
               <article
                 id={id}
-                class="reveal border-line bg-surface scroll-mt-20 rounded-2xl border p-5 sm:p-8 lg:p-10"
+                class="border-line bg-surface scroll-mt-20 rounded-2xl border p-5 sm:p-8 lg:p-10"
               >
                 <div class="grid gap-6 lg:grid-cols-2 lg:gap-12">
                   <div>
