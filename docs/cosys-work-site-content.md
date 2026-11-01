@@ -328,6 +328,21 @@ Nostr is an open network where your identity is a key you hold. The Fediverse is
 - **Your posts stay yours.** Your posts live on your phone and your own relays first, and every network's copy links back to the signed original. Take everything with you whenever you like, or delete your account from inside the app. The app tells you plainly that copies other people kept may remain.
 - **Plugins in plain sight.** Extras, such as viewers for new file types, come built into the app and are listed in Settings with what each can read and write. Nothing is downloaded behind your back.
 
+### The white paper (`#white-paper`)
+*For technical readers.* **The white paper: the ideas SoMA rests on**
+
+Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can check. It describes ideas, not code, and it says plainly what SoMA does not claim.
+
+- The record as a hypergraph: each signed post names what it refers to, and those references form a category, so every figure the app shows can be traced back to what someone wrote.
+- Copies on other networks as structure-preserving maps that remember their original, so two copies of one post are always recognised as the same post.
+- The law every bridge between two networks keeps: a post that goes out and comes back is the same post, never a second one.
+- Trust published as a relation between keys, never as a number about a person. Each reader orders their own feed, and that order is never published.
+- How copies agree without coordination, how a circle's history is split into key epochs when someone leaves, and how a post is shown to have existed by a point in public time.
+
+Button: **[Read the white paper]** (`/soma-whitepaper.pdf`) · *PDF, 8 pages, 166 KB. Free to share and adapt under CC BY 4.0.*
+
+The PDF's source and build live in the tda repository (`docs/whitepaper`). The paper spells the name SOMA; the site's own copy keeps SoMA.
+
 ### The facts
 - **Where it runs:** iPhone, Android, desktop and the web.
 - **Joining:** by invitation from an operator. The first operator runs on nep.work, and any community can run its own.

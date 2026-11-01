@@ -107,6 +107,27 @@ const yours = [
   },
 ];
 
+// The white paper, served from public/. Its source and build live in the tda repository
+// (docs/whitepaper on the soma/whitepaper branch); copy the rebuilt PDF here when it changes.
+// The paper spells the name SOMA; the site's own copy keeps SoMA.
+// needs_review: Nepali version of this block, reviewed by a native speaker.
+const whitepaper = {
+  eyebrow: 'For technical readers',
+  title: 'The white paper:',
+  accentTitle: 'the ideas SoMA rests on',
+  lede: 'Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can check. It describes ideas, not code, and it says plainly what SoMA does not claim.',
+  topics: [
+    'The record as a hypergraph: each signed post names what it refers to, and those references form a category, so every figure the app shows can be traced back to what someone wrote.',
+    'Copies on other networks as structure-preserving maps that remember their original, so two copies of one post are always recognised as the same post.',
+    'The law every bridge between two networks keeps: a post that goes out and comes back is the same post, never a second one.',
+    'Trust published as a relation between keys, never as a number about a person. Each reader orders their own feed, and that order is never published.',
+    'How copies agree without coordination, how a circle’s history is split into key epochs when someone leaves, and how a post is shown to have existed by a point in public time.',
+  ],
+  action: 'Read the white paper',
+  href: '/soma-whitepaper.pdf',
+  details: 'PDF, 8 pages, 166 KB. Free to share and adapt under CC BY 4.0.',
+};
+
 // No price row until the founder sets a price.
 const facts = [
   { term: 'Where it runs', detail: 'iPhone, Android, desktop and the web' },
@@ -327,6 +348,53 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
     />
     <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {yours.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- The white paper -->
+  <Section id="white-paper" class="scroll-mt-20 !pt-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
+        <div>
+          <SectionHeading
+            eyebrow={whitepaper.eyebrow}
+            title={whitepaper.title}
+            accentTitle={whitepaper.accentTitle}
+            accentClass={accent}
+            chipClass={chip}
+            lede={whitepaper.lede}
+            align="left"
+          />
+          <a
+            href={whitepaper.href}
+            class="bg-primary text-on-fill hover:bg-primary-pressed mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+          >
+            {whitepaper.action}
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 4v12M6 10l6 6 6-6M5 20h14"></path>
+            </svg>
+          </a>
+          <p class="text-ink-muted mt-3 text-sm">{whitepaper.details}</p>
+        </div>
+        <ul class="grid gap-3">
+          {
+            whitepaper.topics.map((topic) => (
+              <li class="reveal border-line bg-surface text-ink-muted rounded-2xl border p-5 text-sm leading-relaxed">
+                {topic}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </Section>
 
