@@ -15,14 +15,14 @@ const beforeAfter = {
   before: [
     'An assistant retypes months of handwritten logs while the patient waits',
     'History arrives as a carrier bag of printouts, in no particular order',
-    'A long wait collapses into a short consultation',
+    'After a long wait, the consultation itself is short',
     'Follow-up instructions leave on paper and are never seen again',
-    'Whether the plan was followed is a question, not a record',
+    'There is no record of whether the plan was followed',
   ],
   after: [
     'The history the patient chose to share is on screen before they sit down',
     'Readings, labs and medicines taken arrive already charted and ordered',
-    'The appointment starts at the conversation, not the paperwork',
+    'The appointment starts with the conversation',
     'The plan you set appears on the patient’s phone, signed by you',
     'The next visit opens with what happened in between',
   ],
@@ -91,7 +91,7 @@ const faqs = [
   {
     question: 'Does it replace our existing records system?',
     answer:
-      'No. It sits alongside what you already use. It solves the intake problem, getting a patient’s structured history in front of you at the start of a consultation, rather than trying to be your system of record.',
+      'No. It sits alongside what you already use. It handles intake, getting a patient’s structured history in front of you at the start of a consultation, and leaves your system of record as it is.',
   },
   {
     question: 'What if the clinic’s connection is down?',
@@ -101,7 +101,7 @@ const faqs = [
   {
     question: 'Can we see whether patients followed the plan?',
     answer:
-      'You see what they logged and chose to share, including time-stamped medicine records, with the gaps left as gaps. The point is an accurate picture, not a compliance score.',
+      'You see what they logged and chose to share, including time-stamped medicine records, with the gaps left as gaps. It gives an accurate picture and does not produce a compliance score.',
   },
   {
     question: 'Does the app make clinical recommendations?',
@@ -252,8 +252,8 @@ const structuredData = {
     <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
       <SectionHeading
         eyebrow="What it will do"
-        title="A companion for the consultation,"
-        accentTitle="not another system of record"
+        title="A companion for the consultation"
+        accentTitle="that sits beside your records"
         accentClass={accent}
         chipClass={chip}
       />

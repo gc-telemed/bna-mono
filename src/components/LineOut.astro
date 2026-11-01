@@ -1,0 +1,330 @@
+---
+/**
+ * One guarded line out: the Local AI first thread's rule in one picture. On the left, local
+ * and small (phone, laptop, office box), where data and models stay; one line leaves through
+ * a narrow gate tagged deliberate, logged, minimal and reversible; on the right, a large model
+ * abroad that gets only what is let through. Each organisation decides what crosses.
+ *
+ * One row on wide screens; under 640 px a column with the line running down through the gate,
+ * laid out so labels stay at 12 px or more on a 360 px phone. Colour only from `--p-*` tokens:
+ * the left panel in the primary tint, the gate and line in the primary, the right panel in
+ * line colours. Words come from the page's frontmatter. The line carries `class="draw"` and
+ * `pathLength="1"` so the existing draw-in motion picks it up; nothing else moves.
+ */
+interface Props {
+  title: string;
+  label: string;
+  local: { title: string; chips: readonly string[]; note: string };
+  gate: { label: string; tags: readonly string[] };
+  global: { title: string; chips: readonly string[]; note: string };
+  rule: string;
+}
+const { title, label, local, gate, global, rule } = Astro.props;
+
+/** A pill's width for a label, close enough for Nunito bold; Nepali may want a nudge later. */
+const pill = (text: string, size: number) => Math.round(text.length * size * 0.58 + size * 1.6);
+
+/** Lay chips out in one centred row. */
+function row(chips: readonly string[], size: number, centre: number, gap: number) {
+  const widths = chips.map((c) => pill(c, size));
+  const total = widths.reduce((a, b) => a + b, 0) + gap * (chips.length - 1);
+  let x = centre - total / 2;
+  return chips.map((text, i) => {
+    const w = widths[i]!;
+    const out = { text, x, w };
+    x += w + gap;
+    return out;
+  });
+}
+
+// Wide: 1000 × 340.
+const W = { panel: 330, top: 60, height: 230, chipY: 120, chipH: 38, chip: 16 };
+const wideLocal = row(local.chips, W.chip, 20 + W.panel / 2, 10);
+const wideGlobal = row(global.chips, W.chip, 1000 - 20 - W.panel / 2, 10);
+const tagW = 110;
+
+// Narrow: 300 wide, a column.
+const N = { chip: 14, chipH: 32 };
+const narrowLocal = row(local.chips, N.chip, 150, 8);
+const narrowGlobal = row(global.chips, N.chip, 150, 8);
+const narrowTagW = 112;
+---
+
+<figure class="illustration mx-auto max-w-4xl">
+  <p class="text-ink text-center text-lg font-bold text-balance">{title}</p>
+
+  <!-- Wide: one row -->
+  <svg
+    class="mt-6 hidden h-auto w-full sm:block"
+    viewBox="0 0 1000 340"
+    role="img"
+    aria-label={label}
+  >
+    <!-- Local and small -->
+    <rect
+      x="20"
+      y={W.top}
+      width={W.panel}
+      height={W.height}
+      rx="24"
+      class="fill-primary-tint stroke-primary"
+      stroke-width="2.5"></rect>
+    <text
+      x={20 + W.panel / 2}
+      y={W.top + 42}
+      text-anchor="middle"
+      class="fill-ink"
+      font-size="19"
+      font-weight="700">{local.title}</text
+    >
+    {
+      wideLocal.map(({ text, x, w }) => (
+        <>
+          <rect
+            x={x}
+            y={W.chipY}
+            width={w}
+            height={W.chipH}
+            rx={W.chipH / 2}
+            class="fill-surface stroke-primary"
+            stroke-width="2"
+          />
+          <text
+            x={x + w / 2}
+            y={W.chipY + 25}
+            text-anchor="middle"
+            class="fill-ink"
+            font-size={W.chip}
+            font-weight="700"
+          >
+            {text}
+          </text>
+        </>
+      ))
+    }
+    <text
+      x={20 + W.panel / 2}
+      y={W.top + W.height - 30}
+      text-anchor="middle"
+      class="fill-ink-muted"
+      font-size="16">{local.note}</text
+    >
+
+    <!-- The one line, through the gate -->
+    <path
+      class="draw stroke-primary"
+      pathLength="1"
+      d={`M${20 + W.panel} 175H${1000 - 20 - W.panel}`}
+      stroke-width="3"
+      fill="none"></path>
+    <text x="500" y="112" text-anchor="middle" class="fill-ink" font-size="16" font-weight="700"
+      >{gate.label}</text
+    >
+    <g class="stroke-primary" stroke-width="7" stroke-linecap="round" fill="none">
+      <path d="M488 140V212M512 140V212"></path>
+      <path d="M484 136Q500 118 516 136" stroke-width="4"></path>
+    </g>
+    {
+      gate.tags.map((tag, i) => {
+        const x = i % 2 === 0 ? 500 - tagW - 4 : 504;
+        const y = 228 + Math.floor(i / 2) * 34;
+        return (
+          <>
+            <rect x={x} y={y} width={tagW} height="28" rx="14" class="fill-primary" />
+            <text
+              x={x + tagW / 2}
+              y={y + 19}
+              text-anchor="middle"
+              class="fill-on-fill"
+              font-size="14"
+              font-weight="700"
+            >
+              {tag}
+            </text>
+          </>
+        );
+      })
+    }
+
+    <!-- Global and large -->
+    <rect
+      x={1000 - 20 - W.panel}
+      y={W.top}
+      width={W.panel}
+      height={W.height}
+      rx="24"
+      class="fill-surface stroke-line-strong"
+      stroke-width="2"></rect>
+    <text
+      x={1000 - 20 - W.panel / 2}
+      y={W.top + 42}
+      text-anchor="middle"
+      class="fill-ink"
+      font-size="19"
+      font-weight="700">{global.title}</text
+    >
+    {
+      wideGlobal.map(({ text, x, w }) => (
+        <>
+          <rect
+            x={x}
+            y={W.chipY}
+            width={w}
+            height={W.chipH}
+            rx={W.chipH / 2}
+            class="fill-surface stroke-line-strong"
+            stroke-width="2"
+          />
+          <text
+            x={x + w / 2}
+            y={W.chipY + 25}
+            text-anchor="middle"
+            class="fill-ink"
+            font-size={W.chip}
+            font-weight="700"
+          >
+            {text}
+          </text>
+        </>
+      ))
+    }
+    <text
+      x={1000 - 20 - W.panel / 2}
+      y={W.top + W.height - 30}
+      text-anchor="middle"
+      class="fill-ink-muted"
+      font-size="16">{global.note}</text
+    >
+
+    <path d="M20 312v10H980v-10" class="stroke-line-strong" stroke-width="2" fill="none"></path>
+  </svg>
+
+  <!-- Narrow: a column, the line running down through the gate -->
+  <svg
+    class="mx-auto mt-5 h-auto w-full max-w-sm sm:hidden"
+    viewBox="0 0 300 520"
+    role="img"
+    aria-label={label}
+  >
+    <rect
+      x="4"
+      y="4"
+      width="292"
+      height="140"
+      rx="18"
+      class="fill-primary-tint stroke-primary"
+      stroke-width="2"></rect>
+    <text x="150" y="36" text-anchor="middle" class="fill-ink" font-size="16" font-weight="700"
+      >{local.title}</text
+    >
+    {
+      narrowLocal.map(({ text, x, w }) => (
+        <>
+          <rect
+            x={x}
+            y="52"
+            width={w}
+            height={N.chipH}
+            rx={N.chipH / 2}
+            class="fill-surface stroke-primary"
+            stroke-width="1.5"
+          />
+          <text
+            x={x + w / 2}
+            y="73"
+            text-anchor="middle"
+            class="fill-ink"
+            font-size={N.chip}
+            font-weight="700"
+          >
+            {text}
+          </text>
+        </>
+      ))
+    }
+    <text x="150" y="122" text-anchor="middle" class="fill-ink-muted" font-size="14"
+      >{local.note}</text
+    >
+
+    <path
+      class="draw stroke-primary"
+      pathLength="1"
+      d="M150 144V182M150 212V262M150 340V376"
+      stroke-width="3"
+      fill="none"></path>
+    <text x="150" y="202" text-anchor="middle" class="fill-ink" font-size="15" font-weight="700"
+      >{gate.label}</text
+    >
+    <path
+      d="M112 228H188M112 246H188"
+      class="stroke-primary"
+      stroke-width="7"
+      stroke-linecap="round"
+      fill="none"></path>
+    {
+      gate.tags.map((tag, i) => {
+        const x = i % 2 === 0 ? 150 - narrowTagW - 4 : 154;
+        const y = 270 + Math.floor(i / 2) * 34;
+        return (
+          <>
+            <rect x={x} y={y} width={narrowTagW} height="28" rx="14" class="fill-primary" />
+            <text
+              x={x + narrowTagW / 2}
+              y={y + 19}
+              text-anchor="middle"
+              class="fill-on-fill"
+              font-size="14"
+              font-weight="700"
+            >
+              {tag}
+            </text>
+          </>
+        );
+      })
+    }
+
+    <rect
+      x="4"
+      y="376"
+      width="292"
+      height="138"
+      rx="18"
+      class="fill-surface stroke-line-strong"
+      stroke-width="2"></rect>
+    <text x="150" y="408" text-anchor="middle" class="fill-ink" font-size="16" font-weight="700"
+      >{global.title}</text
+    >
+    {
+      narrowGlobal.map(({ text, x, w }) => (
+        <>
+          <rect
+            x={x}
+            y="424"
+            width={w}
+            height={N.chipH}
+            rx={N.chipH / 2}
+            class="fill-surface stroke-line-strong"
+            stroke-width="1.5"
+          />
+          <text
+            x={x + w / 2}
+            y="445"
+            text-anchor="middle"
+            class="fill-ink"
+            font-size={N.chip}
+            font-weight="700"
+          >
+            {text}
+          </text>
+        </>
+      ))
+    }
+    <text x="150" y="492" text-anchor="middle" class="fill-ink-muted" font-size="14"
+      >{global.note}</text
+    >
+  </svg>
+
+  <figcaption class="text-ink mt-4 text-center text-sm font-semibold text-pretty sm:text-base">
+    {rule}
+  </figcaption>
+</figure>

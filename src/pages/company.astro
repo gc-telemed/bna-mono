@@ -5,14 +5,124 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import NameBand from '@/components/NameBand.astro';
-import { SITE, CONTACT, PRODUCTS, FORMS, NAMES, OFFERS } from '@/data/site';
+import LineOut from '@/components/LineOut.astro';
+import { CONTACT, PRODUCTS, FORMS, NAMES, OFFERS, THREADS } from '@/data/site';
+
+// v5.1. needs_review: Nepali versions of every block below, reviewed by a native speaker.
+const page = {
+  description:
+    'About cosys.work: who we are, what we hold to, and how we keep data, models and running costs under the owner’s control.',
+  lede: 'cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.',
+};
+
+const technology = {
+  eyebrow: 'Technology in Nepal',
+  title: 'Kept at home,',
+  accentTitle: 'open to the world on purpose',
+  lede: 'Most software used in Nepal keeps its data on servers abroad, sends its questions to foreign AI services, and stops when the line drops. We build our products and our clients’ systems so the data, the models and the bills stay under the owner’s control.',
+  jumpLabel: 'Jump to a thread',
+  exampleLabel: 'For example:',
+};
+
+// One block per thread, keyed by its id in THREADS (site.ts), which sets the anchor and the
+// jump link's label.
+// The blocks don't fade in: on a phone each is taller than the screen, and a reveal would still
+// be fading while someone reads its first lines.
+const threads: Record<
+  (typeof THREADS)[number]['id'],
+  { title: string; body: string[]; list: string[]; example: string }
+> = {
+  sovereignty: {
+    title: 'Data stays with the people and offices it belongs to',
+    body: [
+      'A patient’s record lives on their phone and at their clinic. A company’s record lives on its own laptops and office box. Each keeps the keys to its own copy, and an outside party such as an auditor, a bank or a regulator gets a signed view of exactly the part it needs, which can be withdrawn later.',
+      'For public services we propose the same rule at national scale, as federated data residency. Records stay with the province or office that owns them, and questions travel between offices while the records stay put.',
+    ],
+    list: [
+      'Each business names one key holder, usually the owner or the treasurer. The key is made on the business’s own device, and we never hold a copy.',
+      // The two providers are not named until the founder decides (open item).
+      'Where we host, we use data centre and cloud providers listed with Nepal’s Department of Information Technology, starting with two and adding the rest of the list over time.',
+    ],
+    example:
+      'a clinic’s records stay on its own machines. We don’t hold a copy, so we are never a third party to its record-keeping.',
+  },
+  ai: {
+    title: 'Local models first, large models on your terms',
+    body: [
+      'Most AI integrations send a company’s cleaned records, prices, supplier terms and its questions to a model abroad, one convenient call at a time. The company keeps a chat box and a bill that grows with use, and some of its know-how leaves with every call. We keep the intelligence close: a small model on each phone and laptop, and a larger one on the office or branch box, working on data that stays in the building.',
+      'Our local models are built on Gemma, chosen after we examined the open models available. We improve them with fine-tuning, distillation and further pre-training, and we are extending them to long-running tasks, to several agents and several users working together, to step-by-step reasoning, and to larger training data.',
+    ],
+    list: [
+      'A question too large for local machines can go to a large model abroad, one call at a time. Every such call is deliberate, logged, kept to the minimum and reversible.',
+      // "Local body" reading awaits the founder (open item); the egress templates get a link once published.
+      'Each organisation, and each local body that runs public services, sets its own policy for what may leave. We provide base templates and guidelines to start from.',
+    ],
+    example:
+      'the Diabetes App reads a glucometer photo on the phone itself, so the picture never leaves it.',
+  },
+  resilience: {
+    title: 'Work carries on when the line drops',
+    body: [
+      'In many parts of Nepal the line drops every day, and a power cut can take a whole office offline. Our systems keep every essential task on the devices people hold. Devices sync directly when they can reach each other, through a relay when they cannot, and wait when there is no connection at all. When the line returns, the copies merge and every entry keeps its author’s signature.',
+    ],
+    list: [
+      'Relays carry sealed messages they cannot read, and anyone can run one.',
+      'The network depends on no single operator, ourselves included.',
+    ],
+    example:
+      'a branch with a bad line keeps approving leave and answering questions, and its records join the rest of the company when the line comes back.',
+  },
+  intelligence: {
+    title: 'Business intelligence from your own record',
+    body: [
+      'An organisation’s intelligence is the record of how it works: who decided what, who approved it, who was waiting and for how long. Kept at home, that record feeds reports and answers built by models on your own machines, and each answer cites the entries it drew on. There is nothing to buy back from a vendor.',
+    ],
+    list: [
+      'Each team’s assistant answers from what that team may see, because nothing else is on its machines.',
+      'A view for an outside party keeps only the fields that party needs.',
+    ],
+    example:
+      'an investor’s view can show how headcount moved last quarter without naming who was hired.',
+  },
+  costs: {
+    title: 'Run it for less',
+    body: [
+      'Rented cloud and AI services charge more the more you use them. When the work runs on machines you own, with compute pooled between them peer to peer, the bill shrinks to the parts that still need a provider: relaying sealed messages, keeping encrypted backups, and the occasional large-model call.',
+    ],
+    list: [
+      'Before a workload moves, we give a plain verdict: move it now, fix it first, or keep it rented for now.',
+      'We measure the savings with each client as the work moves, and we don’t promise a figure in advance.',
+    ],
+    example:
+      'a ward office and a ministry can draw on one shared pool of machines in the country, instead of each paying for a foreign service.',
+  },
+};
+
+// Words inside the drawing in the Local AI first thread.
+const lineOut = {
+  title: 'One guarded line out',
+  label:
+    'On the left, local and small: a phone, a laptop and an office box, where data and models stay. One guarded line leads right, to a large model abroad. Every call along it is deliberate, logged, kept to the minimum and reversible. Each organisation decides what crosses.',
+  local: {
+    title: 'Local and small',
+    chips: ['Phone', 'Laptop', 'Office box'],
+    note: 'Data and models stay here',
+  },
+  gate: { label: 'One guarded line', tags: ['Deliberate', 'Logged', 'Minimal', 'Reversible'] },
+  global: {
+    title: 'Global and large',
+    chips: ['Large model'],
+    note: 'Gets only what you let through',
+  },
+  rule: 'Each organisation decides what crosses the line',
+};
 
 // New in v5. needs_review: Nepali versions, reviewed by a native speaker.
 const workWithUs = {
   eyebrow: 'Work with us',
   title: 'Your own systems,',
   accentTitle: 'in production',
-  lede: 'We also help companies, organisations and ministries move their systems onto machines they own.',
+  lede: 'We also help companies, organisations and ministries move their systems onto machines they own. Everything in Technology in Nepal comes with both offers.',
   action: 'Write to us',
 };
 
@@ -20,17 +130,17 @@ const beliefs = [
   {
     emoji: '🧭',
     title: 'The record belongs to the patient',
-    body: 'Not to us, and not to whoever acquires us later. If a company can monetise a health history, sooner or later it is asked to. We removed the option by removing the copy.',
+    body: 'It does not belong to us or to whoever acquires us later. A company that can monetise a health history is sooner or later asked to, so we keep no copy.',
   },
   {
     emoji: '📡',
     title: 'Connectivity is a luxury, not a premise',
-    body: 'Software that stops working when the signal drops is not a medical tool, it is a website. Everything essential runs on the device, and the network is a bonus.',
+    body: 'A medical tool has to keep working when the signal drops, so everything essential runs on the device and the network is a bonus.',
   },
   {
     emoji: '🩺',
     title: 'Clinicians decide, software remembers',
-    body: 'No dose calculations and no automated diagnosis. We build record-keeping and communication, and the clinician makes the call.',
+    body: 'We build record-keeping and communication. The software does not calculate doses or diagnose, and the clinician makes the call.',
   },
   {
     emoji: '🫱',
@@ -58,16 +168,12 @@ const approach = [
   {
     emoji: '🔁',
     title: 'Generalise from one condition, carefully',
-    body: 'Diabetes is where we start because the daily logging burden is severe and the clinical loop is tight. The same fabric extends to other long-term conditions once it is genuinely proven on one.',
+    body: 'Diabetes is where we start because the daily logging burden is severe and the clinical loop is tight. The same fabric extends to other long-term conditions once it is proven on one.',
   },
 ];
 ---
 
-<Base
-  title="Company"
-  description={`About ${SITE.name}: why we build offline-first, peer-to-peer health software, and what we hold to.`}
-  path="/company"
->
+<Base title="Company" description={page.description} path="/company">
   <!-- Hero -->
   <Section class="!pt-16 !pb-8 lg:!pt-20">
     <div class="mx-auto max-w-3xl text-center">
@@ -83,9 +189,7 @@ const approach = [
         <span class="text-primary">wanted to exist</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        cosys.work makes software for people managing long-term conditions and the clinicians who
-        treat them. We started because the available tools asked for a permanent internet
-        connection, a monthly fee, and an unconditional copy of the most private thing a person has.
+        {page.lede}
       </p>
       <p class="text-ink mt-5 font-medium">
         Built in Nepal. The Diabetes App is in closed pilot and free forever.
@@ -105,18 +209,18 @@ const approach = [
       <p>
         The usual answer is more hardware and more cloud: a continuous monitor, a subscription, a
         dashboard hosted somewhere far away. That answer excludes most of the people who need it
-        most, and it quietly assumes that a company should hold everybody&rsquo;s medical history in
-        one place.
+        most, and it assumes that a company should hold everybody&rsquo;s medical history in one
+        place.
       </p>
       <p class="text-ink font-medium">
-        We took a different route. Use the camera people already own. Run the intelligence on the
-        phone. Move records directly between the patient and the people who need them, and let
-        nothing in the middle read them.
+        So we use the camera people already own and run the intelligence on the phone. Records move
+        directly between the patient and the people who need them, and nothing in the middle can
+        read them.
       </p>
       <p>
-        That turned out to require three things rather than one: an app for the patient, an app for
-        the clinic, and a peer-to-peer network connecting them. The patient app and the network come
-        first; the Clinic App is in development.
+        That turned out to need three things: an app for the patient, an app for the clinic, and a
+        peer-to-peer network connecting them. The patient app and the network come first; the Clinic
+        App is in development.
       </p>
     </div>
   </Section>
@@ -140,11 +244,84 @@ const approach = [
     <SectionHeading
       eyebrow="How we work"
       title="Built for the hard case first,"
-      accentTitle="not retrofitted to it"
-      lede="We work out of Nepal, and we build for it before we build for anywhere else. That is a design constraint as much as a market."
+      accentTitle="then for everywhere else"
+      lede="We work out of Nepal and build for it before anywhere else, as a market and as a design constraint."
     />
     <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {approach.map((item) => <Card {...item} />)}
+    </div>
+  </Section>
+
+  <!-- Technology in Nepal -->
+  <Section id="technology-in-nepal" class="scroll-mt-20 !pt-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow={technology.eyebrow}
+        title={technology.title}
+        accentTitle={technology.accentTitle}
+        lede={technology.lede}
+      />
+      <nav aria-label={technology.jumpLabel} class="mt-8">
+        <ul class="flex flex-wrap justify-center gap-2">
+          {
+            THREADS.map(({ id, label }) => (
+              <li>
+                <a
+                  href={`#${id}`}
+                  class="border-line-strong bg-surface text-ink hover:border-primary inline-block rounded-full border px-4 py-1.5 text-sm font-semibold transition"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="mt-12 grid gap-5">
+        {
+          THREADS.map(({ id, label }) => {
+            const t = threads[id];
+            return (
+              <article
+                id={id}
+                class="border-line bg-surface scroll-mt-20 rounded-2xl border p-5 sm:p-8 lg:p-10"
+              >
+                <div class="grid gap-6 lg:grid-cols-2 lg:gap-12">
+                  <div>
+                    <p class="text-ink-muted text-xs font-semibold tracking-wider uppercase">
+                      {label}
+                    </p>
+                    <h3 class="text-ink mt-2 text-xl font-bold text-pretty md:text-2xl">
+                      {t.title}
+                    </h3>
+                    <div class="text-ink-muted mt-4 space-y-4 leading-relaxed text-pretty">
+                      {t.body.map((line) => (
+                        <p>{line}</p>
+                      ))}
+                    </div>
+                  </div>
+                  {id === 'ai' && (
+                    <div class="-mx-5 sm:mx-0 lg:col-span-2 lg:row-start-2">
+                      <LineOut {...lineOut} />
+                    </div>
+                  )}
+                  <div class="lg:col-start-2 lg:row-start-1">
+                    <ul class="text-ink-muted list-disc space-y-3 pl-5 text-sm leading-relaxed">
+                      {t.list.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                    <p class="border-primary/30 bg-primary-tint text-ink mt-6 rounded-2xl border px-5 py-4 text-sm leading-relaxed">
+                      <span class="font-semibold">{technology.exampleLabel}</span> {t.example}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
     </div>
   </Section>
 

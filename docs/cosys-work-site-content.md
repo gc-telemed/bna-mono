@@ -1,4 +1,4 @@
-# cosys.work site content (v5, 2026-11-01)
+# cosys.work site content (v5.1, 2026-11-01)
 
 This is the English source copy. Nepali (`ne`) versions are needed for every block before launch and must be reviewed by a native speaker. English stays the default language. Keep the current visual design. `[Screenshot: …]` marks where an image goes. No em dashes anywhere in the copy, in either language.
 
@@ -10,11 +10,13 @@ This is the English source copy. Nepali (`ne`) versions are needed for every blo
 
 **Positioning (v5).** The homepage now introduces the company before the health apps: collaborative systems that people own, that work offline and sync peer to peer, with chronic care in Nepal as the first proof. The health positioning above still holds for the health apps and their pages.
 
+**What changed from v5.** A humanizer pass ran over every page's copy: contrasts, clipped lists, closers and inflated words are rewritten, with the facts, figures, legal and safety notices unchanged; the copy below follows the site. The Company page is now called **About us** in the header and footer (the URL stays `/company`, and `/about` redirects there). Its hero lede is rewritten, and it gains *Technology in Nepal*: data at home, local AI first with large models abroad only through one guarded line, work through outages, business intelligence from an organisation's own record, and lower running costs, with a drawing of the guarded line. *Work with us* says everything in Technology in Nepal comes with both offers. The homepage gains a band, *What stays with you*, under the Work with us cards, linking to each thread. nep.work's introduction now ends "and anyone can run one". The homepage headline now rotates through five lines drawn from the About us threads, the drawings and Who we are. No savings figure and no prices anywhere. Every new block needs its Nepali version, reviewed by a native speaker.
+
 **What changed from v4.3.** The homepage leads with the company: a new hero and *Who we are*, a band explaining cosys.work, nep.work and coplanetary.work, three sections with drawings (collaborative systems, peer-to-peer DNA, beyond Earth), *What we build* with SoMA and the open `@cosys` framework, and *Work with us* with the two consulting offers. Health keeps its own band with the condition apps, the Nepal figures and both buttons; the Snap, Share, Follow steps and the comparison with typical diabetes apps moved to the Diabetes App page. SoMA gets its own page at `/soma` with an invitation form that asks for no name and no phone number. The header gains SoMA; the footer gains the three names, "Built in Nepal" and a link to the open libraries (the app repositories stay private). The Platform page names the network nep.work, and the Company page gains *Work with us* and the three names. The EGU and NASA ADS line, SoMA's price and status line, and the language switch all still wait (see the checks at the end). Every new block needs its Nepali version, reviewed by a native speaker, before launch.
 
 **What changed from v3.** Brought in line with the app as built through Milestone 11 and with the Clinic App as proposed (ADR-20). The patient app's features are stated as they work. Clinic features are marked as coming with the Clinic App, because none of it is built yet. The Platform section now describes the network the app actually uses. See *Check before publishing* at the end for four points that need a decision.
 
-Global header: **Diabetes App · Clinic App · SoMA · Platform · Company · Contact**. The language switch **English | नेपाली** waits until reviewed Nepali pages exist; don't ship a switch that leads nowhere.
+Global header: **Diabetes App · Clinic App · SoMA · Platform · About us · Contact**. The language switch **English | नेपाली** waits until reviewed Nepali pages exist; don't ship a switch that leads nowhere.
 
 Global footer: "cosys.work · nep.work · coplanetary.work" (plain text until those domains serve pages) · "Built in Nepal" · **Open libraries on GitHub** (`github.com/cosys-work/cosys`; the libraries are open, the apps are not) · hello@cosys.work · Privacy
 
@@ -25,7 +27,15 @@ Global footer: "cosys.work · nep.work · coplanetary.work" (plain text until th
 The homepage introduces the company first, then the ideas, then what we build, then health. Every section below is new or rewritten in v5 except *Health in Nepal* and *Our promises*, which are kept from v4.3 and shortened.
 
 ### Hero
-**Systems you own, that keep working when the connection doesn't.**
+*v5.1:* the headline rotates every five seconds through five lines. The first is the page's h1 and the site tagline; the others show in turn, and a "Pause headlines" control stops them. With reduced motion only the first shows. Founder to sign off the wording (see the checks at the end).
+
+1. **Collaborative software with no centre to fail.**
+2. **Families, clinics and offices working together, each keeping its own copy.**
+3. **Your records, your models and your bills, under your own roof.**
+4. **A clinic offline for a day is further away than Mars. We build for both.**
+5. **Built in Nepal, where the line drops every day, and the work carries on.**
+
+*(v5 headline, retired in v5.1: "Systems you own, that keep working when the connection doesn't.")*
 
 CoSys Work builds collaborative software that runs on the devices people already own. It works offline, syncs directly between the people who share it, and keeps every record with the people it belongs to. We started with chronic care in Nepal, where patients, families and clinics share one record without a central server.
 
@@ -44,7 +54,7 @@ CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborat
 Three columns, each linking down to its own section.
 
 - **cosys.work: collaborative systems.** Software for people who work together. Each family, clinic, team or community holds its own keys and its own copy of what concerns it, and every entry is signed by whoever wrote it. Collaborative editors, signed authorship and trust circles are the building blocks. *For example:* a family and their clinic keep one diabetes record in step.
-- **nep.work: the peer-to-peer network, also called nepwork.** The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and any community can run its own node. *For example:* a patient's phone reaches a clinic's computer across Nepal with nothing in the middle that can read the record.
+- **nep.work: the peer-to-peer network, also called nepwork.** The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and anyone can run one. *For example:* a patient's phone reaches a clinic's computer across Nepal with nothing in the middle that can read the record.
 - **coplanetary.work: systems for many places at once.** Systems built for distance and delay. Every copy is signed, can wait, and catches up with the others within known sync times: across town, across a country when the power goes out, and one day across planets. Eventually consistent social media is the first. *For example:* SoMA: write once on your phone, publish to every network, keep proof it's yours.
 
 ### Collaborative systems
@@ -61,7 +71,7 @@ Shared editing works offline and merges when people reconnect. Every entry is si
 ### Peer-to-peer DNA
 **Peer to peer is in our DNA**
 
-Everything we build starts from the same rules, and they come with every product, every engagement and every library we publish.
+Everything we build starts from the same rules, whether it is a product, an engagement or a library we publish.
 
 Your keys stay on your devices, and every entry is signed with them. Your copy of the record is the record, and it syncs with the people you chose whenever there is a connection. Relays carry sealed mail they cannot read. Everything works offline and catches up later. The code is open under Apache-2.0, so anyone can check that all of this is true.
 
@@ -74,11 +84,11 @@ Under the drawing: *Our libraries are published on npm, JSR and crates.io.* **[S
 ### Beyond Earth
 **Built for distance and delay**
 
-Most software assumes the connection is instant and always there. Ours treats delay and disconnection as normal: every copy is signed, can wait as long as it needs to, and catches up with the others in a known time.
+We treat delay and disconnection as normal, although most software assumes the connection is instant and always there. Every copy is signed, can wait as long as it needs to, and catches up with the others in a known time.
 
-That is what keeps a clinic in rural Nepal working through a power cut, and it is the discipline a network between planets needs. Light takes about 1.3 seconds to reach the Moon, and between about 4 and 24 minutes to reach Mars, depending on where the planets are. A clinic that is offline for a day is, in network terms, further away than Mars.
+That is what keeps a clinic in rural Nepal working through a power cut, and a network between planets needs the same thing. Light takes about 1.3 seconds to reach the Moon, and between about 4 and 24 minutes to reach Mars, depending on where the planets are. A clinic that is offline for a day is, in network terms, further away than Mars.
 
-Space agencies solve this with delay-tolerant networking, which stores a message and forwards it when the next link opens. Signed, self-contained records suit that way of travelling. coplanetary.work is where we take it further: social media and shared records that stay consistent across any distance. Nothing we run is in space today. This is a design rule, and the direction we are heading.
+Space agencies solve this with delay-tolerant networking, which stores a message and forwards it when the next link opens. Signed, self-contained records suit that way of travelling. coplanetary.work applies the same approach to social media and shared records, so they stay consistent across any distance. Nothing we run is in space today. This is a design rule, and the direction we are heading.
 
 *(The EGU and NASA ADS line stays out until the founder confirms it; see the checks at the end.)*
 
@@ -99,7 +109,16 @@ For teams who want their own systems in production, on machines they own. No pri
 - **MVP to Production.** For teams with a working prototype and a reason to launch: a review across eight areas, a clear verdict, and a roadmap into production on systems you own.
 - **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
 
-Both cards link to *Work with us* on the Company page.
+Both cards link to *Work with us* on the About us page.
+
+### What stays with you (v5.1)
+A band under the two Work with us cards. Each item links to its thread on About us (`/company#<id>`).
+
+- **Data at home:** records stay with the people and offices they belong to, under keys they hold.
+- **Local AI first:** models run on your machines, and large models abroad get only what you let through.
+- **Through outages:** work carries on offline and catches up when the line returns.
+- **Your own intelligence:** reports and answers from your own record, each with its sources.
+- **Run it for less:** pay for what still needs a provider, and run the rest yourself.
 
 ### Health in Nepal
 **Specialised apps for each condition. Starting with diabetes.**
@@ -162,7 +181,7 @@ Button: **[Join the patient waitlist]** · *Free for patients, always.*
 | Your doctor's targets | Typed in by you, or none | Your doctor's, or published WHO and ADA values, always labelled with where they came from |
 
 ### Log in seconds
-- **Glucometer:** take a photo of the display. The number is read on your phone, and you confirm it before it's saved. It works with the meters sold in Nepal; no Bluetooth needed.
+- **Glucometer:** take a photo of the display. The number is read on your phone, and you confirm it before it's saved. It works with the meters sold in Nepal and does not need Bluetooth.
 - **Lab reports:** snap or pick your HbA1c, lipid or kidney report. The values are read on your phone and saved with the report's date once you've checked them.
 - **Meals:** add a photo and your own note of how the meal felt: light, usual or heavy. *Coming soon:* a colour cue from the photo, trained on Nepali food, once its fine-tuning is done and it has regulatory approval. Until then your own note is the record. The app never counts carbohydrates or calories.
 - **Medicines:** answer a reminder with *Taken*, or tick the medicine when you take it.
@@ -177,7 +196,7 @@ Button: **[Join the patient waitlist]** · *Free for patients, always.*
 - How many readings were under 70 mg/dL and under 54 mg/dL, each line labelled with its source.
 - Your HbA1c from your lab reports, over time.
 
-A reading outside your range is shown as it is, with no alarm colour and no verdict.
+A reading outside your range is shown as it is, without an alarm colour or a verdict.
 
 ### Your doctor's plan, in your pocket
 Your targets, medicines and your doctor's instructions for a low sit on a plan card. You copy them from your prescription, and a photo of the prescription can fill the card in for you to check. Where your doctor hasn't set a target, the app uses published values from the World Health Organization, with the American Diabetes Association's where WHO has none, and says so beside every figure they affect. Every earlier version of your plan is kept.
@@ -220,10 +239,10 @@ English and Nepali. Maithili is planned.
 - **Does it really work with no internet?** Yes. Logging, reading a photo, your summary, your plan and your reminders all run on the phone. The internet is used only to send updates to the family members you chose, and it waits until you are connected.
 - **Does the app calculate my insulin dose?** No, and it never will. The app is a record-keeping and communication tool. It does not calculate or recommend doses, and it does not estimate carbohydrates or calories. Dosing and treatment decisions belong to your doctor.
 - **What happens to my photos?** They are read on your phone and never sent to a server. A number read from a photo is only a suggestion until you confirm it, and you can always type the value instead.
-- **Where do the target ranges come from?** From your doctor, when you copy their targets onto the plan card. Where a target is missing, the app uses published values from the World Health Organization, with the American Diabetes Association’s where WHO has none, and it labels every figure those values affect.
+- **Where do the target ranges come from?** From your doctor, when you copy their targets onto the plan card. Where a target is missing, the app uses published values from the World Health Organization, with the American Diabetes Association's where WHO has none, and it labels every figure those values affect.
 - **Who sees my readings?** Only the people you add, at the level you choose for each: the numbers, the range only, or alerts only. Updates are sealed so only their phones can read them. You can change or remove anyone at any time.
-- **Is an alert an emergency service?** No. An alert reaches your emergency contacts when your phone next has a signal, so it is not real time. In an emergency, call for help directly. The If I feel low card puts your contact’s call button first after a reading under 54 mg/dL.
-- **What if I lose my phone?** Make an encrypted backup from the app and keep it somewhere safe. Only your passphrase opens it, and restoring it on a new phone brings your record back. There is no cloud copy, so the backup is the copy.
+- **Is an alert an emergency service?** No. An alert reaches your emergency contacts when your phone next has a signal, so it is not real time. In an emergency, call for help directly. The If I feel low card puts your contact's call button first after a reading under 54 mg/dL.
+- **What if I lose my phone?** Make an encrypted backup from the app and keep it somewhere safe. Only your passphrase opens it, and restoring it on a new phone brings your record back. There is no cloud copy, so the backup is your only copy.
 - **What does the assistant do?** Ask about my log answers questions about your own entries, such as your last reading or whether you took your medicine today, on phones with about 6 GB of memory. It runs on the phone, never answers medical questions, and never suggests a dose.
 - **How does this work with my doctor?** Today, show or send them the one-page summary as a PDF. When your clinic uses the Clinic App, which is coming soon, you will be able to scan its QR code and share your history directly, and your doctor will be able to set your plan.
 - **How much does it cost?** Nothing. The Diabetes App is free for patients, always.
@@ -267,10 +286,10 @@ Later: a **"needs attention" list** of patients with repeated readings under the
 
 ### Frequently asked questions
 - **When can we use it?** The Clinic App is coming soon. The patient side of its protocol is already built into The Diabetes App, so the clinic side is being designed against something fixed. Request a walkthrough and we will show you where it stands.
-- **Where is patient data stored?** On the patient’s phone, and in your clinic’s records once they have shared it with you. Your records are written only by your clinic’s own device. Where they are stored on a server, each patient’s record is sealed with a key your clinic holds, so we cannot read it.
-- **Does it replace our existing records system?** No. It sits alongside what you already use. It solves the intake problem, getting a patient’s structured history in front of you at the start of a consultation, rather than trying to be your system of record.
-- **What if the clinic’s connection is down?** The patient’s phone and your clinic’s device connect directly when they are in the same room, so a visit does not depend on either side having good internet at that moment. Anything that needs the wider network waits and is sent when a connection returns.
-- **Can we see whether patients followed the plan?** You see what they logged and chose to share, including time-stamped medicine records, with the gaps left as gaps. The point is an accurate picture, not a compliance score.
+- **Where is patient data stored?** On the patient's phone, and in your clinic's records once they have shared it with you. Your records are written only by your clinic's own device. Where they are stored on a server, each patient's record is sealed with a key your clinic holds, so we cannot read it.
+- **Does it replace our existing records system?** No. It sits alongside what you already use. It handles intake, getting a patient's structured history in front of you at the start of a consultation, and leaves your system of record as it is.
+- **What if the clinic's connection is down?** The patient's phone and your clinic's device connect directly when they are in the same room, so a visit does not depend on either side having good internet at that moment. Anything that needs the wider network waits and is sent when a connection returns.
+- **Can we see whether patients followed the plan?** You see what they logged and chose to share, including time-stamped medicine records, with the gaps left as gaps. It gives an accurate picture and does not produce a compliance score.
 - **Does the app make clinical recommendations?** No. It does not calculate doses, propose diagnoses or rank patients. It structures and summarises what was recorded. Every clinical judgement remains yours.
 
 ### Records and responsibility
@@ -298,7 +317,7 @@ Small print: *By invitation. Anonymous by default. Separate from our health apps
 ### How it works
 1. **Write once.** Write on your phone and add photos, sound, PDFs or video clips of up to two minutes. The post is signed on your phone before it goes anywhere, and drafts follow you to your other devices.
 2. **Post everywhere.** SoMA shapes the post for each network. Nostr gets it straight from your phone, and Mastodon and Bluesky get it through bridges. For apps like Instagram, X or LinkedIn, your phone's share sheet opens them with the post ready to go.
-3. **Keep the proof.** Every edit is a new signed version of the same post. The final version is timestamped with OpenTimestamps, which anchors it in Bitcoin within a few hours, with no wallet and no coins. Share the post back from another app and SoMA keeps the link to that copy, private unless you choose to publish it.
+3. **Keep the proof.** Every edit is a new signed version of the same post. The final version is timestamped with OpenTimestamps, which anchors it in Bitcoin within a few hours. You don't need a wallet or any coins. Share the post back from another app and SoMA keeps the link to that copy, private unless you choose to publish it.
 
 [Preview: one post's journey from the phone to each network] · [Preview: the proof screen with its OpenTimestamps seal]
 
@@ -331,15 +350,15 @@ Nostr is an open network where your identity is a key you hold. The Fediverse is
 ### The white paper (`#white-paper`)
 *For technical readers.* **The white paper: the ideas SoMA rests on**
 
-Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can check. It describes ideas, not code, and it says plainly what SoMA does not claim.
+Signed Posts as Hyperedges sets out the mathematics behind SoMA as laws you can check. It contains no code, and it says plainly what SoMA does not claim.
 
 - The record as a hypergraph: each signed post names what it refers to, and those references form a category, so every figure the app shows can be traced back to what someone wrote.
 - Copies on other networks as structure-preserving maps that remember their original, so two copies of one post are always recognised as the same post.
-- The law every bridge between two networks keeps: a post that goes out and comes back is the same post, never a second one.
+- The law every bridge between two networks keeps: a post that goes out and comes back is still the same post and is not duplicated.
 - Trust published as a relation between keys, never as a number about a person. Each reader orders their own feed, and that order is never published.
 - How copies agree without coordination, how a circle's history is split into key epochs when someone leaves, and how a post is shown to have existed by a point in public time.
 
-Button: **[Read the white paper]** (`/soma-whitepaper.pdf`) · *PDF, 8 pages, 166 KB. Free to share and adapt under CC BY 4.0.*
+Button: **[Read the white paper]** (`/soma-whitepaper.pdf`) · *PDF, 8 pages, 172 KB. Free to share and adapt under CC BY 4.0.*
 
 The PDF's source and build live in the tda repository (`docs/whitepaper`). The paper spells the name SOMA; the site's own copy keeps SoMA.
 
@@ -380,8 +399,8 @@ What leaves a phone is decided on the phone. A family member on *Range only* rec
 
 ### Frequently asked questions
 - **What does peer-to-peer mean in practice here?** Records move directly between the devices that need them, over encrypted connections the owner has authorised, using iroh, an open-source peer-to-peer library. A relay helps two phones find each other when they cannot connect directly. It passes on sealed traffic and cannot read it.
-- **Is there a server at all?** Yes, three small ones, and none of them can read a record. A relay helps phones connect. A mailbox holds sealed envelopes for a phone that is offline, until it collects them. And a wake-up service tells a phone that something is waiting, with a message that carries nothing: no reading, no name, not even who sent it.
-- **How will a clinic get my history?** With the Clinic App, which is coming soon: you scan your clinic’s QR code and choose to share. Your history travels over the encrypted connection, and the clinic keeps what you shared, sealed under its own key.
+- **Is there a server at all?** Yes, three small ones, and none of them can read a record. A relay helps phones connect. A mailbox holds sealed envelopes for a phone that is offline, until it collects them. And a wake-up service tells a phone that something is waiting, with a message that leaves out the reading, any name and even who sent it.
+- **How will a clinic get my history?** With the Clinic App, which is coming soon: you scan your clinic's QR code and choose to share. Your history travels over the encrypted connection, and the clinic keeps what you shared, sealed under its own key.
 - **What happens if I lose my phone?** Your record is on your phone and in any encrypted backup you made. A backup opens only with your passphrase, and restoring it on a new phone brings your record back. Keep the backup somewhere safe, because there is no cloud copy to fall back on.
 - **How do I know a clinic is really my clinic?** Each clinic will be listed in a signed directory with its name, registration and key, so the app can check that the clinic you pair with is the one you walked into. A person is checked differently, by a short code you read aloud to each other.
 - **Who decides what plugins are allowed?** Plugins are planned, not built. The intent is that they travel over the same network, straight to the people who want them. Get in touch if you would like to be an early builder.
@@ -395,16 +414,90 @@ Button: **[Get in touch]**
 
 ---
 
-## Company (`/company`)
+## About us (`/company`)
+
+*v5.1:* the nav and footer call this page **About us**; the URL stays `/company`, and `/about` redirects to it.
+
+Description (metadata): *About cosys.work: who we are, what we hold to, and how we keep data, models and running costs under the owner's control.*
+
+### Hero
+Badge: *About cosys.work* · Title: **We build the tools we wanted to exist**
+
+cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.
+
+Status line: "Built in Nepal. The Diabetes App is in closed pilot and free forever."
 
 Keep the four commitments. Update them as follows:
 
 - **The record belongs to the patient.**
 - **Connectivity is a luxury, not a premise.**
-- **Clinicians decide; software remembers.** No dose calculations and no automated diagnosis.
+- **Clinicians decide; software remembers.** We build record-keeping and communication. The software does not calculate doses or diagnose, and the clinician makes the call.
 - **The people who live with it should steer it.** Our diabetes trainers, one of whom lives with Type 1, shape what we build.
 
-Add a status line: "Being built in Nepal. The patient app is free, always."
+### Technology in Nepal (v5.1)
+Between *How we work* and *Our names*.
+
+*Technology in Nepal.* **Kept at home, open to the world on purpose**
+
+Most software used in Nepal keeps its data on servers abroad, sends its questions to foreign AI services, and stops when the line drops. We build our products and our clients' systems so the data, the models and the bills stay under the owner's control.
+
+Jump links: Data at home · Local AI first · Through outages · Your own intelligence · Run it for less
+
+#### Data at home (`#sovereignty`)
+**Data stays with the people and offices it belongs to**
+
+A patient's record lives on their phone and at their clinic. A company's record lives on its own laptops and office box. Each keeps the keys to its own copy, and an outside party such as an auditor, a bank or a regulator gets a signed view of exactly the part it needs, which can be withdrawn later.
+
+For public services we propose the same rule at national scale, as federated data residency. Records stay with the province or office that owns them, and questions travel between offices while the records stay put.
+
+- Each business names one key holder, usually the owner or the treasurer. The key is made on the business's own device, and we never hold a copy.
+- Where we host, we use data centre and cloud providers listed with Nepal's Department of Information Technology, starting with two and adding the rest of the list over time.
+
+*For example:* a clinic's records stay on its own machines. We don't hold a copy, so we are never a third party to its record-keeping.
+
+#### Local AI first (`#ai`)
+**Local models first, large models on your terms**
+
+Most AI integrations send a company's cleaned records, prices, supplier terms and its questions to a model abroad, one convenient call at a time. The company keeps a chat box and a bill that grows with use, and some of its know-how leaves with every call. We keep the intelligence close: a small model on each phone and laptop, and a larger one on the office or branch box, working on data that stays in the building.
+
+Our local models are built on Gemma, chosen after we examined the open models available. We improve them with fine-tuning, distillation and further pre-training, and we are extending them to long-running tasks, to several agents and several users working together, to step-by-step reasoning, and to larger training data.
+
+[Drawing: *One guarded line out*. Left, "Local and small": Phone, Laptop, Office box; "Data and models stay here". Middle: one line through a narrow gate, "One guarded line", tagged Deliberate, Logged, Minimal, Reversible. Right, "Global and large": Large model; "Gets only what you let through". Along the bottom: "Each organisation decides what crosses the line".]
+
+- A question too large for local machines can go to a large model abroad, one call at a time. Every such call is deliberate, logged, kept to the minimum and reversible.
+- Each organisation, and each local body that runs public services, sets its own policy for what may leave. We provide base templates and guidelines to start from.
+
+*For example:* the Diabetes App reads a glucometer photo on the phone itself, so the picture never leaves it.
+
+#### Through outages (`#resilience`)
+**Work carries on when the line drops**
+
+In many parts of Nepal the line drops every day, and a power cut can take a whole office offline. Our systems keep every essential task on the devices people hold. Devices sync directly when they can reach each other, through a relay when they cannot, and wait when there is no connection at all. When the line returns, the copies merge and every entry keeps its author's signature.
+
+- Relays carry sealed messages they cannot read, and anyone can run one.
+- The network depends on no single operator, ourselves included.
+
+*For example:* a branch with a bad line keeps approving leave and answering questions, and its records join the rest of the company when the line comes back.
+
+#### Your own intelligence (`#intelligence`)
+**Business intelligence from your own record**
+
+An organisation's intelligence is the record of how it works: who decided what, who approved it, who was waiting and for how long. Kept at home, that record feeds reports and answers built by models on your own machines, and each answer cites the entries it drew on. There is nothing to buy back from a vendor.
+
+- Each team's assistant answers from what that team may see, because nothing else is on its machines.
+- A view for an outside party keeps only the fields that party needs.
+
+*For example:* an investor's view can show how headcount moved last quarter without naming who was hired.
+
+#### Run it for less (`#costs`)
+**Run it for less**
+
+Rented cloud and AI services charge more the more you use them. When the work runs on machines you own, with compute pooled between them peer to peer, the bill shrinks to the parts that still need a provider: relaying sealed messages, keeping encrypted backups, and the occasional large-model call.
+
+- Before a workload moves, we give a plain verdict: move it now, fix it first, or keep it rented for now.
+- We measure the savings with each client as the work moves, and we don't promise a figure in advance.
+
+*For example:* a ward office and a ministry can draw on one shared pool of machines in the country, instead of each paying for a foreign service.
 
 ### Our names (v5)
 cosys.work, nep.work and coplanetary.work in one short block, with the same one line for each as the homepage band: collaborative systems; the peer-to-peer network, also called nepwork; systems for many places at once.
@@ -412,7 +505,7 @@ cosys.work, nep.work and coplanetary.work in one short block, with the same one 
 ### Work with us (v5, `#work-with-us`)
 **Your own systems, in production**
 
-We also help companies, organisations and ministries move their systems onto machines they own. No prices on the site.
+We also help companies, organisations and ministries move their systems onto machines they own. Everything in Technology in Nepal comes with both offers. No prices on the site.
 
 - **MVP to Production.** For teams with a working prototype and a reason to launch: a review across eight areas, a clear verdict, and a roadmap into production on systems you own.
 - **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
@@ -470,3 +563,8 @@ Update it to match the site and the app:
 7. **nep.work and coplanetary.work:** whether either domain serves a page yet. Until then the footer names them as plain text.
 8. **The link-preview image** (`public/og.png`) still shows the v4 hero line; make a new one with the v5 line.
 9. **Nepali:** every v5 block needs its Nepali version, reviewed by a native speaker, before the language switch ships.
+10. **The first two DoIT-listed providers.** About us says "starting with two" without naming them. Once they are chosen, the founder decides whether the site names them.
+11. **The base egress templates and guidelines.** Link them from the Local AI first thread once they are published.
+12. **"Local body".** The copy reads it as each organisation, and each local body that runs public services. Founder to confirm.
+13. **When a key holder leaves.** The site says nothing about handing over keys until that is decided.
+14. **The rotating headlines** are new wording. Founder to sign them off; `public/og.png` should then carry the first.

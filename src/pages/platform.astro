@@ -45,7 +45,7 @@ const layers = [
   {
     emoji: '📱',
     title: 'The device layer',
-    body: 'Every participant holds their own records locally. Applications are fully functional on the device alone; the network is an addition to that, never a prerequisite for it.',
+    body: 'Every participant holds their own records locally. Applications are fully functional on the device alone, so the network is optional.',
   },
   {
     emoji: '🔗',
@@ -68,7 +68,7 @@ const sovereignty = [
   {
     emoji: '🗑️',
     title: 'Erasure that actually erases',
-    body: 'Ending a share can also ask the other side to erase what it received, and a clinic answers with a receipt. There is no operator archive quietly keeping a readable copy.',
+    body: 'Ending a share can also ask the other side to erase what it received, and a clinic answers with a receipt. No operator archive keeps a readable copy.',
   },
   {
     emoji: '📚',
@@ -78,7 +78,7 @@ const sovereignty = [
   {
     emoji: '🧊',
     title: 'Encrypted backup, kept by you',
-    body: 'A backup is a file only the owner’s passphrase opens, kept wherever they choose. There is no cloud copy to fall back on, so the backup is the copy.',
+    body: 'A backup is a file only the owner’s passphrase opens, kept wherever they choose. There is no cloud copy to fall back on.',
   },
   {
     emoji: '🍴',
@@ -96,7 +96,7 @@ const faqs = [
   {
     question: 'Is there a server at all?',
     answer:
-      'Yes, three small ones, and none of them can read a record. A relay helps phones connect. A mailbox holds sealed envelopes for a phone that is offline, until it collects them. And a wake-up service tells a phone that something is waiting, with a message that carries nothing: no reading, no name, not even who sent it.',
+      'Yes, three small ones, and none of them can read a record. A relay helps phones connect. A mailbox holds sealed envelopes for a phone that is offline, until it collects them. And a wake-up service tells a phone that something is waiting, with a message that leaves out the reading, any name and even who sent it.',
   },
   {
     question: 'How will a clinic get my history?',
@@ -288,9 +288,8 @@ const structuredData = {
         />
         <div class="text-ink-muted mt-5 space-y-4 leading-relaxed text-pretty">
           <p>
-            A person managing several overlapping conditions does not need one vendor&rsquo;s idea
-            of what matters. They need the specific modules their own health calls for, and the
-            people best placed to build those are usually not us.
+            A person managing several overlapping conditions needs the specific modules their own
+            health calls for, and the people best placed to build those are usually not us.
           </p>
           <p>
             The marketplace is coming to the apps. Labs, home sample collection, clinic and
@@ -318,7 +317,7 @@ const structuredData = {
             {
               emoji: '🏋️',
               title: 'Coaches',
-              body: 'Build for one sport, one cohort, one very specific set of needs.',
+              body: 'Build for one sport or one cohort with very specific needs.',
             },
             {
               emoji: '🔬',
@@ -333,10 +332,7 @@ const structuredData = {
 
   <!-- FAQ -->
   <Section>
-    <FAQ
-      faqs={faqs}
-      lede="The architecture raises reasonable questions. Here are the direct answers."
-    />
+    <FAQ faqs={faqs} lede="Direct answers to reasonable questions about the architecture." />
   </Section>
 
   <!-- CTA -->

@@ -7,7 +7,7 @@ export const SITE = {
   name: 'cosys.work',
   legalName: 'CoSys Work Pvt. Ltd.',
   url: 'https://cosys.work',
-  tagline: 'Systems you own, that keep working when the connection doesn’t.',
+  tagline: 'Collaborative software with no centre to fail.',
   description:
     'CoSys Work builds collaborative software that runs on the devices people already own. It works offline, syncs directly between the people who share it, and keeps every record with the people it belongs to. We started with chronic care in Nepal, where patients, families and clinics share one record without a central server.',
 } as const;
@@ -34,7 +34,7 @@ export const LINKS = {
 
 /**
  * The company's three names. The homepage band introduces them, each linking down to its
- * own section, and the Company page and footer repeat them.
+ * own section, and the About us page and footer repeat them.
  */
 export const NAMES = [
   {
@@ -49,7 +49,7 @@ export const NAMES = [
     name: 'nep.work',
     line: 'The peer-to-peer network, also called nepwork',
     intro:
-      'The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and any community can run its own node.',
+      'The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and anyone can run one.',
     example:
       'A patient’s phone reaches a clinic’s computer across Nepal with nothing in the middle that can read the record.',
     href: '/#peer-to-peer',
@@ -64,7 +64,7 @@ export const NAMES = [
   },
 ] as const;
 
-/** The two consulting offers. Shown on the homepage and in the Company page's Work with us. */
+/** The two consulting offers. Shown on the homepage and in About us's Work with us. */
 export const OFFERS = [
   {
     title: 'MVP to Production',
@@ -73,6 +73,39 @@ export const OFFERS = [
   {
     title: 'p2p-fication',
     body: 'For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.',
+  },
+] as const;
+
+/**
+ * The five threads of Technology in Nepal on the About us page (v5.1). Each `id` is the anchor
+ * of its thread on /company; the homepage band and the About us jump links both read this.
+ * needs_review: Nepali versions, reviewed by a native speaker.
+ */
+export const THREADS = [
+  {
+    id: 'sovereignty',
+    label: 'Data at home',
+    line: 'Records stay with the people and offices they belong to, under keys they hold.',
+  },
+  {
+    id: 'ai',
+    label: 'Local AI first',
+    line: 'Models run on your machines, and large models abroad get only what you let through.',
+  },
+  {
+    id: 'resilience',
+    label: 'Through outages',
+    line: 'Work carries on offline and catches up when the line returns.',
+  },
+  {
+    id: 'intelligence',
+    label: 'Your own intelligence',
+    line: 'Reports and answers from your own record, each with its sources.',
+  },
+  {
+    id: 'costs',
+    label: 'Run it for less',
+    line: 'Pay for what still needs a provider, and run the rest yourself.',
   },
 ] as const;
 
@@ -140,6 +173,6 @@ export const NAV = [
   { label: 'Clinic App', href: '/clinic-app' },
   { label: 'SoMA', href: '/soma' },
   { label: 'Platform', href: '/platform' },
-  { label: 'Company', href: '/company' },
+  { label: 'About us', href: '/company' },
   { label: 'Contact', href: '/contact' },
 ] as const;
