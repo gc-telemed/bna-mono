@@ -1,4 +1,4 @@
-# cosys.work site content (v5, 2026-11-01)
+# cosys.work site content (v5.1, 2026-11-01)
 
 This is the English source copy. Nepali (`ne`) versions are needed for every block before launch and must be reviewed by a native speaker. English stays the default language. Keep the current visual design. `[Screenshot: …]` marks where an image goes. No em dashes anywhere in the copy, in either language.
 
@@ -10,11 +10,13 @@ This is the English source copy. Nepali (`ne`) versions are needed for every blo
 
 **Positioning (v5).** The homepage now introduces the company before the health apps: collaborative systems that people own, that work offline and sync peer to peer, with chronic care in Nepal as the first proof. The health positioning above still holds for the health apps and their pages.
 
+**What changed from v5.** The Company page is now called **About us** in the header and footer (the URL stays `/company`, and `/about` redirects there). Its hero lede is rewritten, and it gains *Technology in Nepal*: data at home, local AI first with large models abroad only through one guarded line, work through outages, business intelligence from an organisation's own record, and lower running costs, with a drawing of the guarded line. *Work with us* says everything in Technology in Nepal comes with both offers. The homepage gains a band, *What stays with you*, under the Work with us cards, linking to each thread. nep.work's introduction now ends "and anyone can run one". No savings figure and no prices anywhere. Every new block needs its Nepali version, reviewed by a native speaker.
+
 **What changed from v4.3.** The homepage leads with the company: a new hero and *Who we are*, a band explaining cosys.work, nep.work and coplanetary.work, three sections with drawings (collaborative systems, peer-to-peer DNA, beyond Earth), *What we build* with SoMA and the open `@cosys` framework, and *Work with us* with the two consulting offers. Health keeps its own band with the condition apps, the Nepal figures and both buttons; the Snap, Share, Follow steps and the comparison with typical diabetes apps moved to the Diabetes App page. SoMA gets its own page at `/soma` with an invitation form that asks for no name and no phone number. The header gains SoMA; the footer gains the three names, "Built in Nepal" and a link to the open libraries (the app repositories stay private). The Platform page names the network nep.work, and the Company page gains *Work with us* and the three names. The EGU and NASA ADS line, SoMA's price and status line, and the language switch all still wait (see the checks at the end). Every new block needs its Nepali version, reviewed by a native speaker, before launch.
 
 **What changed from v3.** Brought in line with the app as built through Milestone 11 and with the Clinic App as proposed (ADR-20). The patient app's features are stated as they work. Clinic features are marked as coming with the Clinic App, because none of it is built yet. The Platform section now describes the network the app actually uses. See *Check before publishing* at the end for four points that need a decision.
 
-Global header: **Diabetes App · Clinic App · SoMA · Platform · Company · Contact**. The language switch **English | नेपाली** waits until reviewed Nepali pages exist; don't ship a switch that leads nowhere.
+Global header: **Diabetes App · Clinic App · SoMA · Platform · About us · Contact**. The language switch **English | नेपाली** waits until reviewed Nepali pages exist; don't ship a switch that leads nowhere.
 
 Global footer: "cosys.work · nep.work · coplanetary.work" (plain text until those domains serve pages) · "Built in Nepal" · **Open libraries on GitHub** (`github.com/cosys-work/cosys`; the libraries are open, the apps are not) · hello@cosys.work · Privacy
 
@@ -44,7 +46,7 @@ CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborat
 Three columns, each linking down to its own section.
 
 - **cosys.work: collaborative systems.** Software for people who work together. Each family, clinic, team or community holds its own keys and its own copy of what concerns it, and every entry is signed by whoever wrote it. Collaborative editors, signed authorship and trust circles are the building blocks. *For example:* a family and their clinic keep one diabetes record in step.
-- **nep.work: the peer-to-peer network, also called nepwork.** The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and any community can run its own node. *For example:* a patient's phone reaches a clinic's computer across Nepal with nothing in the middle that can read the record.
+- **nep.work: the peer-to-peer network, also called nepwork.** The network our systems run on. Phones, laptops, office boxes and community servers pass sealed records directly to each other. Relays carry what they cannot read, and anyone can run one. *For example:* a patient's phone reaches a clinic's computer across Nepal with nothing in the middle that can read the record.
 - **coplanetary.work: systems for many places at once.** Systems built for distance and delay. Every copy is signed, can wait, and catches up with the others within known sync times: across town, across a country when the power goes out, and one day across planets. Eventually consistent social media is the first. *For example:* SoMA: write once on your phone, publish to every network, keep proof it's yours.
 
 ### Collaborative systems
@@ -99,7 +101,16 @@ For teams who want their own systems in production, on machines they own. No pri
 - **MVP to Production.** For teams with a working prototype and a reason to launch: a review across eight areas, a clear verdict, and a roadmap into production on systems you own.
 - **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
 
-Both cards link to *Work with us* on the Company page.
+Both cards link to *Work with us* on the About us page.
+
+### What stays with you (v5.1)
+A band under the two Work with us cards. Each item links to its thread on About us (`/company#<id>`).
+
+- **Data at home:** records stay with the people and offices they belong to, under keys they hold.
+- **Local AI first:** models run on your machines, and large models abroad get only what you let through.
+- **Through outages:** work carries on offline and catches up when the line returns.
+- **Your own intelligence:** reports and answers from your own record, each with its sources.
+- **Run it for less:** pay for what still needs a provider, and run the rest yourself.
 
 ### Health in Nepal
 **Specialised apps for each condition. Starting with diabetes.**
@@ -395,7 +406,18 @@ Button: **[Get in touch]**
 
 ---
 
-## Company (`/company`)
+## About us (`/company`)
+
+*v5.1:* the nav and footer call this page **About us**; the URL stays `/company`, and `/about` redirects to it.
+
+Description (metadata): *About cosys.work: who we are, what we hold to, and how we keep data, models and running costs under the owner's control.*
+
+### Hero
+Badge: *About cosys.work* · Title: **We build the tools we wanted to exist**
+
+cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.
+
+Status line: "Built in Nepal. The Diabetes App is in closed pilot and free forever."
 
 Keep the four commitments. Update them as follows:
 
@@ -404,7 +426,70 @@ Keep the four commitments. Update them as follows:
 - **Clinicians decide; software remembers.** No dose calculations and no automated diagnosis.
 - **The people who live with it should steer it.** Our diabetes trainers, one of whom lives with Type 1, shape what we build.
 
-Add a status line: "Being built in Nepal. The patient app is free, always."
+### Technology in Nepal (v5.1)
+Between *How we work* and *Our names*.
+
+*Technology in Nepal.* **Kept at home, open to the world on purpose**
+
+Most software used in Nepal keeps its data on servers abroad, sends its questions to foreign AI services, and stops when the line drops. We build our products and our clients' systems so the data, the models and the bills stay under the owner's control.
+
+Jump links: Data at home · Local AI first · Through outages · Your own intelligence · Run it for less
+
+#### Data at home (`#sovereignty`)
+**Data stays with the people and offices it belongs to**
+
+A patient's record lives on their phone and at their clinic. A company's record lives on its own laptops and office box. Each keeps the keys to its own copy, and an outside party such as an auditor, a bank or a regulator gets a signed view of exactly the part it needs, which can be withdrawn later.
+
+For public services we propose the same rule at national scale, as federated data residency. Records stay with the province or office that owns them, and questions travel between offices while the records stay put.
+
+- Each business names one key holder, usually the owner or the treasurer. The key is made on the business's own device, and we never hold a copy.
+- Where we host, we use data centre and cloud providers listed with Nepal's Department of Information Technology, starting with two and adding the rest of the list over time.
+
+*For example:* a clinic's records stay on its own machines. We don't hold a copy, so we are never a third party to its record-keeping.
+
+#### Local AI first (`#ai`)
+**Local models first, large models on your terms**
+
+Most AI integrations send a company's cleaned records, prices, supplier terms and its questions to a model abroad, one convenient call at a time. The company keeps a chat box and a bill that grows with use, and some of its know-how leaves with every call. We keep the intelligence close: a small model on each phone and laptop, and a larger one on the office or branch box, working on data that stays in the building.
+
+Our local models are built on Gemma, chosen after we examined the open models available. We improve them with fine-tuning, distillation and further pre-training, and we are extending them to long-running tasks, to several agents and several users working together, to step-by-step reasoning, and to larger training data.
+
+[Drawing: *One guarded line out*. Left, "Local and small": Phone, Laptop, Office box; "Data and models stay here". Middle: one line through a narrow gate, "One guarded line", tagged Deliberate, Logged, Minimal, Reversible. Right, "Global and large": Large model; "Gets only what you let through". Along the bottom: "Each organisation decides what crosses the line".]
+
+- A question too large for local machines can go to a large model abroad, one call at a time. Every such call is deliberate, logged, kept to the minimum and reversible.
+- Each organisation, and each local body that runs public services, sets its own policy for what may leave. We provide base templates and guidelines to start from.
+
+*For example:* the Diabetes App reads a glucometer photo on the phone itself, so the picture never leaves it.
+
+#### Through outages (`#resilience`)
+**Work carries on when the line drops**
+
+In many parts of Nepal the line drops every day, and a power cut can take a whole office offline. Our systems keep every essential task on the devices people hold. Devices sync directly when they can reach each other, through a relay when they cannot, and wait when there is no connection at all. When the line returns, the copies merge and every entry keeps its author's signature.
+
+- Relays carry sealed messages they cannot read, and anyone can run one.
+- The network depends on no single operator, ourselves included.
+
+*For example:* a branch with a bad line keeps approving leave and answering questions, and its records join the rest of the company when the line comes back.
+
+#### Your own intelligence (`#intelligence`)
+**Business intelligence from your own record**
+
+An organisation's intelligence is the record of how it works: who decided what, who approved it, who was waiting and for how long. Kept at home, that record feeds reports and answers built by models on your own machines, and each answer cites the entries it drew on. There is nothing to buy back from a vendor.
+
+- Each team's assistant answers from what that team may see, because nothing else is on its machines.
+- A view for an outside party keeps only the fields that party needs.
+
+*For example:* an investor's view can show how headcount moved last quarter without naming who was hired.
+
+#### Run it for less (`#costs`)
+**Run it for less**
+
+Rented cloud and AI services charge more the more you use them. When the work runs on machines you own, with compute pooled between them peer to peer, the bill shrinks to the parts that still need a provider: relaying sealed messages, keeping encrypted backups, and the occasional large-model call.
+
+- Before a workload moves, we give a plain verdict: move it now, fix it first, or keep it rented for now.
+- We measure the savings with each client as the work moves, and we don't promise a figure in advance.
+
+*For example:* a ward office and a ministry can draw on one shared pool of machines in the country, instead of each paying for a foreign service.
 
 ### Our names (v5)
 cosys.work, nep.work and coplanetary.work in one short block, with the same one line for each as the homepage band: collaborative systems; the peer-to-peer network, also called nepwork; systems for many places at once.
@@ -412,7 +497,7 @@ cosys.work, nep.work and coplanetary.work in one short block, with the same one 
 ### Work with us (v5, `#work-with-us`)
 **Your own systems, in production**
 
-We also help companies, organisations and ministries move their systems onto machines they own. No prices on the site.
+We also help companies, organisations and ministries move their systems onto machines they own. Everything in Technology in Nepal comes with both offers. No prices on the site.
 
 - **MVP to Production.** For teams with a working prototype and a reason to launch: a review across eight areas, a clear verdict, and a roadmap into production on systems you own.
 - **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
@@ -470,3 +555,7 @@ Update it to match the site and the app:
 7. **nep.work and coplanetary.work:** whether either domain serves a page yet. Until then the footer names them as plain text.
 8. **The link-preview image** (`public/og.png`) still shows the v4 hero line; make a new one with the v5 line.
 9. **Nepali:** every v5 block needs its Nepali version, reviewed by a native speaker, before the language switch ships.
+10. **The first two DoIT-listed providers.** About us says "starting with two" without naming them. Once they are chosen, the founder decides whether the site names them.
+11. **The base egress templates and guidelines.** Link them from the Local AI first thread once they are published.
+12. **"Local body".** The copy reads it as each organisation, and each local body that runs public services. Founder to confirm.
+13. **When a key holder leaves.** The site says nothing about handing over keys until that is decided.

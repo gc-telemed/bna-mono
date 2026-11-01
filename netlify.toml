@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# The About us page lives at /company; /about is the address people guess.
+[[redirects]]
+  from = "/about"
+  to = "/company"
+  status = 301
+
 # Astro emits content-hashed filenames under /_astro, so they can be cached forever.
 [[headers]]
   for = "/_astro/*"
