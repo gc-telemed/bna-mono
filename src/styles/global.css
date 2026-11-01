@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/nunito';
+@import '@fontsource-variable/oswald';
 
 /**
  * Colour comes from the app's four themes (see src/data/themes.ts), swapped at runtime by
@@ -18,6 +19,11 @@
 
   /* The app ships static cuts at 400/600/700 only, so `font-medium` resolves to 600
      rather than introducing a weight the product never uses. */
+  /* Headings use Oswald, a condensed display face (v5.1 redesign); body text stays Nunito.
+     Devanagari falls through to Mukta. */
+  --font-display:
+    'Oswald Variable', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
   --font-weight-medium: 600;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
@@ -134,7 +140,69 @@
   --p-primary-tint: #0b2e29;
 }
 
+/**
+ * The dark band (v5.1 redesign): the homepage hero and what follows it sit on a night version
+ * of the current theme. Redefining the --p-* tokens here repaints every component inside with
+ * no extra code. Light themes take the slate palette with an accent that reads on dark; the
+ * two dark themes keep their own palette on a slightly deeper ground. --page-ground keeps the
+ * page's own ground for the fog that hands the band back to the page.
+ */
+:root {
+  --page-ground: var(--p-ground);
+}
+.band-dark {
+  --p-ground: #0b1220;
+  --p-surface: #1e293b;
+  --p-surface-muted: #273449;
+  --p-border: #334155;
+  --p-border-strong: #94a3b8;
+  --p-text: #f1f5f9;
+  --p-text-muted: #b4c0d0;
+  --p-text-on-fill: #0b1220;
+  --p-focus: #5eead4;
+  --p-primary: #5eead4;
+  --p-primary-pressed: #99f6e4;
+  --p-primary-tint: #0b2e29;
+  color-scheme: dark;
+  background-color: var(--p-ground);
+  color: var(--p-text-muted);
+}
+:root[data-theme='pink'] .band-dark {
+  --p-focus: #f9a8d4;
+  --p-primary: #f9a8d4;
+  --p-primary-pressed: #fbcfe8;
+  --p-primary-tint: #3b1d33;
+}
+:root[data-theme='slate'] .band-dark {
+  --p-ground: #0b1120;
+  --p-focus: #5ec2f0;
+  --p-primary: #5ec2f0;
+  --p-primary-pressed: #8fd6f6;
+  --p-primary-tint: #1b3346;
+}
+:root[data-theme='trueBlack'] .band-dark {
+  --p-ground: #000000;
+  --p-surface: #141414;
+  --p-surface-muted: #1c1c1c;
+  --p-border: #2e2e2e;
+  --p-border-strong: #a3a3a3;
+  --p-text: #ffffff;
+  --p-text-muted: #cfcfcf;
+  --p-text-on-fill: #000000;
+  --p-focus: #5eead4;
+  --p-primary: #5eead4;
+  --p-primary-pressed: #99f6e4;
+  --p-primary-tint: #0b2e29;
+}
+
 @layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.005em;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -260,6 +328,12 @@
   }
 }
 
+@keyframes ridge-sink {
+  to {
+    transform: translateY(var(--rise, 0));
+  }
+}
+
 @keyframes header-line {
   from {
     border-bottom-color: transparent;
@@ -368,6 +442,16 @@
       animation-range: entry 10% cover 40%;
     }
 
+    /* The Himalaya: each ridge sinks by its --rise as the page scrolls through the first screen,
+       far ridges most, so the range seems to have depth. */
+    .himalaya .ridge {
+      animation-name: ridge-sink;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+
     /* Header hairline: the border and a soft shadow appear once the page has scrolled 64 px. */
     .site-header {
       animation-name: header-line;
@@ -407,12 +491,6 @@
   transform: translateX(-50%);
   align-items: center;
   gap: 0.375rem;
-}
-@media (min-width: 64rem) {
-  .headline-controls {
-    left: -0.375rem;
-    transform: none;
-  }
 }
 .headline-dots {
   display: inline-flex;
@@ -558,4 +636,24 @@
   .headline-rotator:focus-within .headline {
     animation-play-state: paused;
   }
+}
+
+/* A full-width band behind a contained section: the colour runs to both edges of the window
+   while the content keeps its column. Box-shadow and clip-path do it with no layout change and
+   no horizontal scroll. */
+.bleed {
+  box-shadow: 0 0 0 100vmax var(--p-surface-muted);
+  clip-path: inset(0 -100vmax);
+}
+
+/* A header on the night palette stays a little see-through, like the page one, and the
+   wordmark takes its reversed colours, as it does in the two dark themes. */
+.band-dark-header {
+  background-color: color-mix(in srgb, var(--p-ground) 85%, transparent);
+}
+:root .band-dark .cosys-wordmark {
+  color: #f6f4ee;
+}
+:root .band-dark .cosys-dot {
+  color: #f08a4b;
 }

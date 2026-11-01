@@ -3,6 +3,11 @@ import '@/styles/global.css';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import { SITE } from '@/data/site';
+// The two Latin font files every page paints its first screen with. Preloading them means the
+// headline and body are set in their real faces from the first paint, instead of reflowing
+// when the fonts arrive (which showed as layout shift on phones).
+import nunitoLatin from '@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2?url';
+import oswaldLatin from '@fontsource-variable/oswald/files/oswald-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -10,9 +15,11 @@ interface Props {
   /** Page path, e.g. "/clinic-app". Used for the canonical URL. */
   path?: string;
   structuredData?: Record<string, unknown>;
+  /** `dark` puts the header on the night palette, for a page that opens on the dark band. */
+  headerTone?: 'page' | 'dark';
 }
 
-const { title, description, path, structuredData } = Astro.props;
+const { title, description, path, structuredData, headerTone = 'page' } = Astro.props;
 
 const canonical = new URL(path ?? Astro.url.pathname, Astro.site ?? SITE.url).href.replace(
   /(.)\/$/,
@@ -32,6 +39,8 @@ const ogTitle = title === SITE.name ? `${SITE.name}: ${SITE.tagline}` : fullTitl
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="preload" href={oswaldLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={nunitoLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -100,7 +109,7 @@ const ogTitle = title === SITE.name ? `${SITE.name}: ${SITE.tagline}` : fullTitl
     >
       Skip to content
     </a>
-    <Header />
+    <Header tone={headerTone} />
     <main id="main" class="flex-1">
       <slot />
     </main>
