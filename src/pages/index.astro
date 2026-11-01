@@ -20,7 +20,7 @@ const hero = {
   // screen readers get, and SITE.tagline repeats it. The others are aria-hidden.
   // needs_review: Nepali versions, and founder sign-off on the wording.
   headlines: [
-    { title: 'Collaborative software', accentTitle: 'with no centre to fail.' },
+    { title: 'Collaborative systems', accentTitle: 'with no centre to fail.' },
     {
       title: 'Families, clinics and offices working together,',
       accentTitle: 'each keeping its own copy.',
@@ -286,7 +286,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
   <Section class="!pt-16 !pb-8 lg:!pt-24">
     <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14">
       <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
-        <div class="headline-rotator">
+        <div class="headline-rotator relative">
           <h1
             class="text-ink grid items-center text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
           >
@@ -303,30 +303,36 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
               ))
             }
           </h1>
-          <label class="headline-pause text-ink-muted hover:text-ink mt-3">
-            <input type="checkbox" class="sr-only" />
-            <span class="sr-only">{hero.pause}</span>
-            <svg
-              class="icon-pause h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <rect x="6" y="5" width="4" height="14" rx="1"></rect>
-              <rect x="14" y="5" width="4" height="14" rx="1"></rect>
-            </svg>
-            <svg
-              class="icon-play h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
-              ></path>
-            </svg>
-            <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
-            <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
-          </label>
+          <div class="headline-controls">
+            <span class="headline-dots" aria-hidden="true">
+              {hero.headlines.map((_, i) => <span class="headline-dot" style={`--n: ${i}`} />)}
+            </span>
+            <label class="headline-pause text-ink-muted hover:text-ink">
+              <input type="checkbox" class="sr-only" />
+              <span class="sr-only">{hero.pause}</span>
+              <svg
+                class="icon-pause h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+                <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+              </svg>
+              <svg
+                class="icon-play h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
+                ></path>
+              </svg>
+              <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
+              <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
+            </label>
+          </div>
         </div>
         <p
           class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty lg:mx-0"
