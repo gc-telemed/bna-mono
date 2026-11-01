@@ -6,11 +6,60 @@ import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import FAQ from '@/components/FAQ.astro';
 import AppPreview from '@/components/AppPreview.astro';
+import Comparison from '@/components/Comparison.astro';
 import { SITE, PRODUCTS, FORMS } from '@/data/site';
 
 const product = PRODUCTS[0]!;
 const accent = 'text-primary';
 const chip = 'border-primary/30 bg-primary-tint text-ink';
+
+// Moved here from the homepage in v5, with the comparison below.
+const steps = [
+  {
+    step: '01',
+    title: 'Snap',
+    body: 'Photograph your glucometer or a lab report. The number is read on your phone, and you check it before it’s saved. This works in airplane mode.',
+  },
+  {
+    step: '02',
+    title: 'Share',
+    body: 'Choose family members who help you, and choose what each one sees. Before a visit, make a one-page summary of your last month as a PDF to show or send your doctor. When your clinic joins through the Clinic App, you’ll scan its QR code and the summary reaches your doctor directly.',
+  },
+  {
+    step: '03',
+    title: 'Follow',
+    body: 'Your targets, medicines and your doctor’s instructions sit on a plan card on your phone, with reminders for your medicines. Later, with the Clinic App, your clinic will be able to set the plan and send a checklist of next tests.',
+  },
+];
+
+const comparison = [
+  {
+    dimension: 'Works with no signal',
+    typical: 'Partly, or not at all',
+    ours: 'Yes: logging, photos, your summary and reminders (the assistant too, on phones with about 6 GB of memory)',
+  },
+  { dimension: 'Where the AI runs', typical: 'In the cloud', ours: 'On your phone' },
+  {
+    dimension: 'Who holds your record',
+    typical: 'The app company’s servers',
+    ours: 'You, on your phone',
+  },
+  {
+    dimension: 'Cost to patients',
+    typical: 'Free trial, then a subscription',
+    ours: 'Free forever, with optional services from others in the app',
+  },
+  {
+    dimension: 'Share with family',
+    typical: 'The full numbers',
+    ours: 'Your choice for each person: the numbers, the range only, or alerts only',
+  },
+  {
+    dimension: 'Your doctor’s targets',
+    typical: 'Typed in by you, or none',
+    ours: 'Your doctor’s, or published WHO and ADA values, always labelled with where they came from',
+  },
+];
 
 const capture = [
   {
@@ -63,21 +112,38 @@ const shareLevels = [
 
 const marketplace = [
   { emoji: '🧪', title: 'Lab tests', body: 'Book the tests on your doctor’s list.' },
-  { emoji: '🏠', title: 'Home sample collection', body: 'A collector comes to you, so there is no queue.' },
+  {
+    emoji: '🏠',
+    title: 'Home sample collection',
+    body: 'A collector comes to you, so there is no queue.',
+  },
   { emoji: '🏥', title: 'Clinic appointments', body: 'Book your next visit from the app.' },
   { emoji: '🦵', title: 'Physiotherapy', body: 'Appointments with physiotherapists.' },
   { emoji: '🥗', title: 'Dietitians', body: 'Appointments for help with what you eat.' },
-  { emoji: '🏋️', title: 'Exercise at home', body: 'Video packages from gym coaches, to follow at home.' },
+  {
+    emoji: '🏋️',
+    title: 'Exercise at home',
+    body: 'Video packages from gym coaches, to follow at home.',
+  },
   { emoji: '📟', title: 'CGM plugins', body: 'Bring readings from a continuous glucose monitor.' },
   { emoji: '🩸', title: 'Glucometer plugins', body: 'Bring readings from a connected meter.' },
-  { emoji: '💬', title: 'Telemedicine', body: 'Online consultations and appointments, from third-party providers.' },
+  {
+    emoji: '💬',
+    title: 'Telemedicine',
+    body: 'Online consultations and appointments, from third-party providers.',
+  },
 ];
 
 const facts = [
-  { term: 'Price', detail: 'Free forever. Services from third parties in the in-app marketplace, when it opens, are optional and paid to the provider.' },
+  {
+    term: 'Price',
+    detail:
+      'Free forever. Services from third parties in the in-app marketplace, when it opens, are optional and paid to the provider.',
+  },
   {
     term: 'Phones',
-    detail: 'Android phones, including low-cost ones. Minimum Android version to be confirmed before launch.',
+    detail:
+      'Android phones, including low-cost ones. Minimum Android version to be confirmed before launch.',
   },
   {
     term: 'Internet',
@@ -91,7 +157,8 @@ const facts = [
   },
   {
     term: 'Your data',
-    detail: 'Stays on your phone and on the phones you choose. Export it or back it up at any time.',
+    detail:
+      'Stays on your phone and on the phones you choose. Export it or back it up at any time.',
   },
   { term: 'Languages', detail: 'English and Nepali. Maithili is planned.' },
 ];
@@ -149,7 +216,8 @@ const faqs = [
   },
   {
     question: 'How much does it cost?',
-    answer: 'Nothing. The Diabetes App is free forever. The marketplace, when it opens, will offer optional services from third parties, such as lab tests or a dietitian appointment, which you pay the provider for.',
+    answer:
+      'Nothing. The Diabetes App is free forever. The marketplace, when it opens, will offer optional services from third parties, such as lab tests or a dietitian appointment, which you pay the provider for.',
   },
 ];
 
@@ -221,6 +289,30 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
     </div>
   </Section>
 
+  <!-- How it works -->
+  <Section id="how-it-works" class="!pb-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow="How it works"
+        title="Snap, share,"
+        accentTitle="follow the plan"
+        accentClass={accent}
+        chipClass={chip}
+      />
+      <ol class="mt-12 grid gap-5 md:grid-cols-3">
+        {
+          steps.map(({ step, title, body }) => (
+            <li class="border-line bg-surface rounded-2xl border p-6">
+              <span class="text-primary text-sm font-bold tabular-nums">{step}</span>
+              <h3 class="text-ink mt-2 font-semibold text-pretty">{title}</h3>
+              <p class="text-ink-muted mt-2 text-sm leading-relaxed">{body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Section>
+
   <!-- Log in seconds -->
   <Section id="capture">
     <SectionHeading
@@ -267,10 +359,10 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
         <div class={block}>
           <h2 class="text-ink text-xl font-bold">Your doctor&rsquo;s plan, in your pocket</h2>
           <p class="text-ink-muted mt-4 text-sm leading-relaxed">
-            Your targets, medicines and your doctor&rsquo;s instructions for a low sit on a plan card.
-            You copy them from your prescription, and a photo of the prescription can fill the card
-            in for you to check. Where your doctor hasn&rsquo;t set a target, the app uses published
-            values from the World Health Organization, with the American Diabetes
+            Your targets, medicines and your doctor&rsquo;s instructions for a low sit on a plan
+            card. You copy them from your prescription, and a photo of the prescription can fill the
+            card in for you to check. Where your doctor hasn&rsquo;t set a target, the app uses
+            published values from the World Health Organization, with the American Diabetes
             Association&rsquo;s where WHO has none, and says so beside every figure they affect.
             Every earlier version of your plan is kept.
           </p>
@@ -282,9 +374,9 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
         <div class={block}>
           <h2 class="text-ink text-xl font-bold">If you feel low</h2>
           <p class="text-ink-muted mt-4 text-sm leading-relaxed">
-            The <em>If I feel low</em> card on your home screen shows the steps you wrote down from
-            your doctor and a button to call your emergency contact. After a reading under 54 mg/dL,
-            the call button comes first. It works with no signal.
+            The <em>If I feel low</em> card on your home screen shows the steps you wrote down from your
+            doctor and a button to call your emergency contact. After a reading under 54 mg/dL, the call
+            button comes first. It works with no signal.
           </p>
           <p class="text-ink-muted mt-3 text-sm leading-relaxed">
             If you choose, the family members you mark as emergency contacts get a notification when
@@ -297,9 +389,9 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
           <h2 class="text-ink text-xl font-bold">Reminders</h2>
           <p class="text-ink-muted mt-4 text-sm leading-relaxed">
             Reminders for your medicines, with <em>Taken</em>, <em>Not now</em> and{' '}
-            <em>Snooze</em> on the notification itself. If a medicine reminder gets no answer, one
-            follow-up arrives 30 minutes later, and never more than one. You can turn the follow-up
-            off for each reminder.
+            <em>Snooze</em> on the notification itself. If a medicine reminder gets no answer, one follow-up
+            arrives 30 minutes later, and never more than one. You can turn the follow-up off for each
+            reminder.
           </p>
           <h2 class="text-ink mt-7 text-xl font-bold">Take a summary to your visit</h2>
           <p class="text-ink-muted mt-4 text-sm leading-relaxed">
@@ -326,7 +418,9 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
     <div class="mt-12 grid gap-5 md:grid-cols-3">
       {shareLevels.map((item) => <Card {...item} />)}
     </div>
-    <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-pretty">
+    <p
+      class="text-ink-muted mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-pretty"
+    >
       Only the people you mark as emergency contacts get alerts. A relative who lives far away can
       follow along without being woken at night. A family member can also follow a parent&rsquo;s
       record on their own phone, read-only, alongside their own.
@@ -346,6 +440,27 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
     <div class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:mt-12 lg:gap-5">
       {marketplace.map((item) => <Card {...item} />)}
     </div>
+  </Section>
+
+  <!-- What makes it different -->
+  <Section class="!pt-0">
+    <SectionHeading
+      eyebrow="What makes it different"
+      title="The Diabetes App, next to"
+      accentTitle="a typical diabetes app"
+      accentClass={accent}
+      chipClass={chip}
+    />
+    <Comparison
+      caption="Typical diabetes apps compared with The Diabetes App"
+      theirs="Typical diabetes apps"
+      ours="The Diabetes App"
+      rows={comparison.map(({ dimension, typical, ours }) => ({
+        dimension,
+        theirs: typical,
+        ours,
+      }))}
+    />
   </Section>
 
   <!-- Facts -->
@@ -383,7 +498,9 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path>
       </svg>
       <div>
-        <p class="text-ink font-semibold">Your doctor sets the plan, and the app helps you keep to it.</p>
+        <p class="text-ink font-semibold">
+          Your doctor sets the plan, and the app helps you keep to it.
+        </p>
         <p class="text-ink-muted mt-1 text-sm leading-relaxed text-pretty">
           This app does not calculate or recommend insulin doses. All dosing decisions are made
           exclusively by your licensed physician. The app is a record-keeping and communication tool

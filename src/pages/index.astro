@@ -4,8 +4,102 @@ import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
-import Comparison from '@/components/Comparison.astro';
-import { SITE, CONTACT, PRODUCTS, FORMS } from '@/data/site';
+import NameBand from '@/components/NameBand.astro';
+import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS } from '@/data/site';
+
+// Every block below is new in v5 except `conditions`, `facts` and `promises`, kept from v4.3.
+// needs_review: each block needs a Nepali version reviewed by a native speaker before launch.
+
+const hero = {
+  title: 'Systems you own, that keep working',
+  accentTitle: 'when the connection doesn’t.',
+  body: SITE.description,
+  primary: { label: 'See what we build', href: '#what-we-build' },
+  secondary: { label: 'Work with us', href: '#work-with-us' },
+  links: [
+    { lead: 'Living with diabetes?', label: 'Join the waitlist', href: FORMS.waitlist },
+    { lead: 'Run a clinic?', label: 'Bring your clinic', href: FORMS.clinic },
+  ],
+  smallPrint: 'Built in Nepal. Open-source libraries under Apache-2.0.',
+};
+
+const whoWeAre =
+  'CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.';
+
+const ideas = {
+  collaborative: {
+    eyebrow: 'Collaborative systems',
+    title: 'Built for people',
+    accentTitle: 'who work together',
+    body: [
+      'Most software treats you as one account on someone else’s server. Ours starts from the groups people already belong to: a family, a clinic, a team, a cooperative. Each group holds its own keys, its own copy of what concerns it, and its own rules for who joins. Someone who belongs to two groups links them, and each group stays itself.',
+      'Shared editing works offline and merges when people reconnect. Every entry is signed by whoever wrote it, and edits keep their history. You decide who sees what, and you can take it back.',
+    ],
+    example:
+      'In the Diabetes App, a patient chooses whether family sees the numbers, a colour, or only an alert.',
+  },
+  dna: {
+    eyebrow: 'Peer-to-peer DNA',
+    title: 'Peer to peer',
+    accentTitle: 'is in our DNA',
+    body: [
+      'Everything we build starts from the same rules, and they come with every product, every engagement and every library we publish.',
+      'Your keys stay on your devices, and every entry is signed with them. Your copy of the record is the record, and it syncs with the people you chose whenever there is a connection. Relays carry sealed mail they cannot read. Everything works offline and catches up later. The code is open under Apache-2.0, so anyone can check that all of this is true.',
+    ],
+    example:
+      'The Diabetes App logs readings, reads photos and shows trends in airplane mode. Its mailbox carries sealed deposits it cannot open.',
+    libraries: 'Our libraries are published on npm, JSR and crates.io.',
+    librariesLink: 'See the source on GitHub',
+  },
+  beyond: {
+    eyebrow: 'Beyond Earth',
+    title: 'Built for distance',
+    accentTitle: 'and delay',
+    body: [
+      'Most software assumes the connection is instant and always there. Ours treats delay and disconnection as normal: every copy is signed, can wait as long as it needs to, and catches up with the others in a known time.',
+      'That is what keeps a clinic in rural Nepal working through a power cut, and it is the discipline a network between planets needs. Light takes about 1.3 seconds to reach the Moon, and between about 4 and 24 minutes to reach Mars, depending on where the planets are. A clinic that is offline for a day is, in network terms, further away than Mars.',
+      // The EGU and NASA ADS sentence stays out until the founder confirms it (copy source, check 2).
+      'Space agencies solve this with delay-tolerant networking, which stores a message and forwards it when the next link opens. Signed, self-contained records suit that way of travelling. coplanetary.work is where we take it further: social media and shared records that stay consistent across any distance. Nothing we run is in space today. This is a design rule, and the direction we are heading.',
+    ],
+  },
+};
+
+const diabetesApp = PRODUCTS.find((p) => p.slug === '/diabetes-app')!;
+const clinicApp = PRODUCTS.find((p) => p.slug === '/clinic-app')!;
+
+const build = [
+  {
+    title: 'The Diabetes App and the Clinic App',
+    audience: 'For patients and clinics',
+    body: 'Apps for people living with diabetes and the clinics that care for them. The record stays on the patient’s phone and at the clinic, and family see only what the patient chooses. The Diabetes App is in closed pilot, and the Clinic App is in development.',
+    links: [
+      { label: diabetesApp.name, href: diabetesApp.slug },
+      { label: clinicApp.name, href: clinicApp.slug },
+    ],
+  },
+  {
+    title: 'The open @cosys framework',
+    audience: 'For developers',
+    body: 'The libraries our products run on, free under Apache-2.0: @cosys packages on npm and JSR, and cosys- crates on crates.io.',
+    links: [{ label: 'See it on GitHub', href: LINKS.framework }],
+  },
+];
+
+const workWithUs = {
+  eyebrow: 'Work with us',
+  title: 'Your own systems,',
+  accentTitle: 'in production',
+  lede: 'For teams who want their own systems in production, on machines they own.',
+  more: 'How we work together',
+};
+
+const health = {
+  eyebrow: 'Health in Nepal',
+  title: 'Specialised apps for each condition.',
+  accentTitle: 'Starting with diabetes.',
+  lede: 'Each condition gets an app built for it, and they share one record on your phone, because many people live with more than one.',
+  factsTitle: 'Why Nepal, why now',
+};
 
 const conditions = [
   {
@@ -15,45 +109,29 @@ const conditions = [
     href: '/diabetes-app',
     status: 'In closed pilot',
   },
-  { emoji: '🩺', title: 'Blood pressure', body: 'Readings, medicines and your doctor’s targets, over time.', status: 'Coming soon' },
-  { emoji: '🌸', title: 'Menopause', body: 'Symptoms, cycles and treatments, noted in your own words.', status: 'Coming soon' },
-  { emoji: '🦴', title: 'Arthritis', body: 'Pain, stiffness, medicines and what helps, day by day.', status: 'Coming soon' },
-  { emoji: '➕', title: 'And more', body: 'Conditions rarely come alone. The apps share one record, so they work together.', status: 'Coming soon' },
-];
-
-const pillars = [
   {
-    emoji: '🤝',
-    title: 'Peer-to-peer',
-    body: 'Your record moves directly between your phone and the people you choose: family who help, and later your clinic. No central server holds it.',
+    emoji: '🩺',
+    title: 'Blood pressure',
+    body: 'Readings, medicines and your doctor’s targets, over time.',
+    status: 'Coming soon',
   },
   {
-    emoji: '🔒',
-    title: 'Private',
-    body: 'Photos are read and questions answered on your phone. Anything that travels is sealed so only the phones you chose can open it.',
+    emoji: '🌸',
+    title: 'Menopause',
+    body: 'Symptoms, cycles and treatments, noted in your own words.',
+    status: 'Coming soon',
   },
   {
-    emoji: '🗝️',
-    title: 'Sovereign',
-    body: 'The record is yours. You decide who sees what, you can end any share, and you can take the whole of it with you as a file.',
-  },
-];
-
-const steps = [
-  {
-    step: '01',
-    title: 'Snap',
-    body: 'Photograph your glucometer or a lab report. The number is read on your phone, and you check it before it’s saved. This works in airplane mode.',
+    emoji: '🦴',
+    title: 'Arthritis',
+    body: 'Pain, stiffness, medicines and what helps, day by day.',
+    status: 'Coming soon',
   },
   {
-    step: '02',
-    title: 'Share',
-    body: 'Choose family members who help you, and choose what each one sees. Before a visit, make a one-page summary of your last month as a PDF to show or send your doctor. When your clinic joins through the Clinic App, you’ll scan its QR code and the summary reaches your doctor directly.',
-  },
-  {
-    step: '03',
-    title: 'Follow',
-    body: 'Your targets, medicines and your doctor’s instructions sit on a plan card on your phone, with reminders for your medicines. Later, with the Clinic App, your clinic will be able to set the plan and send a checklist of next tests.',
+    emoji: '➕',
+    title: 'And more',
+    body: 'Conditions rarely come alone. The apps share one record, so they work together.',
+    status: 'Coming soon',
   },
 ];
 
@@ -71,35 +149,6 @@ const facts = [
     figure: '1–2 hours',
     body: 'of intake for a 5–15 minute consultation, in the clinics we’ve spoken to.',
     source: 'What we have seen, not a formal study.',
-  },
-];
-
-const comparison = [
-  {
-    dimension: 'Works with no signal',
-    typical: 'Partly, or not at all',
-    ours: 'Yes: logging, photos, your summary and reminders (the assistant too, on phones with about 6 GB of memory)',
-  },
-  { dimension: 'Where the AI runs', typical: 'In the cloud', ours: 'On your phone' },
-  {
-    dimension: 'Who holds your record',
-    typical: 'The app company’s servers',
-    ours: 'You, on your phone',
-  },
-  {
-    dimension: 'Cost to patients',
-    typical: 'Free trial, then a subscription',
-    ours: 'Free forever, with optional services from others in the app'
-  },
-  {
-    dimension: 'Share with family',
-    typical: 'The full numbers',
-    ours: 'Your choice for each person: the numbers, the range only, or alerts only',
-  },
-  {
-    dimension: 'Your doctor’s targets',
-    typical: 'Typed in by you, or none',
-    ours: 'Your doctor’s, or published WHO and ADA values, always labelled with where they came from',
   },
 ];
 
@@ -129,6 +178,7 @@ const structuredData = {
   url: SITE.url,
   description: SITE.description,
   email: CONTACT.email,
+  sameAs: [LINKS.framework],
   makesOffer: PRODUCTS.map(({ name, summary }) => ({
     '@type': 'Offer',
     itemOffered: { '@type': 'SoftwareApplication', name, description: summary },
@@ -139,6 +189,11 @@ const primary =
   'bg-primary hover:bg-primary-pressed text-on-fill inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition';
 const secondary =
   'border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition';
+const textLink = 'text-primary font-semibold underline-offset-2 hover:underline';
+const prose = 'text-ink-muted space-y-4 leading-relaxed text-pretty';
+const example =
+  'border-primary/30 bg-primary-tint text-ink rounded-2xl border px-5 py-4 text-sm leading-relaxed';
+const arrow = 'M5 12h14M12 5l7 7-7 7';
 ---
 
 <Base title={SITE.name} description={SITE.description} path="/" structuredData={structuredData}>
@@ -148,18 +203,16 @@ const secondary =
       <h1
         class="text-ink text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
       >
-        Health care that keeps going{' '}<br class="hidden sm:block" />
-        <span class="text-primary">between visits</span>
+        {hero.title}{' '}<br class="hidden sm:block" />
+        <span class="text-primary">{hero.accentTitle}</span>
       </h1>
       <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
-        Most care happens at home, in the months between clinic visits. cosys.work builds
-        collaborative systems for that part: you, the family who help you, and your doctor, working
-        on your care together. For chronic and comorbid conditions, starting with diabetes.
+        {hero.body}
       </p>
 
       <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-        <a href={FORMS.waitlist} class={primary}>
-          Join the patient waitlist
+        <a href={hero.primary.href} class={primary}>
+          {hero.primary.label}
           <svg
             class="h-4 w-4"
             viewBox="0 0 24 24"
@@ -170,163 +223,151 @@ const secondary =
             stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
+            <path d={arrow}></path>
           </svg>
         </a>
-        <a href={FORMS.clinic} class={secondary}>Bring your clinic</a>
+        <a href={hero.secondary.href} class={secondary}>{hero.secondary.label}</a>
       </div>
-      <p class="text-ink-muted mt-5 text-sm italic">
-        Peer-to-peer, private and sovereign. Built in Nepal.
+      <ul
+        class="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-sm sm:flex-row"
+      >
+        {
+          hero.links.map(({ lead, label, href }) => (
+            <li class="text-ink-muted">
+              {lead}{' '}
+              <a href={href} class={textLink}>
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-ink-muted mt-5 text-sm italic">{hero.smallPrint}</p>
+    </div>
+  </Section>
+
+  <!-- Who we are -->
+  <Section class="!pt-4">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="sr-only">Who we are</h2>
+      <p class="text-ink text-lg leading-relaxed text-pretty sm:text-xl">{whoWeAre}</p>
+    </div>
+  </Section>
+
+  <!-- cosys.work, nep.work and coplanetary.work -->
+  <Section class="!pt-0">
+    <NameBand names={NAMES} />
+  </Section>
+
+  <!-- Collaborative systems -->
+  <Section id="collaborative-systems" class="scroll-mt-20">
+    <SectionHeading
+      eyebrow={ideas.collaborative.eyebrow}
+      title={ideas.collaborative.title}
+      accentTitle={ideas.collaborative.accentTitle}
+    />
+    <div class:list={['mx-auto mt-8 max-w-3xl', prose]}>
+      {ideas.collaborative.body.map((line) => <p>{line}</p>)}
+    </div>
+    <p class:list={['mx-auto mt-6 max-w-3xl', example]}>{ideas.collaborative.example}</p>
+  </Section>
+
+  <!-- Peer-to-peer DNA -->
+  <Section id="peer-to-peer" class="scroll-mt-20 !py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow={ideas.dna.eyebrow}
+        title={ideas.dna.title}
+        accentTitle={ideas.dna.accentTitle}
+      />
+      <div class:list={['mx-auto mt-8 max-w-3xl', prose]}>
+        {ideas.dna.body.map((line) => <p>{line}</p>)}
+      </div>
+      <p class:list={['mx-auto mt-6 max-w-3xl', example]}>{ideas.dna.example}</p>
+      <p class="text-ink-muted mx-auto mt-6 max-w-3xl text-center text-sm">
+        {ideas.dna.libraries}{' '}
+        <a href={LINKS.framework} class={textLink}>{ideas.dna.librariesLink}</a>
       </p>
     </div>
   </Section>
 
-  <!-- Conditions -->
-  <Section class="!pt-4">
+  <!-- Beyond Earth -->
+  <Section id="beyond-earth" class="scroll-mt-20">
     <SectionHeading
-      eyebrow="One app for each condition"
-      title="Specialised apps, coming soon."
-      accentTitle="Starting with diabetes."
-      lede="Each condition gets an app built for it, with the words, the readings and the plans that condition needs. They share one record on your phone, because many people live with more than one."
+      eyebrow={ideas.beyond.eyebrow}
+      title={ideas.beyond.title}
+      accentTitle={ideas.beyond.accentTitle}
     />
-    <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-5 lg:gap-5">
+    <div class:list={['mx-auto mt-8 max-w-3xl', prose]}>
+      {ideas.beyond.body.map((line) => <p>{line}</p>)}
+    </div>
+  </Section>
+
+  <!-- What we build -->
+  <Section id="what-we-build" class="scroll-mt-20 !pt-0">
+    <SectionHeading
+      eyebrow="What we build"
+      title="Our own products,"
+      accentTitle="and the framework under them"
+    />
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
       {
-        conditions.map(({ emoji, title, body, href, status }) => {
-          const Tag = href ? 'a' : 'div';
-          return (
-            <Tag
-              href={href}
-              class:list={[
-                'border-line bg-surface flex gap-4 rounded-2xl border p-5 lg:flex-col lg:gap-0 lg:p-6',
-                href && 'hover:border-primary/40 transition hover:shadow-lg',
-              ]}
-            >
-              <span class="text-3xl leading-none" aria-hidden="true">
-                {emoji}
-              </span>
-              <div class="flex flex-1 flex-col lg:mt-3">
-                <p class="text-ink flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold">
-                  {title}
-                  <span
-                    class:list={[
-                      'inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium lg:hidden',
-                      href
-                        ? 'border-primary/30 bg-primary-tint text-ink'
-                        : 'border-line text-ink-muted',
-                    ]}
+        build.map(({ title, audience, body, links }) => (
+          <div class="border-line bg-surface flex flex-col rounded-2xl border p-8">
+            <span class="border-primary/30 bg-primary-tint text-ink inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium">
+              {audience}
+            </span>
+            <h3 class="text-ink mt-3 text-xl font-bold">{title}</h3>
+            <p class="text-ink-muted mt-2.5 flex-1 text-sm leading-relaxed">{body}</p>
+            <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+              {links.map(({ label, href }) => (
+                <li>
+                  <a
+                    href={href}
+                    class="text-primary inline-flex items-center gap-1.5 font-semibold"
                   >
-                    {status}
-                  </span>
-                </p>
-                <p class="text-ink-muted mt-1.5 flex-1 text-sm leading-relaxed">{body}</p>
-                <span
-                  class:list={[
-                    'mt-4 hidden w-fit rounded-full border px-3 py-0.5 text-xs font-medium lg:inline-block',
-                    href
-                      ? 'border-primary/30 bg-primary-tint text-ink'
-                      : 'border-line text-ink-muted',
-                  ]}
-                >
-                  {status}
-                </span>
-              </div>
-            </Tag>
-          );
-        })
-      }
-    </div>
-  </Section>
-
-  <!-- Pillars -->
-  <Section class="!pt-0">
-    <div class="grid gap-5 md:grid-cols-3">
-      {pillars.map((item) => <Card {...item} />)}
-    </div>
-  </Section>
-
-  <!-- How it works -->
-  <Section class="!py-0">
-    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
-      <SectionHeading
-        eyebrow="How it works, starting with diabetes"
-        title="Snap, share,"
-        accentTitle="follow the plan"
-      />
-      <ol class="mt-12 grid gap-5 md:grid-cols-3">
-        {
-          steps.map(({ step, title, body }) => (
-            <li class="border-line bg-surface rounded-2xl border p-6">
-              <span class="text-primary text-sm font-bold tabular-nums">{step}</span>
-              <h3 class="text-ink mt-2 font-semibold text-pretty">{title}</h3>
-              <p class="text-ink-muted mt-2 text-sm leading-relaxed">{body}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </Section>
-
-  <!-- Why Nepal -->
-  <Section>
-    <SectionHeading
-      eyebrow="Why Nepal, why now"
-      title="Your body changes every day."
-      accentTitle="Visits come every few months."
-    />
-    <div class="mt-12 grid gap-5 md:grid-cols-3">
-      {
-        facts.map(({ figure, body, source }) => (
-          <div class="border-line bg-surface rounded-2xl border p-6">
-            <p class="text-primary text-3xl font-bold tabular-nums">{figure}</p>
-            <p class="text-ink mt-2 text-sm leading-relaxed">{body}</p>
-            {source && <p class="text-ink-muted mt-3 text-xs italic">{source}</p>}
+                    {label}
+                    <svg
+                      class="h-4 w-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={arrow} />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         ))
       }
     </div>
   </Section>
 
-  <!-- What makes it different -->
-  <Section class="!py-0">
-    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
-      <SectionHeading
-        eyebrow="What makes it different"
-        title="The Diabetes App, next to"
-        accentTitle="a typical diabetes app"
-      />
-      <Comparison
-        caption="Typical diabetes apps compared with The Diabetes App"
-        theirs="Typical diabetes apps"
-        ours="The Diabetes App"
-        rows={comparison.map(({ dimension, typical, ours }) => ({ dimension, theirs: typical, ours }))}
-      />
-    </div>
-  </Section>
-
-  <!-- Products -->
-  <Section id="products">
+  <!-- Work with us -->
+  <Section id="work-with-us" class="scroll-mt-20 !pt-0">
     <SectionHeading
-      eyebrow="Three products, one network"
-      title="Built for both sides of the"
-      accentTitle="consulting room door"
+      eyebrow={workWithUs.eyebrow}
+      title={workWithUs.title}
+      accentTitle={workWithUs.accentTitle}
+      lede={workWithUs.lede}
     />
-    <div class="mt-12 grid gap-5 lg:grid-cols-3">
+    <div class="mt-12 grid gap-5 md:grid-cols-2">
       {
-        PRODUCTS.map(({ slug, name, audience, blurb, emoji }) => (
+        OFFERS.map(({ title, body }) => (
           <a
-            href={slug}
+            href="/company#work-with-us"
             class="group border-line bg-surface hover:border-primary/40 flex flex-col rounded-2xl border p-8 transition hover:shadow-lg"
           >
-            <span class="text-4xl" aria-hidden="true">
-              {emoji}
-            </span>
-            <span class="border-primary/30 bg-primary-tint text-ink mt-5 inline-block w-fit rounded-full border px-3 py-0.5 text-xs font-medium">
-              {audience}
-            </span>
-            <h3 class="text-ink mt-3 text-xl font-bold">{name}</h3>
-            <p class="text-ink-muted mt-2.5 flex-1 text-sm leading-relaxed">{blurb}</p>
+            <h3 class="text-ink text-xl font-bold">{title}</h3>
+            <p class="text-ink-muted mt-2.5 flex-1 text-sm leading-relaxed">{body}</p>
             <span class="text-primary mt-6 inline-flex items-center gap-1.5 text-sm font-semibold">
-              Learn more
+              {workWithUs.more}
               <svg
                 class="h-4 w-4 transition group-hover:translate-x-0.5"
                 viewBox="0 0 24 24"
@@ -337,7 +378,7 @@ const secondary =
                 stroke-linejoin="round"
                 aria-hidden="true"
               >
-                <path d="M5 12h14M12 5l7 7-7 7" />
+                <path d={arrow} />
               </svg>
             </span>
           </a>
@@ -346,23 +387,97 @@ const secondary =
     </div>
   </Section>
 
-  <!-- Promises -->
-  <Section>
-    <SectionHeading eyebrow="Our promises" title="What the app will" accentTitle="always and never do" />
-    <div class="mt-12 grid gap-5 md:grid-cols-3">
-      {promises.map((item) => <Card {...item} />)}
+  <!-- Health in Nepal -->
+  <Section id="health" class="scroll-mt-20 !py-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+      <SectionHeading
+        eyebrow={health.eyebrow}
+        title={health.title}
+        accentTitle={health.accentTitle}
+        lede={health.lede}
+      />
+      <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-5 lg:gap-5">
+        {
+          conditions.map(({ emoji, title, body, href, status }) => {
+            const Tag = href ? 'a' : 'div';
+            return (
+              <Tag
+                href={href}
+                class:list={[
+                  'border-line bg-surface flex gap-4 rounded-2xl border p-5 lg:flex-col lg:gap-0 lg:p-6',
+                  href && 'hover:border-primary/40 transition hover:shadow-lg',
+                ]}
+              >
+                <span class="text-3xl leading-none" aria-hidden="true">
+                  {emoji}
+                </span>
+                <div class="flex flex-1 flex-col lg:mt-3">
+                  <p class="text-ink flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold">
+                    {title}
+                    <span
+                      class:list={[
+                        'inline-block rounded-full border px-2.5 py-0.5 text-xs font-medium lg:hidden',
+                        href
+                          ? 'border-primary/30 bg-primary-tint text-ink'
+                          : 'border-line text-ink-muted',
+                      ]}
+                    >
+                      {status}
+                    </span>
+                  </p>
+                  <p class="text-ink-muted mt-1.5 flex-1 text-sm leading-relaxed">{body}</p>
+                  <span
+                    class:list={[
+                      'mt-4 hidden w-fit rounded-full border px-3 py-0.5 text-xs font-medium lg:inline-block',
+                      href
+                        ? 'border-primary/30 bg-primary-tint text-ink'
+                        : 'border-line text-ink-muted',
+                    ]}
+                  >
+                    {status}
+                  </span>
+                </div>
+              </Tag>
+            );
+          })
+        }
+      </div>
+
+      <h3 class="text-ink mt-14 text-center text-xl font-bold">{health.factsTitle}</h3>
+      <div class="mt-6 grid gap-5 md:grid-cols-3">
+        {
+          facts.map(({ figure, body, source }) => (
+            <div class="border-line bg-surface rounded-2xl border p-6">
+              <p class="text-primary text-3xl font-bold tabular-nums">{figure}</p>
+              <p class="text-ink mt-2 text-sm leading-relaxed">{body}</p>
+              {source && <p class="text-ink-muted mt-3 text-xs italic">{source}</p>}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-10">
+        <CTA
+          title="Built in Nepal"
+          body="Patients: the Diabetes App is in closed pilot, so join the waitlist and we'll tell you when it is ready for you. Clinics: the Clinic App is in development, and a preview is available on request."
+          ctaLabel="Join the patient waitlist"
+          href={FORMS.waitlist}
+          secondaryLabel="Bring your clinic"
+          secondaryHref={FORMS.clinic}
+        />
+      </div>
     </div>
   </Section>
 
-  <!-- CTA -->
+  <!-- Promises -->
   <Section>
-    <CTA
-      title="Built in Nepal"
-      body="Patients: The Diabetes App is in closed pilot, so join the waitlist and we'll tell you when it is ready for you. Clinics: the Clinic App is in development, and a preview is available on request."
-      ctaLabel="Bring your clinic"
-      href={FORMS.clinic}
-      secondaryLabel="Join the patient waitlist"
-      secondaryHref={FORMS.waitlist}
+    <SectionHeading
+      eyebrow="Our promises"
+      title="What our health apps will"
+      accentTitle="always and never do"
     />
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {promises.map((item) => <Card {...item} />)}
+    </div>
   </Section>
 </Base>
