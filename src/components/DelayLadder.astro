@@ -15,8 +15,11 @@ interface Props {
   axisNarrow: string;
   rule: string;
   steps: readonly { place: string; delay: readonly string[]; highlight?: boolean }[];
+  /** `column-lg` also shows the column on wide screens, for a pinned side column. */
+  layout?: 'auto' | 'column-lg';
 }
-const { title, label, axis, axisNarrow, rule, steps } = Astro.props;
+const { title, label, axis, axisNarrow, rule, steps, layout = 'auto' } = Astro.props;
+const pinned = layout === 'column-lg';
 
 // Wide: five boxes in a row.
 const W = { box: 140, gap: 20, top: 0, height: 92 };
@@ -28,12 +31,12 @@ const N = { left: 30, width: 250, height: 58, gap: 12 };
 const columnHeight = steps.length * N.height + (steps.length - 1) * N.gap;
 ---
 
-<figure class="illustration mx-auto max-w-4xl">
+<figure class:list={['illustration mx-auto', pinned ? 'max-w-4xl lg:max-w-[22rem]' : 'max-w-4xl']}>
   <p class="text-ink text-center text-lg font-bold text-balance">{title}</p>
 
   <!-- Wide -->
   <svg
-    class="mt-6 hidden h-auto w-full sm:block"
+    class:list={['mt-6 hidden h-auto w-full sm:block', pinned && 'lg:hidden']}
     viewBox={`-2 -2 ${wideWidth + 4} ${axisY + 70}`}
     role="img"
     aria-label={label}
@@ -93,9 +96,11 @@ const columnHeight = steps.length * N.height + (steps.length - 1) * N.gap;
   </svg>
 
   <!-- Narrow: a column, the axis running down -->
-  <p class="text-ink-muted mt-6 text-center text-sm sm:hidden">{axisNarrow}</p>
+  <p class:list={['text-ink-muted mt-6 text-center text-sm sm:hidden', pinned && 'lg:block']}>
+    {axisNarrow}
+  </p>
   <svg
-    class="mx-auto mt-3 h-auto w-full max-w-sm sm:hidden"
+    class:list={['mx-auto mt-3 h-auto w-full max-w-sm sm:hidden', pinned && 'lg:block']}
     viewBox={`-2 -2 284 ${columnHeight + 34}`}
     role="img"
     aria-label={label}
