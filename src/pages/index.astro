@@ -298,7 +298,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
           <div class="mx-auto max-w-4xl text-center">
             <div class="headline-rotator relative">
               <h1
-                class="text-ink grid items-center text-5xl leading-[1.04] font-semibold text-balance sm:text-6xl lg:text-7xl"
+                class="text-ink grid items-center text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:text-6xl lg:leading-tight"
               >
                 {
                   hero.headlines.map(({ title, accentTitle }, i) => (
@@ -674,10 +674,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
       {
         promises.map(({ title, body }, i) => (
           <div class="reveal border-line border-t pt-6">
-            <p
-              class="text-primary font-display text-5xl leading-none font-semibold tabular-nums"
-              aria-hidden="true"
-            >
+            <p class="text-primary text-5xl leading-none font-bold tabular-nums" aria-hidden="true">
               {String(i + 1).padStart(2, '0')}
             </p>
             <h3 class="text-ink mt-4 text-xl font-semibold">{title}</h3>
