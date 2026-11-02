@@ -112,7 +112,9 @@ For teams who want their own systems in production, on machines they own. No pri
 Both cards link to *Work with us* on the About us page.
 
 ### What stays with you (v5.1)
-A band under the two Work with us cards. Each item links to its thread on About us (`/company#<id>`).
+A band under the two Work with us cards: the title and a one-line lede pinned on the left, and the five items as a deck of numbered cards that roll up over each other as the page scrolls. Each item links to its thread on About us (`/company#<id>`).
+
+Lede: *Five things every system we build keeps under its owner's control.* (New wording; founder to sign off.)
 
 - **Data at home:** records stay with the people and offices they belong to, under keys they hold.
 - **Local AI first:** models run on your machines, and large models abroad get only what you let through.

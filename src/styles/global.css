@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/nunito';
-@import '@fontsource-variable/oswald';
 
 /**
  * Colour comes from the app's four themes (see src/data/themes.ts), swapped at runtime by
@@ -19,11 +18,6 @@
 
   /* The app ships static cuts at 400/600/700 only, so `font-medium` resolves to 600
      rather than introducing a weight the product never uses. */
-  /* Headings use Oswald, a condensed display face (v5.1 redesign); body text stays Nunito.
-     Devanagari falls through to Mukta. */
-  --font-display:
-    'Oswald Variable', 'Mukta', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-
   --font-weight-medium: 600;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
@@ -196,13 +190,6 @@
 }
 
 @layer base {
-  h1,
-  h2,
-  h3 {
-    font-family: var(--font-display);
-    letter-spacing: 0.005em;
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
@@ -328,6 +315,15 @@
   }
 }
 
+@keyframes lightup {
+  from {
+    opacity: 0.28;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes ridge-sink {
   to {
     transform: translateY(var(--rise, 0));
@@ -440,6 +436,31 @@
       animation-fill-mode: both;
       animation-timeline: --drawing;
       animation-range: entry 10% cover 40%;
+    }
+
+    /* Light-up text (after openvibe.social): sentences and paragraphs brighten as they reach
+       the middle of the screen, and stay lit. */
+    .lightup {
+      animation-name: lightup;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 35%;
+    }
+
+    /* Pinned drawings: in a .scrolly section the drawing stays put on wide screens while the
+       text scrolls past, so it is driven by the section's progress, not its own (a pinned
+       element barely moves through the viewport). */
+    .scrolly {
+      view-timeline: --drawing block;
+    }
+    .scrolly .illustration {
+      view-timeline: none;
+    }
+    @media (min-width: 64rem) {
+      .scrolly .illustration > svg {
+        animation-name: none;
+      }
     }
 
     /* The Himalaya: each ridge sinks by its --rise as the page scrolls through the first screen,
@@ -656,4 +677,26 @@
 }
 :root .band-dark .cosys-dot {
   color: #f08a4b;
+}
+
+/* A deck of cards that roll up over each other (after fedica.com): each card sticks a little
+   lower than the one before, so as the page scrolls the next card slides up over it and leaves
+   its top strip showing. Pure position: sticky, so it works without scroll-driven animation
+   and with reduced motion too: nothing animates, the cards only stop where they are put. */
+.stack {
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: 1rem;
+}
+.stack-card {
+  position: sticky;
+  top: calc(5rem + var(--i) * 0.9rem);
+}
+@media (min-width: 64rem) {
+  .stack {
+    gap: 2.5rem;
+  }
+  .stack-card {
+    top: calc(8rem + var(--i) * 1.25rem);
+  }
 }
