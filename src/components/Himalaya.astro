@@ -1,0 +1,164 @@
+---
+/**
+ * The homepage's night-time Himalaya: four ridgelines behind the hero, far to near, with snow
+ * on the far peaks, a soft glow in the sky, and a smooth wave at the foot that hands the dark
+ * band back to the light page below.
+ *
+ * Drawn, not photographed, so it repaints with the theme: every colour is a `--p-*` token,
+ * read inside `.band-dark`, which sets a night version of the current theme. The ridges are
+ * generated here at build time by midpoint displacement from a fixed seed, so every build
+ * draws the same range. Each layer carries `--rise`, the distance it sinks as the page scrolls
+ * (CSS scroll-driven, in global.css): far layers sink more, so they seem to move slower and
+ * further away. Decorative, so hidden from assistive technology.
+ */
+interface Props {
+  /** `range`: the sky and ridges, stretched to fill its positioned parent (the ridges are
+   * forgiving of a little stretch, and this keeps every peak in view at any width). `fog`: the wave along the foot of its positioned parent, in the page's colour. */
+  part: 'range' | 'fog';
+  class?: string;
+}
+const { part, class: className } = Astro.props;
+
+import { SCENE_W as W, SCENE_H as H, ridge } from '@/scripts/ridges';
+
+// Far: the high range, a few tall sharp summits with snow. Mid and near: rolling ridges.
+// Nearest: the foothills, almost smooth, in the band's ground colour.
+const far = ridge(
+  7,
+  [
+    [0, 400],
+    [120, 350],
+    [250, 250],
+    [330, 300],
+    [470, 165],
+    [560, 270],
+    [650, 235],
+    [770, 330],
+    [900, 215],
+    [985, 255],
+    [1085, 150],
+    [1190, 265],
+    [1300, 225],
+    [1420, 320],
+    [1520, 255],
+    [1600, 300],
+  ],
+  34,
+  4,
+);
+const mid = ridge(
+  19,
+  [
+    [0, 470],
+    [200, 418],
+    [380, 470],
+    [600, 398],
+    [820, 462],
+    [1050, 408],
+    [1300, 468],
+    [1600, 425],
+  ],
+  26,
+  4,
+);
+const near = ridge(
+  31,
+  [
+    [0, 545],
+    [350, 500],
+    [700, 548],
+    [1050, 505],
+    [1400, 545],
+    [1600, 520],
+  ],
+  16,
+  4,
+);
+const nearest = ridge(
+  43,
+  [
+    [0, 615],
+    [400, 588],
+    [800, 622],
+    [1200, 594],
+    [1600, 612],
+  ],
+  8,
+  3,
+);
+
+/** Where the band meets the page: one smooth, gentle wave in the page's own colour. */
+const shore = `M0 ${H}L0 690C260 662 520 660 800 676C1080 692 1340 688 1600 664L${W} ${H}Z`;
+---
+
+{
+  part === 'range' && (
+    <div
+      class:list={['himalaya pointer-events-none absolute inset-0 overflow-hidden', className]}
+      aria-hidden="true"
+    >
+      <svg class="h-full w-full" viewBox={`0 150 ${W} ${H - 150}`} preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="himalaya-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" style="stop-color: var(--p-ground)" />
+            <stop offset="0.75" style="stop-color: var(--p-surface)" />
+          </linearGradient>
+          <radialGradient id="himalaya-glow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" style="stop-color: var(--p-primary); stop-opacity: 0.35" />
+            <stop offset="1" style="stop-color: var(--p-primary); stop-opacity: 0" />
+          </radialGradient>
+          <clipPath id="himalaya-far">
+            <path d={far} />
+          </clipPath>
+          <linearGradient id="himalaya-snow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" style="stop-color: var(--p-text); stop-opacity: 0.7" />
+            <stop offset="1" style="stop-color: var(--p-text); stop-opacity: 0" />
+          </linearGradient>
+        </defs>
+
+        <rect y="150" width={W} height={H - 150} fill="url(#himalaya-sky)" />
+        <g class="ridge" style="--rise: 180px">
+          <circle cx="1220" cy="330" r="180" fill="url(#himalaya-glow)" />
+        </g>
+        <g class="ridge" style="--rise: 130px">
+          <path d={far} class="fill-surface-muted" />
+          <rect
+            x="0"
+            y="140"
+            width={W}
+            height="150"
+            fill="url(#himalaya-snow)"
+            clip-path="url(#himalaya-far)"
+          />
+        </g>
+        <g class="ridge" style="--rise: 85px">
+          <path d={mid} class="fill-surface" />
+        </g>
+        <g class="ridge" style="--rise: 45px">
+          <path d={near} style="fill: color-mix(in srgb, var(--p-surface) 55%, var(--p-ground))" />
+        </g>
+        <g class="ridge" style="--rise: 15px">
+          <path d={nearest} class="fill-ground" />
+        </g>
+      </svg>
+    </div>
+  )
+}
+
+<!-- The edge that hands the dark band back to the light page. It paints with the page's own
+     ground (--page-ground, read outside the band), so it works in every theme. -->
+{
+  part === 'fog' && (
+    <svg
+      class:list={[
+        'himalaya-fog pointer-events-none absolute inset-x-0 bottom-0 h-10 w-full sm:h-16',
+        className,
+      ]}
+      viewBox={`0 600 ${W} 120`}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path d={shore} style="fill: var(--page-ground)" />
+    </svg>
+  )
+}

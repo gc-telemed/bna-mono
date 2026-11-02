@@ -6,6 +6,8 @@ interface Props {
   accentTitle?: string;
   lede?: string;
   accentClass?: string;
+  /** No longer used: the eyebrow is a plain caption since the v5.1 redesign. Kept so older
+   * call sites still type-check. */
   chipClass?: string;
   align?: 'center' | 'left';
 }
@@ -16,7 +18,6 @@ const {
   accentTitle,
   lede,
   accentClass = 'text-primary',
-  chipClass = 'border-primary/30 bg-primary-tint text-ink',
   align = 'center',
 } = Astro.props;
 ---
@@ -24,17 +25,15 @@ const {
 <div class:list={['reveal', align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-2xl']}>
   {
     eyebrow && (
-      <span
-        class:list={['inline-block rounded-full border px-4 py-1 text-sm font-medium', chipClass]}
-      >
+      <span class="text-ink-muted inline-block text-xs font-semibold tracking-[0.22em] uppercase">
         {eyebrow}
       </span>
     )
   }
   <h2
     class:list={[
-      'text-ink text-3xl font-bold tracking-tight text-balance md:text-4xl md:leading-tight',
-      eyebrow && 'mt-4',
+      'text-ink text-4xl leading-[1.08] font-semibold text-balance md:text-5xl lg:text-6xl',
+      eyebrow && 'mt-3',
     ]}
   >
     {title}
@@ -52,7 +51,7 @@ const {
     lede && (
       <p
         class:list={[
-          'text-ink-muted mt-4 leading-relaxed text-pretty',
+          'text-ink-muted mt-5 text-lg leading-relaxed text-pretty',
           align === 'center' && 'mx-auto max-w-2xl',
         ]}
       >

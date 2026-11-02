@@ -2,10 +2,10 @@
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
-import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import NameBand from '@/components/NameBand.astro';
 import HeroArt from '@/components/HeroArt.astro';
+import Himalaya from '@/components/Himalaya.astro';
 import Circles from '@/components/Circles.astro';
 import Helix from '@/components/Helix.astro';
 import DelayLadder from '@/components/DelayLadder.astro';
@@ -53,6 +53,7 @@ const hero = {
   },
 };
 
+const whoWeAreLabel = 'Who we are';
 const whoWeAre =
   'CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.';
 
@@ -187,32 +188,27 @@ const health = {
 
 const conditions = [
   {
-    emoji: '🩸',
     title: 'Diabetes',
     body: 'The Diabetes App, the first of them. Photo logging, your doctor’s plan, and family who help.',
     href: '/diabetes-app',
     status: 'In closed pilot',
   },
   {
-    emoji: '🩺',
     title: 'Blood pressure',
     body: 'Readings, medicines and your doctor’s targets, over time.',
     status: 'Coming soon',
   },
   {
-    emoji: '🌸',
     title: 'Menopause',
     body: 'Symptoms, cycles and treatments, noted in your own words.',
     status: 'Coming soon',
   },
   {
-    emoji: '🦴',
     title: 'Arthritis',
     body: 'Pain, stiffness, medicines and what helps, day by day.',
     status: 'Coming soon',
   },
   {
-    emoji: '➕',
     title: 'And more',
     body: 'Conditions rarely come alone. The apps share one record, so they work together.',
     status: 'Coming soon',
@@ -238,17 +234,14 @@ const facts = [
 
 const promises = [
   {
-    emoji: '🩺',
     title: 'Your doctor decides; the app remembers',
     body: 'It never calculates or recommends insulin doses, and it never estimates carbohydrates or calories.',
   },
   {
-    emoji: '🗄️',
     title: 'Your record belongs to you',
     body: 'Export it at any time as PDF or CSV, or as an encrypted backup only your passphrase opens. There is no cloud copy of your record.',
   },
   {
-    emoji: '📡',
     title: 'Built for the hard case first',
     body: 'It runs on low-cost Android phones, on slow networks and in Nepali.',
   },
@@ -281,115 +274,144 @@ const example =
 const arrow = 'M5 12h14M12 5l7 7-7 7';
 ---
 
-<Base title={SITE.name} description={SITE.description} path="/" structuredData={structuredData}>
-  <!-- Hero -->
-  <Section class="!pt-16 !pb-8 lg:!pt-24">
-    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-14">
-      <div class="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
-        <div class="headline-rotator relative">
-          <h1
-            class="text-ink grid items-center text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
-          >
-            {
-              hero.headlines.map(({ title, accentTitle }, i) => (
-                <span
-                  class="headline"
-                  style={`--n: ${i}`}
-                  aria-hidden={i === 0 ? undefined : 'true'}
-                >
-                  {title} <br class="hidden sm:block" />
-                  <span class="text-primary">{accentTitle}</span>
+<Base
+  title={SITE.name}
+  description={SITE.description}
+  path="/"
+  structuredData={structuredData}
+  headerTone="dark"
+>
+  <!--
+    The dark band: the hero over a drawn Himalaya, then Who we are and the three names, on a
+    night version of the theme (.band-dark in global.css), handed back to the page by a fog bank.
+  -->
+  <div class="band-dark relative overflow-hidden pb-24 sm:pb-36">
+    <!-- Hero -->
+    <div class="relative">
+      <div
+        class="absolute inset-x-0 bottom-0 h-[clamp(200px,30vw,380px)] sm:h-[calc(clamp(200px,30vw,380px)+24px)]"
+      >
+        <Himalaya part="range" />
+      </div>
+      <Section class="relative !pt-20 !pb-[clamp(200px,30vw,380px)] lg:!pt-28">
+        <div>
+          <div class="mx-auto max-w-4xl text-center">
+            <div class="headline-rotator relative">
+              <h1
+                class="text-ink grid items-center text-5xl leading-[1.04] font-semibold text-balance sm:text-6xl lg:text-7xl"
+              >
+                {
+                  hero.headlines.map(({ title, accentTitle }, i) => (
+                    <span
+                      class="headline"
+                      style={`--n: ${i}`}
+                      aria-hidden={i === 0 ? undefined : 'true'}
+                    >
+                      {title} <br class="hidden sm:block" />
+                      <span class="text-primary">{accentTitle}</span>
+                    </span>
+                  ))
+                }
+              </h1>
+              <div class="headline-controls">
+                <span class="headline-dots" aria-hidden="true">
+                  {hero.headlines.map((_, i) => <span class="headline-dot" style={`--n: ${i}`} />)}
                 </span>
-              ))
-            }
-          </h1>
-          <div class="headline-controls">
-            <span class="headline-dots" aria-hidden="true">
-              {hero.headlines.map((_, i) => <span class="headline-dot" style={`--n: ${i}`} />)}
-            </span>
-            <label class="headline-pause text-ink-muted hover:text-ink">
-              <input type="checkbox" class="sr-only" />
-              <span class="sr-only">{hero.pause}</span>
-              <svg
-                class="icon-pause h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <rect x="6" y="5" width="4" height="14" rx="1"></rect>
-                <rect x="14" y="5" width="4" height="14" rx="1"></rect>
-              </svg>
-              <svg
-                class="icon-play h-4 w-4"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
-                ></path>
-              </svg>
-              <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
-              <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
-            </label>
+                <label class="headline-pause text-ink-muted hover:text-ink">
+                  <input type="checkbox" class="sr-only" />
+                  <span class="sr-only">{hero.pause}</span>
+                  <svg
+                    class="icon-pause h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+                    <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+                  </svg>
+                  <svg
+                    class="icon-play h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M8 5.5v13a1 1 0 0 0 1.5.87l11-6.5a1 1 0 0 0 0-1.74l-11-6.5A1 1 0 0 0 8 5.5Z"
+                    ></path>
+                  </svg>
+                  <span class="headline-tip tip-pause" aria-hidden="true">{hero.pause}</span>
+                  <span class="headline-tip tip-play" aria-hidden="true">{hero.play}</span>
+                </label>
+              </div>
+            </div>
+            <p class="text-ink-muted mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-pretty">
+              {hero.body}
+            </p>
+
+            <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <a href={hero.primary.href} class={primary}>
+                {hero.primary.label}
+                <svg
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={arrow}></path>
+                </svg>
+              </a>
+              <a href={hero.secondary.href} class={secondary}>{hero.secondary.label}</a>
+            </div>
+            <ul
+              class="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-sm sm:flex-row"
+            >
+              {
+                hero.links.map(({ lead, label, href }) => (
+                  <li class="text-ink-muted">
+                    {lead}{' '}
+                    <a href={href} class={textLink}>
+                      {label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+            <p class="text-ink-muted mt-5 text-sm italic">{hero.smallPrint}</p>
           </div>
         </div>
-        <p
-          class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty lg:mx-0"
-        >
-          {hero.body}
-        </p>
+      </Section>
+    </div>
 
-        <div class="mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-          <a href={hero.primary.href} class={primary}>
-            {hero.primary.label}
-            <svg
-              class="h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d={arrow}></path>
-            </svg>
-          </a>
-          <a href={hero.secondary.href} class={secondary}>{hero.secondary.label}</a>
+    <!-- Who we are -->
+    <Section class="!pt-6">
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
+        <div>
+          <h2
+            class="text-ink-muted text-xs font-semibold tracking-[0.22em] uppercase"
+            style="font-family: inherit"
+          >
+            {whoWeAreLabel}
+          </h2>
+          <p
+            class="text-ink mt-4 text-xl leading-relaxed text-pretty sm:text-2xl sm:leading-relaxed"
+          >
+            {whoWeAre}
+          </p>
         </div>
-        <ul
-          class="mt-6 flex flex-col items-center justify-center gap-x-6 gap-y-2 text-sm sm:flex-row lg:justify-start"
-        >
-          {
-            hero.links.map(({ lead, label, href }) => (
-              <li class="text-ink-muted">
-                {lead}{' '}
-                <a href={href} class={textLink}>
-                  {label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-        <p class="text-ink-muted mt-5 text-sm italic">{hero.smallPrint}</p>
+        <HeroArt {...hero.art} class="mx-auto max-w-sm lg:max-w-none" />
       </div>
-      <HeroArt {...hero.art} class="mx-auto max-w-sm lg:max-w-none" />
-    </div>
-  </Section>
+    </Section>
 
-  <!-- Who we are -->
-  <Section class="!pt-4">
-    <div class="mx-auto max-w-3xl">
-      <h2 class="sr-only">Who we are</h2>
-      <p class="text-ink text-lg leading-relaxed text-pretty sm:text-xl">{whoWeAre}</p>
-    </div>
-  </Section>
-
-  <!-- cosys.work, nep.work and coplanetary.work -->
-  <Section class="!pt-0">
-    <NameBand names={NAMES} />
-  </Section>
+    <!-- cosys.work, nep.work and coplanetary.work -->
+    <Section class="relative z-10 !pt-0">
+      <NameBand names={NAMES} />
+    </Section>
+    <Himalaya part="fog" />
+  </div>
 
   <!-- Collaborative systems -->
   <Section id="collaborative-systems" class="scroll-mt-20">
@@ -409,7 +431,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
 
   <!-- Peer-to-peer DNA -->
   <Section id="peer-to-peer" class="scroll-mt-20 !py-0">
-    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+    <div class="bleed bg-surface-muted py-16 lg:py-24">
       <SectionHeading
         eyebrow={ideas.dna.eyebrow}
         title={ideas.dna.title}
@@ -563,7 +585,7 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
 
   <!-- Health in Nepal -->
   <Section id="health" class="scroll-mt-20 !py-0">
-    <div class="bg-surface-muted rounded-3xl px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+    <div class="bleed bg-surface-muted py-16 lg:py-24">
       <SectionHeading
         eyebrow={health.eyebrow}
         title={health.title}
@@ -572,21 +594,18 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
       />
       <div class="mt-10 grid gap-3 sm:grid-cols-2 lg:mt-12 lg:grid-cols-5 lg:gap-5">
         {
-          conditions.map(({ emoji, title, body, href, status }) => {
+          conditions.map(({ title, body, href, status }) => {
             const Tag = href ? 'a' : 'div';
             return (
               <Tag
                 href={href}
                 class:list={[
-                  'reveal border-line bg-surface flex gap-4 rounded-2xl border p-5 lg:flex-col lg:gap-0 lg:p-6',
+                  'reveal border-line bg-surface flex rounded-2xl border p-5 lg:p-6',
                   href &&
                     'lift hover:border-primary/40 transition hover:shadow-lg focus-visible:shadow-lg',
                 ]}
               >
-                <span class="text-3xl leading-none" aria-hidden="true">
-                  {emoji}
-                </span>
-                <div class="flex flex-1 flex-col lg:mt-3">
+                <div class="flex flex-1 flex-col">
                   <p class="text-ink flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold">
                     {title}
                     <span
@@ -652,7 +671,20 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
       accentTitle="always and never do"
     />
     <div class="mt-12 grid gap-5 md:grid-cols-3">
-      {promises.map((item) => <Card {...item} />)}
+      {
+        promises.map(({ title, body }, i) => (
+          <div class="reveal border-line border-t pt-6">
+            <p
+              class="text-primary font-display text-5xl leading-none font-semibold tabular-nums"
+              aria-hidden="true"
+            >
+              {String(i + 1).padStart(2, '0')}
+            </p>
+            <h3 class="text-ink mt-4 text-xl font-semibold">{title}</h3>
+            <p class="text-ink-muted mt-2 leading-relaxed">{body}</p>
+          </div>
+        ))
+      }
     </div>
   </Section>
 </Base>
