@@ -17,6 +17,23 @@ const page = {
   lede: 'cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.',
 };
 
+// The hero's line about what we publish. The paper links to its DOI, the white paper to its
+// section on the SoMA page, where the two sit side by side.
+// needs_review: Nepali version, reviewed by a native speaker.
+const papers = {
+  intro: 'We also publish the mathematics our systems rest on.',
+  paper: {
+    title: 'Collaboration Is Composition',
+    href: 'https://doi.org/10.5281/zenodo.24026645',
+    rest: 'shows how people and software work together with no server in the middle, and we proved its main results in Lean 4.',
+  },
+  whitepaper: {
+    title: 'The SoMA white paper',
+    href: '/soma#white-paper',
+    rest: 'sets out the ideas behind SoMA.',
+  },
+};
+
 const technology = {
   eyebrow: 'Technology in Nepal',
   title: 'Kept at home,',
@@ -196,6 +213,21 @@ const approach = [
         </h1>
         <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
           {page.lede}
+        </p>
+        <p class="text-ink-muted mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">
+          {papers.intro}{' '}
+          <a
+            href={papers.paper.href}
+            class="text-primary font-medium italic underline-offset-2 hover:underline"
+            >{papers.paper.title}</a
+          >{' '}
+          {papers.paper.rest}{' '}
+          <a
+            href={papers.whitepaper.href}
+            class="text-primary font-medium underline-offset-2 hover:underline"
+            >{papers.whitepaper.title}</a
+          >{' '}
+          {papers.whitepaper.rest}
         </p>
         <p class="text-ink mt-5 font-medium">
           Built in Nepal. The Diabetes App is in closed pilot and free forever.

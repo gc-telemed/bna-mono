@@ -364,6 +364,25 @@ Button: **[Read the white paper]** (`/soma-whitepaper.pdf`) · *PDF, 8 pages, 17
 
 The PDF's source and build live in the tda repository (`docs/whitepaper`). The paper spells the name SOMA; the site's own copy keeps SoMA.
 
+#### The paper (`#paper`, new 2026-11-07)
+In the same section, under the white paper and laid out the same way.
+
+*Also for technical readers.* **The paper: collaboration is composition**
+
+Collaboration Is Composition is about people and software that keep their own records and work together with no server in the middle. It gives a mechanized model of the system our open-source libraries implement, with a case study from health care, and we proved its main results in Lean 4.
+
+- Each party, whether a person, an organisation or the software acting for one, acts through a machine that reads and appends to its own log of signed records.
+- A collaboration is those machines wired together through mailboxes, so it is a machine too, and it can be wired into a larger one. The wiring changes as devices pair and are revoked.
+- Claims are types that only records signed by the right keys can satisfy, so an approval signed by an agent does not type-check.
+- When every machine only adds to what it knows, logs and views agree in whatever order messages arrive, as long as each one eventually does. A step that takes something back is where the model asks for a signature.
+- Trust depends on who is looking. Each observer computes its own ranking from what it can see.
+
+Button: **[Read the paper]** (`https://doi.org/10.5281/zenodo.24026645`) · *Preprint, 20 pages, on Zenodo. Free to share and adapt under CC BY 4.0.*
+
+Under it: **The Lean 4 proofs** (`https://doi.org/10.5281/zenodo.24026063`) have their own record on Zenodo.
+
+The site links the DOI and keeps no copy of the PDF. The paper's source lives in the tda repository (`docs/papers/collaboration-is-composition`).
+
 ### The facts
 - **Where it runs:** iPhone, Android, desktop and the web.
 - **Joining:** by invitation from an operator. The first operator runs on nep.work, and any community can run its own.
@@ -426,6 +445,8 @@ Description (metadata): *About cosys.work: who we are, what we hold to, and how 
 Badge: *About cosys.work* · Title: **We build the tools we wanted to exist**
 
 cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.
+
+Under it (new 2026-11-07): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`https://doi.org/10.5281/zenodo.24026645`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
 
 Status line: "Built in Nepal. The Diabetes App is in closed pilot and free forever."
 
