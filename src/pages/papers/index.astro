@@ -1,0 +1,92 @@
+---
+/**
+ * Our numbered papers, from 0, newest first once there are more. Each links to its own page,
+ * which is the page Google Scholar indexes. The SoMA white paper is not in the series and is
+ * listed after it.
+ */
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import { PAPER_SERIES, PAPERS } from '@/data/site';
+
+// needs_review: Nepali version of this page, reviewed by a native speaker.
+const page = {
+  description:
+    'Our numbered papers, from 0: the mathematics our systems rest on, each with its abstract, PDF, DOI and how to cite it.',
+  eyebrow: 'Papers',
+  title: 'The mathematics',
+  accentTitle: 'our systems rest on',
+  lede: 'We number our papers from 0. Each has its own page with the abstract, the PDF, its DOI and how to cite it.',
+  read: 'Abstract, PDF and citation',
+  also: {
+    before: 'Not in the series:',
+    after: 'Signed Posts as Hyperedges, which sets out the ideas behind SoMA.',
+  },
+};
+
+const papers = [...PAPER_SERIES].sort((a, b) => b.number - a.number);
+---
+
+<Base title="Papers" description={page.description} path="/papers">
+  <Section class="!pt-14 lg:!pt-20">
+    <div class="mx-auto max-w-3xl">
+      <span class="text-ink-muted inline-block text-xs font-semibold tracking-[0.22em] uppercase">
+        {page.eyebrow}
+      </span>
+      <h1
+        class="text-ink mt-5 text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:leading-tight"
+      >
+        {page.title}{' '}<br class="hidden sm:block" />
+        <span class="text-primary">{page.accentTitle}</span>
+      </h1>
+      <p class="text-ink-muted mt-6 text-lg leading-relaxed text-pretty">{page.lede}</p>
+
+      <ol class="mt-12 grid gap-5">
+        {
+          papers.map(({ number, slug, shortTitle, subtitle, summary, publication }) => (
+            <li>
+              <a
+                href={`/papers/${slug}`}
+                class="lift group border-line bg-surface hover:border-primary/30 block rounded-2xl border p-6 transition hover:shadow-md focus-visible:shadow-md sm:p-8"
+              >
+                <span class="text-ink-muted text-xs font-semibold tracking-[0.22em] uppercase">
+                  Paper {number} · {publication.kind} · {publication.year}
+                </span>
+                <h2 class="text-ink mt-3 text-xl font-bold text-balance sm:text-2xl">
+                  {shortTitle}: {subtitle}
+                </h2>
+                <p class="text-ink-muted mt-2 text-sm">
+                  {publication.authors.map(({ given, family }) => `${given} ${family}`).join(', ')}
+                </p>
+                <p class="text-ink-muted mt-4 leading-relaxed text-pretty">{summary}</p>
+                <span class="text-primary mt-5 inline-flex items-center gap-1.5 text-sm font-semibold">
+                  {page.read}
+                  <svg
+                    class="h-4 w-4 transition group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="text-ink-muted mt-10 text-sm leading-relaxed">
+        {page.also.before}{' '}
+        <a
+          href={PAPERS.whitepaper.href}
+          class="text-primary font-medium underline-offset-2 hover:underline"
+          >{PAPERS.whitepaper.title}</a
+        >, {page.also.after}
+      </p>
+    </div>
+  </Section>
+</Base>

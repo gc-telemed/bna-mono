@@ -95,15 +95,43 @@ export const PUBLICATIONS = {
 } as const satisfies Record<string, Publication>;
 
 /**
+ * Our numbered papers, from 0. Each one gets its own page at /papers/<slug>, with the PDF beside
+ * it at /papers/<slug>.pdf (in public/papers/): Google Scholar indexes a paper only from a page
+ * of its own, and reads its PDF only from the same folder as that page. The abstract is the
+ * paper's own, word for word. A new version means a new PDF here and a new DOI in PUBLICATIONS.
+ */
+export const PAPER_SERIES = [
+  {
+    number: 0,
+    slug: 'collaboration-is-composition',
+    publication: PUBLICATIONS.paper,
+    proofs: PUBLICATIONS.proofs,
+    shortTitle: 'Collaboration Is Composition',
+    subtitle: 'Mealy Machines over Signed Records in Poly and Org',
+    affiliation: 'CoSys Work Pvt. Ltd.',
+    pdf: { pages: 20, size: '252 KB' },
+    // The line under each heading in How to cite, here and on the SoMA page.
+    citeNotes: {
+      paper: 'Preprint. Free to share and adapt under CC BY 4.0.',
+      proofs: 'Release proofs-v1.0.0 of our open-source libraries, under Apache 2.0.',
+    },
+    summary:
+      'People and software that keep their own records and work together with no server in the middle, modelled as machines over signed records and wired together, with the main results proved in Lean 4.',
+    abstract:
+      'People, organisations and the software acting for them increasingly work together without a shared server and without an orchestrator: each party keeps its own record, and work moves between peers as signed messages. We argue that such collaboration is composition. Every party acts through a Mealy machine over an append-only log of signed records, and a collaboration is existing machines wired together through mailboxes, so a collaboration is itself a machine and can be wired into a larger one. We give a mechanized model of one such system, the model that our published libraries implement, with primitives from a research matrix we wrote in 2014 and from applied category theory. In the category of polynomial functors a mailbox turns each machine into a dynamical system, and wiring that changes as units pair becomes one map whose routing depends on the units’ positions. Held in a registry, the wiring carries the identitor and compositor of a dynamic organization in the sense of Shapiro and Spivak. Claims are types whose only inhabitants are records signed by the right keys, so an approval signed by an agent does not type-check. What composition gives follows from known results, applied to this model and checked in Lean 4. Bisimilar machines give bisimilar collaborations. When every machine is monotone in its log, logs and views converge under any fair delivery order, a form of the CALM theorem, and a step that is not monotone is where the model asks for a signature. Acceptance of a derived fact is a homomorphism out of a provenance semiring, and trust is a fibration over observers, with each ranking computed inside its observer’s fiber. A case study from health care, in which a patient routes lab results and payment requests between her clinic and her family, runs through the paper.',
+  },
+] as const;
+
+/**
  * The line about what we publish, under the introduction on the homepage (Who we are) and on
- * About us. The paper links to its DOI, the white paper to its section on the SoMA page, where
- * the two sit side by side. needs_review: Nepali version, reviewed by a native speaker.
+ * About us. The paper links to its page under /papers, the white paper to its section on the
+ * SoMA page. needs_review: Nepali version, reviewed by a native speaker.
  */
 export const PAPERS = {
   intro: 'We also publish the mathematics our systems rest on.',
   paper: {
     title: 'Collaboration Is Composition',
-    href: `https://doi.org/${PUBLICATIONS.paper.doi}`,
+    href: `/papers/${PAPER_SERIES[0].slug}`,
     rest: 'shows how people and software work together with no server in the middle, and we proved its main results in Lean 4.',
   },
   whitepaper: {
