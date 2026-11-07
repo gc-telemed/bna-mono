@@ -381,7 +381,20 @@ Collaboration Is Composition is about people and software that keep their own re
 
 Button: **[Read the paper]** (`https://doi.org/10.5281/zenodo.24026645`) · *Preprint, 20 pages, on Zenodo. Free to share and adapt under CC BY 4.0.*
 
-Under it: **The Lean 4 proofs** (`https://doi.org/10.5281/zenodo.24026063`) have their own record on Zenodo.
+Under it, a DOI badge for each record, drawn by the site itself (DOI on the left, the number on the right, linking through doi.org), so the page makes no request to Zenodo:
+
+- *The paper* · DOI 10.5281/zenodo.24026645
+- *The Lean 4 proofs* · DOI 10.5281/zenodo.24026063
+
+#### How to cite them (`#cite`)
+Under the paper block, two cards side by side.
+
+**How to cite them.** Each version has its own DOI, so cite the one you read or ran.
+
+- **The paper.** *Preprint. Free to share and adapt under CC BY 4.0.* Reference: Karna, R. (2026). *Collaboration Is Composition: Mealy Machines over Signed Records in Poly and Org* [Preprint]. Zenodo. https://doi.org/10.5281/zenodo.24026645. Then its BibTeX entry (`karna2026collaboration`) and a **[Copy BibTeX]** button.
+- **The Lean 4 proofs.** *Release proofs-v1.0.0 of our open-source libraries, under Apache 2.0.* Reference: Karna, R. (2026). *cosys: packages and Lean 4 proofs for Collaboration Is Composition* (Version proofs-v1.0.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.24026063. Then its BibTeX entry (`karna2026cosys`, the same entry the paper cites it by) and a **[Copy BibTeX]** button.
+
+The titles, dates and versions follow the Zenodo records (`PUBLICATIONS` in `src/data/site.ts`). The page's structured data lists both works by DOI, as a `ScholarlyArticle` and a `SoftwareSourceCode`.
 
 The site links the DOI and keeps no copy of the PDF. The paper's source lives in the tda repository (`docs/papers/collaboration-is-composition`).
 

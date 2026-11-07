@@ -1,0 +1,62 @@
+---
+/**
+ * How to cite one publication: its reference, in the style Zenodo and most journals accept, and
+ * its BibTeX entry with a button that copies it. The button stays hidden until the script below
+ * finds the clipboard, so without it the entry is still there to select by hand.
+ */
+import { authorList, doiUrl, referenceDetail } from '@/data/publications';
+import type { Publication } from '@/data/site';
+
+interface Props {
+  heading: string;
+  publication: Publication;
+  /** The line under the heading: what the work is and its licence. */
+  note: string;
+}
+
+const { heading, publication, note } = Astro.props;
+const url = doiUrl(publication.doi);
+---
+
+<article class="border-line bg-surface flex min-w-0 flex-col rounded-2xl border p-5 sm:p-6">
+  <h4 class="text-ink text-lg font-bold">{heading}</h4>
+  <p class="text-ink-muted mt-1 text-sm">{note}</p>
+  <p class="text-ink mt-4 text-sm leading-relaxed">
+    {authorList(publication)} ({publication.year}). <i>{publication.title}</i>{
+      referenceDetail(publication)
+    }. {publication.publisher}.{' '}
+    <a href={url} class="text-primary font-medium break-all underline-offset-2 hover:underline"
+      >{url}</a
+    >
+  </p>
+  <pre
+    class="bg-surface-muted text-ink mt-4 overflow-x-auto rounded-xl p-4 text-xs leading-relaxed"><code>{publication.bibtex}</code></pre>
+  <button
+    type="button"
+    hidden
+    data-copy-bibtex
+    class="border-line-strong text-ink hover:border-primary mt-3 self-start rounded-lg border px-4 py-2 text-sm font-semibold transition"
+  >
+    <span data-copy-label aria-live="polite">Copy BibTeX</span>
+  </button>
+</article>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-bibtex]')) {
+    if (!navigator.clipboard) continue;
+    button.hidden = false;
+    const label = button.querySelector<HTMLElement>('[data-copy-label]')!;
+    const code = button.previousElementSibling?.textContent ?? '';
+    let timer: number | undefined;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(code);
+        label.textContent = 'Copied';
+      } catch {
+        label.textContent = 'Select the entry to copy it';
+      }
+      clearTimeout(timer);
+      timer = window.setTimeout(() => (label.textContent = 'Copy BibTeX'), 2500);
+    });
+  }
+</script>

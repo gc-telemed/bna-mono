@@ -32,6 +32,68 @@ export const LINKS = {
   framework: 'https://github.com/cosys-work/cosys',
 } as const;
 
+/** A work we published with a DOI, as its Zenodo record describes it. */
+export interface Publication {
+  title: string;
+  authors: readonly { family: string; given: string; orcid?: string }[];
+  year: number;
+  /** The day the record was issued. */
+  date: string;
+  /** The record's resource type, shown in brackets in the reference. */
+  kind: 'Preprint' | 'Software';
+  version?: string;
+  publisher: string;
+  doi: string;
+  license: { name: string; url: string };
+  bibtex: string;
+}
+
+/**
+ * Our works with a DOI, as their Zenodo records describe them (DataCite, read 2026-11-07). The
+ * SoMA page gives each a DOI badge, a Cite block and an entry in its structured data. A version
+ * DOI never changes, so a new version means a new DOI here, not an edit to the old one.
+ */
+export const PUBLICATIONS = {
+  paper: {
+    title: 'Collaboration Is Composition: Mealy Machines over Signed Records in Poly and Org',
+    authors: [{ family: 'Karna', given: 'Risav', orcid: '0009-0005-6682-9473' }],
+    year: 2026,
+    date: '2026-11-07',
+    kind: 'Preprint',
+    publisher: 'Zenodo',
+    doi: '10.5281/zenodo.24026645',
+    license: { name: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' },
+    bibtex: `@misc{karna2026collaboration,
+  author       = {Karna, Risav},
+  title        = {{Collaboration Is Composition}: {Mealy} Machines over Signed Records in {Poly} and {Org}},
+  year         = {2026},
+  howpublished = {Preprint, Zenodo},
+  doi          = {10.5281/zenodo.24026645},
+  url          = {https://doi.org/10.5281/zenodo.24026645}
+}`,
+  },
+  proofs: {
+    title: 'cosys: packages and Lean 4 proofs for Collaboration Is Composition',
+    authors: [{ family: 'Karna', given: 'Risav', orcid: '0009-0005-6682-9473' }],
+    year: 2026,
+    date: '2026-11-07',
+    kind: 'Software',
+    version: 'proofs-v1.0.0',
+    publisher: 'Zenodo',
+    doi: '10.5281/zenodo.24026063',
+    license: { name: 'Apache 2.0', url: 'https://www.apache.org/licenses/LICENSE-2.0' },
+    // The same key and fields as the paper's own reference to it.
+    bibtex: `@misc{karna2026cosys,
+  author       = {Karna, Risav},
+  title        = {cosys: packages and {Lean} 4 proofs for {Collaboration Is Composition}},
+  year         = {2026},
+  howpublished = {Zenodo, release proofs-v1.0.0},
+  doi          = {10.5281/zenodo.24026063},
+  url          = {https://doi.org/10.5281/zenodo.24026063}
+}`,
+  },
+} as const satisfies Record<string, Publication>;
+
 /**
  * The line about what we publish, under the introduction on the homepage (Who we are) and on
  * About us. The paper links to its DOI, the white paper to its section on the SoMA page, where
@@ -41,7 +103,7 @@ export const PAPERS = {
   intro: 'We also publish the mathematics our systems rest on.',
   paper: {
     title: 'Collaboration Is Composition',
-    href: 'https://doi.org/10.5281/zenodo.24026645',
+    href: `https://doi.org/${PUBLICATIONS.paper.doi}`,
     rest: 'shows how people and software work together with no server in the middle, and we proved its main results in Lean 4.',
   },
   whitepaper: {
