@@ -50,7 +50,7 @@ Small print: *Built in Nepal. Open-source libraries under Apache-2.0.*
 ### Who we are
 CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.
 
-Under it, smaller (new 2026-11-07, the same line as under the About us introduction): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`https://doi.org/10.5281/zenodo.24026645`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
+Under it, smaller (new 2026-11-07, the same line as under the About us introduction): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`/papers/collaboration-is-composition`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
 
 ### cosys.work, nep.work and coplanetary.work
 Three columns, each linking down to its own section.
@@ -379,7 +379,7 @@ Collaboration Is Composition is about people and software that keep their own re
 - When every machine only adds to what it knows, logs and views agree in whatever order messages arrive, as long as each one eventually does. A step that takes something back is where the model asks for a signature.
 - Trust depends on who is looking. Each observer computes its own ranking from what it can see.
 
-Button: **[Read the paper]** (`https://doi.org/10.5281/zenodo.24026645`) · *Preprint, 20 pages, on Zenodo. Free to share and adapt under CC BY 4.0.*
+Button: **[Read the paper]** (`/papers/collaboration-is-composition`) · *Preprint, 20 pages. Free to share and adapt under CC BY 4.0.*
 
 Under it, a DOI badge for each record, drawn by the site itself (DOI on the left, the number on the right, linking through doi.org), so the page makes no request to Zenodo:
 
@@ -396,7 +396,7 @@ Under the paper block, two cards side by side.
 
 The titles, dates and versions follow the Zenodo records (`PUBLICATIONS` in `src/data/site.ts`). The page's structured data lists both works by DOI, as a `ScholarlyArticle` and a `SoftwareSourceCode`.
 
-The site links the DOI and keeps no copy of the PDF. The paper's source lives in the tda repository (`docs/papers/collaboration-is-composition`).
+The paper's own page, `/papers/collaboration-is-composition`, holds the abstract and the PDF; see Papers below. The paper's source lives in the tda repository (`docs/papers/collaboration-is-composition`).
 
 ### The facts
 - **Where it runs:** iPhone, Android, desktop and the web.
@@ -461,7 +461,7 @@ Badge: *About cosys.work* · Title: **We build the tools we wanted to exist**
 
 cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.
 
-Under it (new 2026-11-07): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`https://doi.org/10.5281/zenodo.24026645`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
+Under it (new 2026-11-07): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`/papers/collaboration-is-composition`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
 
 Status line: "Built in Nepal. The Diabetes App is in closed pilot and free forever."
 
@@ -549,6 +549,42 @@ We also help companies, organisations and ministries move their systems onto mac
 - **p2p-fication.** For organisations with systems already running: move data and workloads onto machines you own, add local business intelligence and language models, and keep working through internet and cloud outages.
 
 Button: **[Write to us]** (hello@cosys.work, until the founder decides whether *Work with us* gets a form; see the checks at the end)
+
+---
+
+## Papers (`/papers`, new 2026-11-07)
+
+Our numbered papers, from 0. Linked from the footer (Company column), from the line under Who we are and the About us introduction, and from the paper block on the SoMA page. Each paper has its own page, because Google Scholar indexes a paper only from a page of its own, and its PDF sits beside that page in the same folder, because Scholar reads a PDF only from there.
+
+Description (metadata): *Our numbered papers, from 0: the mathematics our systems rest on, each with its abstract, PDF, DOI and how to cite it.*
+
+### The list
+*Papers.* **The mathematics our systems rest on**
+
+We number our papers from 0. Each has its own page with the abstract, the PDF, its DOI and how to cite it.
+
+- **Paper 0 · Preprint · 2026.** *Collaboration Is Composition: Mealy Machines over Signed Records in Poly and Org.* Risav Karna. People and software that keep their own records and work together with no server in the middle, modelled as machines over signed records and wired together, with the main results proved in Lean 4. Link: **Abstract, PDF and citation**
+
+Under the list: Not in the series: **The SoMA white paper** (`/soma#white-paper`), Signed Posts as Hyperedges, which sets out the ideas behind SoMA.
+
+### Paper 0 (`/papers/collaboration-is-composition`)
+Top line: *Papers / Paper 0 · Preprint · 7 November 2026*
+
+Title: **Collaboration Is Composition:** *Mealy Machines over Signed Records in Poly and Org*
+
+Author line: **Risav Karna**, CoSys Work Pvt. Ltd. · ORCID 0009-0005-6682-9473
+
+**Abstract.** The paper's abstract, word for word, in full. Don't edit it here: it changes only with a new version of the paper.
+
+Buttons: **[Download the PDF]** (`/papers/collaboration-is-composition.pdf`) **[The record on Zenodo]** (`https://doi.org/10.5281/zenodo.24026645`) · *PDF, 20 pages, 252 KB. Free to share and adapt under CC BY 4.0.*
+
+DOI badges: *The paper* · 10.5281/zenodo.24026645; *The Lean 4 proofs* · 10.5281/zenodo.24026063.
+
+**How to cite it.** Each version has its own DOI, so cite the one you read or ran. The same two cards as on the SoMA page.
+
+Last line: **← All papers**
+
+The page's head carries Google Scholar's `citation_*` tags (title, author with affiliation and ORCID, date as 2026/11/07, publisher Zenodo, DOI, PDF and abstract URLs) and schema.org data for a `ScholarlyArticle`. The PDF in `public/papers/` is the paper's share build (`collaboration-is-composition-share.pdf` in the tda repository) and should match the file on Zenodo. When a new version is published, replace the PDF, the DOI and the page count together.
 
 ---
 

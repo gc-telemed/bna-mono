@@ -7,8 +7,8 @@ import CTA from '@/components/CTA.astro';
 import SomaPreview from '@/components/SomaPreview.astro';
 import DoiBadge from '@/components/DoiBadge.astro';
 import Citation from '@/components/Citation.astro';
-import { SITE, PRODUCTS, FORMS, PUBLICATIONS } from '@/data/site';
-import { doiUrl, scholarlyData } from '@/data/publications';
+import { SITE, PRODUCTS, FORMS, PAPER_SERIES, PUBLICATIONS } from '@/data/site';
+import { scholarlyData } from '@/data/publications';
 
 // Copy from the SoMA page draft (docs/handoff/2026-11-01-soma-page-copy.md) and copy source v5.
 // needs_review: every block needs a Nepali version reviewed by a native speaker before launch.
@@ -132,9 +132,10 @@ const whitepaper = {
   details: 'PDF, 8 pages, 172 KB. Free to share and adapt under CC BY 4.0.',
 };
 
-// The paper beside the white paper, linked by its DOI rather than copied into public/: Zenodo
-// keeps the PDF and every later version, and the record points to the newest one.
+// The paper beside the white paper. Paper 0 in our series: its button leads to its own page under
+// /papers, which has the abstract and the PDF; the DOI badges lead to the Zenodo records.
 // needs_review: Nepali version of this block, reviewed by a native speaker.
+const series = PAPER_SERIES[0];
 const paper = {
   eyebrow: 'Also for technical readers',
   title: 'The paper:',
@@ -148,8 +149,8 @@ const paper = {
     'Trust depends on who is looking. Each observer computes its own ranking from what it can see.',
   ],
   action: 'Read the paper',
-  href: doiUrl(PUBLICATIONS.paper.doi),
-  details: 'Preprint, 20 pages, on Zenodo. Free to share and adapt under CC BY 4.0.',
+  href: `/papers/${series.slug}`,
+  details: 'Preprint, 20 pages. Free to share and adapt under CC BY 4.0.',
   // A DOI badge for each record, under the button.
   records: [
     { label: 'The paper', doi: PUBLICATIONS.paper.doi },
@@ -158,14 +159,8 @@ const paper = {
   cite: {
     title: 'How to cite them',
     lede: 'Each version has its own DOI, so cite the one you read or ran.',
-    paper: {
-      heading: 'The paper',
-      note: 'Preprint. Free to share and adapt under CC BY 4.0.',
-    },
-    proofs: {
-      heading: 'The Lean 4 proofs',
-      note: 'Release proofs-v1.0.0 of our open-source libraries, under Apache 2.0.',
-    },
+    paper: { heading: 'The paper', note: series.citeNotes.paper },
+    proofs: { heading: 'The Lean 4 proofs', note: series.citeNotes.proofs },
   },
 };
 
@@ -475,7 +470,7 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
               stroke-linejoin="round"
               aria-hidden="true"
             >
-              <path d="M7 17L17 7M8 7h9v9"></path>
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </a>
           <p class="text-ink-muted mt-3 text-sm">{paper.details}</p>
