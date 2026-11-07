@@ -8,7 +8,7 @@ import NameBand from '@/components/NameBand.astro';
 import LineOut from '@/components/LineOut.astro';
 import NepalScene from '@/components/NepalScene.astro';
 import Himalaya from '@/components/Himalaya.astro';
-import { CONTACT, PRODUCTS, FORMS, NAMES, OFFERS, THREADS } from '@/data/site';
+import { CONTACT, PRODUCTS, FORMS, NAMES, OFFERS, PAPERS, THREADS } from '@/data/site';
 
 // v5.1. needs_review: Nepali versions of every block below, reviewed by a native speaker.
 const page = {
@@ -196,6 +196,21 @@ const approach = [
         </h1>
         <p class="text-ink-muted mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty">
           {page.lede}
+        </p>
+        <p class="text-ink-muted mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">
+          {PAPERS.intro}{' '}
+          <a
+            href={PAPERS.paper.href}
+            class="text-primary font-medium italic underline-offset-2 hover:underline"
+            >{PAPERS.paper.title}</a
+          >{' '}
+          {PAPERS.paper.rest}{' '}
+          <a
+            href={PAPERS.whitepaper.href}
+            class="text-primary font-medium underline-offset-2 hover:underline"
+            >{PAPERS.whitepaper.title}</a
+          >{' '}
+          {PAPERS.whitepaper.rest}
         </p>
         <p class="text-ink mt-5 font-medium">
           Built in Nepal. The Diabetes App is in closed pilot and free forever.

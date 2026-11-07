@@ -33,6 +33,25 @@ export const LINKS = {
 } as const;
 
 /**
+ * The line about what we publish, under the introduction on the homepage (Who we are) and on
+ * About us. The paper links to its DOI, the white paper to its section on the SoMA page, where
+ * the two sit side by side. needs_review: Nepali version, reviewed by a native speaker.
+ */
+export const PAPERS = {
+  intro: 'We also publish the mathematics our systems rest on.',
+  paper: {
+    title: 'Collaboration Is Composition',
+    href: 'https://doi.org/10.5281/zenodo.24026645',
+    rest: 'shows how people and software work together with no server in the middle, and we proved its main results in Lean 4.',
+  },
+  whitepaper: {
+    title: 'The SoMA white paper',
+    href: '/soma#white-paper',
+    rest: 'sets out the ideas behind SoMA.',
+  },
+} as const;
+
+/**
  * The company's three names. The homepage band introduces them, each linking down to its
  * own section, and the About us page and footer repeat them.
  */

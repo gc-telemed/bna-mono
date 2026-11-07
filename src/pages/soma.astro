@@ -129,6 +129,31 @@ const whitepaper = {
   details: 'PDF, 8 pages, 172 KB. Free to share and adapt under CC BY 4.0.',
 };
 
+// The paper beside the white paper, linked by its DOI rather than copied into public/: Zenodo
+// keeps the PDF and every later version, and the record points to the newest one.
+// needs_review: Nepali version of this block, reviewed by a native speaker.
+const paper = {
+  eyebrow: 'Also for technical readers',
+  title: 'The paper:',
+  accentTitle: 'collaboration is composition',
+  lede: 'Collaboration Is Composition is about people and software that keep their own records and work together with no server in the middle. It gives a mechanized model of the system our open-source libraries implement, with a case study from health care, and we proved its main results in Lean 4.',
+  topics: [
+    'Each party, whether a person, an organisation or the software acting for one, acts through a machine that reads and appends to its own log of signed records.',
+    'A collaboration is those machines wired together through mailboxes, so it is a machine too, and it can be wired into a larger one. The wiring changes as devices pair and are revoked.',
+    'Claims are types that only records signed by the right keys can satisfy, so an approval signed by an agent does not type-check.',
+    'When every machine only adds to what it knows, logs and views agree in whatever order messages arrive, as long as each one eventually does. A step that takes something back is where the model asks for a signature.',
+    'Trust depends on who is looking. Each observer computes its own ranking from what it can see.',
+  ],
+  action: 'Read the paper',
+  href: 'https://doi.org/10.5281/zenodo.24026645',
+  details: 'Preprint, 20 pages, on Zenodo. Free to share and adapt under CC BY 4.0.',
+  proofs: {
+    label: 'The Lean 4 proofs',
+    href: 'https://doi.org/10.5281/zenodo.24026063',
+    rest: 'have their own record on Zenodo.',
+  },
+};
+
 // No price row until the founder sets a price.
 const facts = [
   { term: 'Where it runs', detail: 'iPhone, Android, desktop and the web' },
@@ -389,6 +414,60 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
         <ul class="grid gap-3">
           {
             whitepaper.topics.map((topic) => (
+              <li class="reveal border-line bg-surface text-ink-muted rounded-2xl border p-5 text-sm leading-relaxed">
+                {topic}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- The paper, beside the white paper -->
+      <div
+        id="paper"
+        class="border-line mt-14 grid scroll-mt-20 gap-10 border-t pt-14 lg:mt-20 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16 lg:pt-20"
+      >
+        <div>
+          <SectionHeading
+            eyebrow={paper.eyebrow}
+            title={paper.title}
+            accentTitle={paper.accentTitle}
+            accentClass={accent}
+            chipClass={chip}
+            lede={paper.lede}
+            align="left"
+          />
+          <a
+            href={paper.href}
+            class="bg-primary text-on-fill hover:bg-primary-pressed mt-8 inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+          >
+            {paper.action}
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17L17 7M8 7h9v9"></path>
+            </svg>
+          </a>
+          <p class="text-ink-muted mt-3 text-sm">{paper.details}</p>
+          <p class="text-ink-muted mt-1 text-sm">
+            <a
+              href={paper.proofs.href}
+              class="text-primary font-medium underline-offset-2 hover:underline"
+              >{paper.proofs.label}</a
+            >{' '}
+            {paper.proofs.rest}
+          </p>
+        </div>
+        <ul class="grid gap-3">
+          {
+            paper.topics.map((topic) => (
               <li class="reveal border-line bg-surface text-ink-muted rounded-2xl border p-5 text-sm leading-relaxed">
                 {topic}
               </li>
