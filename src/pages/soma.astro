@@ -5,7 +5,10 @@ import SectionHeading from '@/components/SectionHeading.astro';
 import Card from '@/components/Card.astro';
 import CTA from '@/components/CTA.astro';
 import SomaPreview from '@/components/SomaPreview.astro';
-import { SITE, PRODUCTS, FORMS } from '@/data/site';
+import DoiBadge from '@/components/DoiBadge.astro';
+import Citation from '@/components/Citation.astro';
+import { SITE, PRODUCTS, FORMS, PAPER_SERIES, PUBLICATIONS } from '@/data/site';
+import { scholarlyData } from '@/data/publications';
 
 // Copy from the SoMA page draft (docs/handoff/2026-11-01-soma-page-copy.md) and copy source v5.
 // needs_review: every block needs a Nepali version reviewed by a native speaker before launch.
@@ -129,9 +132,10 @@ const whitepaper = {
   details: 'PDF, 8 pages, 172 KB. Free to share and adapt under CC BY 4.0.',
 };
 
-// The paper beside the white paper, linked by its DOI rather than copied into public/: Zenodo
-// keeps the PDF and every later version, and the record points to the newest one.
+// The paper beside the white paper. Paper 0 in our series: its button leads to its own page under
+// /papers, which has the abstract and the PDF; the DOI badges lead to the Zenodo records.
 // needs_review: Nepali version of this block, reviewed by a native speaker.
+const series = PAPER_SERIES[0];
 const paper = {
   eyebrow: 'Also for technical readers',
   title: 'The paper:',
@@ -145,12 +149,18 @@ const paper = {
     'Trust depends on who is looking. Each observer computes its own ranking from what it can see.',
   ],
   action: 'Read the paper',
-  href: 'https://doi.org/10.5281/zenodo.24026645',
-  details: 'Preprint, 20 pages, on Zenodo. Free to share and adapt under CC BY 4.0.',
-  proofs: {
-    label: 'The Lean 4 proofs',
-    href: 'https://doi.org/10.5281/zenodo.24026063',
-    rest: 'have their own record on Zenodo.',
+  href: `/papers/${series.slug}`,
+  details: 'Preprint, 20 pages. Free to share and adapt under CC BY 4.0.',
+  // A DOI badge for each record, under the button.
+  records: [
+    { label: 'The paper', doi: PUBLICATIONS.paper.doi },
+    { label: 'The Lean 4 proofs', doi: PUBLICATIONS.proofs.doi },
+  ],
+  cite: {
+    title: 'How to cite them',
+    lede: 'Each version has its own DOI, so cite the one you read or ran.',
+    paper: { heading: 'The paper', note: series.citeNotes.paper },
+    proofs: { heading: 'The Lean 4 proofs', note: series.citeNotes.proofs },
   },
 };
 
@@ -183,15 +193,23 @@ const closing = {
   secondary: 'Run an operator',
 };
 
+// The app, and the two works with a DOI that this page cites, each identified by its DOI so
+// search engines can tie this page to the Zenodo records.
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: product.name,
-  applicationCategory: 'SocialNetworkingApplication',
-  operatingSystem: 'iOS, Android, desktop, web',
-  description: product.summary,
-  url: `${SITE.url}${product.slug}`,
-  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: product.name,
+      applicationCategory: 'SocialNetworkingApplication',
+      operatingSystem: 'iOS, Android, desktop, web',
+      description: product.summary,
+      url: `${SITE.url}${product.slug}`,
+      publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+    },
+    scholarlyData(PUBLICATIONS.paper),
+    scholarlyData(PUBLICATIONS.proofs),
+  ],
 };
 
 const block = 'border-line bg-surface rounded-2xl border p-7';
@@ -452,18 +470,22 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
               stroke-linejoin="round"
               aria-hidden="true"
             >
-              <path d="M7 17L17 7M8 7h9v9"></path>
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </a>
           <p class="text-ink-muted mt-3 text-sm">{paper.details}</p>
-          <p class="text-ink-muted mt-1 text-sm">
-            <a
-              href={paper.proofs.href}
-              class="text-primary font-medium underline-offset-2 hover:underline"
-              >{paper.proofs.label}</a
-            >{' '}
-            {paper.proofs.rest}
-          </p>
+          <dl class="mt-6 grid gap-3 text-sm">
+            {
+              paper.records.map(({ label, doi }) => (
+                <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  <dt class="text-ink-muted min-w-32">{label}</dt>
+                  <dd>
+                    <DoiBadge doi={doi} />
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
         </div>
         <ul class="grid gap-3">
           {
@@ -474,6 +496,16 @@ const block = 'border-line bg-surface rounded-2xl border p-7';
             ))
           }
         </ul>
+      </div>
+
+      <!-- How to cite the paper and the proofs -->
+      <div id="cite" class="mt-14 scroll-mt-20 lg:mt-16">
+        <h3 class="text-ink text-xl font-bold">{paper.cite.title}</h3>
+        <p class="text-ink-muted mt-2 text-sm">{paper.cite.lede}</p>
+        <div class="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          <Citation publication={PUBLICATIONS.paper} {...paper.cite.paper} />
+          <Citation publication={PUBLICATIONS.proofs} {...paper.cite.proofs} />
+        </div>
       </div>
     </div>
   </Section>

@@ -1,0 +1,26 @@
+---
+/**
+ * A DOI badge drawn by the site itself, so showing it costs the visitor no request to another
+ * server. It reads like Zenodo's badge, DOI on the left and the number on the right, in the
+ * site's own colours, and links to the record through doi.org.
+ */
+import { doiUrl } from '@/data/publications';
+
+interface Props {
+  doi: string;
+  class?: string;
+}
+
+const { doi, class: className } = Astro.props;
+---
+
+<a
+  href={doiUrl(doi)}
+  class:list={[
+    'border-primary hover:border-primary-pressed inline-flex overflow-hidden rounded-md border text-xs leading-none font-semibold transition',
+    className,
+  ]}
+>
+  <span class="bg-primary text-on-fill px-2 py-1.5">DOI</span>
+  <span class="bg-surface text-ink px-2 py-1.5 tabular-nums">{doi}</span>
+</a>

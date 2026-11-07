@@ -1,0 +1,209 @@
+---
+/**
+ * One paper in our numbered series: its title, author, date and full abstract at the top, then
+ * the PDF, its DOI badges and how to cite it. The head carries Google Scholar's citation_* tags,
+ * and the PDF sits beside this page at /papers/<slug>.pdf, the folder Scholar requires.
+ */
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
+import DoiBadge from '@/components/DoiBadge.astro';
+import Citation from '@/components/Citation.astro';
+import { PAPER_SERIES, SITE } from '@/data/site';
+import { doiUrl, scholarlyData } from '@/data/publications';
+
+export function getStaticPaths() {
+  return PAPER_SERIES.map((paper) => ({ params: { slug: paper.slug }, props: { paper } }));
+}
+
+interface Props {
+  paper: (typeof PAPER_SERIES)[number];
+}
+
+const { paper } = Astro.props;
+const publication = paper.publication;
+const path = `/papers/${paper.slug}`;
+const pageUrl = new URL(path, SITE.url).href;
+const pdfPath = `${path}.pdf`;
+const pdfUrl = new URL(pdfPath, SITE.url).href;
+// Scholar wants the date as 2026/11/07.
+const scholarDate = publication.date.replaceAll('-', '/');
+const shownDate = new Date(`${publication.date}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+// The page's own words; the title and abstract are the paper's.
+// needs_review: Nepali version of these lines, reviewed by a native speaker.
+const copy = {
+  series: 'Papers',
+  label: `Paper ${paper.number}`,
+  abstract: 'Abstract',
+  download: 'Download the PDF',
+  pdfDetails: `PDF, ${paper.pdf.pages} pages, ${paper.pdf.size}. Free to share and adapt under ${publication.license.name}.`,
+  record: 'The record on Zenodo',
+  records: [
+    { label: 'The paper', doi: publication.doi },
+    { label: 'The Lean 4 proofs', doi: paper.proofs.doi },
+  ],
+  cite: {
+    title: 'How to cite it',
+    lede: 'Each version has its own DOI, so cite the one you read or ran.',
+  },
+  back: 'All papers',
+};
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  ...scholarlyData(publication),
+  url: pageUrl,
+  sameAs: doiUrl(publication.doi),
+  abstract: paper.abstract,
+  inLanguage: 'en',
+  encoding: { '@type': 'MediaObject', contentUrl: pdfUrl, encodingFormat: 'application/pdf' },
+};
+---
+
+<Base
+  title={paper.shortTitle}
+  description={paper.summary}
+  path={path}
+  structuredData={structuredData}
+>
+  <Fragment slot="head">
+    <meta name="citation_title" content={publication.title} />
+    {
+      publication.authors.map(({ family, given, orcid }) => (
+        <>
+          <meta name="citation_author" content={`${family}, ${given}`} />
+          <meta name="citation_author_institution" content={paper.affiliation} />
+          {orcid && <meta name="citation_author_orcid" content={`https://orcid.org/${orcid}`} />}
+        </>
+      ))
+    }
+    <meta name="citation_publication_date" content={scholarDate} />
+    <meta name="citation_online_date" content={scholarDate} />
+    <meta name="citation_publisher" content={publication.publisher} />
+    <meta name="citation_doi" content={publication.doi} />
+    <meta name="citation_pdf_url" content={pdfUrl} />
+    <meta name="citation_abstract_html_url" content={pageUrl} />
+    <meta name="citation_language" content="en" />
+  </Fragment>
+
+  <Section class="!pt-14 lg:!pt-20">
+    <article class="mx-auto max-w-3xl">
+      <p class="text-ink-muted text-xs font-semibold tracking-[0.22em] uppercase">
+        <a href="/papers" class="hover:text-primary transition">{copy.series}</a>
+        <span aria-hidden="true"> / </span>
+        {copy.label} · {publication.kind} · {shownDate}
+      </p>
+      <h1
+        class="text-ink mt-5 text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl lg:leading-tight"
+      >
+        {paper.shortTitle}:{' '}
+        <span
+          class="text-primary mt-2 block text-xl font-semibold tracking-normal sm:text-2xl lg:text-3xl"
+        >
+          {paper.subtitle}
+        </span>
+      </h1>
+      {
+        publication.authors.map(({ family, given, orcid }) => (
+          <p class="text-ink mt-6">
+            <span class="font-semibold">
+              {given} {family}
+            </span>
+            <span class="text-ink-muted">, {paper.affiliation}</span>
+            {orcid && (
+              <a
+                href={`https://orcid.org/${orcid}`}
+                class="text-ink-muted hover:text-primary ml-2 text-sm whitespace-nowrap transition"
+              >
+                ORCID {orcid}
+              </a>
+            )}
+          </p>
+        ))
+      }
+
+      <h2 class="text-ink mt-10 text-lg font-bold">{copy.abstract}</h2>
+      <p class="text-ink-muted mt-3 text-lg leading-relaxed text-pretty">{paper.abstract}</p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <a
+          href={pdfPath}
+          class="bg-primary text-on-fill hover:bg-primary-pressed inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold shadow-sm transition"
+        >
+          {copy.download}
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 4v12M6 10l6 6 6-6M5 20h14"></path>
+          </svg>
+        </a>
+        <a
+          href={doiUrl(publication.doi)}
+          class="border-line-strong bg-surface text-ink hover:bg-surface-muted inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-semibold shadow-sm transition"
+        >
+          {copy.record}
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M7 17L17 7M8 7h9v9"></path>
+          </svg>
+        </a>
+      </div>
+      <p class="text-ink-muted mt-3 text-sm">{copy.pdfDetails}</p>
+      <dl class="mt-6 grid gap-3 text-sm">
+        {
+          copy.records.map(({ label, doi }) => (
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <dt class="text-ink-muted min-w-32">{label}</dt>
+              <dd>
+                <DoiBadge doi={doi} />
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </article>
+  </Section>
+
+  <Section id="cite" class="scroll-mt-20 !pt-0">
+    <div class="bg-surface-muted rounded-3xl px-6 py-12 sm:px-10 lg:px-16 lg:py-16">
+      <h2 class="text-ink text-2xl font-bold">{copy.cite.title}</h2>
+      <p class="text-ink-muted mt-2 text-sm">{copy.cite.lede}</p>
+      <div class="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <Citation publication={publication} heading="The paper" note={paper.citeNotes.paper} />
+        <Citation
+          publication={paper.proofs}
+          heading="The Lean 4 proofs"
+          note={paper.citeNotes.proofs}
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section class="!pt-0">
+    <p class="mx-auto max-w-3xl text-sm">
+      <a href="/papers" class="text-primary font-semibold underline-offset-2 hover:underline">
+        <span aria-hidden="true">← </span>{copy.back}
+      </a>
+    </p>
+  </Section>
+</Base>

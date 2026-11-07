@@ -74,6 +74,9 @@ const ogTitle = title === SITE.name ? `${SITE.name}: ${SITE.tagline}` : fullTitl
       )
     }
 
+    {/* Page-specific head tags, such as a paper's Google Scholar citation_* tags. */}
+    <slot name="head" />
+
     {
       /* Resolve the theme before first paint so the page never flashes the wrong one.
         Mirrors resolveThemeId() in src/data/themes.ts; kept inline and dependency-free
