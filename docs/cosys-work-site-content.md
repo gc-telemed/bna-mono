@@ -50,6 +50,8 @@ Small print: *Built in Nepal. Open-source libraries under Apache-2.0.*
 ### Who we are
 CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.
 
+Under it, smaller (new 2026-11-07, the same line as under the About us introduction): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`https://doi.org/10.5281/zenodo.24026645`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
+
 ### cosys.work, nep.work and coplanetary.work
 Three columns, each linking down to its own section.
 

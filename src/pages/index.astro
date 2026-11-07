@@ -9,7 +9,7 @@ import Himalaya from '@/components/Himalaya.astro';
 import Circles from '@/components/Circles.astro';
 import Helix from '@/components/Helix.astro';
 import DelayLadder from '@/components/DelayLadder.astro';
-import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS, THREADS } from '@/data/site';
+import { SITE, CONTACT, PRODUCTS, FORMS, LINKS, NAMES, OFFERS, PAPERS, THREADS } from '@/data/site';
 
 // Every block below is new in v5 except `conditions`, `facts` and `promises`, kept from v4.3.
 // needs_review: each block needs a Nepali version reviewed by a native speaker before launch.
@@ -405,6 +405,27 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
                 .split(/(?<=\.)\s+/)
                 .map((sentence) => <span class="lightup">{sentence} </span>)
             }
+          </p>
+          <!-- The line about what we publish, the same as on About us. Each sentence lights up
+               on its own, like the paragraph above. -->
+          <p class="text-ink-muted mt-5 text-lg leading-relaxed text-pretty">
+            <span class="lightup">{PAPERS.intro} </span>
+            <span class="lightup"
+              ><a
+                href={PAPERS.paper.href}
+                class="text-primary font-medium italic underline-offset-2 hover:underline"
+                >{PAPERS.paper.title}</a
+              >{' '}
+              {PAPERS.paper.rest}{' '}</span
+            >
+            <span class="lightup"
+              ><a
+                href={PAPERS.whitepaper.href}
+                class="text-primary font-medium underline-offset-2 hover:underline"
+                >{PAPERS.whitepaper.title}</a
+              >{' '}
+              {PAPERS.whitepaper.rest}</span
+            >
           </p>
         </div>
         <HeroArt {...hero.art} class="mx-auto max-w-sm lg:max-w-none" />
