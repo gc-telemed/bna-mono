@@ -11,6 +11,14 @@
   to = "/company"
   status = 301
 
+# /papers is papers.html, beside a papers/ folder that holds each paper's page and PDF. Serve
+# the file for /papers explicitly, so the folder of the same name never wins.
+[[redirects]]
+  from = "/papers"
+  to = "/papers.html"
+  status = 200
+  force = true
+
 # Astro emits content-hashed filenames under /_astro, so they can be cached forever.
 [[headers]]
   for = "/_astro/*"
