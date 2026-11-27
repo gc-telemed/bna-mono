@@ -15,7 +15,6 @@ const page = {
   eyebrow: 'Papers',
   title: 'The mathematics',
   accentTitle: 'our systems rest on',
-  lede: 'We number our papers from 0. Each has its own page with the abstract, the PDF, its DOI and how to cite it.',
   read: 'Abstract, PDF and citation',
   also: {
     before: 'Not in the series:',
@@ -38,8 +37,6 @@ const papers = [...PAPER_SERIES].sort((a, b) => b.number - a.number);
         {page.title}{' '}<br class="hidden sm:block" />
         <span class="text-primary">{page.accentTitle}</span>
       </h1>
-      <p class="text-ink-muted mt-6 text-lg leading-relaxed text-pretty">{page.lede}</p>
-
       <ol class="mt-12 grid gap-5">
         {
           papers.map(({ number, slug, shortTitle, subtitle, summary, publication }) => (

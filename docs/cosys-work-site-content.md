@@ -561,7 +561,7 @@ Description (metadata): *Our numbered papers, from 0: the mathematics our system
 ### The list
 *Papers.* **The mathematics our systems rest on**
 
-We number our papers from 0, and list them newest first. Each has its own page with the abstract, the PDF, its DOI and how to cite it.
+Newest first, with no line under the heading (removed 2026-11-27).
 
 - **Paper 1 · Preprint · 2026** (new 2026-11-27). *What Absence Costs.* Risav Karna. Which social facts anyone holding the records can settle, which need a seal declaring a set of records complete, and who may hold that seal, with the main results proved in Lean 4. Link: **Abstract, PDF and citation**
 - **Paper 0 · Preprint · 2026.** *Collaboration Is Composition: Mealy Machines over Signed Records in Poly and Org.* Risav Karna. People and software that keep their own records and work together with no server in the middle, modelled as machines over signed records and wired together, with the main results proved in Lean 4. Link: **Abstract, PDF and citation**
