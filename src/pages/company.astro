@@ -199,12 +199,19 @@ const approach = [
         </p>
         <p class="text-ink-muted mx-auto mt-4 max-w-2xl leading-relaxed text-pretty">
           {PAPERS.intro}{' '}
-          <a
-            href={PAPERS.paper.href}
-            class="text-primary font-medium italic underline-offset-2 hover:underline"
-            >{PAPERS.paper.title}</a
-          >{' '}
-          {PAPERS.paper.rest}{' '}
+          {
+            PAPERS.series.map(({ href, title, rest }) => (
+              <>
+                <a
+                  href={href}
+                  class="text-primary font-medium italic underline-offset-2 hover:underline"
+                >
+                  {title}
+                </a>{' '}
+                {rest}{' '}
+              </>
+            ))
+          }
           <a
             href={PAPERS.whitepaper.href}
             class="text-primary font-medium underline-offset-2 hover:underline"

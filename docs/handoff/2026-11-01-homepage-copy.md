@@ -50,7 +50,7 @@ The hero carries one promise that is true of everything you build: it keeps work
 
 **Who we are** (the block under the hero):
 
-> CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.
+> CoSys Work Pvt. Ltd. is a software company in Nepal. CoSys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.
 
 ## cosys.work, nep.work and coplanetary.work
 

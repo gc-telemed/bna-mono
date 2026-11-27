@@ -55,7 +55,7 @@ const hero = {
 
 const whoWeAreLabel = 'Who we are';
 const whoWeAre =
-  'CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.';
+  'CoSys Work Pvt. Ltd. is a software company in Nepal. CoSys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.';
 
 const ideas = {
   collaborative: {
@@ -410,14 +410,19 @@ const arrow = 'M5 12h14M12 5l7 7-7 7';
                on its own, like the paragraph above. -->
           <p class="text-ink-muted mt-5 text-lg leading-relaxed text-pretty">
             <span class="lightup">{PAPERS.intro} </span>
-            <span class="lightup"
-              ><a
-                href={PAPERS.paper.href}
-                class="text-primary font-medium italic underline-offset-2 hover:underline"
-                >{PAPERS.paper.title}</a
-              >{' '}
-              {PAPERS.paper.rest}{' '}</span
-            >
+            {
+              PAPERS.series.map(({ href, title, rest }) => (
+                <span class="lightup">
+                  <a
+                    href={href}
+                    class="text-primary font-medium italic underline-offset-2 hover:underline"
+                  >
+                    {title}
+                  </a>{' '}
+                  {rest}{' '}
+                </span>
+              ))
+            }
             <span class="lightup"
               ><a
                 href={PAPERS.whitepaper.href}
