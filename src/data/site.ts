@@ -92,6 +92,45 @@ export const PUBLICATIONS = {
   url          = {https://doi.org/10.5281/zenodo.24026063}
 }`,
   },
+  absence: {
+    title: 'What Absence Costs',
+    authors: [{ family: 'Karna', given: 'Risav', orcid: '0009-0005-6682-9473' }],
+    year: 2026,
+    date: '2026-11-26',
+    kind: 'Preprint',
+    publisher: 'Zenodo',
+    doi: '10.5281/zenodo.24566902',
+    license: { name: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' },
+    bibtex: `@misc{karna2026absence,
+  author       = {Karna, Risav},
+  title        = {{What Absence Costs}},
+  year         = {2026},
+  howpublished = {Preprint, Zenodo},
+  doi          = {10.5281/zenodo.24566902},
+  url          = {https://doi.org/10.5281/zenodo.24566902}
+}`,
+  },
+  absenceProofs: {
+    title:
+      'cosys: packages and Lean 4 proofs for Collaboration Is Composition and What Absence Costs',
+    authors: [{ family: 'Karna', given: 'Risav', orcid: '0009-0005-6682-9473' }],
+    year: 2026,
+    date: '2026-11-26',
+    kind: 'Software',
+    version: 'proofs-v1.1.0',
+    publisher: 'Zenodo',
+    doi: '10.5281/zenodo.24566342',
+    license: { name: 'Apache 2.0', url: 'https://www.apache.org/licenses/LICENSE-2.0' },
+    // The same key and fields as the paper's own reference to it.
+    bibtex: `@misc{karna2026social,
+  author       = {Karna, Risav},
+  title        = {{Lean} 4 Proofs for {What Absence Costs}},
+  year         = {2026},
+  howpublished = {Zenodo, release proofs-v1.1.0},
+  doi          = {10.5281/zenodo.24566342},
+  url          = {https://doi.org/10.5281/zenodo.24566342}
+}`,
+  },
 } as const satisfies Record<string, Publication>;
 
 /**
@@ -99,6 +138,7 @@ export const PUBLICATIONS = {
  * it at /papers/<slug>.pdf (in public/papers/): Google Scholar indexes a paper only from a page
  * of its own, and reads its PDF only from the same folder as that page. The abstract is the
  * paper's own, word for word. A new version means a new PDF here and a new DOI in PUBLICATIONS.
+ * A paper with no subtitle has `subtitle: null`, and its title is its short title alone.
  */
 export const PAPER_SERIES = [
   {
@@ -119,6 +159,25 @@ export const PAPER_SERIES = [
       'People and software that keep their own records and work together with no server in the middle, modelled as machines over signed records and wired together, with the main results proved in Lean 4.',
     abstract:
       'People, organisations and the software acting for them increasingly work together without a shared server and without an orchestrator: each party keeps its own record, and work moves between peers as signed messages. We argue that such collaboration is composition. Every party acts through a Mealy machine over an append-only log of signed records, and a collaboration is existing machines wired together through mailboxes, so a collaboration is itself a machine and can be wired into a larger one. We give a mechanized model of one such system, the model that our published libraries implement, with primitives from a research matrix we wrote in 2014 and from applied category theory. In the category of polynomial functors a mailbox turns each machine into a dynamical system, and wiring that changes as units pair becomes one map whose routing depends on the units’ positions. Held in a registry, the wiring carries the identitor and compositor of a dynamic organization in the sense of Shapiro and Spivak. Claims are types whose only inhabitants are records signed by the right keys, so an approval signed by an agent does not type-check. What composition gives follows from known results, applied to this model and checked in Lean 4. Bisimilar machines give bisimilar collaborations. When every machine is monotone in its log, logs and views converge under any fair delivery order, a form of the CALM theorem, and a step that is not monotone is where the model asks for a signature. Acceptance of a derived fact is a homomorphism out of a provenance semiring, and trust is a fibration over observers, with each ranking computed inside its observer’s fiber. A case study from health care, in which a patient routes lab results and payment requests between her clinic and her family, runs through the paper.',
+  },
+  {
+    number: 1,
+    slug: 'what-absence-costs',
+    publication: PUBLICATIONS.absence,
+    proofs: PUBLICATIONS.absenceProofs,
+    shortTitle: 'What Absence Costs',
+    subtitle: null,
+    affiliation: 'CoSys Work Pvt. Ltd.',
+    pdf: { pages: 19, size: '162 KB' },
+    // The line under each heading in How to cite.
+    citeNotes: {
+      paper: 'Preprint. Free to share and adapt under CC BY 4.0.',
+      proofs: 'Release proofs-v1.1.0 of our open-source libraries, under Apache 2.0.',
+    },
+    summary:
+      'Which social facts anyone holding the records can settle, which need a seal declaring a set of records complete, and who may hold that seal, with the main results proved in Lean 4.',
+    abstract:
+      'The records that make social facts are moving out of drawers and registries into systems that hold them for us: platforms, shared ledgers, and collaborations in which each party keeps its own log of signed records. Earlier work modeled such collaborations as machines that compose, and showed, in a form of the CALM theorem, that steps which only add records converge without coordination while a step that depends on a record being absent needs coordination. This paper asks what that result means for social ontology. We call the condition on records under which a social fact holds its grounding condition, and sort grounding conditions by monotonicity. A fact whose condition asks only that certain records exist can be settled by anyone who holds them, in any order. A fact that asks for an absence, such as that no objection is open, that a prescription is the latest, or that a license has not been revoked, cannot be settled by anyone until a seal declares a set of records complete. A seal is a status function declaration in Searle’s sense, and the parties a question concerns can make it together, as a joint commitment in Gilbert’s sense. Authority is needed where absence matters, and where it is needed it can be shared. We then ask who may seal, and answer with secondary rules written as co-signed records, frames built in layers by consensus, tiered thresholds, governing bodies that act through one facade, and appeals that end in institutions outside the collaboration. Replies to the main objections close the paper.',
   },
 ] as const;
 

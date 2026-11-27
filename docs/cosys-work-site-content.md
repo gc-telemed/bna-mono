@@ -561,8 +561,9 @@ Description (metadata): *Our numbered papers, from 0: the mathematics our system
 ### The list
 *Papers.* **The mathematics our systems rest on**
 
-We number our papers from 0. Each has its own page with the abstract, the PDF, its DOI and how to cite it.
+We number our papers from 0, and list them newest first. Each has its own page with the abstract, the PDF, its DOI and how to cite it.
 
+- **Paper 1 · Preprint · 2026** (new 2026-11-27). *What Absence Costs.* Risav Karna. Which social facts anyone holding the records can settle, which need a seal declaring a set of records complete, and who may hold that seal, with the main results proved in Lean 4. Link: **Abstract, PDF and citation**
 - **Paper 0 · Preprint · 2026.** *Collaboration Is Composition: Mealy Machines over Signed Records in Poly and Org.* Risav Karna. People and software that keep their own records and work together with no server in the middle, modelled as machines over signed records and wired together, with the main results proved in Lean 4. Link: **Abstract, PDF and citation**
 
 Under the list: Not in the series: **The SoMA white paper** (`/soma#white-paper`), Signed Posts as Hyperedges, which sets out the ideas behind SoMA.
@@ -585,6 +586,30 @@ DOI badges: *The paper* · 10.5281/zenodo.24026645; *The Lean 4 proofs* · 10.52
 Last line: **← All papers**
 
 The page's head carries Google Scholar's `citation_*` tags (title, author with affiliation and ORCID, date as 2026/11/07, publisher Zenodo, DOI, PDF and abstract URLs) and schema.org data for a `ScholarlyArticle`. The PDF in `public/papers/` is the paper's share build (`collaboration-is-composition-share.pdf` in the tda repository) and should match the file on Zenodo. When a new version is published, replace the PDF, the DOI and the page count together.
+
+### Paper 1 (`/papers/what-absence-costs`, new 2026-11-27)
+Laid out as Paper 0's page.
+
+Top line: *Papers / Paper 1 · Preprint · 26 November 2026*
+
+Title: **What Absence Costs**. The paper has no subtitle, so the title stands alone.
+
+Author line: **Risav Karna**, CoSys Work Pvt. Ltd. · ORCID 0009-0005-6682-9473
+
+**Abstract.** The paper's abstract, word for word, in full. Don't edit it here: it changes only with a new version of the paper.
+
+Buttons: **[Download the PDF]** (`/papers/what-absence-costs.pdf`) **[The record on Zenodo]** (`https://doi.org/10.5281/zenodo.24566902`) · *PDF, 19 pages, 162 KB. Free to share and adapt under CC BY 4.0.*
+
+DOI badges: *The paper* · 10.5281/zenodo.24566902; *The Lean 4 proofs* · 10.5281/zenodo.24566342.
+
+**How to cite it.** Each version has its own DOI, so cite the one you read or ran. Two cards:
+
+- **The paper.** *Preprint. Free to share and adapt under CC BY 4.0.* Reference: Karna, R. (2026). *What Absence Costs* [Preprint]. Zenodo. https://doi.org/10.5281/zenodo.24566902. Then its BibTeX entry (`karna2026absence`) and a **[Copy BibTeX]** button.
+- **The Lean 4 proofs.** *Release proofs-v1.1.0 of our open-source libraries, under Apache 2.0.* Reference: Karna, R. (2026). *cosys: packages and Lean 4 proofs for Collaboration Is Composition and What Absence Costs* (Version proofs-v1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.24566342. Then its BibTeX entry (`karna2026social`, the same entry the paper cites it by) and a **[Copy BibTeX]** button.
+
+Last line: **← All papers**
+
+The head carries the same Google Scholar tags and schema.org data as Paper 0's page, dated 2026/11/26. The PDF in `public/papers/` is the paper's `make` build from `cosys-work/cosys` (`papers/what-absence-costs`), the same file as on Zenodo (MD5 `9d58ca9893159a66eb4692c32d302d22`). The paper's source lives there, beside the Lean library `CosysSocial` it cites.
 
 ---
 

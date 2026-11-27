@@ -52,7 +52,7 @@ const papers = [...PAPER_SERIES].sort((a, b) => b.number - a.number);
                   Paper {number} · {publication.kind} · {publication.year}
                 </span>
                 <h2 class="text-ink mt-3 text-xl font-bold text-balance sm:text-2xl">
-                  {shortTitle}: {subtitle}
+                  {subtitle ? `${shortTitle}: ${subtitle}` : shortTitle}
                 </h2>
                 <p class="text-ink-muted mt-2 text-sm">
                   {publication.authors.map(({ given, family }) => `${given} ${family}`).join(', ')}
