@@ -183,16 +183,24 @@ export const PAPER_SERIES = [
 
 /**
  * The line about what we publish, under the introduction on the homepage (Who we are) and on
- * About us. The paper links to its page under /papers, the white paper to its section on the
- * SoMA page. needs_review: Nepali version, reviewed by a native speaker.
+ * About us. Each paper in the series links to its page under /papers, in the order of the series,
+ * and the white paper to its section on the SoMA page. needs_review: Nepali version, reviewed by a
+ * native speaker.
  */
 export const PAPERS = {
   intro: 'We also publish the mathematics our systems rest on.',
-  paper: {
-    title: 'Collaboration Is Composition',
-    href: `/papers/${PAPER_SERIES[0].slug}`,
-    rest: 'shows how people and software work together with no server in the middle, and we proved its main results in Lean 4.',
-  },
+  series: [
+    {
+      title: 'Collaboration Is Composition',
+      href: `/papers/${PAPER_SERIES[0].slug}`,
+      rest: 'shows how people and software work together with no server in the middle, and we proved its main results in Lean 4.',
+    },
+    {
+      title: 'What Absence Costs',
+      href: `/papers/${PAPER_SERIES[1].slug}`,
+      rest: 'asks which social facts need an authority, and who may hold it.',
+    },
+  ],
   whitepaper: {
     title: 'The SoMA white paper',
     href: '/soma#white-paper',

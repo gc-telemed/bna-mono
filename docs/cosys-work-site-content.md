@@ -50,7 +50,7 @@ Small print: *Built in Nepal. Open-source libraries under Apache-2.0.*
 ### Who we are
 CoSys Work Pvt. Ltd. is a software company in Nepal. Cosys stands for collaborative systems: software for families, clinics, teams and communities that need to work together without handing their records to a platform. We build our own products, starting with apps for people living with diabetes and the clinics that care for them. We also help companies, organisations and ministries move their systems onto machines they own. Our framework is open source, and the network it runs on, nep.work, has no centre to fail.
 
-Under it, smaller (new 2026-11-07, the same line as under the About us introduction): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`/papers/collaboration-is-composition`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
+Under it, smaller (new 2026-11-07, the same line as under the About us introduction): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`/papers/collaboration-is-composition`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. ***What Absence Costs*** (`/papers/what-absence-costs`, added 2026-11-27) asks which social facts need an authority, and who may hold it. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
 
 ### cosys.work, nep.work and coplanetary.work
 Three columns, each linking down to its own section.
@@ -461,7 +461,7 @@ Badge: *About cosys.work* · Title: **We build the tools we wanted to exist**
 
 cosys.work builds collaborative systems that people own. They run on the devices people already have, keep working offline, and sync directly between the people who share them. We started with chronic care, because the tools available asked for a permanent internet connection, a monthly fee, and an unconditional copy of the most private thing a person has.
 
-Under it (new 2026-11-07): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`/papers/collaboration-is-composition`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
+Under it (new 2026-11-07): We also publish the mathematics our systems rest on. ***Collaboration Is Composition*** (`/papers/collaboration-is-composition`) shows how people and software work together with no server in the middle, and we proved its main results in Lean 4. ***What Absence Costs*** (`/papers/what-absence-costs`, added 2026-11-27) asks which social facts need an authority, and who may hold it. **The SoMA white paper** (`/soma#white-paper`) sets out the ideas behind SoMA.
 
 Status line: "Built in Nepal. The Diabetes App is in closed pilot and free forever."
 
